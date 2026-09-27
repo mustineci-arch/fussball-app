@@ -6,7 +6,7 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
-import { useCompetitions, useSquad, useStandings, useTeam, useTeamFixtures, useTopPlayers } from '../data/queries'
+import { useCompetitions, usePlayersPhotos, useSquad, useStandings, useTeam, useTeamFixtures, useTopPlayers } from '../data/queries'
 import { POSITION_ORDER } from '../domain/labels'
 import { isFinished, isLive, isUpcoming } from '../domain/status'
 import type { Fixture, FormResult, Id, Team } from '../domain/types'
@@ -15,6 +15,7 @@ import { FavoriteButton } from '../features/favorites/FavoriteButton'
 import { favoriteFromTeam } from '../features/favorites/store'
 import { FixtureList } from '../features/matches/FixtureList'
 import { useT, type MessageKey } from '../i18n'
+import { PhotoCredits } from '../media/PhotoCredit'
 
 const TAB_IDS = ['overview', 'matches', 'squad', 'table', 'stats'] as const
 
@@ -155,6 +156,7 @@ function Matches({ teamId }: { teamId: Id }) {
 function Squad({ teamId }: { teamId: Id }) {
   const t = useT()
   const { data, isPending, error, refetch } = useSquad(teamId)
+  const { data: photos } = usePlayersPhotos(`squad:${teamId}`, data)
   if (isPending) return <BlockSkeleton rows={8} />
   if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
   if (data.length === 0) return <EmptyState icon={Users} title={t('team.noSquad')} />
@@ -172,7 +174,7 @@ function Squad({ teamId }: { teamId: Id }) {
             <Card padded={false} className="grid divide-y divide-border overflow-hidden sm:grid-cols-2 sm:divide-y-0 sm:[&>*]:border-b sm:[&>*]:border-border">
               {g.players.map((p) => (
                 <Link key={p.id} to={`/player/${p.id}`} className="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-2">
-                  <PlayerAvatar name={p.name} photoUrl={p.photoUrl} shirtNumber={p.shirtNumber} size={40} />
+                  <PlayerAvatar name={p.name} photoUrl={photos?.[p.id]?.url ?? p.photoUrl} shirtNumber={p.shirtNumber} size={40} />
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-semibold">{p.name}</span>
                     <span className="text-xs text-muted">
@@ -184,6 +186,14 @@ function Squad({ teamId }: { teamId: Id }) {
             </Card>
           </Section>
         ))}
+      {photos && (
+        <PhotoCredits
+          credits={data.flatMap((p) => {
+            const photo = photos[p.id]
+            return photo ? [{ subject: p.name, photo }] : []
+          })}
+        />
+      )}
     </div>
   )
 }

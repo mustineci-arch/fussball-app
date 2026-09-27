@@ -59,10 +59,13 @@ export const formatDateTime = (isoUtc: string) =>
   fmt({ day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(isoUtc))
 
 /** Liefert undefined statt eines Fehlers, wenn das Datum ungültig ist */
-export function formatBirthDate(iso: string): string | undefined {
+export function formatDate(iso: string): string | undefined {
   const date = new Date(iso)
   return Number.isNaN(date.getTime()) ? undefined : fmt({ day: '2-digit', month: '2-digit', year: 'numeric' }).format(date)
 }
+
+/** Geburtsdatum = normales Datum; eigener Name für die Lesbarkeit an der Aufrufstelle */
+export const formatBirthDate = formatDate
 
 export function ageFrom(birthDate: string, now = new Date()): number | undefined {
   const birth = new Date(birthDate)

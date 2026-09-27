@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { todayKey } from '../domain/date'
 import { isFinished, isLive } from '../domain/status'
 import type { Fixture, Id, Player, TopPlayerCategory } from '../domain/types'
-import { findPlayerPhoto } from '../media/wikimedia'
+import { findPlayerPhoto, findPlayerPhotos, photoKey } from '../media/wikimedia'
 import { provider } from '../providers'
 
 const MINUTE = 60_000
@@ -133,6 +133,28 @@ export const usePlayerPhoto = (player: Pick<Player, 'id' | 'name' | 'birthDate'>
         espnId: provider.id === 'espn' ? player!.id : undefined,
       }),
     enabled: player !== undefined && !provider.isDemo,
+    staleTime: Number.POSITIVE_INFINITY,
+    retry: 1,
+  })
+
+/**
+ * Fotos für viele Spieler (Kader, Aufstellung) – gebündelt abgefragt, Ergebnis je Spieler-ID.
+ * `scope` unterscheidet die Listen im Cache, z. B. "squad:432" oder "lineup:401861074".
+ */
+export const usePlayersPhotos = (scope: string, players: Pick<Player, 'id' | 'name' | 'birthDate'>[] | undefined) =>
+  useQuery({
+    queryKey: ['photos', scope, players?.length, players?.filter((p) => p.birthDate).length],
+    queryFn: async () => {
+      const list = players ?? []
+      const queries = list.map((p) => ({
+        name: p.name,
+        birthDate: p.birthDate,
+        espnId: provider.id === 'espn' ? p.id : undefined,
+      }))
+      const found = await findPlayerPhotos(queries)
+      return Object.fromEntries(list.map((p, i) => [p.id, found.get(photoKey(queries[i]!)) ?? null]))
+    },
+    enabled: !!players?.length && !provider.isDemo,
     staleTime: Number.POSITIVE_INFINITY,
     retry: 1,
   })

@@ -3,12 +3,16 @@ import { PlayerAvatar, TeamLogo } from '../../components/media'
 import { Card, Section } from '../../components/ui/Card'
 import type { Lineup, LineupPlayer, Team } from '../../domain/types'
 import { useT } from '../../i18n'
+import type { PlayerPhoto } from '../../media/wikimedia'
 
-function PitchPlayer({ entry }: { entry: LineupPlayer }) {
+/** Frei lizenzierte Fotos je Spieler-ID (Nachweise stehen unter der Aufstellung) */
+type Photos = Record<string, PlayerPhoto | null> | undefined
+
+function PitchPlayer({ entry, photos }: { entry: LineupPlayer; photos: Photos }) {
   const label = entry.player.shortName ?? entry.player.name
   return (
     <Link to={`/player/${entry.player.id}`} className="flex w-16 flex-col items-center gap-1 hover:opacity-85 md:w-20" title={entry.player.name}>
-      <PlayerAvatar name={entry.player.name} photoUrl={entry.player.photoUrl} shirtNumber={entry.shirtNumber} size={34} className="ring-2 ring-white/70 rounded-full" />
+      <PlayerAvatar name={entry.player.name} photoUrl={photos?.[entry.player.id]?.url ?? entry.player.photoUrl} shirtNumber={entry.shirtNumber} size={34} className="ring-2 ring-white/70 rounded-full" />
       <span className="max-w-full truncate rounded bg-black/35 px-1 text-[10.5px] leading-tight font-medium text-white md:text-xs">{label}</span>
     </Link>
   )
@@ -24,7 +28,7 @@ function rowsOf(lineup: Lineup): LineupPlayer[][] {
   return [...rows.entries()].sort((a, b) => a[0] - b[0]).map(([, players]) => players.sort((a, b) => (a.gridCol ?? 0) - (b.gridCol ?? 0)))
 }
 
-function HalfPitch({ lineup, side }: { lineup: Lineup; side: 'home' | 'away' }) {
+function HalfPitch({ lineup, side, photos }: { lineup: Lineup; side: 'home' | 'away'; photos: Photos }) {
   const rows = rowsOf(lineup)
   const n = rows.length
   return (
@@ -38,7 +42,7 @@ function HalfPitch({ lineup, side }: { lineup: Lineup; side: 'home' | 'away' }) 
         return (
           <div key={i} className="absolute inset-x-0 flex -translate-y-1/2 justify-around px-1" style={{ top: `${top}%` }}>
             {ordered.map((p) => (
-              <PitchPlayer key={p.player.id} entry={p} />
+              <PitchPlayer key={p.player.id} entry={p} photos={photos} />
             ))}
           </div>
         )
@@ -70,7 +74,7 @@ function TeamLabel({ team, lineup }: { team: Team; lineup?: Lineup }) {
   )
 }
 
-function Bench({ team, lineup }: { team: Team; lineup: Lineup }) {
+function Bench({ team, lineup, photos }: { team: Team; lineup: Lineup; photos: Photos }) {
   const t = useT()
   return (
     <div className="min-w-0 space-y-2">
@@ -81,6 +85,7 @@ function Bench({ team, lineup }: { team: Team; lineup: Lineup }) {
           <li key={p.player.id}>
             <Link to={`/player/${p.player.id}`} className="flex items-center gap-2 rounded-lg py-0.5 text-sm hover:text-brand">
               <span className="w-5 text-right text-xs font-semibold text-subtle tabular-nums">{p.shirtNumber ?? ''}</span>
+              <PlayerAvatar name={p.player.name} photoUrl={photos?.[p.player.id]?.url} size={24} />
               <span className="truncate">{p.player.name}</span>
             </Link>
           </li>
@@ -95,9 +100,10 @@ interface LineupPitchProps {
   awayTeam: Team
   home?: Lineup
   away?: Lineup
+  photos?: Photos
 }
 
-export function LineupPitch({ homeTeam, awayTeam, home, away }: LineupPitchProps) {
+export function LineupPitch({ homeTeam, awayTeam, home, away, photos }: LineupPitchProps) {
   const t = useT()
   const hasGrid = [home, away].every((l) => !l || l.starters.every((p) => p.gridRow !== undefined))
 
@@ -110,8 +116,8 @@ export function LineupPitch({ homeTeam, awayTeam, home, away }: LineupPitchProps
         {hasGrid ? (
           <div className="relative mx-auto aspect-[68/100] max-h-[760px] w-full bg-pitch">
             <PitchMarkings />
-            {away && <HalfPitch lineup={away} side="away" />}
-            {home && <HalfPitch lineup={home} side="home" />}
+            {away && <HalfPitch lineup={away} side="away" photos={photos} />}
+            {home && <HalfPitch lineup={home} side="home" photos={photos} />}
           </div>
         ) : (
           <div className="grid gap-4 p-4 sm:grid-cols-2">
@@ -137,8 +143,8 @@ export function LineupPitch({ homeTeam, awayTeam, home, away }: LineupPitchProps
 
       <Section title={t('match.bench')}>
         <Card className="grid gap-6 sm:grid-cols-2">
-          {home ? <Bench team={homeTeam} lineup={home} /> : <p className="text-sm text-muted">{homeTeam.shortName}: {t('common.notAvailable')}</p>}
-          {away ? <Bench team={awayTeam} lineup={away} /> : <p className="text-sm text-muted">{awayTeam.shortName}: {t('common.notAvailable')}</p>}
+          {home ? <Bench team={homeTeam} lineup={home} photos={photos} /> : <p className="text-sm text-muted">{homeTeam.shortName}: {t('common.notAvailable')}</p>}
+          {away ? <Bench team={awayTeam} lineup={away} photos={photos} /> : <p className="text-sm text-muted">{awayTeam.shortName}: {t('common.notAvailable')}</p>}
         </Card>
       </Section>
     </div>

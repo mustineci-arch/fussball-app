@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import type { Competition } from '../../domain/types'
+import { useLogoUrl } from './useLogoUrl'
 
 interface CompetitionBadgeProps {
   competition: Pick<Competition, 'name' | 'shortName' | 'logoUrl' | 'type'>
@@ -10,14 +11,14 @@ interface CompetitionBadgeProps {
 
 /** Wettbewerbslogo oder neutrales Kürzel */
 export const CompetitionBadge = memo(function CompetitionBadge({ competition, size = 24, className }: CompetitionBadgeProps) {
-  const [failed, setFailed] = useState(false)
-  if (competition.logoUrl && !failed) {
+  const { src, onError } = useLogoUrl(competition.logoUrl)
+  if (src) {
     return (
       <img
-        src={competition.logoUrl}
+        src={src}
         alt=""
         loading="lazy"
-        onError={() => setFailed(true)}
+        onError={onError}
         style={{ width: size, height: size }}
         className={clsx('shrink-0 object-contain', className)}
       />

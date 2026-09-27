@@ -5,7 +5,7 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState, StaleNotice } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
-import { useCompetitions, useFixtureDetails, useStandings } from '../data/queries'
+import { useCompetitions, useFixtureDetails, usePlayersPhotos, useSquad, useStandings } from '../data/queries'
 import { formatDateTime } from '../domain/date'
 import type { FixtureDetails } from '../domain/types'
 import { StandingsTable } from '../features/competitions/StandingsTable'
@@ -14,6 +14,8 @@ import { LineupPitch } from '../features/match-center/LineupPitch'
 import { MatchHeader } from '../features/match-center/MatchHeader'
 import { StatsPanel } from '../features/match-center/StatsPanel'
 import { useT } from '../i18n'
+import { PhotoCredits } from '../media/PhotoCredit'
+import { TvSection } from '../tv/TvSection'
 
 const TAB_IDS = ['overview', 'lineups', 'stats', 'events', 'table'] as const
 type TabId = (typeof TAB_IDS)[number]
@@ -48,6 +50,7 @@ function Overview({ details }: { details: FixtureDetails }) {
           </dl>
         </Card>
       </Section>
+      <TvSection fixture={fixture} />
     </div>
   )
 }
@@ -68,6 +71,32 @@ function TableTab({ details }: { details: FixtureDetails }) {
   )
 }
 
+/** Aufstellung mit Fotos. Geburtsdaten kommen aus den Kadern – nötig für die sichere Foto-Zuordnung. */
+function LineupsTab({ details }: { details: FixtureDetails }) {
+  const { fixture, lineups } = details
+  const homeSquad = useSquad(fixture.homeTeam.id)
+  const awaySquad = useSquad(fixture.awayTeam.id)
+  const squadsSettled = !homeSquad.isPending && !awaySquad.isPending
+  const birthDates = new Map([...(homeSquad.data ?? []), ...(awaySquad.data ?? [])].map((p) => [p.id, p.birthDate]))
+  const players = [lineups?.home, lineups?.away].flatMap((l) =>
+    l ? [...l.starters, ...l.substitutes].map((e) => ({ id: e.player.id, name: e.player.name, birthDate: birthDates.get(e.player.id) })) : [],
+  )
+  const { data: photos } = usePlayersPhotos(`lineup:${fixture.id}`, squadsSettled ? players : undefined)
+  return (
+    <div className="space-y-5">
+      <LineupPitch homeTeam={fixture.homeTeam} awayTeam={fixture.awayTeam} home={lineups?.home} away={lineups?.away} photos={photos} />
+      {photos && (
+        <PhotoCredits
+          credits={players.flatMap((p) => {
+            const photo = photos[p.id]
+            return photo ? [{ subject: p.name, photo }] : []
+          })}
+        />
+      )}
+    </div>
+  )
+}
+
 function TabContent({ tab, details }: { tab: TabId; details: FixtureDetails }) {
   const t = useT()
   const { fixture } = details
@@ -76,7 +105,7 @@ function TabContent({ tab, details }: { tab: TabId; details: FixtureDetails }) {
       return <Overview details={details} />
     case 'lineups':
       return details.lineups && (details.lineups.home || details.lineups.away) ? (
-        <LineupPitch homeTeam={fixture.homeTeam} awayTeam={fixture.awayTeam} home={details.lineups.home} away={details.lineups.away} />
+        <LineupsTab details={details} />
       ) : (
         <EmptyState icon={ClipboardList} title={t('match.noLineupTitle')} description={t('match.noLineupText')} />
       )

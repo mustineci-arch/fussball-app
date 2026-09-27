@@ -93,7 +93,7 @@ export default function MatchesPage() {
         <div className="space-y-4">
           {mine.length > 0 && (
             <Card padded={false} className="overflow-hidden border-amber-300/60">
-              <p className="flex items-center gap-2 border-b border-border bg-amber-50 px-4 py-2.5 text-[13px] font-bold tracking-wide uppercase dark:bg-amber-950/30">
+              <p className="flex items-center gap-2 border-b border-border bg-amber-50 px-4 py-2.5 dark:bg-amber-400/10 text-[13px] font-bold tracking-wide uppercase">
                 <Star className="size-4 text-amber-500" fill="currentColor" aria-hidden />
                 {t('matches.myMatches')}
               </p>

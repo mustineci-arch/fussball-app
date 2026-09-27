@@ -6,6 +6,7 @@ import { router } from './app/router'
 import { subscribeLanguage, useLanguage } from './i18n'
 import { NotFoundError } from './providers/errors'
 import './styles/index.css'
+import './theme'
 
 const queryClient = new QueryClient({
   defaultOptions: {

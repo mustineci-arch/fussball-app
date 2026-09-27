@@ -11,6 +11,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Anstoß" />
     <title>Anstoß</title>
+    <!-- Design vor dem ersten Zeichnen setzen, damit es beim Start nicht hell aufblitzt -->
+    <script>
+      try {
+        var s = localStorage.getItem('anstoss.theme') || 'system'
+        var dark = s === 'dark' || (s === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

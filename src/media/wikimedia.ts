@@ -103,6 +103,24 @@ async function getJson<T>(base: string, params: Record<string, string>): Promise
   }
 }
 
+const SPARQL_ENDPOINT = 'https://query.wikidata.org/sparql'
+const chunk = <T,>(items: T[], size: number): T[][] =>
+  Array.from({ length: Math.ceil(items.length / size) }, (_, i) => items.slice(i * size, i * size + size))
+
+/** Eine Abfrage für viele Spieler: ESPN-ID → Dateiname des Wikidata-Bildes */
+async function imagesByEspnId(espnIds: string[]): Promise<Map<string, string>> {
+  const result = new Map<string, string>()
+  for (const ids of chunk(espnIds.filter((id) => /^\d+$/.test(id)), 80)) {
+    const query = `SELECT ?espn ?img WHERE { VALUES ?espn { ${ids.map((id) => `"${id}"`).join(' ')} } ?item wdt:${ESPN_PLAYER_ID} ?espn ; wdt:P18 ?img . }`
+    const data = await getJson<{ results?: { bindings?: { espn?: { value: string }; img?: { value: string } }[] } }>(SPARQL_ENDPOINT, { query })
+    for (const b of data.results?.bindings ?? []) {
+      const file = b.img?.value.split('/Special:FilePath/')[1]
+      if (b.espn && file && !result.has(b.espn.value)) result.set(b.espn.value, decodeURIComponent(file))
+    }
+  }
+  return result
+}
+
 async function searchIds(query: string, limit: number): Promise<string[]> {
   const data = await getJson<{ query?: { search?: { title: string }[] } }>(WIKIDATA_API, {
     action: 'query',
@@ -113,14 +131,31 @@ async function searchIds(query: string, limit: number): Promise<string[]> {
   return (data.query?.search ?? []).map((r) => r.title).filter((t) => /^Q\d+$/.test(t))
 }
 
-async function getEntities(ids: string[]): Promise<Entity[]> {
-  if (ids.length === 0) return []
-  const data = await getJson<{ entities?: Record<string, Entity> }>(WIKIDATA_API, {
-    action: 'wbgetentities',
-    ids: ids.join('|'),
-    props: 'claims',
+async function getEntities(ids: string[]): Promise<Map<string, Entity>> {
+  const result = new Map<string, Entity>()
+  for (const part of chunk([...new Set(ids)], 50)) {
+    const data = await getJson<{ entities?: Record<string, Entity> }>(WIKIDATA_API, {
+      action: 'wbgetentities',
+      ids: part.join('|'),
+      props: 'claims',
+    })
+    for (const e of Object.values(data.entities ?? {})) result.set(e.id, e)
+  }
+  return result
+}
+
+/** Führt Aufgaben mit begrenzter Parallelität aus (Wikimedia nicht überlasten) */
+async function mapLimited<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = []
+  let next = 0
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (next < items.length) {
+      const index = next++
+      results[index] = await fn(items[index] as T)
+    }
   })
-  return Object.values(data.entities ?? {})
+  await Promise.all(workers)
+  return results
 }
 
 interface ImageInfo {
@@ -129,29 +164,39 @@ interface ImageInfo {
   extmetadata?: Record<string, { value?: string }>
 }
 
-async function getPhoto(fileName: string): Promise<PlayerPhoto | undefined> {
-  const data = await getJson<{ query?: { pages?: Record<string, { imageinfo?: ImageInfo[] }> } }>(COMMONS_API, {
-    action: 'query',
-    titles: `File:${fileName}`,
-    prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
-    iiurlwidth: '320',
-    iiextmetadatafilter: 'Artist|Credit|LicenseShortName|LicenseUrl',
-  })
-  const info = Object.values(data.query?.pages ?? {})[0]?.imageinfo?.[0]
+function toPhoto(info: ImageInfo | undefined): PlayerPhoto | undefined {
   const meta = info?.extmetadata ?? {}
   const license = plainText(meta.LicenseShortName?.value)
   if (!info?.thumburl || !info.descriptionurl || !isFreeLicense(license)) return undefined
   const author = plainText(meta.Artist?.value) || plainText(meta.Credit?.value)
   // Ohne Urheber keine korrekte Namensnennung möglich (außer gemeinfrei/CC0)
   if (!author && !/^(cc0|public domain|pd\b)/i.test(license)) return undefined
-  return {
-    url: info.thumburl,
-    filePageUrl: info.descriptionurl,
-    author: author || '–',
-    license,
-    licenseUrl: meta.LicenseUrl?.value,
+  return { url: info.thumburl, filePageUrl: info.descriptionurl, author: author || '–', license, licenseUrl: meta.LicenseUrl?.value }
+}
+
+/** Bild- und Lizenzinfos für viele Dateien auf einmal (bis 50 je Anfrage) */
+async function getPhotos(fileNames: string[]): Promise<Map<string, PlayerPhoto>> {
+  const result = new Map<string, PlayerPhoto>()
+  for (const part of chunk([...new Set(fileNames)], 50)) {
+    const data = await getJson<{
+      query?: { normalized?: { from: string; to: string }[]; pages?: Record<string, { title?: string; imageinfo?: ImageInfo[] }> }
+    }>(COMMONS_API, {
+      action: 'query',
+      titles: part.map((f) => `File:${f}`).join('|'),
+      prop: 'imageinfo',
+      iiprop: 'url|extmetadata',
+      iiurlwidth: '320',
+      iiextmetadatafilter: 'Artist|Credit|LicenseShortName|LicenseUrl',
+    })
+    // Commons normalisiert Titel (z. B. "_" → " ") – zurück auf den angefragten Namen abbilden
+    const normalized = new Map((data.query?.normalized ?? []).map((n) => [n.to, n.from]))
+    for (const page of Object.values(data.query?.pages ?? {})) {
+      const requested = page.title ? (normalized.get(page.title) ?? page.title) : undefined
+      const photo = toPhoto(page.imageinfo?.[0])
+      if (requested && photo) result.set(requested.replace(/^File:/, ''), photo)
+    }
   }
+  return result
 }
 
 // ------------------------------------------------------------ Cache (pro Gerät, 30 Tage)
@@ -168,35 +213,75 @@ function readCache(): Record<string, CacheEntry> {
   }
 }
 
-function writeCache(key: string, photo: PlayerPhoto | null) {
+function writeCache(updates: Record<string, PlayerPhoto | null>) {
   try {
     const cache = readCache()
-    cache[key] = { at: Date.now(), photo }
-    // Speicher klein halten: nur die neuesten 500 Einträge
-    const entries = Object.entries(cache).sort((a, b) => b[1].at - a[1].at).slice(0, 500)
+    const now = Date.now()
+    for (const [key, photo] of Object.entries(updates)) cache[key] = { at: now, photo }
+    // Speicher klein halten: nur die neuesten 800 Einträge
+    const entries = Object.entries(cache).sort((a, b) => b[1].at - a[1].at).slice(0, 800)
     localStorage.setItem(CACHE_KEY, JSON.stringify(Object.fromEntries(entries)))
   } catch {
     // Cache ist optional
   }
 }
 
-/** Sucht ein frei lizenziertes Foto. `null` = es gibt keins (wird ebenfalls gecacht). */
-export async function findPlayerPhoto(query: PhotoQuery): Promise<PlayerPhoto | null> {
-  const cacheKey = query.espnId ? `espn:${query.espnId}` : `name:${query.name}|${query.birthDate ?? ''}`
-  const cached = readCache()[cacheKey]
-  if (cached && Date.now() - cached.at < CACHE_DAYS * 86_400_000) return cached.photo
+const cacheKeyOf = (q: PhotoQuery) => (q.espnId ? `espn:${q.espnId}` : `name:${q.name}|${q.birthDate ?? ''}`)
 
-  let fileName: string | undefined
-  if (query.espnId && /^\d+$/.test(query.espnId)) {
-    const ids = await searchIds(`haswbstatement:${ESPN_PLAYER_ID}=${query.espnId}`, 2)
-    fileName = pickImage(await getEntities(ids), true)
+/**
+ * Sucht frei lizenzierte Fotos für mehrere Spieler gebündelt.
+ * Ergebnis je Cache-Schlüssel; `null` = es gibt keins (wird ebenfalls gecacht).
+ */
+export async function findPlayerPhotos(queries: PhotoQuery[]): Promise<Map<string, PlayerPhoto | null>> {
+  const result = new Map<string, PlayerPhoto | null>()
+  const cache = readCache()
+  const fresh = (key: string) => {
+    const entry = cache[key]
+    return entry && Date.now() - entry.at < CACHE_DAYS * 86_400_000 ? entry : undefined
   }
-  if (!fileName && query.birthDate) {
-    const ids = await searchIds(`${query.name} haswbstatement:P106=${FOOTBALLER}`, 5)
-    fileName = pickImage(await getEntities(ids), false, query.birthDate)
+  const open = queries.filter((q) => {
+    const hit = fresh(cacheKeyOf(q))
+    if (hit) result.set(cacheKeyOf(q), hit.photo)
+    return !hit
+  })
+  if (open.length === 0) return result
+
+  // 1) Eindeutig über ESPN-ID – eine Abfrage für alle
+  const fileByQuery = new Map<PhotoQuery, string>()
+  const byEspn = await imagesByEspnId(open.flatMap((q) => (q.espnId ? [q.espnId] : [])))
+  for (const q of open) {
+    const file = q.espnId ? byEspn.get(q.espnId) : undefined
+    if (file) fileByQuery.set(q, file)
   }
 
-  const photo = fileName ? ((await getPhoto(fileName)) ?? null) : null
-  writeCache(cacheKey, photo)
-  return photo
+  // 2) Übrige über Name + Beruf + exaktes Geburtsdatum
+  const rest = open.filter((q) => !fileByQuery.has(q) && q.birthDate)
+  const candidates = await mapLimited(rest, 4, (q) => searchIds(`${q.name} haswbstatement:P106=${FOOTBALLER}`, 5))
+  const entities = await getEntities(candidates.flat())
+  rest.forEach((q, i) => {
+    const list = (candidates[i] ?? []).flatMap((id) => entities.get(id) ?? [])
+    const file = pickImage(list, false, q.birthDate)
+    if (file) fileByQuery.set(q, file)
+  })
+
+  // 3) Lizenzen und Urheber prüfen – eine Abfrage je 50 Bilder
+  const photos = await getPhotos([...fileByQuery.values()])
+  const updates: Record<string, PlayerPhoto | null> = {}
+  for (const q of open) {
+    const file = fileByQuery.get(q)
+    const photo = (file && photos.get(file)) || null
+    // "Kein Foto" nur merken, wenn vollständig gesucht wurde (mit Geburtsdatum) –
+    // sonst könnte eine spätere Suche mit Geburtsdatum noch fündig werden.
+    if (photo || q.birthDate) updates[cacheKeyOf(q)] = photo
+    result.set(cacheKeyOf(q), photo)
+  }
+  writeCache(updates)
+  return result
 }
+
+/** Einzelnes Foto (Spielerseite) */
+export async function findPlayerPhoto(query: PhotoQuery): Promise<PlayerPhoto | null> {
+  return (await findPlayerPhotos([query])).get(cacheKeyOf(query)) ?? null
+}
+
+export { cacheKeyOf as photoKey }

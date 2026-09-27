@@ -1,0 +1,127 @@
+/**
+ * Daten-Hooks der App. Hier liegt die Cache-Strategie im Browser:
+ * Stammdaten lange, Tabellen mittel, Live-Spiele kurz – beendete Spiele gar nicht neu.
+ */
+import { useQuery } from '@tanstack/react-query'
+import { todayKey } from '../domain/date'
+import { isFinished, isLive } from '../domain/status'
+import type { Fixture, Id, TopPlayerCategory } from '../domain/types'
+import { provider } from '../providers'
+
+const MINUTE = 60_000
+const HOUR = 60 * MINUTE
+
+/** Aktualisierungsintervall für Live-Daten */
+export const LIVE_REFRESH_MS = 20_000
+
+export const staleTimes = {
+  static: 12 * HOUR,
+  standings: 10 * MINUTE,
+  fixtures: 5 * MINUTE,
+  live: 15_000,
+} as const
+
+const hasLive = (fixtures: Fixture[] | undefined) => fixtures?.some((f) => isLive(f.status)) ?? false
+
+export const queryKeys = {
+  competitions: ['competitions'] as const,
+  competition: (id: Id) => ['competition', id] as const,
+  competitionFixtures: (id: Id) => ['competition', id, 'fixtures'] as const,
+  competitionTeams: (id: Id) => ['competition', id, 'teams'] as const,
+  standings: (id: Id) => ['competition', id, 'standings'] as const,
+  topPlayers: (id: Id, category: TopPlayerCategory) => ['competition', id, 'top', category] as const,
+  fixturesByDate: (date: string) => ['fixtures', date] as const,
+  fixture: (id: Id) => ['fixture', id] as const,
+  team: (id: Id) => ['team', id] as const,
+  teamFixtures: (id: Id) => ['team', id, 'fixtures'] as const,
+  squad: (id: Id) => ['team', id, 'squad'] as const,
+  player: (id: Id) => ['player', id] as const,
+  search: (q: string) => ['search', q] as const,
+}
+
+export const useCompetitions = () =>
+  useQuery({ queryKey: queryKeys.competitions, queryFn: () => provider.getCompetitions(), staleTime: staleTimes.static })
+
+export const useCompetition = (id: Id) =>
+  useQuery({ queryKey: queryKeys.competition(id), queryFn: () => provider.getCompetition(id), staleTime: staleTimes.static })
+
+export const useCompetitionFixtures = (id: Id) =>
+  useQuery({
+    queryKey: queryKeys.competitionFixtures(id),
+    queryFn: () => provider.getCompetitionFixtures(id),
+    staleTime: staleTimes.fixtures,
+    refetchInterval: (q) => (hasLive(q.state.data) ? LIVE_REFRESH_MS : false),
+  })
+
+export const useCompetitionTeams = (id: Id) =>
+  useQuery({ queryKey: queryKeys.competitionTeams(id), queryFn: () => provider.getCompetitionTeams(id), staleTime: staleTimes.static })
+
+export const useStandings = (id: Id) =>
+  useQuery({
+    queryKey: queryKeys.standings(id),
+    queryFn: () => provider.getStandings(id),
+    staleTime: staleTimes.standings,
+    enabled: id !== '',
+  })
+
+export const useTopPlayers = (id: Id, category: TopPlayerCategory) =>
+  useQuery({
+    queryKey: queryKeys.topPlayers(id, category),
+    queryFn: () => provider.getTopPlayers(id, category),
+    staleTime: staleTimes.standings,
+    enabled: id !== '',
+  })
+
+export const useFixturesByDate = (date: string) =>
+  useQuery({
+    queryKey: queryKeys.fixturesByDate(date),
+    queryFn: () => provider.getFixturesByDate(date),
+    staleTime: date === todayKey() ? staleTimes.live : staleTimes.fixtures,
+    // Nur pollen, solange am gewählten Tag tatsächlich Spiele laufen.
+    refetchInterval: (q) => (hasLive(q.state.data) ? LIVE_REFRESH_MS : false),
+  })
+
+export const useFixtureDetails = (id: Id) =>
+  useQuery({
+    queryKey: queryKeys.fixture(id),
+    queryFn: () => provider.getFixtureDetails(id),
+    staleTime: (q) => {
+      const status = q.state.data?.fixture.status
+      if (status && isFinished(status)) return Number.POSITIVE_INFINITY
+      return staleTimes.live
+    },
+    refetchInterval: (q) => {
+      const status = q.state.data?.fixture.status
+      if (!status) return false
+      if (isLive(status)) return LIVE_REFRESH_MS
+      // Kurz vor Anpfiff gelegentlich prüfen (Aufstellung, Anpfiff).
+      if (status === 'scheduled') return 2 * MINUTE
+      return false
+    },
+  })
+
+export const useTeam = (id: Id) =>
+  useQuery({ queryKey: queryKeys.team(id), queryFn: () => provider.getTeam(id), staleTime: staleTimes.static })
+
+export const useTeamFixtures = (id: Id) =>
+  useQuery({
+    queryKey: queryKeys.teamFixtures(id),
+    queryFn: () => provider.getTeamFixtures(id),
+    staleTime: staleTimes.fixtures,
+    refetchInterval: (q) => (hasLive(q.state.data) ? LIVE_REFRESH_MS : false),
+  })
+
+export const useSquad = (id: Id) =>
+  useQuery({ queryKey: queryKeys.squad(id), queryFn: () => provider.getSquad(id), staleTime: staleTimes.static })
+
+export const usePlayer = (id: Id) =>
+  useQuery({ queryKey: queryKeys.player(id), queryFn: () => provider.getPlayer(id), staleTime: staleTimes.standings })
+
+export const useSearch = (q: string) =>
+  useQuery({
+    queryKey: queryKeys.search(q),
+    queryFn: () => provider.search(q),
+    enabled: q.trim().length >= 2,
+    staleTime: staleTimes.static,
+    placeholderData: (prev) => prev,
+  })

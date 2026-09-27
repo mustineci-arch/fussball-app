@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/* Dark Mode ist vorbereitet: <html data-theme="dark"> schaltet alle Tokens um. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  --bg: #f2f5f3;
+  --surface: #ffffff;
+  --surface-2: #f6f8f7;
+  --surface-3: #eaefec;
+  --text: #0f1813;
+  --muted: #5e6c65;
+  --subtle: #8d9a94;
+  --border: #e1e7e3;
+  --brand: #0f7a4a;
+  --brand-strong: #0a5c37;
+  --brand-soft: #e2f3ea;
+  --live: #e0313a;
+  --live-soft: #fdebeb;
+  --pitch: #2f8a55;
+  --pitch-line: rgb(255 255 255 / 0.45);
+  --zone-cl: #1d4ed8;
+  --zone-el: #ea7a0c;
+  --zone-ecl: #0d9488;
+  --zone-rel: #dc2626;
+  --shadow-card: 0 1px 2px rgb(16 24 20 / 0.04), 0 2px 8px rgb(16 24 20 / 0.05);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #0c1210;
+  --surface: #141c18;
+  --surface-2: #19231e;
+  --surface-3: #212d27;
+  --text: #e8efeb;
+  --muted: #9aa8a1;
+  --subtle: #6c7a73;
+  --border: #25312b;
+  --brand: #34b27a;
+  --brand-strong: #5fd29c;
+  --brand-soft: #173326;
+  --live: #ff5a61;
+  --live-soft: #3a1618;
+  --pitch: #1f5f3b;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-live: var(--live);
+  --color-live-soft: var(--live-soft);
+  --color-pitch: var(--pitch);
+  --color-zone-cl: var(--zone-cl);
+  --color-zone-el: var(--zone-el);
+  --color-zone-ecl: var(--zone-ecl);
+  --color-zone-rel: var(--zone-rel);
+  --shadow-card: var(--shadow-card);
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-feature-settings: 'tnum' 1;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.animate-live {
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-live, .animate-pulse {
+    animation: none;
+  }
+}

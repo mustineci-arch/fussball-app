@@ -45,7 +45,11 @@ export const formatWeekday = (key: string) => weekdayFmt.format(fromKey(key)).re
 export const formatShortDate = (key: string) => shortDateFmt.format(fromKey(key))
 export const formatLongDate = (key: string) => longDateFmt.format(fromKey(key))
 export const formatKickoff = (isoUtc: string) => timeFmt.format(new Date(isoUtc))
-export const formatBirthDate = (iso: string) => birthDateFmt.format(new Date(iso))
+/** Liefert undefined statt eines Fehlers, wenn das Datum ungültig ist */
+export function formatBirthDate(iso: string): string | undefined {
+  const date = new Date(iso)
+  return Number.isNaN(date.getTime()) ? undefined : birthDateFmt.format(date)
+}
 export const formatDateTime = (isoUtc: string) =>
   `${shortDateFmt.format(new Date(isoUtc))}, ${timeFmt.format(new Date(isoUtc))}`
 

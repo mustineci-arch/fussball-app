@@ -1,5 +1,5 @@
 import { Search as SearchIcon, SearchX } from 'lucide-react'
-import { useDeferredValue, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { CompetitionBadge, PlayerAvatar, TeamLogo } from '../components/media'
 import { Card, Section } from '../components/ui/Card'
@@ -9,6 +9,16 @@ import { EmptyState, ErrorState } from '../components/ui/States'
 import { useSearch } from '../data/queries'
 import { POSITION_LABELS } from '../domain/labels'
 import type { ReactNode } from 'react'
+
+/** Wartet, bis der Nutzer kurz nicht tippt – spart Anfragen an die Datenquelle. */
+function useDebounced<T>(value: T, delayMs: number): T {
+  const [debounced, setDebounced] = useState(value)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delayMs)
+    return () => clearTimeout(timer)
+  }, [value, delayMs])
+  return debounced
+}
 
 function ResultRow({ to, media, title, subtitle }: { to: string; media: ReactNode; title: string; subtitle?: string }) {
   return (
@@ -25,7 +35,7 @@ function ResultRow({ to, media, title, subtitle }: { to: string; media: ReactNod
 export default function SearchPage() {
   const [params, setParams] = useSearchParams()
   const query = params.get('q') ?? ''
-  const deferred = useDeferredValue(query.trim())
+  const deferred = useDebounced(query.trim(), 350)
   const { data, isFetching, error, refetch } = useSearch(deferred)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -68,7 +78,7 @@ export default function SearchPage() {
               <Section title="Teams">
                 <Card padded={false} className="divide-y divide-border overflow-hidden">
                   {data.teams.map((t) => (
-                    <ResultRow key={t.id} to={`/team/${t.id}`} media={<TeamLogo team={t} size={32} />} title={t.name} subtitle={t.country} />
+                    <ResultRow key={t.id} to={`/team/${t.id}`} media={<TeamLogo team={t} size={32} />} title={t.name} subtitle={t.league ?? t.country} />
                   ))}
                 </Card>
               </Section>
@@ -82,7 +92,7 @@ export default function SearchPage() {
                       to={`/player/${p.id}`}
                       media={<PlayerAvatar name={p.name} photoUrl={p.photoUrl} size={32} />}
                       title={p.name}
-                      subtitle={[p.position && POSITION_LABELS[p.position].singular, p.nationality].filter(Boolean).join(' · ')}
+                      subtitle={[p.teamName, p.position && POSITION_LABELS[p.position].singular, p.nationality].filter(Boolean).join(' · ')}
                     />
                   ))}
                 </Card>

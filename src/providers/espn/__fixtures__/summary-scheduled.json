@@ -1,0 +1,159 @@
+{
+ "header": {
+  "id": "401861071",
+  "league": {
+   "slug": "uefa.nations",
+   "name": "UEFA Nations League"
+  },
+  "competitions": [
+   {
+    "id": "401861071",
+    "date": "2026-09-27T16:00Z",
+    "status": {
+     "type": {
+      "id": "1",
+      "name": "STATUS_SCHEDULED",
+      "state": "pre",
+      "completed": false,
+      "description": "Scheduled",
+      "detail": "Sun, September 27th at 12:00 PM EDT",
+      "shortDetail": "9/27 - 12:00 PM EDT"
+     }
+    },
+    "competitors": [
+     {
+      "id": "474",
+      "homeAway": "home",
+      "team": {
+       "id": "474",
+       "displayName": "Austria",
+       "shortDisplayName": "Austria",
+       "abbreviation": "AUT",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "id": "18272",
+      "homeAway": "away",
+      "team": {
+       "id": "18272",
+       "displayName": "Kosovo",
+       "shortDisplayName": "Kosovo",
+       "abbreviation": "KOS",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "gameInfo": {
+  "venue": {
+   "fullName": "Ernst-Happel-Stadion"
+  }
+ },
+ "rosters": [
+  {
+   "homeAway": "home",
+   "team": {
+    "id": "474",
+    "displayName": "Austria",
+    "abbreviation": "AUT",
+    "logos": [
+     {
+      "href": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png",
+      "rel": [
+       "full",
+       "default"
+      ]
+     }
+    ]
+   },
+   "roster": []
+  },
+  {
+   "homeAway": "away",
+   "team": {
+    "id": "18272",
+    "displayName": "Kosovo",
+    "abbreviation": "KOS",
+    "logos": [
+     {
+      "href": "https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png",
+      "rel": [
+       "full",
+       "default"
+      ]
+     }
+    ]
+   },
+   "roster": []
+  }
+ ],
+ "boxscore": {
+  "teams": [
+   {
+    "team": {
+     "id": "474"
+    },
+    "statistics": [
+     {
+      "name": "goalDifference",
+      "displayValue": "8"
+     },
+     {
+      "name": "totalGoals",
+      "displayValue": "12"
+     },
+     {
+      "name": "goalAssists",
+      "displayValue": "2"
+     },
+     {
+      "name": "goalsConceded",
+      "displayValue": "4"
+     }
+    ]
+   },
+   {
+    "team": {
+     "id": "18272"
+    },
+    "statistics": [
+     {
+      "name": "goalDifference",
+      "displayValue": "4"
+     },
+     {
+      "name": "totalGoals",
+      "displayValue": "4"
+     },
+     {
+      "name": "goalAssists",
+      "displayValue": "0"
+     },
+     {
+      "name": "goalsConceded",
+      "displayValue": "0"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -41,6 +41,8 @@ export interface Team {
   venue?: string
   coach?: string
   isNational?: boolean
+  /** Name der Hauptliga – nur zur Anzeige (z. B. in Suchergebnissen) */
+  league?: string
 }
 
 export type PlayerPosition = 'GK' | 'DF' | 'MF' | 'FW'
@@ -57,6 +59,8 @@ export interface Player {
   position?: PlayerPosition
   shirtNumber?: number
   teamId?: Id
+  /** Vereinsname – nur zur Anzeige, wenn das Team-Objekt nicht geladen ist */
+  teamName?: string
   /** Nur gesetzt, wenn das Bild lizenziert/freigegeben ist */
   photoUrl?: string
 }
@@ -182,6 +186,11 @@ export type StandingZoneKind =
   | 'promotion'
   | 'relegation_playoff'
   | 'relegation'
+  /** Weiterkommen in einem Turnier (z. B. Achtelfinale) */
+  | 'qualification'
+  /** Play-off-Plätze in einem Turnier */
+  | 'playoff'
+  | 'eliminated'
 
 export interface StandingZone {
   kind: StandingZoneKind

@@ -1,0 +1,34 @@
+{
+ "athlete": {
+  "id": "159146",
+  "displayName": "Kaan Ayhan",
+  "firstName": "Kaan",
+  "lastName": "Ayhan",
+  "displayDOB": "10/11/1994",
+  "citizenship": "Türkiye",
+  "jersey": "23",
+  "position": {
+   "id": "2",
+   "name": "Defender",
+   "displayName": "Defender",
+   "abbreviation": "D",
+   "leaf": false,
+   "slug": "defender"
+  },
+  "team": {
+   "id": "432",
+   "displayName": "Galatasaray",
+   "shortDisplayName": "Galatasaray",
+   "abbreviation": "GAL",
+   "logos": [
+    {
+     "href": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+     "rel": [
+      "full",
+      "default"
+     ]
+    }
+   ]
+  }
+ }
+}

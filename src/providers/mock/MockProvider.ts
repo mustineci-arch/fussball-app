@@ -39,7 +39,9 @@ interface Resolved {
 
 export class MockProvider implements FootballProvider {
   readonly id = 'mock'
+  readonly displayName = 'Demo-Daten'
   readonly isDemo = true
+  readonly topPlayerCategories: readonly TopPlayerCategory[] = ['goals', 'assists', 'yellow_cards', 'red_cards', 'clean_sheets']
 
   private readonly schedule: ScheduledFixture[] = buildSchedule()
   private readonly scripts = new Map<Id, MatchScript>()

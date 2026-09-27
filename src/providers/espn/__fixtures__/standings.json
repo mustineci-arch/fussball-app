@@ -1,0 +1,956 @@
+{
+ "name": "Turkish Super Lig",
+ "children": [
+  {
+   "name": "2026/2027 Turkish Super Lig",
+   "standings": {
+    "entries": [
+     {
+      "team": {
+       "id": "132335",
+       "displayName": "Amed SFK",
+       "shortDisplayName": "Amed SFK",
+       "abbreviation": "AMED"
+      },
+      "note": {
+       "color": "#81D6AC",
+       "description": "Champions League",
+       "rank": 1
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 1
+       },
+       {
+        "name": "points",
+        "value": 13
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 7
+       },
+       {
+        "name": "pointsFor",
+        "value": 15
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 4
+       },
+       {
+        "name": "rank",
+        "value": 1
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "432",
+       "displayName": "Galatasaray",
+       "shortDisplayName": "Galatasaray",
+       "abbreviation": "GAL",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#B5E7CE",
+       "description": "Champions League qualifying",
+       "rank": 2
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 1
+       },
+       {
+        "name": "points",
+        "value": 13
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 10
+       },
+       {
+        "name": "pointsFor",
+        "value": 13
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 4
+       },
+       {
+        "name": "rank",
+        "value": 2
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "1895",
+       "displayName": "Besiktas",
+       "shortDisplayName": "Besiktas",
+       "abbreviation": "BES",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#B2BFD0",
+       "description": "Europa League qualifying",
+       "rank": 3
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 12
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 7
+       },
+       {
+        "name": "pointsFor",
+        "value": 14
+       },
+       {
+        "name": "ties",
+        "value": 0
+       },
+       {
+        "name": "wins",
+        "value": 4
+       },
+       {
+        "name": "rank",
+        "value": 3
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "995",
+       "displayName": "Kocaelispor",
+       "shortDisplayName": "Kocaelispor",
+       "abbreviation": "KOC",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/995.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#c6d1e0",
+       "description": "Conference League qualifying",
+       "rank": 4
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 12
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 4
+       },
+       {
+        "name": "pointsFor",
+        "value": 7
+       },
+       {
+        "name": "ties",
+        "value": 0
+       },
+       {
+        "name": "wins",
+        "value": 4
+       },
+       {
+        "name": "rank",
+        "value": 4
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "9078",
+       "displayName": "Alanyaspor",
+       "shortDisplayName": "Alanyaspor",
+       "abbreviation": "ALA",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/9078.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 1
+       },
+       {
+        "name": "points",
+        "value": 11
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 6
+       },
+       {
+        "name": "pointsFor",
+        "value": 8
+       },
+       {
+        "name": "ties",
+        "value": 2
+       },
+       {
+        "name": "wins",
+        "value": 3
+       },
+       {
+        "name": "rank",
+        "value": 5
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "436",
+       "displayName": "Fenerbahce",
+       "shortDisplayName": "Fenerbahce",
+       "abbreviation": "FEN",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 10
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 6
+       },
+       {
+        "name": "pointsFor",
+        "value": 16
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 3
+       },
+       {
+        "name": "rank",
+        "value": 6
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "997",
+       "displayName": "Trabzonspor",
+       "shortDisplayName": "Trabzonspor",
+       "abbreviation": "TRAB",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 10
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 5
+       },
+       {
+        "name": "pointsFor",
+        "value": 13
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 3
+       },
+       {
+        "name": "rank",
+        "value": 7
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "6870",
+       "displayName": "Kasimpasa",
+       "shortDisplayName": "Kasimpasa",
+       "abbreviation": "KAS",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6870.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 0
+       },
+       {
+        "name": "points",
+        "value": 10
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 5
+       },
+       {
+        "name": "pointsFor",
+        "value": 7
+       },
+       {
+        "name": "ties",
+        "value": 4
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 8
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "7656",
+       "displayName": "Caykur Rizespor",
+       "shortDisplayName": "Caykur Rizespor",
+       "abbreviation": "CAY",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/7656.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 10
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 6
+       },
+       {
+        "name": "pointsFor",
+        "value": 7
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 3
+       },
+       {
+        "name": "rank",
+        "value": 9
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "20070",
+       "displayName": "Gaziantep FK",
+       "shortDisplayName": "Gaziantep",
+       "abbreviation": "GAZ",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/20070.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 2
+       },
+       {
+        "name": "points",
+        "value": 8
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 7
+       },
+       {
+        "name": "pointsFor",
+        "value": 7
+       },
+       {
+        "name": "ties",
+        "value": 2
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 10
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "132334",
+       "displayName": "Çorum FK",
+       "shortDisplayName": "Çorum FK",
+       "abbreviation": "COR",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/132334.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 3
+       },
+       {
+        "name": "points",
+        "value": 7
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 12
+       },
+       {
+        "name": "pointsFor",
+        "value": 13
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 11
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "7914",
+       "displayName": "Istanbul Basaksehir",
+       "shortDisplayName": "Istanbul BB",
+       "abbreviation": "IBFK",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/7914.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 3
+       },
+       {
+        "name": "points",
+        "value": 7
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 11
+       },
+       {
+        "name": "pointsFor",
+        "value": 10
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 12
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "996",
+       "displayName": "Genclerbirligi",
+       "shortDisplayName": "Genclerbirli",
+       "abbreviation": "GEN",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/996.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 3
+       },
+       {
+        "name": "points",
+        "value": 7
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 13
+       },
+       {
+        "name": "pointsFor",
+        "value": 5
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 13
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "19267",
+       "displayName": "Erzurum BB",
+       "shortDisplayName": "Erzurum",
+       "abbreviation": "ERZ",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/19267.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 3
+       },
+       {
+        "name": "points",
+        "value": 7
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 11
+       },
+       {
+        "name": "pointsFor",
+        "value": 3
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 2
+       },
+       {
+        "name": "rank",
+        "value": 14
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "7648",
+       "displayName": "Konyaspor",
+       "shortDisplayName": "Konyaspor",
+       "abbreviation": "KNY",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/7648.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 4
+       },
+       {
+        "name": "points",
+        "value": 4
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 8
+       },
+       {
+        "name": "pointsFor",
+        "value": 4
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 1
+       },
+       {
+        "name": "rank",
+        "value": 15
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "11429",
+       "displayName": "Samsunspor",
+       "shortDisplayName": "Samsunspor",
+       "abbreviation": "SAM",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/11429.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#FF7F84",
+       "description": "Relegated",
+       "rank": 16
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 4
+       },
+       {
+        "name": "points",
+        "value": 4
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 12
+       },
+       {
+        "name": "pointsFor",
+        "value": 6
+       },
+       {
+        "name": "ties",
+        "value": 1
+       },
+       {
+        "name": "wins",
+        "value": 1
+       },
+       {
+        "name": "rank",
+        "value": 16
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "789",
+       "displayName": "Goztepe",
+       "shortDisplayName": "Goztepe",
+       "abbreviation": "GOZ",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/789.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#FF7F84",
+       "description": "Relegated",
+       "rank": 17
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 3
+       },
+       {
+        "name": "points",
+        "value": 3
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 15
+       },
+       {
+        "name": "pointsFor",
+        "value": 11
+       },
+       {
+        "name": "ties",
+        "value": 3
+       },
+       {
+        "name": "wins",
+        "value": 0
+       },
+       {
+        "name": "rank",
+        "value": 17
+       }
+      ]
+     },
+     {
+      "team": {
+       "id": "20729",
+       "displayName": "Eyupspor",
+       "shortDisplayName": "Eyupspor",
+       "abbreviation": "EYU",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/20729.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      },
+      "note": {
+       "color": "#FF7F84",
+       "description": "Relegated",
+       "rank": 18
+      },
+      "stats": [
+       {
+        "name": "gamesPlayed",
+        "value": 6
+       },
+       {
+        "name": "losses",
+        "value": 5
+       },
+       {
+        "name": "points",
+        "value": 3
+       },
+       {
+        "name": "pointsAgainst",
+        "value": 16
+       },
+       {
+        "name": "pointsFor",
+        "value": 2
+       },
+       {
+        "name": "ties",
+        "value": 0
+       },
+       {
+        "name": "wins",
+        "value": 1
+       },
+       {
+        "name": "rank",
+        "value": 18
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

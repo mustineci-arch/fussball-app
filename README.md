@@ -27,6 +27,17 @@ src/
 Die UI spricht ausschließlich mit `FootballProvider`. Der Anbieter wird in `src/providers/index.ts`
 über `VITE_DATA_PROVIDER` gewählt – ein Wechsel erfordert keine Änderungen an Seiten oder Komponenten.
 
+## Datenquelle
+
+Standard ist die **inoffizielle ESPN-API** (kostenlos, kein API-Key, direkt aus dem Browser abrufbar).
+Sie ist undokumentiert und kann sich jederzeit ändern – daher nur für **private Nutzung**.
+Für einen öffentlichen Betrieb wird ein lizenzierter Anbieter als weiterer Adapter in
+`src/providers/` ergänzt. Mit `VITE_DATA_PROVIDER=mock` läuft die App mit Demo-Daten.
+
+- Adapter: `src/providers/espn/` (Client mit Single-Flight + Cache, Mapper, Liga-Liste)
+- Neuer Wettbewerb: eine Zeile in `src/providers/espn/leagues.ts`
+- Tests laufen gegen gespeicherte echte Antworten in `src/providers/espn/__fixtures__/`
+
 ## Deployment
 
 ```bash

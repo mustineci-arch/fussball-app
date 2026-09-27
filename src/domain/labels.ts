@@ -55,6 +55,9 @@ export const ZONE_STYLES: Record<StandingZoneKind, string> = {
   promotion: 'bg-zone-cl',
   relegation_playoff: 'bg-zone-el',
   relegation: 'bg-zone-rel',
+  qualification: 'bg-zone-cl',
+  playoff: 'bg-zone-el',
+  eliminated: 'bg-zone-rel',
 }
 
 export const FORM_LABELS = { W: 'S', D: 'U', L: 'N' } as const

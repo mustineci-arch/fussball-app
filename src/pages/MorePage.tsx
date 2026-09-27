@@ -25,9 +25,13 @@ export default function MorePage() {
       </Section>
       <Section title="Über die App">
         <Card padded={false} className="divide-y divide-border">
-          <Row icon={<Database className="size-5" />} title="Datenquelle" value={provider.isDemo ? 'Demo-Daten' : provider.id} />
+          <Row icon={<Database className="size-5" />} title="Datenquelle" value={provider.displayName} />
           <Row icon={<Info className="size-5" />} title="Version" value={__APP_VERSION__} />
         </Card>
+        <p className="px-1 text-xs text-muted">
+          Private Nutzung. Spielstände, Tabellen und Statistiken stammen von der Datenquelle und werden
+          ohne Gewähr angezeigt. Live-Daten können einige Sekunden verzögert sein.
+        </p>
       </Section>
     </div>
   )

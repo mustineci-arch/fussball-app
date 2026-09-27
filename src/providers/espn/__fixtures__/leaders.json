@@ -1,0 +1,248 @@
+{
+ "stats": [
+  {
+   "name": "goalsLeaders",
+   "leaders": [
+    {
+     "value": 7,
+     "athlete": {
+      "id": "173896",
+      "displayName": "Mohamed Salah",
+      "team": {
+       "id": "997",
+       "displayName": "Trabzonspor",
+       "abbreviation": "TRAB",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/997.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 7,
+     "athlete": {
+      "id": "356402",
+      "displayName": "Gift Orban",
+      "team": {
+       "id": "132335",
+       "displayName": "Amed SFK",
+       "abbreviation": "AMED"
+      }
+     }
+    },
+    {
+     "value": 6,
+     "athlete": {
+      "id": "216937",
+      "displayName": "Eldor Shomurodov",
+      "team": {
+       "id": "7914",
+       "displayName": "Istanbul Basaksehir",
+       "abbreviation": "IBFK",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/7914.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 6,
+     "athlete": {
+      "id": "240209",
+      "displayName": "Vedat Muriqi",
+      "team": {
+       "id": "436",
+       "displayName": "Fenerbahce",
+       "abbreviation": "FEN",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 6,
+     "athlete": {
+      "id": "228296",
+      "displayName": "Victor Osimhen",
+      "team": {
+       "id": "432",
+       "displayName": "Galatasaray",
+       "abbreviation": "GAL",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 5,
+     "athlete": {
+      "id": "235677",
+      "displayName": "Dusan Vlahovic",
+      "team": {
+       "id": "1895",
+       "displayName": "Besiktas",
+       "abbreviation": "BES",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/1895.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "name": "assistsLeaders",
+   "leaders": [
+    {
+     "value": 3,
+     "athlete": {
+      "id": "211923",
+      "displayName": "Irfan Can Kahveci",
+      "team": {
+       "id": "436",
+       "displayName": "Fenerbahce",
+       "abbreviation": "FEN",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/436.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 2,
+     "athlete": {
+      "id": "306808",
+      "displayName": "Mithat Pala",
+      "team": {
+       "id": "7656",
+       "displayName": "Caykur Rizespor",
+       "abbreviation": "CAY",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/7656.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 2,
+     "athlete": {
+      "id": "212334",
+      "displayName": "Florent Hadergjonaj",
+      "team": {
+       "id": "9078",
+       "displayName": "Alanyaspor",
+       "abbreviation": "ALA",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/9078.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 2,
+     "athlete": {
+      "id": "159052",
+      "displayName": "Cláudio Winck",
+      "team": {
+       "id": "6870",
+       "displayName": "Kasimpasa",
+       "abbreviation": "KAS",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/6870.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    },
+    {
+     "value": 2,
+     "athlete": {
+      "id": "342759",
+      "displayName": "Ermal Krasniqi",
+      "team": {
+       "id": "132335",
+       "displayName": "Amed SFK",
+       "abbreviation": "AMED"
+      }
+     }
+    },
+    {
+     "value": 2,
+     "athlete": {
+      "id": "212973",
+      "displayName": "Lucas Torreira",
+      "team": {
+       "id": "432",
+       "displayName": "Galatasaray",
+       "abbreviation": "GAL",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

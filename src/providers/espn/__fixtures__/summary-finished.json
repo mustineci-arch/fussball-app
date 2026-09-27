@@ -1,0 +1,1679 @@
+{
+ "header": {
+  "id": "401879286",
+  "league": {
+   "slug": "eng.1",
+   "name": "English Premier League"
+  },
+  "competitions": [
+   {
+    "id": "401879286",
+    "date": "2026-09-05T11:30Z",
+    "status": {
+     "type": {
+      "id": "28",
+      "name": "STATUS_FULL_TIME",
+      "state": "post",
+      "completed": true,
+      "description": "Full Time",
+      "detail": "FT",
+      "shortDetail": "FT"
+     }
+    },
+    "competitors": [
+     {
+      "id": "361",
+      "homeAway": "home",
+      "score": "2",
+      "linescores": [
+       {
+        "displayValue": "1"
+       },
+       {
+        "displayValue": "1"
+       }
+      ],
+      "team": {
+       "id": "361",
+       "displayName": "Newcastle United",
+       "shortDisplayName": "Newcastle",
+       "abbreviation": "NEW",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "id": "349",
+      "homeAway": "away",
+      "score": "2",
+      "linescores": [
+       {
+        "displayValue": "2"
+       },
+       {
+        "displayValue": "0"
+       }
+      ],
+      "team": {
+       "id": "349",
+       "displayName": "AFC Bournemouth",
+       "shortDisplayName": "Bournemouth",
+       "abbreviation": "BOU",
+       "logos": [
+        {
+         "href": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+         "rel": [
+          "full",
+          "default"
+         ]
+        }
+       ]
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "gameInfo": {
+  "venue": {
+   "fullName": "St. James' Park"
+  },
+  "officials": [
+   {
+    "displayName": "Robert Jones",
+    "position": {
+     "name": "Referee"
+    }
+   }
+  ]
+ },
+ "rosters": [
+  {
+   "homeAway": "home",
+   "formation": "4-2-3-1",
+   "team": {
+    "id": "361",
+    "displayName": "Newcastle United",
+    "abbreviation": "NEW",
+    "logos": [
+     {
+      "href": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+      "rel": [
+       "full",
+       "default"
+      ]
+     }
+    ]
+   },
+   "roster": [
+    {
+     "starter": true,
+     "jersey": "21",
+     "athlete": {
+      "id": "319267",
+      "displayName": "Lukás Hornícek",
+      "shortName": "L. Hornícek"
+     },
+     "position": {
+      "abbreviation": "G",
+      "name": "Goalkeeper"
+     },
+     "formationPlace": "1",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "4",
+     "athlete": {
+      "id": "274633",
+      "displayName": "Sven Botman",
+      "shortName": "S. Botman"
+     },
+     "position": {
+      "abbreviation": "CD-L",
+      "name": "Center Left Defender"
+     },
+     "formationPlace": "6",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "12",
+     "athlete": {
+      "id": "303444",
+      "displayName": "Malick Thiaw",
+      "shortName": "M. Thiaw"
+     },
+     "position": {
+      "abbreviation": "CD-R",
+      "name": "Center Right Defender"
+     },
+     "formationPlace": "5",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "3",
+     "athlete": {
+      "id": "106139",
+      "displayName": "Lewis Hall",
+      "shortName": "L. Hall"
+     },
+     "position": {
+      "abbreviation": "LB",
+      "name": "Left Back"
+     },
+     "formationPlace": "3",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "37",
+     "athlete": {
+      "id": "308979",
+      "displayName": "Amar Dedic",
+      "shortName": "A. Dedic"
+     },
+     "position": {
+      "abbreviation": "RB",
+      "name": "Right Back"
+     },
+     "formationPlace": "2",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "28",
+     "athlete": {
+      "id": "259517",
+      "displayName": "Joe Willock",
+      "shortName": "J. Willock"
+     },
+     "position": {
+      "abbreviation": "AM",
+      "name": "Attacking Midfielder"
+     },
+     "formationPlace": "10",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "67",
+     "athlete": {
+      "id": "349078",
+      "displayName": "Lewis Miley",
+      "shortName": "L. Miley"
+     },
+     "position": {
+      "abbreviation": "LM",
+      "name": "Left Midfielder"
+     },
+     "formationPlace": "4",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "6",
+     "athlete": {
+      "id": "323986",
+      "displayName": "Nico González",
+      "shortName": "N. González"
+     },
+     "position": {
+      "abbreviation": "RM",
+      "name": "Right Midfielder"
+     },
+     "formationPlace": "8",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "9",
+     "athlete": {
+      "id": "224077",
+      "displayName": "Yoane Wissa",
+      "shortName": "Y. Wissa"
+     },
+     "position": {
+      "abbreviation": "F",
+      "name": "Forward"
+     },
+     "formationPlace": "9",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "11",
+     "athlete": {
+      "id": "243386",
+      "displayName": "Harvey Barnes",
+      "shortName": "H. Barnes"
+     },
+     "position": {
+      "abbreviation": "AM-L",
+      "name": "Attacking Midfielder Left"
+     },
+     "formationPlace": "11",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "19",
+     "athlete": {
+      "id": "296622",
+      "displayName": "Anthony Elanga",
+      "shortName": "A. Elanga"
+     },
+     "position": {
+      "abbreviation": "AM-R",
+      "name": "Attacking Midfielder Right"
+     },
+     "formationPlace": "7",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "2",
+     "athlete": {
+      "id": "299641",
+      "displayName": "Tino Livramento",
+      "shortName": "T. Livramento"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "1",
+     "athlete": {
+      "id": "161715",
+      "displayName": "Nick Pope",
+      "shortName": "N. Pope"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "5",
+     "athlete": {
+      "id": "179233",
+      "displayName": "Fabian Schär",
+      "shortName": "F. Schär"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "20",
+     "athlete": {
+      "id": "359651",
+      "displayName": "Matias Fernandez-Pardo",
+      "shortName": "M. Fernandez-Pardo"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "23",
+     "athlete": {
+      "id": "172836",
+      "displayName": "Jacob Murphy",
+      "shortName": "J. Murphy"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "8",
+     "athlete": {
+      "id": "396630",
+      "displayName": "Aladji Bamba",
+      "shortName": "A. Bamba"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "17",
+     "athlete": {
+      "id": "359108",
+      "displayName": "Bazoumana Touré",
+      "shortName": "B. Touré"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "14",
+     "athlete": {
+      "id": "384372",
+      "displayName": "Sean Steur",
+      "shortName": "S. Steur"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "41",
+     "athlete": {
+      "id": "286090",
+      "displayName": "Jacob Ramsey",
+      "shortName": "J. Ramsey"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    }
+   ]
+  },
+  {
+   "homeAway": "away",
+   "formation": "4-2-3-1",
+   "team": {
+    "id": "349",
+    "displayName": "AFC Bournemouth",
+    "abbreviation": "BOU",
+    "logos": [
+     {
+      "href": "https://a.espncdn.com/i/teamlogos/soccer/500/349.png",
+      "rel": [
+       "full",
+       "default"
+      ]
+     }
+    ]
+   },
+   "roster": [
+    {
+     "starter": true,
+     "jersey": "1",
+     "athlete": {
+      "id": "289824",
+      "displayName": "Djordje Petrovic",
+      "shortName": "D. Petrovic"
+     },
+     "position": {
+      "abbreviation": "G",
+      "name": "Goalkeeper"
+     },
+     "formationPlace": "1",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "14",
+     "athlete": {
+      "id": "346588",
+      "displayName": "António Silva",
+      "shortName": "A. Silva"
+     },
+     "position": {
+      "abbreviation": "CD-L",
+      "name": "Center Left Defender"
+     },
+     "formationPlace": "6",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "5",
+     "athlete": {
+      "id": "279155",
+      "displayName": "James Hill",
+      "shortName": "J. Hill"
+     },
+     "position": {
+      "abbreviation": "CD-R",
+      "name": "Center Right Defender"
+     },
+     "formationPlace": "5",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "3",
+     "athlete": {
+      "id": "305684",
+      "displayName": "Adrien Truffert",
+      "shortName": "A. Truffert"
+     },
+     "position": {
+      "abbreviation": "LB",
+      "name": "Left Back"
+     },
+     "formationPlace": "3",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "15",
+     "athlete": {
+      "id": "122268",
+      "displayName": "Adam Smith",
+      "shortName": "A. Smith"
+     },
+     "position": {
+      "abbreviation": "RB",
+      "name": "Right Back"
+     },
+     "formationPlace": "2",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "19",
+     "athlete": {
+      "id": "245916",
+      "displayName": "Justin Kluivert",
+      "shortName": "J. Kluivert"
+     },
+     "position": {
+      "abbreviation": "AM",
+      "name": "Attacking Midfielder"
+     },
+     "formationPlace": "10",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "8",
+     "athlete": {
+      "id": "314790",
+      "displayName": "Alex Scott",
+      "shortName": "A. Scott"
+     },
+     "position": {
+      "abbreviation": "LM",
+      "name": "Left Midfielder"
+     },
+     "formationPlace": "4",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "12",
+     "athlete": {
+      "id": "222776",
+      "displayName": "Tyler Adams",
+      "shortName": "T. Adams"
+     },
+     "position": {
+      "abbreviation": "RM",
+      "name": "Right Midfielder"
+     },
+     "formationPlace": "8",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "9",
+     "athlete": {
+      "id": "102368",
+      "displayName": "Evanilson",
+      "shortName": "Evanilson"
+     },
+     "position": {
+      "abbreviation": "F",
+      "name": "Forward"
+     },
+     "formationPlace": "9",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "16",
+     "athlete": {
+      "id": "243364",
+      "displayName": "Marcus Tavernier",
+      "shortName": "M. Tavernier"
+     },
+     "position": {
+      "abbreviation": "AM-L",
+      "name": "Attacking Midfielder Left"
+     },
+     "formationPlace": "11",
+     "subbedIn": false
+    },
+    {
+     "starter": true,
+     "jersey": "37",
+     "athlete": {
+      "id": "357719",
+      "displayName": "Rayan",
+      "shortName": "Rayan"
+     },
+     "position": {
+      "abbreviation": "AM-R",
+      "name": "Attacking Midfielder Right"
+     },
+     "formationPlace": "7",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "10",
+     "athlete": {
+      "id": "93435",
+      "displayName": "Ryan Christie",
+      "shortName": "R. Christie"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "7",
+     "athlete": {
+      "id": "72487",
+      "displayName": "David Brooks",
+      "shortName": "D. Brooks"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "24",
+     "athlete": {
+      "id": "303804",
+      "displayName": "Juanlu Sanchez",
+      "shortName": "Juanlu Sanchez"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "29",
+     "athlete": {
+      "id": "312182",
+      "displayName": "Daniel Jebbison",
+      "shortName": "D. Jebbison"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "20",
+     "athlete": {
+      "id": "240055",
+      "displayName": "Michele Di Gregorio",
+      "shortName": "M. Di Gregorio"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "6",
+     "athlete": {
+      "id": "339797",
+      "displayName": "Julio Soler",
+      "shortName": "J. Soler"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    },
+    {
+     "starter": false,
+     "jersey": "4",
+     "athlete": {
+      "id": "223452",
+      "displayName": "Lewis Cook",
+      "shortName": "L. Cook"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "11",
+     "athlete": {
+      "id": "332948",
+      "displayName": "Ben Gannon-Doak",
+      "shortName": "B. Gannon-Doak"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": true
+    },
+    {
+     "starter": false,
+     "jersey": "18",
+     "athlete": {
+      "id": "282675",
+      "displayName": "Bafodé Diakité",
+      "shortName": "B. Diakité"
+     },
+     "position": {
+      "abbreviation": "SUB",
+      "name": "Substitute"
+     },
+     "formationPlace": "0",
+     "subbedIn": false
+    }
+   ]
+  }
+ ],
+ "boxscore": {
+  "teams": [
+   {
+    "team": {
+     "id": "361"
+    },
+    "statistics": [
+     {
+      "name": "foulsCommitted",
+      "displayValue": "19"
+     },
+     {
+      "name": "yellowCards",
+      "displayValue": "2"
+     },
+     {
+      "name": "redCards",
+      "displayValue": "0"
+     },
+     {
+      "name": "offsides",
+      "displayValue": "1"
+     },
+     {
+      "name": "wonCorners",
+      "displayValue": "4"
+     },
+     {
+      "name": "saves",
+      "displayValue": "4"
+     },
+     {
+      "name": "possessionPct",
+      "displayValue": "57.3"
+     },
+     {
+      "name": "totalShots",
+      "displayValue": "8"
+     },
+     {
+      "name": "shotsOnTarget",
+      "displayValue": "2"
+     },
+     {
+      "name": "shotPct",
+      "displayValue": "0.3"
+     },
+     {
+      "name": "penaltyKickGoals",
+      "displayValue": "0"
+     },
+     {
+      "name": "penaltyKickShots",
+      "displayValue": "0"
+     },
+     {
+      "name": "accuratePasses",
+      "displayValue": "361"
+     },
+     {
+      "name": "totalPasses",
+      "displayValue": "443"
+     },
+     {
+      "name": "passPct",
+      "displayValue": "0.8"
+     },
+     {
+      "name": "accurateCrosses",
+      "displayValue": "2"
+     },
+     {
+      "name": "totalCrosses",
+      "displayValue": "11"
+     },
+     {
+      "name": "crossPct",
+      "displayValue": "0.2"
+     },
+     {
+      "name": "totalLongBalls",
+      "displayValue": "61"
+     },
+     {
+      "name": "accurateLongBalls",
+      "displayValue": "25"
+     },
+     {
+      "name": "longballPct",
+      "displayValue": "0.4"
+     },
+     {
+      "name": "blockedShots",
+      "displayValue": "2"
+     },
+     {
+      "name": "effectiveTackles",
+      "displayValue": "2"
+     },
+     {
+      "name": "totalTackles",
+      "displayValue": "5"
+     },
+     {
+      "name": "tacklePct",
+      "displayValue": "0.4"
+     },
+     {
+      "name": "interceptions",
+      "displayValue": "6"
+     },
+     {
+      "name": "effectiveClearance",
+      "displayValue": "13"
+     },
+     {
+      "name": "totalClearance",
+      "displayValue": "13"
+     }
+    ]
+   },
+   {
+    "team": {
+     "id": "349"
+    },
+    "statistics": [
+     {
+      "name": "foulsCommitted",
+      "displayValue": "17"
+     },
+     {
+      "name": "yellowCards",
+      "displayValue": "3"
+     },
+     {
+      "name": "redCards",
+      "displayValue": "0"
+     },
+     {
+      "name": "offsides",
+      "displayValue": "1"
+     },
+     {
+      "name": "wonCorners",
+      "displayValue": "3"
+     },
+     {
+      "name": "saves",
+      "displayValue": "0"
+     },
+     {
+      "name": "possessionPct",
+      "displayValue": "42.7"
+     },
+     {
+      "name": "totalShots",
+      "displayValue": "17"
+     },
+     {
+      "name": "shotsOnTarget",
+      "displayValue": "5"
+     },
+     {
+      "name": "shotPct",
+      "displayValue": "0.3"
+     },
+     {
+      "name": "penaltyKickGoals",
+      "displayValue": "0"
+     },
+     {
+      "name": "penaltyKickShots",
+      "displayValue": "0"
+     },
+     {
+      "name": "accuratePasses",
+      "displayValue": "251"
+     },
+     {
+      "name": "totalPasses",
+      "displayValue": "328"
+     },
+     {
+      "name": "passPct",
+      "displayValue": "0.8"
+     },
+     {
+      "name": "accurateCrosses",
+      "displayValue": "2"
+     },
+     {
+      "name": "totalCrosses",
+      "displayValue": "12"
+     },
+     {
+      "name": "crossPct",
+      "displayValue": "0.2"
+     },
+     {
+      "name": "totalLongBalls",
+      "displayValue": "47"
+     },
+     {
+      "name": "accurateLongBalls",
+      "displayValue": "17"
+     },
+     {
+      "name": "longballPct",
+      "displayValue": "0.4"
+     },
+     {
+      "name": "blockedShots",
+      "displayValue": "7"
+     },
+     {
+      "name": "effectiveTackles",
+      "displayValue": "5"
+     },
+     {
+      "name": "totalTackles",
+      "displayValue": "12"
+     },
+     {
+      "name": "tacklePct",
+      "displayValue": "0.4"
+     },
+     {
+      "name": "interceptions",
+      "displayValue": "7"
+     },
+     {
+      "name": "effectiveClearance",
+      "displayValue": "22"
+     },
+     {
+      "name": "totalClearance",
+      "displayValue": "22"
+     }
+    ]
+   }
+  ]
+ },
+ "keyEvents": [
+  {
+   "id": "51872564",
+   "type": {
+    "id": "80",
+    "text": "Kickoff",
+    "type": "kickoff"
+   },
+   "clock": {
+    "displayValue": ""
+   }
+  },
+  {
+   "id": "51873218",
+   "type": {
+    "id": "70",
+    "text": "Goal",
+    "type": "goal"
+   },
+   "clock": {
+    "displayValue": "9'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "243364",
+      "displayName": "Marcus Tavernier"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51875378",
+   "type": {
+    "id": "94",
+    "text": "Yellow Card",
+    "type": "yellow-card"
+   },
+   "clock": {
+    "displayValue": "28'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "296622",
+      "displayName": "Anthony Elanga"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51875563",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "28'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51875564",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "28'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51875565",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "29'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51875566",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "29'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51876154",
+   "type": {
+    "id": "97",
+    "text": "Own Goal",
+    "type": "own-goal"
+   },
+   "clock": {
+    "displayValue": "35'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "303444",
+      "displayName": "Malick Thiaw"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51876375",
+   "type": {
+    "id": "70",
+    "text": "Goal",
+    "type": "goal"
+   },
+   "clock": {
+    "displayValue": "37'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "243386",
+      "displayName": "Harvey Barnes"
+     }
+    },
+    {
+     "athlete": {
+      "id": "106139",
+      "displayName": "Lewis Hall"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51877733",
+   "type": {
+    "id": "81",
+    "text": "Halftime",
+    "type": "halftime"
+   },
+   "clock": {
+    "displayValue": "45'+3'"
+   }
+  },
+  {
+   "id": "51878571",
+   "type": {
+    "id": "82",
+    "text": "Start 2nd Half",
+    "type": "start-2nd-half"
+   },
+   "clock": {
+    "displayValue": "45'"
+   }
+  },
+  {
+   "id": "51878797",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "49'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51878798",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "49'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51878912",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "50'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51878911",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "50'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51879741",
+   "type": {
+    "id": "94",
+    "text": "Yellow Card",
+    "type": "yellow-card"
+   },
+   "clock": {
+    "displayValue": "57'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "224077",
+      "displayName": "Yoane Wissa"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51880647",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "63'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "359651",
+      "displayName": "Matias Fernandez-Pardo"
+     }
+    },
+    {
+     "athlete": {
+      "id": "259517",
+      "displayName": "Joe Willock"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51880648",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "63'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "286090",
+      "displayName": "Jacob Ramsey"
+     }
+    },
+    {
+     "athlete": {
+      "id": "349078",
+      "displayName": "Lewis Miley"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51880901",
+   "type": {
+    "id": "94",
+    "text": "Yellow Card",
+    "type": "yellow-card"
+   },
+   "clock": {
+    "displayValue": "66'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "245916",
+      "displayName": "Justin Kluivert"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51881941",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "76'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "223452",
+      "displayName": "Lewis Cook"
+     }
+    },
+    {
+     "athlete": {
+      "id": "222776",
+      "displayName": "Tyler Adams"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51882064",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "76'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "72487",
+      "displayName": "David Brooks"
+     }
+    },
+    {
+     "athlete": {
+      "id": "245916",
+      "displayName": "Justin Kluivert"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51882177",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "77'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "384372",
+      "displayName": "Sean Steur"
+     }
+    },
+    {
+     "athlete": {
+      "id": "323986",
+      "displayName": "Nico González"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51882178",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "78'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "172836",
+      "displayName": "Jacob Murphy"
+     }
+    },
+    {
+     "athlete": {
+      "id": "296622",
+      "displayName": "Anthony Elanga"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51882491",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "80'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51882492",
+   "type": {
+    "id": "129",
+    "text": "Start Delay",
+    "type": "start-delay"
+   },
+   "clock": {
+    "displayValue": "80'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51882664",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "81'"
+   },
+   "team": {
+    "id": "349"
+   }
+  },
+  {
+   "id": "51882666",
+   "type": {
+    "id": "130",
+    "text": "End Delay",
+    "type": "end-delay"
+   },
+   "clock": {
+    "displayValue": "81'"
+   },
+   "team": {
+    "id": "361"
+   }
+  },
+  {
+   "id": "51883368",
+   "type": {
+    "id": "94",
+    "text": "Yellow Card",
+    "type": "yellow-card"
+   },
+   "clock": {
+    "displayValue": "87'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "305684",
+      "displayName": "Adrien Truffert"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51883547",
+   "type": {
+    "id": "70",
+    "text": "Goal",
+    "type": "goal"
+   },
+   "clock": {
+    "displayValue": "88'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "286090",
+      "displayName": "Jacob Ramsey"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51883700",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "89'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "312182",
+      "displayName": "Daniel Jebbison"
+     }
+    },
+    {
+     "athlete": {
+      "id": "243364",
+      "displayName": "Marcus Tavernier"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51883701",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "89'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "332948",
+      "displayName": "Ben Gannon-Doak"
+     }
+    },
+    {
+     "athlete": {
+      "id": "357719",
+      "displayName": "Rayan"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51883702",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "90'"
+   },
+   "team": {
+    "id": "361"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "299641",
+      "displayName": "Tino Livramento"
+     }
+    },
+    {
+     "athlete": {
+      "id": "106139",
+      "displayName": "Lewis Hall"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51884212",
+   "type": {
+    "id": "94",
+    "text": "Yellow Card",
+    "type": "yellow-card"
+   },
+   "clock": {
+    "displayValue": "90'+4'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "122268",
+      "displayName": "Adam Smith"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51884496",
+   "type": {
+    "id": "76",
+    "text": "Substitution",
+    "type": "substitution"
+   },
+   "clock": {
+    "displayValue": "90'+6'"
+   },
+   "team": {
+    "id": "349"
+   },
+   "participants": [
+    {
+     "athlete": {
+      "id": "93435",
+      "displayName": "Ryan Christie"
+     }
+    },
+    {
+     "athlete": {
+      "id": "314790",
+      "displayName": "Alex Scott"
+     }
+    }
+   ]
+  },
+  {
+   "id": "51884497",
+   "type": {
+    "id": "83",
+    "text": "End Regular Time",
+    "type": "end-regular-time"
+   },
+   "clock": {
+    "displayValue": "90'+7'"
+   }
+  }
+ ]
+}

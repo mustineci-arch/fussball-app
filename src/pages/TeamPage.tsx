@@ -32,7 +32,7 @@ function Header({ team, leagueId }: { team: Team; leagueId?: Id }) {
   const league = competitions?.find((c) => c.id === leagueId)
   const facts = [
     { label: 'Land', value: team.country },
-    { label: 'Liga', value: league?.name, to: league && `/competition/${league.id}` },
+    { label: 'Liga', value: league?.name ?? team.league, to: leagueId && `/competition/${leagueId}` },
     { label: 'Stadion', value: team.venue },
     { label: 'Trainer', value: team.coach },
   ].filter((f) => f.value)

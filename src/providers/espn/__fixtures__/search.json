@@ -1,0 +1,50 @@
+{
+ "results": [
+  {
+   "type": "team",
+   "contents": [
+    {
+     "uid": "s:600~t:432",
+     "displayName": "Galatasaray",
+     "subtitle": "Turkish Super Lig",
+     "sport": "soccer",
+     "image": {
+      "default": "https://a.espncdn.com/i/teamlogos/soccer/500/432.png"
+     }
+    },
+    {
+     "uid": "s:600~t:22406",
+     "displayName": "Galatasaray",
+     "subtitle": "UEFA Women's Champions League",
+     "sport": "soccer",
+     "image": {
+      "default": "https://a.espncdn.com/i/teamlogos/soccer/500/22406.png"
+     }
+    }
+   ]
+  },
+  {
+   "type": "player",
+   "contents": [
+    {
+     "uid": "s:600~a:367007",
+     "displayName": "Turan Çalhanoglu",
+     "subtitle": "FC Astoria Walldorf",
+     "sport": "soccer"
+    },
+    {
+     "uid": "s:600~a:170785",
+     "displayName": "Hakan Çalhanoglu",
+     "subtitle": "Internazionale",
+     "sport": "soccer"
+    },
+    {
+     "uid": "s:600~a:310965",
+     "displayName": "Kerim Çalhanoglu",
+     "subtitle": "Gaziantep FK",
+     "sport": "soccer"
+    }
+   ]
+  }
+ ]
+}

@@ -18,6 +18,7 @@ import { TOP_CATEGORY_LABELS } from '../domain/labels'
 import { isFinished, isLive, isUpcoming } from '../domain/status'
 import type { Competition, Id, TopPlayerCategory } from '../domain/types'
 import { StandingsTable } from '../features/competitions/StandingsTable'
+import { provider } from '../providers'
 import { TopPlayersList } from '../features/competitions/TopPlayersList'
 import { FixtureList } from '../features/matches/FixtureList'
 
@@ -122,10 +123,11 @@ function TableTab({ id }: { id: Id }) {
   )
 }
 
-const CATEGORIES = Object.entries(TOP_CATEGORY_LABELS).map(([id, label]) => ({ id: id as TopPlayerCategory, label }))
+// Nur Kategorien anbieten, die die Datenquelle tatsächlich liefert
+const CATEGORIES = provider.topPlayerCategories.map((id) => ({ id, label: TOP_CATEGORY_LABELS[id] }))
 
 function Stats({ id }: { id: Id }) {
-  const [category, setCategory] = useState<TopPlayerCategory>('goals')
+  const [category, setCategory] = useState<TopPlayerCategory>(CATEGORIES[0]?.id ?? 'goals')
   const { data, isPending, error, refetch } = useTopPlayers(id, category)
   return (
     <div className="space-y-4">

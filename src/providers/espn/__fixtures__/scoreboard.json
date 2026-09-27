@@ -1,0 +1,141 @@
+{
+ "leagues": [
+  {
+   "slug": "uefa.nations"
+  }
+ ],
+ "events": [
+  {
+   "id": "401861067",
+   "date": "2026-09-27T13:00Z",
+   "status": {
+    "clock": 1260,
+    "displayClock": "21'",
+    "period": 1,
+    "type": {
+     "id": "25",
+     "name": "STATUS_FIRST_HALF",
+     "state": "in",
+     "completed": false,
+     "description": "First Half",
+     "detail": "21'",
+     "shortDetail": "21'"
+    }
+   },
+   "competitions": [
+    {
+     "id": "401861067",
+     "date": "2026-09-27T13:00Z",
+     "status": {
+      "clock": 1260,
+      "displayClock": "21'",
+      "period": 1,
+      "type": {
+       "id": "25",
+       "name": "STATUS_FIRST_HALF",
+       "state": "in",
+       "completed": false,
+       "description": "First Half",
+       "detail": "21'",
+       "shortDetail": "21'"
+      }
+     },
+     "venue": {
+      "fullName": "S. Darius and S. Gireno Stadium"
+     },
+     "competitors": [
+      {
+       "id": "460",
+       "homeAway": "home",
+       "score": "1",
+       "team": {
+        "id": "460",
+        "displayName": "Lithuania",
+        "shortDisplayName": "Lithuania",
+        "abbreviation": "LTU",
+        "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ltu.png"
+       }
+      },
+      {
+       "id": "581",
+       "homeAway": "away",
+       "score": "1",
+       "team": {
+        "id": "581",
+        "displayName": "Azerbaijan",
+        "shortDisplayName": "Azerbaijan",
+        "abbreviation": "AZE",
+        "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aze.png"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "401861071",
+   "date": "2026-09-27T16:00Z",
+   "status": {
+    "clock": 0,
+    "displayClock": "0'",
+    "type": {
+     "id": "1",
+     "name": "STATUS_SCHEDULED",
+     "state": "pre",
+     "completed": false,
+     "description": "Scheduled",
+     "detail": "Sun, September 27th at 12:00 PM EDT",
+     "shortDetail": "Scheduled"
+    }
+   },
+   "competitions": [
+    {
+     "id": "401861071",
+     "date": "2026-09-27T16:00Z",
+     "status": {
+      "clock": 0,
+      "displayClock": "0'",
+      "type": {
+       "id": "1",
+       "name": "STATUS_SCHEDULED",
+       "state": "pre",
+       "completed": false,
+       "description": "Scheduled",
+       "detail": "Sun, September 27th at 12:00 PM EDT",
+       "shortDetail": "Scheduled"
+      }
+     },
+     "venue": {
+      "fullName": "Ernst-Happel-Stadion"
+     },
+     "competitors": [
+      {
+       "id": "474",
+       "homeAway": "home",
+       "score": "0",
+       "team": {
+        "id": "474",
+        "displayName": "Austria",
+        "shortDisplayName": "Austria",
+        "abbreviation": "AUT",
+        "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aut.png"
+       }
+      },
+      {
+       "id": "18272",
+       "homeAway": "away",
+       "score": "0",
+       "team": {
+        "id": "18272",
+        "displayName": "Kosovo",
+        "shortDisplayName": "Kosovo",
+        "abbreviation": "KOS",
+        "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kosovo.png"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

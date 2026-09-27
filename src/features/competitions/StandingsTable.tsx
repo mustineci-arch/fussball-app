@@ -100,7 +100,7 @@ export function StandingsTable({ table, highlightTeamIds = [], compact }: Standi
       {usedZones.length > 0 && !compact && (
         <ul className="flex flex-wrap gap-x-4 gap-y-1.5 border-t border-border px-4 py-3 text-xs text-muted">
           {usedZones.map((z) => (
-            <li key={z.kind} className="flex items-center gap-1.5">
+            <li key={z.label} className="flex items-center gap-1.5">
               <span className={clsx('size-2.5 rounded-sm', ZONE_STYLES[z.kind])} aria-hidden />
               {z.label}
             </li>

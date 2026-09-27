@@ -43,6 +43,8 @@ export default function PlayerPage() {
   }
 
   const { player, team, seasonStats } = data
+  // Nur Spalten zeigen, für die die Datenquelle überhaupt Werte liefert
+  const columns = STAT_COLUMNS.filter((c) => seasonStats.some((s) => s[c.key] !== undefined))
   const age = player.birthDate ? ageFrom(player.birthDate) : undefined
   const facts = [
     { label: 'Nationalität', value: player.nationality },
@@ -87,7 +89,7 @@ export default function PlayerPage() {
               <thead className="text-[11px] font-semibold tracking-wide text-subtle uppercase">
                 <tr className="border-b border-border">
                   <th className="px-4 py-2 text-left">Wettbewerb</th>
-                  {STAT_COLUMNS.map((c) => (
+                  {columns.map((c) => (
                     <th key={c.key} title={c.title} className="px-2 py-2 text-center">
                       {c.label}
                     </th>
@@ -96,12 +98,12 @@ export default function PlayerPage() {
               </thead>
               <tbody className="divide-y divide-border">
                 {seasonStats.map((s, i) => (
-                  <tr key={s.competitionId ?? i}>
+                  <tr key={`${s.competitionId}-${s.seasonLabel}-${i}`}>
                     <td className="px-4 py-2.5 font-medium whitespace-nowrap">
-                      {competitions?.find((c) => c.id === s.competitionId)?.shortName ?? '–'}
+                      {competitions?.find((c) => c.id === s.competitionId)?.shortName ?? 'Anderer Wettbewerb'}
                       {s.seasonLabel && <span className="ml-1.5 text-xs text-subtle">{s.seasonLabel}</span>}
                     </td>
-                    {STAT_COLUMNS.map((c) => (
+                    {columns.map((c) => (
                       <td key={c.key} className="px-2 py-2.5 text-center tabular-nums">
                         {s[c.key] ?? '–'}
                       </td>

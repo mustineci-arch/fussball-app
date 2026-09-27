@@ -21,8 +21,12 @@ import type {
  */
 export interface FootballProvider {
   readonly id: string
+  /** Anzeigename der Datenquelle (Quellenangabe) */
+  readonly displayName: string
   /** true, wenn die Daten nicht echt sind (Mock/Demo) */
   readonly isDemo: boolean
+  /** Welche Bestenlisten die Quelle liefert – andere Kategorien blendet die UI aus */
+  readonly topPlayerCategories: readonly TopPlayerCategory[]
 
   getCompetitions(): Promise<Competition[]>
   getCompetition(id: Id): Promise<{ competition: Competition; season?: Season }>

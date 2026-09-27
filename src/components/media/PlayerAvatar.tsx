@@ -28,7 +28,7 @@ export const PlayerAvatar = memo(function PlayerAvatar({ name, photoUrl, shirtNu
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="size-full rounded-full bg-surface-3 object-cover"
+          className="size-full rounded-full bg-surface-3 object-cover object-top"
         />
       ) : (
         <span

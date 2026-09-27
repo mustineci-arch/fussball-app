@@ -43,6 +43,16 @@ export default defineConfig({
             },
           },
           {
+            // Spielerfotos und Wikimedia-Metadaten ändern sich selten
+            urlPattern: ({ url }) => /(^|\.)wiki(data|media)\.org$/.test(url.hostname),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'wikimedia',
+              expiration: { maxEntries: 400, maxAgeSeconds: 30 * 24 * 60 * 60 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
             // Logos ändern sich praktisch nie
             urlPattern: ({ url }) => url.hostname === 'a.espncdn.com',
             handler: 'CacheFirst',

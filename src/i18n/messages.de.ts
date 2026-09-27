@@ -289,6 +289,10 @@ export const de = {
   'more.installed': 'Installiert',
   'more.installAction': 'Installieren',
 
+  'photo.credit': 'Foto',
+  'more.photos': 'Spielerfotos',
+  'more.photosValue': 'Wikimedia Commons (freie Lizenzen)',
+
   'pwa.iosHintTitle': 'Als App installieren',
   'pwa.iosHintText': 'Tippe in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“.',
   'pwa.updateAvailable': 'Eine neue Version ist verfügbar.',

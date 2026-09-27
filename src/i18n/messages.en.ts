@@ -291,6 +291,10 @@ export const en: Record<MessageKey, string> = {
   'more.installed': 'Installed',
   'more.installAction': 'Install',
 
+  'photo.credit': 'Photo',
+  'more.photos': 'Player photos',
+  'more.photosValue': 'Wikimedia Commons (free licences)',
+
   'pwa.iosHintTitle': 'Install as an app',
   'pwa.iosHintText': 'In Safari, tap “Share” and then “Add to Home Screen”.',
   'pwa.updateAvailable': 'A new version is available.',

@@ -5,7 +5,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { todayKey } from '../domain/date'
 import { isFinished, isLive } from '../domain/status'
-import type { Fixture, Id, TopPlayerCategory } from '../domain/types'
+import type { Fixture, Id, Player, TopPlayerCategory } from '../domain/types'
+import { findPlayerPhoto } from '../media/wikimedia'
 import { provider } from '../providers'
 
 const MINUTE = 60_000
@@ -116,6 +117,25 @@ export const useSquad = (id: Id) =>
 
 export const usePlayer = (id: Id) =>
   useQuery({ queryKey: queryKeys.player(id), queryFn: () => provider.getPlayer(id), staleTime: staleTimes.standings })
+
+/**
+ * Frei lizenziertes Spielerfoto (Wikimedia Commons).
+ * Im Demo-Modus nie – die erfundenen Namen könnten sonst echten Personen zugeordnet werden.
+ */
+export const usePlayerPhoto = (player: Pick<Player, 'id' | 'name' | 'birthDate'> | undefined) =>
+  useQuery({
+    queryKey: ['photo', player?.id],
+    queryFn: () =>
+      findPlayerPhoto({
+        name: player!.name,
+        birthDate: player!.birthDate,
+        // Die Spieler-IDs sind bei ESPN die ESPN-IDs – nur dann für die exakte Zuordnung nutzen
+        espnId: provider.id === 'espn' ? player!.id : undefined,
+      }),
+    enabled: player !== undefined && !provider.isDemo,
+    staleTime: Number.POSITIVE_INFINITY,
+    retry: 1,
+  })
 
 export const useSearch = (q: string) =>
   useQuery({

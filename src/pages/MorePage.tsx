@@ -1,4 +1,4 @@
-import { Database, Download, Info, Languages, Moon, Share } from 'lucide-react'
+import { Camera, Database, Download, Info, Languages, Moon, Share } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { LanguageSwitch } from '../components/layout/LanguageSwitch'
 import { Card, Section } from '../components/ui/Card'
@@ -64,6 +64,7 @@ export default function MorePage() {
       <Section title={t('more.about')}>
         <Card padded={false} className="divide-y divide-border">
           <Row icon={<Database className="size-5" />} title={t('more.dataSource')} value={provider.isDemo ? t('more.demoData') : 'ESPN'} />
+          {!provider.isDemo && <Row icon={<Camera className="size-5" />} title={t('more.photos')} value={t('more.photosValue')} />}
           <Row icon={<Info className="size-5" />} title={t('more.version')} value={__APP_VERSION__} />
         </Card>
         <p className="px-1 text-xs text-muted">{t('more.disclaimer')}</p>

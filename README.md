@@ -38,6 +38,13 @@ Für einen öffentlichen Betrieb wird ein lizenzierter Anbieter als weiterer Ada
 - Neuer Wettbewerb: eine Zeile in `src/providers/espn/leagues.ts`
 - Tests laufen gegen gespeicherte echte Antworten in `src/providers/espn/__fixtures__/`
 
+## Spielerfotos
+
+Nur frei lizenzierte Fotos aus **Wikimedia Commons** (CC0, gemeinfrei, CC BY, CC BY-SA),
+immer mit Urheber und Lizenz direkt unter dem Foto (`src/media/`). Zuordnung nur eindeutig:
+über die ESPN-ID in Wikidata oder Name + Beruf Fußballspieler + exaktes Geburtsdatum.
+Fotos von ESPN oder anderen Webseiten werden nicht verwendet.
+
 ## Deployment
 
 ```bash

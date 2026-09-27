@@ -4,10 +4,11 @@ import { Card, Section } from '../components/ui/Card'
 import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
-import { useCompetitions, usePlayer } from '../data/queries'
+import { useCompetitions, usePlayer, usePlayerPhoto } from '../data/queries'
 import { ageFrom, formatBirthDate } from '../domain/date'
 import type { PlayerSeasonStats } from '../domain/types'
 import { useT } from '../i18n'
+import { PhotoCredit } from '../media/PhotoCredit'
 
 type StatColumn = keyof Omit<PlayerSeasonStats, 'competitionId' | 'seasonLabel'>
 const STAT_COLUMNS: readonly StatColumn[] = ['appearances', 'starts', 'minutes', 'goals', 'assists', 'yellowCards', 'redCards']
@@ -17,6 +18,7 @@ export default function PlayerPage() {
   const { id = '' } = useParams()
   const { data, isPending, error, refetch } = usePlayer(id)
   const { data: competitions } = useCompetitions()
+  const { data: photo } = usePlayerPhoto(data?.player)
 
   if (isPending) {
     return (
@@ -53,7 +55,7 @@ export default function PlayerPage() {
       <BackButton />
       <Card className="space-y-5">
         <div className="flex items-center gap-4">
-          <PlayerAvatar name={player.name} photoUrl={player.photoUrl} shirtNumber={player.shirtNumber} size={80} />
+          <PlayerAvatar name={player.name} photoUrl={photo?.url ?? player.photoUrl} shirtNumber={player.shirtNumber} size={96} />
           <div className="min-w-0">
             <h1 className="text-2xl font-bold tracking-tight">{player.name}</h1>
             {team && (
@@ -64,6 +66,7 @@ export default function PlayerPage() {
             )}
           </div>
         </div>
+        {photo && <PhotoCredit photo={photo} />}
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-3">
           {facts.map((f) => (
             <div key={f.label}>

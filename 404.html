@@ -11,10 +11,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Anstoß" />
     <title>Anstoß</title>
-    <script type="module" crossorigin src="/fussball-app/assets/index-BXwqm5J6.js"></script>
-    <link rel="modulepreload" crossorigin href="/fussball-app/assets/Card-U9Qa73nL.js">
-    <link rel="modulepreload" crossorigin href="/fussball-app/assets/providers-BktXp3yw.js">
-    <link rel="stylesheet" crossorigin href="/fussball-app/assets/index-C3KioJ0D.css">
+    <!-- Design vor dem ersten Zeichnen setzen, damit es beim Start nicht hell aufblitzt -->
+    <script>
+      try {
+        var s = localStorage.getItem('anstoss.theme') || 'system'
+        var dark = s === 'dark' || (s === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="/fussball-app/assets/index-CEEXoViW.js"></script>
+    <link rel="modulepreload" crossorigin href="/fussball-app/assets/Card-BRNz890z.js">
+    <link rel="modulepreload" crossorigin href="/fussball-app/assets/theme-5_dD0L7R.js">
+    <link rel="stylesheet" crossorigin href="/fussball-app/assets/index-Ckz9KUrz.css">
   <link rel="manifest" href="/fussball-app/manifest.webmanifest">
 <meta name="theme-color" content="#0f7a4a">
 <link rel="icon" href="/fussball-app/favicon.ico" sizes="48x48">

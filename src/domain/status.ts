@@ -30,30 +30,13 @@ export function matchesFilter(fixture: Fixture, filter: FixtureFilter): boolean 
   }
 }
 
-const STATUS_LABELS: Record<FixtureStatus, string> = {
-  scheduled: 'Geplant',
-  live_1h: '1. Halbzeit',
-  halftime: 'Halbzeit',
-  live_2h: '2. Halbzeit',
-  extra_time: 'Verlängerung',
-  break: 'Pause',
-  penalties: 'Elfmeterschießen',
-  finished: 'Beendet',
-  finished_aet: 'n. V.',
-  finished_pen: 'n. E.',
-  postponed: 'Verschoben',
-  cancelled: 'Abgesagt',
-  abandoned: 'Abgebrochen',
-  suspended: 'Unterbrochen',
-  unknown: '–',
-}
-
-export const statusLabel = (status: FixtureStatus) => STATUS_LABELS[status]
-
-/** Anzeige der Spielminute, z. B. "67'" oder "90+3'". Undefined, wenn nicht verfügbar. */
+/**
+ * Laufende Spielminute, z. B. "67'" oder "90+3'".
+ * Undefined in Pausen (Halbzeit, Elfmeterschießen) oder wenn die Quelle keine Minute liefert –
+ * die UI zeigt dann den übersetzten Status.
+ */
 export function formatMinute(fixture: Pick<Fixture, 'status' | 'minute' | 'extraMinute'>): string | undefined {
-  if (fixture.status === 'halftime') return 'HZ'
-  if (fixture.status === 'penalties') return 'Elf.'
+  if (fixture.status === 'halftime' || fixture.status === 'penalties' || fixture.status === 'break') return undefined
   if (fixture.minute === undefined) return undefined
   return fixture.extraMinute ? `${fixture.minute}+${fixture.extraMinute}'` : `${fixture.minute}'`
 }

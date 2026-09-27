@@ -1,7 +1,8 @@
 import clsx from 'clsx'
 import { CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useRef } from 'react'
-import { addDays, formatShortDate, formatWeekday, relativeDayLabel, todayKey } from '../../domain/date'
+import { addDays, formatShortDate, formatWeekday, relativeDay, todayKey } from '../../domain/date'
+import { useT } from '../../i18n'
 
 interface DateStripProps {
   value: string
@@ -11,6 +12,7 @@ interface DateStripProps {
 const VISIBLE_OFFSETS = [-3, -2, -1, 0, 1, 2, 3]
 
 export function DateStrip({ value, onChange }: DateStripProps) {
+  const t = useT()
   const today = todayKey()
   const inputRef = useRef<HTMLInputElement>(null)
   const activeRef = useRef<HTMLButtonElement>(null)
@@ -36,14 +38,14 @@ export function DateStrip({ value, onChange }: DateStripProps) {
 
   return (
     <div className="flex items-center gap-1">
-      <button type="button" className={arrowClass} onClick={() => onChange(addDays(value, -1))} aria-label="Vorheriger Tag">
+      <button type="button" className={arrowClass} onClick={() => onChange(addDays(value, -1))} aria-label={t('date.previousDay')}>
         <ChevronLeft className="size-5" />
       </button>
 
       <div className="scrollbar-none flex flex-1 snap-x gap-1 overflow-x-auto">
         {days.map((day) => {
           const active = day === value
-          const relative = relativeDayLabel(day, today)
+          const relative = relativeDay(day, today)
           return (
             <button
               key={day}
@@ -56,14 +58,14 @@ export function DateStrip({ value, onChange }: DateStripProps) {
                 active ? 'bg-text text-surface' : 'text-muted hover:bg-surface-3 hover:text-text',
               )}
             >
-              <span className="text-[13px] font-semibold">{relative ?? formatWeekday(day)}</span>
+              <span className="text-[13px] font-semibold">{relative ? t(`day.${relative}`) : formatWeekday(day)}</span>
               <span className={clsx('text-[11px]', active ? 'opacity-75' : 'text-subtle')}>{formatShortDate(day)}</span>
             </button>
           )
         })}
       </div>
 
-      <button type="button" className={arrowClass} onClick={() => onChange(addDays(value, 1))} aria-label="Nächster Tag">
+      <button type="button" className={arrowClass} onClick={() => onChange(addDays(value, 1))} aria-label={t('date.nextDay')}>
         <ChevronRight className="size-5" />
       </button>
 
@@ -72,7 +74,7 @@ export function DateStrip({ value, onChange }: DateStripProps) {
           type="button"
           onClick={openPicker}
           className={clsx(arrowClass, value !== today && 'text-brand')}
-          aria-label="Datum im Kalender wählen"
+          aria-label={t('date.pickDate')}
         >
           <CalendarDays className="size-5" />
         </button>

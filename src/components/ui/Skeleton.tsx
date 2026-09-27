@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useT } from '../../i18n'
 import { Card } from './Card'
 
 export function Skeleton({ className }: { className?: string }) {
@@ -7,8 +8,9 @@ export function Skeleton({ className }: { className?: string }) {
 
 /** Platzhalter für Spiellisten während des Ladens */
 export function MatchListSkeleton({ groups = 3 }: { groups?: number }) {
+  const t = useT()
   return (
-    <div className="space-y-5" aria-busy="true" aria-label="Wird geladen">
+    <div className="space-y-5" aria-busy="true" aria-label={t('common.loading')}>
       {Array.from({ length: groups }, (_, g) => (
         <div key={g} className="space-y-2.5">
           <Skeleton className="ml-1 h-3.5 w-32" />
@@ -29,8 +31,9 @@ export function MatchListSkeleton({ groups = 3 }: { groups?: number }) {
 }
 
 export function BlockSkeleton({ rows = 5 }: { rows?: number }) {
+  const t = useT()
   return (
-    <div aria-busy="true" aria-label="Wird geladen">
+    <div aria-busy="true" aria-label={t('common.loading')}>
       <Card className="space-y-3">
         {Array.from({ length: rows }, (_, i) => (
           <Skeleton key={i} className={clsx('h-4', i % 3 === 2 ? 'w-2/3' : 'w-full')} />

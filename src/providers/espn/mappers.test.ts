@@ -150,11 +150,11 @@ describe('mapStandings', () => {
 
   it('leitet Zonen aus den Anmerkungen der Datenquelle ab', () => {
     expect(table!.zones).toEqual([
-      { kind: 'champions_league', label: 'Champions League', fromRank: 1, toRank: 1 },
-      { kind: 'champions_league', label: 'Champions-League-Qualifikation', fromRank: 2, toRank: 2 },
-      { kind: 'europa_league', label: 'Europa-League-Qualifikation', fromRank: 3, toRank: 3 },
-      { kind: 'conference_league', label: 'Conference-League-Qualifikation', fromRank: 4, toRank: 4 },
-      { kind: 'relegation', label: 'Abstieg', fromRank: 16, toRank: 18 },
+      { kind: 'champions_league', label: 'champions_league', fromRank: 1, toRank: 1 },
+      { kind: 'champions_league', label: 'cl_qualifying', fromRank: 2, toRank: 2 },
+      { kind: 'europa_league', label: 'el_qualifying', fromRank: 3, toRank: 3 },
+      { kind: 'conference_league', label: 'ecl_qualifying', fromRank: 4, toRank: 4 },
+      { kind: 'relegation', label: 'relegation', fromRank: 16, toRank: 18 },
     ])
   })
 })
@@ -172,6 +172,7 @@ describe('Bestenlisten, Spieler, Suche', () => {
     const profile = mapAthlete(athlete, athleteStats)!
     expect(profile.player).toMatchObject({ name: 'Kaan Ayhan', birthDate: '1994-11-10', position: 'DF' })
     expect(profile.team?.name).toBe('Galatasaray')
+    expect(profile.player.nationality).toBe('Türkei')
     expect(profile.seasonStats[0]).toMatchObject({ competitionId: 'c-super-lig', seasonLabel: '2026/27' })
     // ESPN liefert keine Einsätze/Minuten – die bleiben leer statt geschätzt
     expect(profile.seasonStats[0]?.appearances).toBeUndefined()

@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import { CircleAlert, Inbox, RotateCw, WifiOff } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useT } from '../../i18n'
 import { NotFoundError } from '../../providers/errors'
 import { Card } from './Card'
 
@@ -31,19 +32,16 @@ interface ErrorStateProps {
 
 /** Einheitliche Fehleranzeige – niemals eine weiße Seite. */
 export function ErrorState({ error, onRetry }: ErrorStateProps) {
+  const t = useT()
   if (error instanceof NotFoundError) {
-    return <EmptyState icon={CircleAlert} title="Nicht gefunden" description="Diese Seite gibt es nicht (mehr)." />
+    return <EmptyState icon={CircleAlert} title={t('state.notFoundTitle')} description={t('state.notFoundText')} />
   }
   const offline = typeof navigator !== 'undefined' && !navigator.onLine
   return (
     <EmptyState
       icon={offline ? WifiOff : CircleAlert}
-      title={offline ? 'Keine Internetverbindung' : 'Daten konnten nicht geladen werden'}
-      description={
-        offline
-          ? 'Sobald du wieder online bist, werden die Daten automatisch aktualisiert.'
-          : 'Die Datenquelle ist gerade nicht erreichbar. Bitte versuche es gleich noch einmal.'
-      }
+      title={t(offline ? 'state.offlineTitle' : 'state.errorTitle')}
+      description={t(offline ? 'state.offlineText' : 'state.errorText')}
       action={
         onRetry && (
           <button
@@ -51,7 +49,7 @@ export function ErrorState({ error, onRetry }: ErrorStateProps) {
             onClick={onRetry}
             className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-strong"
           >
-            <RotateCw className="size-4" aria-hidden /> Erneut versuchen
+            <RotateCw className="size-4" aria-hidden /> {t('common.retry')}
           </button>
         )
       }
@@ -61,11 +59,12 @@ export function ErrorState({ error, onRetry }: ErrorStateProps) {
 
 /** Dezenter Hinweis, wenn eine Live-Aktualisierung fehlschlägt, aber alte Daten noch angezeigt werden. */
 export function StaleNotice({ show }: { show: boolean }) {
+  const t = useT()
   if (!show) return null
   return (
     <p role="status" className="flex items-center gap-2 rounded-xl bg-live-soft px-3 py-2 text-sm text-live">
       <WifiOff className="size-4 shrink-0" aria-hidden />
-      Live-Daten konnten momentan nicht aktualisiert werden.
+      {t('state.stale')}
     </p>
   )
 }

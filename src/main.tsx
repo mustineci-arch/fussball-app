@@ -3,6 +3,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
 import { router } from './app/router'
+import { subscribeLanguage, useLanguage } from './i18n'
 import { NotFoundError } from './providers/errors'
 import './styles/index.css'
 
@@ -18,13 +19,22 @@ const queryClient = new QueryClient({
   },
 })
 
+// Namen (Länder, Vereine, Wettbewerbe) hängen von der Sprache ab → bei einem Wechsel neu laden.
+subscribeLanguage(() => queryClient.clear())
+
+function App() {
+  // Neuaufbau bei Sprachwechsel – so übernehmen auch Datums- und Zahlenformate die neue Sprache.
+  const language = useLanguage()
+  return <RouterProvider key={language} router={router} />
+}
+
 const root = document.getElementById('root')
 if (!root) throw new Error('#root fehlt in index.html')
 
 createRoot(root).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <App />
     </QueryClientProvider>
   </StrictMode>,
 )

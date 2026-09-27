@@ -6,20 +6,14 @@ import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { useCompetitions, usePlayer } from '../data/queries'
 import { ageFrom, formatBirthDate } from '../domain/date'
-import { POSITION_LABELS } from '../domain/labels'
 import type { PlayerSeasonStats } from '../domain/types'
+import { useT } from '../i18n'
 
-const STAT_COLUMNS: readonly { key: keyof PlayerSeasonStats; label: string; title: string }[] = [
-  { key: 'appearances', label: 'Sp', title: 'Spiele' },
-  { key: 'starts', label: 'SE', title: 'Startelf' },
-  { key: 'minutes', label: 'Min', title: 'Spielminuten' },
-  { key: 'goals', label: 'T', title: 'Tore' },
-  { key: 'assists', label: 'A', title: 'Assists' },
-  { key: 'yellowCards', label: 'GK', title: 'Gelbe Karten' },
-  { key: 'redCards', label: 'RK', title: 'Rote Karten' },
-]
+type StatColumn = keyof Omit<PlayerSeasonStats, 'competitionId' | 'seasonLabel'>
+const STAT_COLUMNS: readonly StatColumn[] = ['appearances', 'starts', 'minutes', 'goals', 'assists', 'yellowCards', 'redCards']
 
 export default function PlayerPage() {
+  const t = useT()
   const { id = '' } = useParams()
   const { data, isPending, error, refetch } = usePlayer(id)
   const { data: competitions } = useCompetitions()
@@ -44,14 +38,14 @@ export default function PlayerPage() {
 
   const { player, team, seasonStats } = data
   // Nur Spalten zeigen, für die die Datenquelle überhaupt Werte liefert
-  const columns = STAT_COLUMNS.filter((c) => seasonStats.some((s) => s[c.key] !== undefined))
+  const columns = STAT_COLUMNS.filter((c) => seasonStats.some((s) => s[c] !== undefined))
   const age = player.birthDate ? ageFrom(player.birthDate) : undefined
   const facts = [
-    { label: 'Nationalität', value: player.nationality },
-    { label: 'Alter', value: age !== undefined ? `${age} Jahre` : undefined },
-    { label: 'Geburtsdatum', value: player.birthDate && formatBirthDate(player.birthDate) },
-    { label: 'Position', value: player.position && POSITION_LABELS[player.position].singular },
-    { label: 'Rückennummer', value: player.shirtNumber?.toString() },
+    { label: t('player.nationality'), value: player.nationality },
+    { label: t('player.age'), value: age !== undefined ? t('common.years', { n: age }) : undefined },
+    { label: t('player.birthDate'), value: player.birthDate && formatBirthDate(player.birthDate) },
+    { label: t('player.position'), value: player.position && t(`position.${player.position}`) },
+    { label: t('player.number'), value: player.shirtNumber?.toString() },
   ]
 
   return (
@@ -74,24 +68,24 @@ export default function PlayerPage() {
           {facts.map((f) => (
             <div key={f.label}>
               <dt className="text-xs text-muted">{f.label}</dt>
-              <dd className="font-medium">{f.value ?? <span className="text-subtle">nicht verfügbar</span>}</dd>
+              <dd className="font-medium">{f.value ?? <span className="text-subtle">{t('common.notAvailable')}</span>}</dd>
             </div>
           ))}
         </dl>
       </Card>
 
-      <Section title="Saisonstatistiken">
+      <Section title={t('player.seasonStats')}>
         {seasonStats.length === 0 ? (
-          <EmptyState title="Keine Statistiken verfügbar" description="Für diese Saison liegen noch keine Einsätze vor." />
+          <EmptyState title={t('player.noStatsTitle')} description={t('player.noStatsText')} />
         ) : (
           <Card padded={false} className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="text-[11px] font-semibold tracking-wide text-subtle uppercase">
                 <tr className="border-b border-border">
-                  <th className="px-4 py-2 text-left">Wettbewerb</th>
+                  <th className="px-4 py-2 text-left">{t('player.competition')}</th>
                   {columns.map((c) => (
-                    <th key={c.key} title={c.title} className="px-2 py-2 text-center">
-                      {c.label}
+                    <th key={c} title={t(`player.col.${c}.title`)} className="px-2 py-2 text-center">
+                      {t(`player.col.${c}`)}
                     </th>
                   ))}
                 </tr>
@@ -100,12 +94,12 @@ export default function PlayerPage() {
                 {seasonStats.map((s, i) => (
                   <tr key={`${s.competitionId}-${s.seasonLabel}-${i}`}>
                     <td className="px-4 py-2.5 font-medium whitespace-nowrap">
-                      {competitions?.find((c) => c.id === s.competitionId)?.shortName ?? 'Anderer Wettbewerb'}
+                      {competitions?.find((c) => c.id === s.competitionId)?.shortName ?? t('competition.other')}
                       {s.seasonLabel && <span className="ml-1.5 text-xs text-subtle">{s.seasonLabel}</span>}
                     </td>
                     {columns.map((c) => (
-                      <td key={c.key} className="px-2 py-2.5 text-center tabular-nums">
-                        {s[c.key] ?? '–'}
+                      <td key={c} className="px-2 py-2.5 text-center tabular-nums">
+                        {s[c] ?? '–'}
                       </td>
                     ))}
                   </tr>

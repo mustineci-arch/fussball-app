@@ -30,7 +30,7 @@ describe('status', () => {
   it('formatiert die Spielminute', () => {
     expect(formatMinute({ status: 'live_2h', minute: 67 })).toBe("67'")
     expect(formatMinute({ status: 'live_2h', minute: 90, extraMinute: 3 })).toBe("90+3'")
-    expect(formatMinute({ status: 'halftime', minute: 45 })).toBe('HZ')
+    expect(formatMinute({ status: 'halftime', minute: 45 })).toBeUndefined()
     expect(formatMinute({ status: 'live_1h' })).toBeUndefined()
   })
 })

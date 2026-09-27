@@ -33,10 +33,10 @@ const comp = (
 ): Competition => ({ id: `c-${slug}`, slug, name, shortName, type, priority, country })
 
 const ZONES_8: StandingZone[] = [
-  { kind: 'champions_league', fromRank: 1, toRank: 2, label: 'Champions League' },
-  { kind: 'europa_league', fromRank: 3, toRank: 3, label: 'Europa League' },
-  { kind: 'conference_league', fromRank: 4, toRank: 4, label: 'Conference League' },
-  { kind: 'relegation', fromRank: 8, toRank: 8, label: 'Abstieg' },
+  { kind: 'champions_league', fromRank: 1, toRank: 2, label: 'champions_league' },
+  { kind: 'europa_league', fromRank: 3, toRank: 3, label: 'europa_league' },
+  { kind: 'conference_league', fromRank: 4, toRank: 4, label: 'conference_league' },
+  { kind: 'relegation', fromRank: 8, toRank: 8, label: 'relegation' },
 ]
 
 export const LEAGUES: readonly LeagueSeed[] = [

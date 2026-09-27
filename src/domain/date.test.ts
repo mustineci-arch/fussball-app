@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, ageFrom, parseDateKey, relativeDayLabel } from './date'
+import { addDays, ageFrom, parseDateKey, relativeDay } from './date'
 
 describe('date', () => {
   it('addiert Tage über Monatsgrenzen', () => {
@@ -13,10 +13,10 @@ describe('date', () => {
   })
 
   it('liefert relative Tagesbezeichnungen', () => {
-    expect(relativeDayLabel('2026-09-27', '2026-09-27')).toBe('Heute')
-    expect(relativeDayLabel('2026-09-26', '2026-09-27')).toBe('Gestern')
-    expect(relativeDayLabel('2026-09-28', '2026-09-27')).toBe('Morgen')
-    expect(relativeDayLabel('2026-09-30', '2026-09-27')).toBeUndefined()
+    expect(relativeDay('2026-09-27', '2026-09-27')).toBe('today')
+    expect(relativeDay('2026-09-26', '2026-09-27')).toBe('yesterday')
+    expect(relativeDay('2026-09-28', '2026-09-27')).toBe('tomorrow')
+    expect(relativeDay('2026-09-30', '2026-09-27')).toBeUndefined()
   })
 
   it('berechnet das Alter', () => {

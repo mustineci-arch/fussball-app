@@ -7,42 +7,47 @@ import { BlockSkeleton } from '../components/ui/Skeleton'
 import { ErrorState } from '../components/ui/States'
 import { useCompetitions } from '../data/queries'
 import type { Competition, CompetitionType } from '../domain/types'
+import { FavoriteButton } from '../features/favorites/FavoriteButton'
+import { favoriteFromCompetition } from '../features/favorites/store'
+import { useT, type MessageKey } from '../i18n'
 
-const GROUPS: readonly { type: CompetitionType; title: string }[] = [
-  { type: 'league', title: 'Ligen' },
-  { type: 'cup', title: 'Europapokal' },
-  { type: 'international', title: 'Nationalmannschaften' },
+const GROUPS: readonly { type: CompetitionType; titleKey: MessageKey }[] = [
+  { type: 'league', titleKey: 'competitions.leagues' },
+  { type: 'cup', titleKey: 'competitions.cups' },
+  { type: 'international', titleKey: 'competitions.international' },
 ]
 
 function CompetitionCard({ competition }: { competition: Competition }) {
   return (
-    <Link to={`/competition/${competition.id}`} className="flex items-center gap-3 px-4 py-3 hover:bg-surface-2">
+    <Link to={`/competition/${competition.id}`} className="flex items-center gap-3 py-2 pr-2 pl-4 hover:bg-surface-2">
       <CompetitionBadge competition={competition} size={36} />
       <span className="min-w-0 flex-1">
         <span className="block truncate font-semibold">{competition.name}</span>
         {competition.country && <span className="block text-xs text-muted">{competition.country}</span>}
       </span>
+      <FavoriteButton entry={favoriteFromCompetition(competition)} size="sm" />
       <ChevronRight className="size-4 text-subtle" aria-hidden />
     </Link>
   )
 }
 
 export default function CompetitionsPage() {
+  const t = useT()
   const { data, isPending, error, refetch } = useCompetitions()
 
   return (
     <div className="space-y-5">
-      <PageTitle>Wettbewerbe</PageTitle>
+      <PageTitle>{t('competitions.title')}</PageTitle>
       {isPending ? (
         <BlockSkeleton rows={8} />
       ) : error ? (
         <ErrorState error={error} onRetry={() => void refetch()} />
       ) : (
-        GROUPS.map(({ type, title }) => {
+        GROUPS.map(({ type, titleKey }) => {
           const list = data.filter((c) => c.type === type)
           if (list.length === 0) return null
           return (
-            <Section key={type} title={title}>
+            <Section key={type} title={t(titleKey)}>
               <Card padded={false} className="grid divide-y divide-border overflow-hidden md:grid-cols-2 md:divide-y-0 md:[&>*]:border-b md:[&>*]:border-border">
                 {list.map((c) => (
                   <CompetitionCard key={c.id} competition={c} />

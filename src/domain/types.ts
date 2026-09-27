@@ -129,6 +129,9 @@ export interface MatchEvent {
   player?: Pick<Player, 'id' | 'name'>
   /** Vorlagengeber / ausgewechselter Spieler */
   relatedPlayer?: Pick<Player, 'id' | 'name'>
+  /** Art des Tors, falls bekannt */
+  qualifier?: 'header' | 'free_kick'
+  /** Freitext der Quelle (z. B. VAR-Entscheidung) – wird unübersetzt angezeigt */
   detail?: string
 }
 
@@ -192,11 +195,29 @@ export type StandingZoneKind =
   | 'playoff'
   | 'eliminated'
 
+/** Sprachneutrale Bezeichnung einer Tabellenzone – die UI übersetzt sie */
+export type ZoneLabel =
+  | 'champions_league'
+  | 'cl_qualifying'
+  | 'europa_league'
+  | 'el_qualifying'
+  | 'conference_league'
+  | 'ecl_qualifying'
+  | 'relegation_playoff'
+  | 'relegation'
+  | 'promotion'
+  | 'round_of_16'
+  | 'playoff_seeded'
+  | 'playoff_unseeded'
+  | 'playoff'
+  | 'qualification'
+  | 'eliminated'
+
 export interface StandingZone {
   kind: StandingZoneKind
   fromRank: number
   toRank: number
-  label: string
+  label: ZoneLabel
 }
 
 export interface StandingRow {

@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { PlayerAvatar, TeamLogo } from '../../components/media'
 import { Card, Section } from '../../components/ui/Card'
 import type { Lineup, LineupPlayer, Team } from '../../domain/types'
+import { useT } from '../../i18n'
 
 function PitchPlayer({ entry }: { entry: LineupPlayer }) {
   const label = entry.player.shortName ?? entry.player.name
@@ -70,10 +71,11 @@ function TeamLabel({ team, lineup }: { team: Team; lineup?: Lineup }) {
 }
 
 function Bench({ team, lineup }: { team: Team; lineup: Lineup }) {
+  const t = useT()
   return (
     <div className="min-w-0 space-y-2">
       <TeamLabel team={team} />
-      {lineup.coach && <p className="text-xs text-muted">Trainer: <span className="font-medium text-text">{lineup.coach}</span></p>}
+      {lineup.coach && <p className="text-xs text-muted">{t('match.coach')}: <span className="font-medium text-text">{lineup.coach}</span></p>}
       <ul className="space-y-1.5">
         {lineup.substitutes.map((p) => (
           <li key={p.player.id}>
@@ -96,6 +98,7 @@ interface LineupPitchProps {
 }
 
 export function LineupPitch({ homeTeam, awayTeam, home, away }: LineupPitchProps) {
+  const t = useT()
   const hasGrid = [home, away].every((l) => !l || l.starters.every((p) => p.gridRow !== undefined))
 
   return (
@@ -132,10 +135,10 @@ export function LineupPitch({ homeTeam, awayTeam, home, away }: LineupPitchProps
         </div>
       </Card>
 
-      <Section title="Ersatzbank & Trainer">
+      <Section title={t('match.bench')}>
         <Card className="grid gap-6 sm:grid-cols-2">
-          {home ? <Bench team={homeTeam} lineup={home} /> : <p className="text-sm text-muted">{homeTeam.shortName}: nicht verfügbar</p>}
-          {away ? <Bench team={awayTeam} lineup={away} /> : <p className="text-sm text-muted">{awayTeam.shortName}: nicht verfügbar</p>}
+          {home ? <Bench team={homeTeam} lineup={home} /> : <p className="text-sm text-muted">{homeTeam.shortName}: {t('common.notAvailable')}</p>}
+          {away ? <Bench team={awayTeam} lineup={away} /> : <p className="text-sm text-muted">{awayTeam.shortName}: {t('common.notAvailable')}</p>}
         </Card>
       </Section>
     </div>

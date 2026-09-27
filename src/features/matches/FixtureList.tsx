@@ -1,7 +1,9 @@
 import { Card, Section } from '../../components/ui/Card'
-import { formatLongDate, relativeDayLabel, toDateKey } from '../../domain/date'
+import { toDateKey } from '../../domain/date'
 import type { Fixture } from '../../domain/types'
+import { useT } from '../../i18n'
 import { MatchRow } from './MatchRow'
+import { dayHeading } from './statusText'
 
 interface FixtureListProps {
   title: string
@@ -11,6 +13,7 @@ interface FixtureListProps {
 
 /** Spiele nach Kalendertag gruppiert (für Wettbewerbs- und Teamseiten). */
 export function FixtureList({ title, fixtures, highlightTeamId }: FixtureListProps) {
+  const t = useT()
   if (fixtures.length === 0) return null
   const byDay = new Map<string, Fixture[]>()
   for (const f of fixtures) {
@@ -23,8 +26,7 @@ export function FixtureList({ title, fixtures, highlightTeamId }: FixtureListPro
         {[...byDay.entries()].map(([day, list]) => (
           <div key={day}>
             <p className="border-y border-border bg-surface-2 px-4 py-1.5 text-xs font-semibold text-muted first:border-t-0">
-              {relativeDayLabel(day) ? `${relativeDayLabel(day)}, ` : ''}
-              {formatLongDate(day)}
+              {dayHeading(day, t)}
             </p>
             <div className="divide-y divide-border">
               {list.map((f) => (

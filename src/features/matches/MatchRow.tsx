@@ -3,22 +3,25 @@ import { memo } from 'react'
 import { Link } from 'react-router'
 import { TeamLogo } from '../../components/media'
 import { formatKickoff } from '../../domain/date'
-import { formatMinute, isFinished, isLive, statusLabel } from '../../domain/status'
+import { isFinished, isLive } from '../../domain/status'
 import type { Fixture } from '../../domain/types'
+import { useT } from '../../i18n'
+import { liveLabel } from './statusText'
 
 export function LiveBadge({ fixture, className }: { fixture: Fixture; className?: string }) {
-  const minute = formatMinute(fixture)
+  const t = useT()
   return (
     <span className={clsx('inline-flex items-center gap-1 text-xs font-bold text-live', className)}>
       <span className="animate-live size-1.5 rounded-full bg-live" aria-hidden />
-      <span className="sr-only">Live, </span>
-      {minute ?? 'LIVE'}
+      <span className="sr-only">{t('matches.srLive')}</span>
+      {liveLabel(fixture, t)}
     </span>
   )
 }
 
 /** Mittlerer Block: Anstoßzeit, Spielstand oder Status */
 function ScoreCell({ fixture }: { fixture: Fixture }) {
+  const t = useT()
   const live = isLive(fixture.status)
   if (fixture.score && (live || isFinished(fixture.status))) {
     return (
@@ -37,16 +40,21 @@ function ScoreCell({ fixture }: { fixture: Fixture }) {
   if (fixture.status === 'scheduled') {
     return <span className="inline-flex min-w-14 justify-center text-[15px] font-semibold tabular-nums">{formatKickoff(fixture.kickoffAt)}</span>
   }
-  return <span className="inline-flex min-w-14 justify-center text-xs font-semibold text-muted">{statusLabel(fixture.status)}</span>
+  return <span className="inline-flex min-w-14 justify-center text-xs font-semibold text-muted">{t(`status.${fixture.status}`)}</span>
 }
 
 function StatusCell({ fixture }: { fixture: Fixture }) {
+  const t = useT()
   if (isLive(fixture.status)) return <LiveBadge fixture={fixture} />
   if (isFinished(fixture.status)) {
-    return <span className="text-xs font-medium text-subtle">{fixture.status === 'finished' ? 'Ende' : statusLabel(fixture.status)}</span>
+    return (
+      <span className="text-xs font-medium text-subtle">
+        {fixture.status === 'finished' ? t('matches.ended') : t(`status.${fixture.status}`)}
+      </span>
+    )
   }
   if (fixture.status === 'scheduled') return null
-  return <span className="text-xs font-semibold text-live">{statusLabel(fixture.status)}</span>
+  return <span className="text-xs font-semibold text-live">{t(`status.${fixture.status}`)}</span>
 }
 
 interface MatchRowProps {

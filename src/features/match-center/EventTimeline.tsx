@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { Link } from 'react-router'
 import { Card } from '../../components/ui/Card'
-import { EVENT_LABELS } from '../../domain/labels'
 import type { Fixture, MatchEvent } from '../../domain/types'
+import { useT } from '../../i18n'
 import { EventIcon } from './EventIcon'
 
 const formatEventMinute = (e: MatchEvent) => (e.extraMinute ? `${e.minute}+${e.extraMinute}'` : `${e.minute}'`)
@@ -17,6 +17,7 @@ function PlayerLink({ player, className }: { player?: MatchEvent['player']; clas
 }
 
 function EventText({ event }: { event: MatchEvent }) {
+  const t = useT()
   if (event.type === 'substitution') {
     return (
       <span className="flex flex-col">
@@ -25,26 +26,28 @@ function EventText({ event }: { event: MatchEvent }) {
         </span>
         {event.relatedPlayer && (
           <span className="text-xs text-muted">
-            für <PlayerLink player={event.relatedPlayer} />
+            {t('match.for')} <PlayerLink player={event.relatedPlayer} />
           </span>
         )}
       </span>
     )
   }
+  const details = [
+    event.player ? t(`event.${event.type}`) : undefined,
+    event.qualifier ? t(`event.qualifier.${event.qualifier}`) : undefined,
+    event.detail,
+  ].filter(Boolean)
   return (
     <span className="flex flex-col">
-      <span className="font-medium">
-        {event.player ? <PlayerLink player={event.player} /> : EVENT_LABELS[event.type]}
-      </span>
+      <span className="font-medium">{event.player ? <PlayerLink player={event.player} /> : t(`event.${event.type}`)}</span>
       <span className="text-xs text-muted">
-        {event.player && EVENT_LABELS[event.type]}
+        {details.join(' · ')}
         {event.type === 'goal' && event.relatedPlayer && (
           <>
-            {' · Vorlage '}
+            {` · ${t('match.assist')} `}
             <PlayerLink player={event.relatedPlayer} />
           </>
         )}
-        {event.detail && `${event.player ? ' · ' : ''}${event.detail}`}
       </span>
     </span>
   )
@@ -70,10 +73,7 @@ export function EventTimeline({ fixture, events, keyOnly }: EventTimelineProps) 
         {list.map((event) => {
           const home = event.teamId === fixture.homeTeam.id
           return (
-            <li
-              key={event.id}
-              className={clsx('flex items-center gap-3 px-4 py-2.5 text-sm', !home && 'flex-row-reverse text-right')}
-            >
+            <li key={event.id} className={clsx('flex items-center gap-3 px-4 py-2.5 text-sm', !home && 'flex-row-reverse text-right')}>
               <span className="w-11 shrink-0 text-center text-xs font-bold text-muted tabular-nums">{formatEventMinute(event)}</span>
               <span className="grid w-5 shrink-0 place-items-center">
                 <EventIcon type={event.type} />

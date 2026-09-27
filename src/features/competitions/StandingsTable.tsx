@@ -2,8 +2,9 @@ import clsx from 'clsx'
 import { Link } from 'react-router'
 import { TeamLogo } from '../../components/media'
 import { Card } from '../../components/ui/Card'
-import { FORM_LABELS, ZONE_STYLES } from '../../domain/labels'
+import { ZONE_STYLES } from '../../domain/labels'
 import type { FormResult, Id, StandingTable as Table, StandingZone } from '../../domain/types'
+import { useT } from '../../i18n'
 
 const zoneFor = (rank: number, zones: StandingZone[]) => zones.find((z) => rank >= z.fromRank && rank <= z.toRank)
 
@@ -14,19 +15,16 @@ const FORM_STYLES: Record<FormResult, string> = {
 }
 
 export function FormStrip({ form, size = 'sm' }: { form: FormResult[]; size?: 'sm' | 'md' }) {
+  const t = useT()
   return (
     <span className="inline-flex gap-1">
       {form.map((r, i) => (
         <span
           key={i}
-          title={r === 'W' ? 'Sieg' : r === 'D' ? 'Unentschieden' : 'Niederlage'}
-          className={clsx(
-            'grid place-items-center rounded font-bold',
-            size === 'sm' ? 'size-5 text-[10px]' : 'size-7 text-xs',
-            FORM_STYLES[r],
-          )}
+          title={t(`form.${r}.title`)}
+          className={clsx('grid place-items-center rounded font-bold', size === 'sm' ? 'size-5 text-[10px]' : 'size-7 text-xs', FORM_STYLES[r])}
         >
-          {FORM_LABELS[r]}
+          {t(`form.${r}`)}
         </span>
       ))}
     </span>
@@ -41,8 +39,10 @@ interface StandingsTableProps {
 }
 
 export function StandingsTable({ table, highlightTeamIds = [], compact }: StandingsTableProps) {
+  const t = useT()
   const cell = 'px-1.5 py-2.5 text-center tabular-nums'
   const wide = compact ? 'hidden' : 'hidden md:table-cell'
+  const goals = compact ? 'hidden' : 'hidden sm:table-cell'
   const usedZones = table.zones.filter((z) => table.rows.some((r) => r.rank >= z.fromRank && r.rank <= z.toRank))
 
   return (
@@ -52,15 +52,15 @@ export function StandingsTable({ table, highlightTeamIds = [], compact }: Standi
         <thead className="text-[11px] font-semibold tracking-wide text-subtle uppercase">
           <tr className="border-b border-border">
             <th className="w-10 py-2 pl-3 text-left">#</th>
-            <th className="w-full py-2 text-left">Verein</th>
-            <th className={cell} title="Spiele">Sp</th>
-            <th className={clsx(cell, wide)} title="Siege">S</th>
-            <th className={clsx(cell, wide)} title="Unentschieden">U</th>
-            <th className={clsx(cell, wide)} title="Niederlagen">N</th>
-            <th className={clsx(cell, compact ? 'hidden' : 'hidden sm:table-cell')} title="Tore : Gegentore">Tore</th>
-            <th className={cell} title="Tordifferenz">TD</th>
-            <th className={clsx(cell, 'pr-3')} title="Punkte">Pkt</th>
-            {!compact && <th className="hidden py-2 pr-3 text-left lg:table-cell">Form</th>}
+            <th className="w-full py-2 text-left">{t('table.club')}</th>
+            <th className={cell} title={t('table.playedTitle')}>{t('table.played')}</th>
+            <th className={clsx(cell, wide)} title={t('table.wonTitle')}>{t('table.won')}</th>
+            <th className={clsx(cell, wide)} title={t('table.drawnTitle')}>{t('table.drawn')}</th>
+            <th className={clsx(cell, wide)} title={t('table.lostTitle')}>{t('table.lost')}</th>
+            <th className={clsx(cell, goals)} title={t('table.goalsTitle')}>{t('table.goals')}</th>
+            <th className={cell} title={t('table.diffTitle')}>{t('table.diff')}</th>
+            <th className={clsx(cell, 'pr-3')} title={t('table.pointsTitle')}>{t('table.points')}</th>
+            {!compact && <th className="hidden py-2 pr-3 text-left lg:table-cell">{t('table.form')}</th>}
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
@@ -84,14 +84,12 @@ export function StandingsTable({ table, highlightTeamIds = [], compact }: Standi
                 <td className={clsx(cell, wide)}>{row.won}</td>
                 <td className={clsx(cell, wide)}>{row.drawn}</td>
                 <td className={clsx(cell, wide)}>{row.lost}</td>
-                <td className={clsx(cell, compact ? 'hidden' : 'hidden sm:table-cell')}>
+                <td className={clsx(cell, goals)}>
                   {row.goalsFor}:{row.goalsAgainst}
                 </td>
                 <td className={clsx(cell, 'text-muted')}>{diff > 0 ? `+${diff}` : diff}</td>
                 <td className={clsx(cell, 'pr-3 font-bold')}>{row.points}</td>
-                {!compact && (
-                  <td className="hidden py-2.5 pr-3 lg:table-cell">{row.form && <FormStrip form={row.form} />}</td>
-                )}
+                {!compact && <td className="hidden py-2.5 pr-3 lg:table-cell">{row.form && <FormStrip form={row.form} />}</td>}
               </tr>
             )
           })}
@@ -102,7 +100,7 @@ export function StandingsTable({ table, highlightTeamIds = [], compact }: Standi
           {usedZones.map((z) => (
             <li key={z.label} className="flex items-center gap-1.5">
               <span className={clsx('size-2.5 rounded-sm', ZONE_STYLES[z.kind])} aria-hidden />
-              {z.label}
+              {t(`zone.${z.label}`)}
             </li>
           ))}
         </ul>

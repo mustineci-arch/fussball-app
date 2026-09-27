@@ -23,7 +23,7 @@ import type {
 import { NotFoundError } from '../errors'
 import type { FootballProvider } from '../FootballProvider'
 import { EspnClient, SITE_API, STANDINGS_API, WEB_API, ttl } from './client'
-import { LEAGUES, competitionIdForSlug, listedCompetition, slugForCompetition } from './leagues'
+import { LEAGUE_SLUGS, competitionIdForSlug, listedCompetition, listedCompetitions, slugForCompetition } from './leagues'
 import {
   mapAthlete,
   mapFixture,
@@ -69,7 +69,7 @@ export class EspnProvider implements FootballProvider {
   // ------------------------------------------------------------ Wettbewerbe
 
   async getCompetitions(): Promise<Competition[]> {
-    return LEAGUES.map((l) => l.competition)
+    return listedCompetitions()
   }
 
   async getCompetition(id: Id): Promise<{ competition: Competition; season?: Season }> {
@@ -128,7 +128,7 @@ export class EspnProvider implements FootballProvider {
     const slug = slugForCompetition(competitionId)
     if (!slug || !this.topPlayerCategories.includes(category)) return []
     const raw = await this.client.get<RawLeaders>(`${SITE_API}/${slug}/statistics`, ttl.medium)
-    return mapLeaders(raw, category === 'goals' ? 'goalsLeaders' : 'assistsLeaders')
+    return mapLeaders(raw, category === 'goals' ? 'goalsLeaders' : 'assistsLeaders', slug)
   }
 
   // ------------------------------------------------------------ Spiele
@@ -139,7 +139,7 @@ export class EspnProvider implements FootballProvider {
     // daher werden Vortag und Tag abgefragt und anschließend nach lokalem Datum gefiltert.
     const days = [addDays(dateKey, -1), dateKey]
     const results = await Promise.allSettled(
-      LEAGUES.flatMap(({ slug }) => days.map((day) => this.scoreboard(slug, day).then((raw) => this.mapBoard(raw, slug)))),
+      LEAGUE_SLUGS.flatMap((slug) => days.map((day) => this.scoreboard(slug, day).then((raw) => this.mapBoard(raw, slug)))),
     )
     const fixtures = results.flatMap((r) => (r.status === 'fulfilled' ? r.value : []))
     // Nur wenn alle Anfragen scheitern, ist das ein Fehler – einzelne Ligen dürfen fehlen.
@@ -209,7 +209,7 @@ export class EspnProvider implements FootballProvider {
     const q = query.trim()
     if (q.length < 2) return { teams: [], players: [], competitions: [] }
     const needle = normalizeText(q)
-    const competitions = LEAGUES.map((l) => l.competition).filter(
+    const competitions = listedCompetitions().filter(
       (c) => normalizeText(c.name).includes(needle) || normalizeText(c.shortName).includes(needle),
     )
     const raw = await this.client.get<RawSearch>(`${WEB_API}/search/v2?query=${encodeURIComponent(q)}&limit=20`, ttl.long)

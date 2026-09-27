@@ -7,19 +7,16 @@ import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
 import { useCompetitions, useSquad, useStandings, useTeam, useTeamFixtures, useTopPlayers } from '../data/queries'
-import { POSITION_LABELS, POSITION_ORDER } from '../domain/labels'
+import { POSITION_ORDER } from '../domain/labels'
 import { isFinished, isLive, isUpcoming } from '../domain/status'
 import type { Fixture, FormResult, Id, Team } from '../domain/types'
 import { FormStrip, StandingsTable } from '../features/competitions/StandingsTable'
+import { FavoriteButton } from '../features/favorites/FavoriteButton'
+import { favoriteFromTeam } from '../features/favorites/store'
 import { FixtureList } from '../features/matches/FixtureList'
+import { useT, type MessageKey } from '../i18n'
 
-const TABS = [
-  { id: 'overview', label: 'Übersicht' },
-  { id: 'matches', label: 'Spiele' },
-  { id: 'squad', label: 'Kader' },
-  { id: 'table', label: 'Tabelle' },
-  { id: 'stats', label: 'Statistiken' },
-] as const
+const TAB_IDS = ['overview', 'matches', 'squad', 'table', 'stats'] as const
 
 function resultFor(f: Fixture, teamId: Id): FormResult | undefined {
   if (!f.score || !isFinished(f.status)) return undefined
@@ -28,24 +25,27 @@ function resultFor(f: Fixture, teamId: Id): FormResult | undefined {
 }
 
 function Header({ team, leagueId }: { team: Team; leagueId?: Id }) {
+  const t = useT()
   const { data: competitions } = useCompetitions()
   const league = competitions?.find((c) => c.id === leagueId)
-  const facts = [
-    { label: 'Land', value: team.country },
-    { label: 'Liga', value: league?.name ?? team.league, to: leagueId && `/competition/${leagueId}` },
-    { label: 'Stadion', value: team.venue },
-    { label: 'Trainer', value: team.coach },
-  ].filter((f) => f.value)
+  const facts: { label: string; value?: string; to?: string }[] = [
+    { label: t('team.country'), value: team.country },
+    { label: t('team.league'), value: league?.name ?? team.league, to: leagueId && `/competition/${leagueId}` },
+    { label: t('team.venue'), value: team.venue },
+    { label: t('team.coach'), value: team.coach },
+  ]
+  const visible = facts.filter((f) => f.value)
 
   return (
     <Card className="space-y-4">
       <div className="flex items-center gap-4">
         <TeamLogo team={team} size={64} />
-        <h1 className="text-2xl font-bold tracking-tight">{team.name}</h1>
+        <h1 className="flex-1 text-2xl font-bold tracking-tight">{team.name}</h1>
+        <FavoriteButton entry={favoriteFromTeam(team)} />
       </div>
-      {facts.length > 0 && (
+      {visible.length > 0 && (
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm md:grid-cols-4">
-          {facts.map((f) => (
+          {visible.map((f) => (
             <div key={f.label} className="min-w-0">
               <dt className="text-xs text-muted">{f.label}</dt>
               <dd className="truncate font-medium">
@@ -69,7 +69,7 @@ function useTeamData(teamId: Id, leagueId?: Id) {
   const fixtures = useTeamFixtures(teamId)
   const standings = useStandings(leagueId ?? '')
   const all = fixtures.data ?? []
-  const row = standings.data?.flatMap((t) => t.rows).find((r) => r.team.id === teamId)
+  const row = standings.data?.flatMap((table) => table.rows).find((r) => r.team.id === teamId)
   return {
     fixtures,
     live: all.filter((f) => isLive(f.status)),
@@ -90,6 +90,7 @@ function StatTile({ label, value }: { label: string; value?: number | string }) 
 }
 
 function Overview({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
+  const t = useT()
   const { fixtures, live, upcoming, results, row } = useTeamData(teamId, leagueId)
   const scorers = useTopPlayers(leagueId ?? '', 'goals')
   const topScorer = scorers.data?.find((e) => e.team.id === teamId)
@@ -104,10 +105,10 @@ function Overview({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
 
   return (
     <div className="space-y-5">
-      <FixtureList title="Live" fixtures={live} highlightTeamId={teamId} />
-      <FixtureList title="Nächstes Spiel" fixtures={upcoming.slice(0, 1)} highlightTeamId={teamId} />
+      <FixtureList title={t('common.live')} fixtures={live} highlightTeamId={teamId} />
+      <FixtureList title={t('team.nextMatch')} fixtures={upcoming.slice(0, 1)} highlightTeamId={teamId} />
       {form.length > 0 && (
-        <Section title="Form (letzte 5)">
+        <Section title={t('team.form')}>
           <Card>
             <FormStrip form={form} size="md" />
           </Card>
@@ -115,13 +116,13 @@ function Overview({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
       )}
       {row && (
         <div className="grid grid-cols-3 gap-3">
-          <StatTile label="Tabellenplatz" value={`${row.rank}.`} />
-          <StatTile label="Tore" value={row.goalsFor} />
-          <StatTile label="Gegentore" value={row.goalsAgainst} />
+          <StatTile label={t('team.position')} value={`${row.rank}.`} />
+          <StatTile label={t('team.goals')} value={row.goalsFor} />
+          <StatTile label={t('team.goalsAgainst')} value={row.goalsAgainst} />
         </div>
       )}
       {topScorer && (
-        <Section title="Top-Torschütze">
+        <Section title={t('team.topScorer')}>
           <Card>
             <Link to={`/player/${topScorer.player.id}`} className="flex items-center gap-3">
               <PlayerAvatar name={topScorer.player.name} photoUrl={topScorer.player.photoUrl} size={40} />
@@ -131,34 +132,36 @@ function Overview({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
           </Card>
         </Section>
       )}
-      <FixtureList title="Letzte Spiele" fixtures={results.slice(0, 5)} highlightTeamId={teamId} />
+      <FixtureList title={t('team.lastMatches')} fixtures={results.slice(0, 5)} highlightTeamId={teamId} />
     </div>
   )
 }
 
 function Matches({ teamId }: { teamId: Id }) {
+  const t = useT()
   const { fixtures, live, upcoming, results } = useTeamData(teamId)
   if (fixtures.isPending) return <BlockSkeleton rows={8} />
   if (fixtures.error) return <ErrorState error={fixtures.error} onRetry={() => void fixtures.refetch()} />
-  if (live.length + upcoming.length + results.length === 0) return <EmptyState icon={CalendarX2} title="Keine Spiele" />
+  if (live.length + upcoming.length + results.length === 0) return <EmptyState icon={CalendarX2} title={t('matches.emptyTitle')} />
   return (
     <div className="space-y-5">
-      <FixtureList title="Live" fixtures={live} highlightTeamId={teamId} />
-      <FixtureList title="Kommende Spiele" fixtures={upcoming} highlightTeamId={teamId} />
-      <FixtureList title="Ergebnisse" fixtures={results} highlightTeamId={teamId} />
+      <FixtureList title={t('common.live')} fixtures={live} highlightTeamId={teamId} />
+      <FixtureList title={t('competition.upcoming')} fixtures={upcoming} highlightTeamId={teamId} />
+      <FixtureList title={t('competition.results')} fixtures={results} highlightTeamId={teamId} />
     </div>
   )
 }
 
 function Squad({ teamId }: { teamId: Id }) {
+  const t = useT()
   const { data, isPending, error, refetch } = useSquad(teamId)
   if (isPending) return <BlockSkeleton rows={8} />
   if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
-  if (data.length === 0) return <EmptyState icon={Users} title="Kader nicht verfügbar" />
+  if (data.length === 0) return <EmptyState icon={Users} title={t('team.noSquad')} />
 
   const groups = [
-    ...POSITION_ORDER.map((pos) => ({ title: POSITION_LABELS[pos].group, players: data.filter((p) => p.position === pos) })),
-    { title: 'Ohne Positionsangabe', players: data.filter((p) => !p.position) },
+    ...POSITION_ORDER.map((pos) => ({ title: t(`position.${pos}`), players: data.filter((p) => p.position === pos) })),
+    { title: t('team.noPosition'), players: data.filter((p) => !p.position) },
   ]
   return (
     <div className="space-y-5">
@@ -173,7 +176,7 @@ function Squad({ teamId }: { teamId: Id }) {
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-semibold">{p.name}</span>
                     <span className="text-xs text-muted">
-                      {[p.position && POSITION_LABELS[p.position].singular, p.nationality].filter(Boolean).join(' · ')}
+                      {[p.position && t(`position.${p.position}`), p.nationality].filter(Boolean).join(' · ')}
                     </span>
                   </span>
                 </Link>
@@ -186,47 +189,52 @@ function Squad({ teamId }: { teamId: Id }) {
 }
 
 function TableTab({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
+  const t = useT()
   const { standings } = useTeamData(teamId, leagueId)
-  if (!leagueId) return <EmptyState icon={Table2} title="Keine Tabelle" />
+  if (!leagueId) return <EmptyState icon={Table2} title={t('table.noneTitle')} />
   if (standings.isPending) return <BlockSkeleton rows={8} />
   if (standings.error) return <ErrorState error={standings.error} onRetry={() => void standings.refetch()} />
-  if (!standings.data.length) return <EmptyState icon={Table2} title="Keine Tabelle" description="Für diesen Wettbewerb ist keine Tabelle verfügbar." />
+  if (!standings.data.length) return <EmptyState icon={Table2} title={t('table.noneTitle')} description={t('table.noneText')} />
   return (
     <div className="space-y-4">
-      {standings.data.map((t, i) => (
-        <StandingsTable key={t.groupName ?? i} table={t} highlightTeamIds={[teamId]} />
+      {standings.data.map((table, i) => (
+        <StandingsTable key={table.groupName ?? i} table={table} highlightTeamIds={[teamId]} />
       ))}
     </div>
   )
 }
 
+const STAT_TILES: readonly [MessageKey, (r: NonNullable<ReturnType<typeof useTeamData>['row']>) => number][] = [
+  ['team.stat.played', (r) => r.played],
+  ['team.stat.won', (r) => r.won],
+  ['team.stat.drawn', (r) => r.drawn],
+  ['team.stat.lost', (r) => r.lost],
+  ['team.stat.goalsFor', (r) => r.goalsFor],
+  ['team.stat.goalsAgainst', (r) => r.goalsAgainst],
+  ['team.stat.diff', (r) => r.goalsFor - r.goalsAgainst],
+  ['team.stat.points', (r) => r.points],
+]
+
 function Stats({ teamId, leagueId }: { teamId: Id; leagueId?: Id }) {
+  const t = useT()
   const { row, standings } = useTeamData(teamId, leagueId)
   if (leagueId && standings.isPending) return <BlockSkeleton rows={4} />
-  if (!row) return <EmptyState title="Keine Statistiken verfügbar" />
-  const tiles = [
-    { label: 'Spiele', value: row.played },
-    { label: 'Siege', value: row.won },
-    { label: 'Unentschieden', value: row.drawn },
-    { label: 'Niederlagen', value: row.lost },
-    { label: 'Tore', value: row.goalsFor },
-    { label: 'Gegentore', value: row.goalsAgainst },
-    { label: 'Tordifferenz', value: row.goalsFor - row.goalsAgainst },
-    { label: 'Punkte', value: row.points },
-  ]
+  if (!row) return <EmptyState title={t('team.noStats')} />
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      {tiles.map((t) => (
-        <StatTile key={t.label} label={t.label} value={t.value} />
+      {STAT_TILES.map(([key, value]) => (
+        <StatTile key={key} label={t(key)} value={value(row)} />
       ))}
     </div>
   )
 }
 
 export default function TeamPage() {
+  const t = useT()
   const { id = '' } = useParams()
   const { data, isPending, error, refetch } = useTeam(id)
-  const [tab, setTab] = useTabParam(TABS)
+  const tabs = TAB_IDS.map((tab) => ({ id: tab, label: t(`team.tab.${tab}`) }))
+  const [tab, setTab] = useTabParam(tabs)
   const leagueId = data?.competitionIds[0]
 
   return (
@@ -239,7 +247,7 @@ export default function TeamPage() {
       ) : (
         <>
           <Header team={data.team} leagueId={leagueId} />
-          <TabBar tabs={TABS} active={tab} onChange={setTab} />
+          <TabBar tabs={tabs} active={tab} onChange={setTab} />
           {tab === 'overview' && <Overview teamId={id} leagueId={leagueId} />}
           {tab === 'matches' && <Matches teamId={id} />}
           {tab === 'squad' && <Squad teamId={id} />}

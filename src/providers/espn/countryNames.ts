@@ -60,6 +60,11 @@ function buildLookup(): Map<string, string> {
   return map
 }
 
+/** Ländername in der gewünschten Sprache – ESPN liefert bereits Englisch. */
+export function localizeCountry(name: string | undefined, language: 'de' | 'en'): string | undefined {
+  return language === 'de' ? toGermanCountry(name) : name
+}
+
 /** Übersetzt einen englischen Ländernamen; Unbekanntes bleibt unverändert. */
 export function toGermanCountry(name: string | undefined): string | undefined {
   if (!name) return name

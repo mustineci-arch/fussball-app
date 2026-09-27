@@ -21,10 +21,13 @@ import type {
   StandingZoneKind,
   Team,
   TopPlayerEntry,
+  ZoneLabel,
 } from '../../domain/types'
-import { toGermanCountry } from './countryNames'
+import { getLanguage } from '../../i18n'
+import { localizeCountry } from './countryNames'
 import { competitionIdForSlug } from './leagues'
 import { assignGrid } from './lineupGrid'
+import { correctedNationality, fixPlayerName, fixTeamName, isTurkishContext, type NameContext } from './nameFixes'
 import type {
   RawAthleteResponse,
   RawAthleteStats,
@@ -112,15 +115,19 @@ function logoOf(team?: RawTeam): string | undefined {
 export function mapTeam(raw: RawTeam | undefined): Team | undefined {
   if (!raw?.id) return undefined
   const logoUrl = logoOf(raw)
+  const language = getLanguage()
   // Nationalteams erkennt man am Flaggen-Logo – ihre (englischen) Namen werden übersetzt.
   const isNational = raw.isNational ?? logoUrl?.includes('/teamlogos/countries/')
-  const translate = (value: string) => (isNational ? (toGermanCountry(value) ?? value) : value)
-  const name = translate(raw.displayName ?? raw.name ?? raw.location ?? raw.abbreviation ?? `Team ${raw.id}`)
+  const espnName = raw.displayName ?? raw.name ?? raw.location ?? raw.abbreviation ?? `Team ${raw.id}`
+  const espnShort = raw.shortDisplayName ?? espnName
+  const { name, short } = isNational
+    ? { name: localizeCountry(espnName, language) ?? espnName, short: localizeCountry(espnShort, language) ?? espnShort }
+    : fixTeamName(raw.id, { name: espnName, short: espnShort }, language)
   return {
     id: raw.id,
     slug: slugify(name),
     name,
-    shortName: raw.shortDisplayName ? translate(raw.shortDisplayName) : name,
+    shortName: short,
     code: raw.abbreviation,
     logoUrl,
     isNational,
@@ -169,14 +176,14 @@ export function mapFixture(raw: RawEvent, leagueSlug?: string): Fixture | undefi
   }
 }
 
-function mapEventType(type = ''): { type: MatchEventType; detail?: string } | undefined {
+function mapEventType(type = ''): { type: MatchEventType; qualifier?: MatchEvent['qualifier'] } | undefined {
   const t = type.toLowerCase()
   if (t === 'own-goal') return { type: 'own_goal' }
   if (t === 'penalty---scored') return { type: 'penalty_goal' }
   if (t.startsWith('penalty---missed') || t.startsWith('penalty---saved')) return { type: 'penalty_missed' }
   if (t.startsWith('goal')) {
-    const detail = t.includes('header') ? 'Kopfball' : t.includes('free-kick') ? 'Freistoß' : undefined
-    return { type: 'goal', detail }
+    const qualifier = t.includes('header') ? 'header' : t.includes('free-kick') ? 'free_kick' : undefined
+    return { type: 'goal', qualifier }
   }
   if (t === 'yellow-card') return { type: 'yellow' }
   if (t.includes('yellow') && t.includes('red')) return { type: 'second_yellow' }
@@ -186,9 +193,10 @@ function mapEventType(type = ''): { type: MatchEventType; detail?: string } | un
   return undefined // Anpfiff, Halbzeit usw. sind keine Timeline-Ereignisse
 }
 
-const ref = (a?: { id?: string; displayName?: string }) => (a?.id && a.displayName ? { id: a.id, name: a.displayName } : undefined)
+const ref = (a: { id?: string; displayName?: string } | undefined, ctx: NameContext = {}) =>
+  a?.id && a.displayName ? { id: a.id, name: fixPlayerName(a.id, a.displayName, ctx) } : undefined
 
-export function mapMatchEvent(raw: RawKeyEvent, fixtureId: string): MatchEvent | undefined {
+export function mapMatchEvent(raw: RawKeyEvent, fixtureId: string, ctx: NameContext = {}): MatchEvent | undefined {
   const kind = mapEventType(raw.type?.type)
   const clock = parseClock(raw.clock?.displayValue)
   if (!kind || !clock || !raw.team?.id) return undefined
@@ -200,9 +208,10 @@ export function mapMatchEvent(raw: RawKeyEvent, fixtureId: string): MatchEvent |
     type: kind.type,
     ...clock,
     // Wechsel: 1. Beteiligter kommt rein, 2. geht raus. Tor: 2. Beteiligter = Vorlage.
-    player: ref(first?.athlete),
-    relatedPlayer: kind.type === 'goal' || kind.type === 'substitution' ? ref(second?.athlete) : undefined,
-    detail: kind.type === 'var' ? raw.type?.text : kind.detail,
+    player: ref(first?.athlete, ctx),
+    relatedPlayer: kind.type === 'goal' || kind.type === 'substitution' ? ref(second?.athlete, ctx) : undefined,
+    qualifier: kind.qualifier,
+    detail: kind.type === 'var' ? raw.type?.text : undefined,
   }
 }
 
@@ -216,20 +225,21 @@ export function mapPosition(abbreviation?: string, name?: string): PlayerPositio
   return undefined
 }
 
-export function mapLineup(raw: RawRoster): Lineup | undefined {
+export function mapLineup(raw: RawRoster, leagueSlug?: string): Lineup | undefined {
   const teamId = raw.team?.id
   const entries = raw.roster ?? []
   const startersRaw = entries.filter((e) => e.starter)
   // Vor Veröffentlichung liefert ESPN oft einen Kader ohne Startelf – dann gibt es noch keine Aufstellung.
   if (!teamId || startersRaw.length < 11) return undefined
 
+  const ctx: NameContext = { teamId, leagueSlug }
   const toPlayer = (e: (typeof entries)[number]): LineupPlayer | undefined => {
     if (!e.athlete?.id) return undefined
     return {
       player: {
         id: e.athlete.id,
-        name: e.athlete.displayName ?? '–',
-        shortName: e.athlete.shortName,
+        name: fixPlayerName(e.athlete.id, e.athlete.displayName ?? '–', ctx),
+        shortName: e.athlete.shortName ? fixPlayerName(e.athlete.id, e.athlete.shortName, ctx) : undefined,
         position: mapPosition(e.position?.abbreviation, e.position?.name),
       },
       shirtNumber: toInt(e.jersey),
@@ -307,16 +317,22 @@ export function mapSummary(raw: RawSummary): MappedSummary | undefined {
   fixture.referee = referee
 
   const started = fixture.status !== 'scheduled' && fixture.status !== 'postponed' && fixture.status !== 'cancelled'
+  const leagueSlug = raw.header?.league?.slug
+  // Ereignisse betreffen beide Teams (z. B. Eigentore) – türkische Schreibweise, sobald ein Team türkisch ist
+  const eventCtx: NameContext = {
+    leagueSlug,
+    turkish: isTurkishContext({ teamId: fixture.homeTeam.id }) || isTurkishContext({ teamId: fixture.awayTeam.id }),
+  }
   const lineup = (side: 'home' | 'away') => {
     const r = raw.rosters?.find((x) => x.homeAway === side)
-    return r ? mapLineup(r) : undefined
+    return r ? mapLineup(r, leagueSlug) : undefined
   }
   const home = lineup('home')
   const away = lineup('away')
 
   return {
     fixture,
-    events: started ? (raw.keyEvents ?? []).flatMap((e) => mapMatchEvent(e, fixture.id) ?? []) : undefined,
+    events: started ? (raw.keyEvents ?? []).flatMap((e) => mapMatchEvent(e, fixture.id, eventCtx) ?? []) : undefined,
     lineups: home || away ? { home, away } : undefined,
     statistics: started ? mapStatistics(raw.boxscore?.teams, fixture.homeTeam.id, fixture.awayTeam.id) : undefined,
   }
@@ -324,27 +340,28 @@ export function mapSummary(raw: RawSummary): MappedSummary | undefined {
 
 // ------------------------------------------------------------ Tabellen
 
-const ZONE_RULES: readonly { test: RegExp; kind: StandingZoneKind; label?: string }[] = [
-  { test: /champions league qualif/i, kind: 'champions_league', label: 'Champions-League-Qualifikation' },
-  { test: /champions league/i, kind: 'champions_league', label: 'Champions League' },
-  { test: /europa league qualif/i, kind: 'europa_league', label: 'Europa-League-Qualifikation' },
-  { test: /europa league/i, kind: 'europa_league', label: 'Europa League' },
-  { test: /conference league qualif/i, kind: 'conference_league', label: 'Conference-League-Qualifikation' },
-  { test: /conference league/i, kind: 'conference_league', label: 'Conference League' },
-  { test: /relegation play/i, kind: 'relegation_playoff', label: 'Relegation' },
-  { test: /relegat/i, kind: 'relegation', label: 'Abstieg' },
-  { test: /promot/i, kind: 'promotion', label: 'Aufstieg' },
-  { test: /round of 16/i, kind: 'qualification', label: 'Achtelfinale' },
-  { test: /playoffs?\s*-\s*seeded/i, kind: 'playoff', label: 'Play-offs (gesetzt)' },
-  { test: /playoffs?\s*-\s*unseeded/i, kind: 'playoff', label: 'Play-offs (ungesetzt)' },
-  { test: /play-?off/i, kind: 'playoff', label: 'Play-offs' },
-  { test: /qualif|advance|knockout/i, kind: 'qualification', label: 'Weiterkommen' },
-  { test: /eliminat/i, kind: 'eliminated', label: 'Ausgeschieden' },
+/** Anmerkungen der Quelle → Zonentyp und sprachneutrale Bezeichnung (Spezielles zuerst) */
+const ZONE_RULES: readonly { test: RegExp; kind: StandingZoneKind; label: ZoneLabel }[] = [
+  { test: /champions league qualif/i, kind: 'champions_league', label: 'cl_qualifying' },
+  { test: /champions league/i, kind: 'champions_league', label: 'champions_league' },
+  { test: /europa league qualif/i, kind: 'europa_league', label: 'el_qualifying' },
+  { test: /europa league/i, kind: 'europa_league', label: 'europa_league' },
+  { test: /conference league qualif/i, kind: 'conference_league', label: 'ecl_qualifying' },
+  { test: /conference league/i, kind: 'conference_league', label: 'conference_league' },
+  { test: /relegation play/i, kind: 'relegation_playoff', label: 'relegation_playoff' },
+  { test: /relegat/i, kind: 'relegation', label: 'relegation' },
+  { test: /promot/i, kind: 'promotion', label: 'promotion' },
+  { test: /round of 16/i, kind: 'qualification', label: 'round_of_16' },
+  { test: /playoffs?\s*-\s*seeded/i, kind: 'playoff', label: 'playoff_seeded' },
+  { test: /playoffs?\s*-\s*unseeded/i, kind: 'playoff', label: 'playoff_unseeded' },
+  { test: /play-?off/i, kind: 'playoff', label: 'playoff' },
+  { test: /qualif|advance|knockout/i, kind: 'qualification', label: 'qualification' },
+  { test: /eliminat/i, kind: 'eliminated', label: 'eliminated' },
 ]
 
-function classifyZone(description: string): { kind: StandingZoneKind; label: string } | undefined {
+function classifyZone(description: string): { kind: StandingZoneKind; label: ZoneLabel } | undefined {
   const rule = ZONE_RULES.find((r) => r.test.test(description))
-  return rule ? { kind: rule.kind, label: rule.label ?? description } : undefined
+  return rule ? { kind: rule.kind, label: rule.label } : undefined
 }
 
 function mapStandingGroup(group: RawStandingGroup, competitionId: string, groupName?: string): StandingTable | undefined {
@@ -398,13 +415,18 @@ export function mapStandings(raw: RawStandingGroup, competitionId: string): Stan
 
 // ------------------------------------------------------------ Bestenlisten, Kader, Spieler
 
-export function mapLeaders(raw: RawLeaders, statName: 'goalsLeaders' | 'assistsLeaders', limit = 20): TopPlayerEntry[] {
+export function mapLeaders(
+  raw: RawLeaders,
+  statName: 'goalsLeaders' | 'assistsLeaders',
+  leagueSlug?: string,
+  limit = 20,
+): TopPlayerEntry[] {
   const leaders = raw.stats?.find((s) => s.name === statName)?.leaders ?? []
   let rank = 0
   let previous: number | undefined
   return leaders.slice(0, limit).flatMap((l, i) => {
     const team = mapTeam(l.athlete?.team)
-    const player = ref(l.athlete)
+    const player = ref(l.athlete, { teamId: team?.id, leagueSlug })
     const value = toInt(l.value)
     if (!team || !player || value === undefined) return []
     if (value !== previous) rank = i + 1 // gleiche Werte = gleicher Platz
@@ -441,16 +463,18 @@ export function parseDisplayDob(value?: string, age?: number, now = new Date()):
 
 export function mapRosterAthlete(raw: RawRosterAthlete, team?: Team): Player | undefined {
   if (!raw.id) return undefined
-  const name = raw.displayName ?? [raw.firstName, raw.lastName].filter(Boolean).join(' ')
+  const nationality = correctedNationality(raw.id, raw.citizenship)
+  const ctx: NameContext = { teamId: team?.id, nationality }
+  const name = fixPlayerName(raw.id, raw.displayName ?? [raw.firstName, raw.lastName].filter(Boolean).join(' '), ctx)
   return {
     id: raw.id,
     slug: slugify(name),
     name,
-    shortName: raw.shortName,
+    shortName: raw.shortName ? fixPlayerName(raw.id, raw.shortName, ctx) : undefined,
     firstName: raw.firstName,
     lastName: raw.lastName,
     birthDate: raw.dateOfBirth ? isoDate(raw.dateOfBirth)?.slice(0, 10) : undefined,
-    nationality: toGermanCountry(raw.citizenship),
+    nationality: localizeCountry(nationality, getLanguage()),
     position: mapPosition(raw.position?.abbreviation, raw.position?.name),
     shirtNumber: toInt(raw.jersey),
     teamId: team?.id,
@@ -464,7 +488,8 @@ export function mapAthlete(raw: RawAthleteResponse, stats?: RawAthleteStats): { 
   const a = raw.athlete
   if (!a?.id) return undefined
   const team = mapTeam(a.team)
-  const name = a.displayName ?? [a.firstName, a.lastName].filter(Boolean).join(' ')
+  const nationality = correctedNationality(a.id, a.citizenship)
+  const name = fixPlayerName(a.id, a.displayName ?? [a.firstName, a.lastName].filter(Boolean).join(' '), { teamId: team?.id, nationality })
   const player: Player = {
     id: a.id,
     slug: slugify(name),
@@ -472,7 +497,7 @@ export function mapAthlete(raw: RawAthleteResponse, stats?: RawAthleteStats): { 
     firstName: a.firstName,
     lastName: a.lastName,
     birthDate: parseDisplayDob(a.displayDOB, toInt(a.age)),
-    nationality: toGermanCountry(a.citizenship),
+    nationality: localizeCountry(nationality, getLanguage()),
     position: mapPosition(a.position?.abbreviation, a.position?.name),
     shirtNumber: toInt(a.jersey),
     teamId: team?.id,
@@ -512,7 +537,8 @@ export function mapSearch(raw: RawSearch): Omit<SearchResults, 'competitions'> {
   const teams = contents('team').flatMap((c): Team[] => {
     const id = idFromUid(c.uid, 't')
     if (!id || !c.displayName) return []
-    return [{ id, slug: slugify(c.displayName), name: c.displayName, shortName: c.displayName, logoUrl: c.image?.default, league: c.subtitle }]
+    const { name } = fixTeamName(id, { name: c.displayName, short: c.displayName }, getLanguage())
+    return [{ id, slug: slugify(name), name, shortName: name, logoUrl: c.image?.default, league: c.subtitle }]
   })
   const players = contents('player').flatMap((c): Player[] => {
     const id = idFromUid(c.uid, 'a')

@@ -5,9 +5,11 @@ import { isLive, isUpcoming } from '../../domain/status'
 import { MatchRow } from '../../features/matches/MatchRow'
 import { Card, Section } from '../ui/Card'
 import { Skeleton } from '../ui/Skeleton'
+import { useT } from '../../i18n'
 
 /** Desktop-Zusatzspalte: "Live jetzt" bzw. nächste Spiele von heute */
 export function RightRail() {
+  const t = useT()
   const onMatchesPage = useMatch('/')
   const { data, isPending } = useFixturesByDate(todayKey())
 
@@ -21,7 +23,7 @@ export function RightRail() {
   return (
     <aside className="hidden w-80 shrink-0 pt-6 xl:block">
       <div className="sticky top-20 space-y-3">
-        <Section title={live.length > 0 ? 'Live jetzt' : 'Heute noch'}>
+        <Section title={t(live.length > 0 ? 'matches.liveNow' : 'matches.laterToday')}>
           <Card padded={false} className="divide-y divide-border overflow-hidden">
             {isPending &&
               Array.from({ length: 3 }, (_, i) => (
@@ -29,7 +31,7 @@ export function RightRail() {
                   <Skeleton className="h-5 w-full" />
                 </div>
               ))}
-            {!isPending && list.length === 0 && <p className="p-4 text-sm text-muted">Heute keine weiteren Spiele.</p>}
+            {!isPending && list.length === 0 && <p className="p-4 text-sm text-muted">{t('matches.noMoreToday')}</p>}
             {list.map((f) => (
               <MatchRow key={f.id} fixture={f} />
             ))}

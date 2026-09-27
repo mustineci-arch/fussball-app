@@ -1,6 +1,7 @@
 import { Card } from '../../components/ui/Card'
-import { STAT_LABELS } from '../../domain/labels'
+import { STAT_ORDER } from '../../domain/labels'
 import type { MatchStatistic } from '../../domain/types'
+import { useT } from '../../i18n'
 
 function formatValue(value: number, unit?: string) {
   const text = Number.isInteger(value) ? String(value) : value.toFixed(2)
@@ -32,16 +33,17 @@ function StatRow({ label, stat, unit }: { label: string; stat: MatchStatistic; u
 
 /** Zeigt nur Statistiken, die die Datenquelle tatsächlich liefert. */
 export function StatsPanel({ statistics }: { statistics: MatchStatistic[] }) {
+  const t = useT()
   const byKey = new Map(statistics.map((s) => [s.key, s]))
-  const rows = STAT_LABELS.flatMap(({ key, label, unit }) => {
+  const rows = STAT_ORDER.flatMap(({ key, unit }) => {
     const stat = byKey.get(key)
-    return stat ? [{ key, label, unit, stat }] : []
+    return stat ? [{ key, unit, stat }] : []
   })
 
   return (
     <Card className="space-y-4">
       {rows.map((r) => (
-        <StatRow key={r.key} label={r.label} stat={r.stat} unit={r.unit} />
+        <StatRow key={r.key} label={t(`stat.${r.key}`)} stat={r.stat} unit={r.unit} />
       ))}
     </Card>
   )

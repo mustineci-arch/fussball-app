@@ -7,13 +7,15 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { Chips, TabBar, useTabParam } from '../components/ui/Tabs'
-import { useCompetition, useCompetitionFixtures, useCompetitionTeams, useStandings, useTopPlayers } from '../data/queries'
+import { useCompetition, useCompetitionFixtures, useCompetitionTeams, useSeasonFixtures, useStandings, useTopPlayers } from '../data/queries'
 import { isFinished, isLive, isUpcoming } from '../domain/status'
 import type { Competition, Id, TopPlayerCategory } from '../domain/types'
 import { StandingsTable } from '../features/competitions/StandingsTable'
+import { CrossTable, FeverCurve } from '../features/competitions/TableViews'
+import { computeTable } from '../features/competitions/tableStats'
 import { TopPlayersList } from '../features/competitions/TopPlayersList'
 import { FavoriteButton } from '../features/favorites/FavoriteButton'
-import { favoriteFromCompetition } from '../features/favorites/store'
+import { favoriteFromCompetition, favoriteIds, useFavorites } from '../features/favorites/store'
 import { FixtureList } from '../features/matches/FixtureList'
 import { useT } from '../i18n'
 import { provider } from '../providers'
@@ -102,17 +104,43 @@ function Matches({ id }: { id: Id }) {
   )
 }
 
-function TableTab({ id }: { id: Id }) {
+const TABLE_VIEWS = ['all', 'home', 'away', 'first', 'second', 'fever', 'cross'] as const
+type TableView = (typeof TABLE_VIEWS)[number]
+
+function TableTab({ id, type }: { id: Id; type: Competition['type'] }) {
   const t = useT()
+  const [view, setView] = useState<TableView>('all')
   const { data, isPending, error, refetch } = useStandings(id)
+  // Zusatzansichten nur bei Ligen mit einer einzigen Tabelle (nicht bei Gruppenphasen)
+  const withViews = type === 'league' && data?.length === 1
+  const season = useSeasonFixtures(id, withViews && view !== 'all')
+  const favoriteTeams = favoriteIds(useFavorites(), 'team')
   if (isPending) return <BlockSkeleton rows={8} />
   if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
   if (!data.length) return <EmptyState icon={Table2} title={t('table.noneTitle')} description={t('table.noneText')} />
+  const highlight = data.flatMap((table) => table.rows.map((r) => r.team.id).filter((teamId) => favoriteTeams.has(teamId)))
+  const [table] = data
+
+  const body = () => {
+    if (!withViews || view === 'all' || !table) {
+      return data.map((tbl, i) => <StandingsTable key={tbl.groupName ?? i} table={tbl} highlightTeamIds={highlight} />)
+    }
+    if (season.isPending) return <BlockSkeleton rows={8} />
+    if (season.error) return <ErrorState error={season.error} onRetry={() => void season.refetch()} />
+    const fixtures = season.data
+    if (!fixtures.some((f) => isFinished(f.status))) return <EmptyState icon={Table2} title={t('common.noData')} description={t('tableViews.noResults')} />
+    if (view === 'fever') return <FeverCurve table={table} fixtures={fixtures} preselect={highlight} />
+    if (view === 'cross') return <CrossTable table={table} fixtures={fixtures} highlightTeamIds={highlight} />
+    const rows = computeTable(fixtures, view, table.rows.map((r) => r.team))
+    return <StandingsTable table={{ ...table, rows, zones: [] }} highlightTeamIds={highlight} />
+  }
+
   return (
     <div className="space-y-4">
-      {data.map((table, i) => (
-        <StandingsTable key={table.groupName ?? i} table={table} />
-      ))}
+      {withViews && (
+        <Chips options={TABLE_VIEWS.map((v) => ({ id: v, label: t(`tableViews.view.${v}`) }))} active={view} onChange={setView} />
+      )}
+      {body()}
     </div>
   )
 }
@@ -179,7 +207,7 @@ export default function CompetitionPage() {
           <TabBar tabs={tabs} active={tab} onChange={setTab} />
           {tab === 'overview' && <Overview id={id} />}
           {tab === 'matches' && <Matches id={id} />}
-          {tab === 'table' && <TableTab id={id} />}
+          {tab === 'table' && <TableTab id={id} type={data.competition.type} />}
           {tab === 'stats' && <Stats id={id} />}
           {tab === 'teams' && <Teams id={id} />}
         </>

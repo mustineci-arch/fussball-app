@@ -28,6 +28,7 @@ export const queryKeys = {
   competitions: ['competitions'] as const,
   competition: (id: Id) => ['competition', id] as const,
   competitionFixtures: (id: Id) => ['competition', id, 'fixtures'] as const,
+  seasonFixtures: (id: Id) => ['competition', id, 'season-fixtures'] as const,
   competitionTeams: (id: Id) => ['competition', id, 'teams'] as const,
   standings: (id: Id) => ['competition', id, 'standings'] as const,
   topPlayers: (id: Id, category: TopPlayerCategory) => ['competition', id, 'top', category] as const,
@@ -52,6 +53,14 @@ export const useCompetitionFixtures = (id: Id) =>
     queryFn: () => provider.getCompetitionFixtures(id),
     staleTime: staleTimes.fixtures,
     refetchInterval: (q) => (hasLive(q.state.data) ? LIVE_REFRESH_MS : false),
+  })
+
+export const useSeasonFixtures = (id: Id, enabled = true) =>
+  useQuery({
+    queryKey: queryKeys.seasonFixtures(id),
+    queryFn: () => provider.getSeasonFixtures(id),
+    staleTime: staleTimes.standings,
+    enabled: enabled && id !== '',
   })
 
 export const useCompetitionTeams = (id: Id) =>

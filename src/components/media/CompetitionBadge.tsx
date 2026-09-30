@@ -24,12 +24,16 @@ export const CompetitionBadge = memo(function CompetitionBadge({ competition, si
       />
     )
   }
-  const label = competition.shortName
-    .split(/\s+/)
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 3)
-    .toUpperCase()
+  // Kurze Kürzel (z. B. "U13") vollständig, sonst Anfangsbuchstaben
+  const label = (
+    competition.shortName.length <= 3
+      ? competition.shortName
+      : competition.shortName
+          .split(/\s+/)
+          .map((w) => w[0])
+          .join('')
+          .slice(0, 3)
+  ).toUpperCase()
   return (
     <span
       aria-hidden

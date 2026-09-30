@@ -32,6 +32,12 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
+            // fussball.de-Ligen (per GitHub Action aktualisiert): frisch laden, offline den letzten Stand
+            urlPattern: ({ url }) => url.pathname.endsWith('/data/fussballde.json'),
+            handler: 'NetworkFirst',
+            options: { cacheName: 'fussballde', networkTimeoutSeconds: 6, cacheableResponse: { statuses: [200] } },
+          },
+          {
             // Spieldaten: immer zuerst frisch aus dem Netz, bei Offline den letzten Stand zeigen
             urlPattern: ({ url }) => url.hostname.endsWith('api.espn.com'),
             handler: 'NetworkFirst',

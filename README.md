@@ -38,6 +38,13 @@ Für einen öffentlichen Betrieb wird ein lizenzierter Anbieter als weiterer Ada
 - Neuer Wettbewerb: eine Zeile in `src/providers/espn/leagues.ts`
 - Tests laufen gegen gespeicherte echte Antworten in `src/providers/espn/__fixtures__/`
 
+### Amateur- und Jugendligen (fussball.de)
+
+`src/providers/fussballde/withFussballDe.ts` ergänzt jeden Anbieter um Ligen aus
+`public/data/fussballde.json` (IDs mit Präfix `fde-`). Die Datei wird zur Laufzeit geladen –
+Aktualisieren heißt nur: Datei ersetzen und veröffentlichen. Format: `src/providers/fussballde/types.ts`.
+Mit `matches` (Ergebnissen) funktionieren auch Heim/Auswärts, Hin-/Rückrunde, Fieberkurve und Kreuztabelle.
+
 ## Spielerfotos
 
 Nur frei lizenzierte Fotos aus **Wikimedia Commons** (CC0, gemeinfrei, CC BY, CC BY-SA),

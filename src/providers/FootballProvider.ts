@@ -31,6 +31,8 @@ export interface FootballProvider {
   getCompetitions(): Promise<Competition[]>
   getCompetition(id: Id): Promise<{ competition: Competition; season?: Season }>
   getCompetitionFixtures(competitionId: Id): Promise<Fixture[]>
+  /** Alle Spiele der laufenden Saison bis heute – Grundlage für Heim/Auswärts, Fieberkurve, Kreuztabelle */
+  getSeasonFixtures(competitionId: Id): Promise<Fixture[]>
   getCompetitionTeams(competitionId: Id): Promise<Team[]>
   getStandings(competitionId: Id): Promise<StandingTable[]>
   getTopPlayers(competitionId: Id, category: TopPlayerCategory): Promise<TopPlayerEntry[]>

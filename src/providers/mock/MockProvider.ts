@@ -72,6 +72,10 @@ export class MockProvider implements FootballProvider {
       .map((r) => r.fixture)
   }
 
+  async getSeasonFixtures(competitionId: Id): Promise<Fixture[]> {
+    return this.getCompetitionFixtures(competitionId)
+  }
+
   async getCompetitionTeams(competitionId: Id): Promise<Team[]> {
     await latency()
     this.requireCompetition(competitionId)

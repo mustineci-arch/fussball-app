@@ -63,7 +63,7 @@ export interface RawEvent {
 }
 
 export interface RawScoreboard {
-  leagues?: { slug?: string; season?: { displayName?: string } }[]
+  leagues?: { slug?: string; season?: { displayName?: string; startDate?: string } }[]
   events?: RawEvent[]
 }
 

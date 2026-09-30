@@ -103,6 +103,21 @@ export class EspnProvider implements FootballProvider {
     return this.dedupe(lists.flatMap((raw) => this.mapBoard(raw, slug)))
   }
 
+  async getSeasonFixtures(competitionId: Id): Promise<Fixture[]> {
+    const slug = this.requireSlug(competitionId)
+    const today = todayKey()
+    const board = await this.scoreboard(slug)
+    // Saisonbeginn laut ESPN; fehlt er, gilt der 1. Juli (europäischer Spielkalender).
+    const start =
+      board.leagues?.[0]?.season?.startDate?.slice(0, 10) ??
+      `${Number(today.slice(0, 4)) - (today.slice(5, 7) < '07' ? 1 : 0)}-07-01`
+    const raw = await this.client.get<RawScoreboard>(
+      `${SITE_API}/${slug}/scoreboard?dates=${compactDate(start)}-${compactDate(today)}&limit=1000`,
+      (r) => fixturesTtl(this.mapBoard(r, slug)),
+    )
+    return this.dedupe(this.mapBoard(raw, slug))
+  }
+
   async getCompetitionTeams(competitionId: Id): Promise<Team[]> {
     const slug = this.requireSlug(competitionId)
     const raw = await this.client.get<RawTeamsList>(`${SITE_API}/${slug}/teams`, ttl.long)

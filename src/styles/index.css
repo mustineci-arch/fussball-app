@@ -23,6 +23,10 @@
   --zone-el: #ea7a0c;
   --zone-ecl: #0d9488;
   --zone-rel: #dc2626;
+  /* Linien der Fieberkurve (validierte Kategorienfarben, Reihenfolge fest) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
   --shadow-card: 0 1px 2px rgb(16 24 20 / 0.04), 0 2px 8px rgb(16 24 20 / 0.05);
   color-scheme: light;
 }
@@ -42,6 +46,9 @@
   --live: #ff5a61;
   --live-soft: #3a1618;
   --pitch: #1f5f3b;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3);
   color-scheme: dark;
 }

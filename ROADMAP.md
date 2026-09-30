@@ -21,7 +21,18 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - PWA: installierbar, offline nutzbar, Update-Hinweis
 - Deutsch / Englisch, Dark Mode (Hell/Dunkel/System)
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
+- Tabellen-Ansichten wie auf fussball.de: Gesamt, Heim, Auswärts, Hinrunde, Rückrunde, Fieberkurve, Kreuztabelle
+- Jugendliga von fussball.de (U13-Kreisliga 03 Herbst, Hamburg) als eigener Wettbewerb – Daten in `public/data/fussballde.json`
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
+
+## Offen: fussball.de automatisch synchronisieren
+
+`public/data/fussballde.json` ist aktuell von Hand gefüllt (Stand 30.09.2026, nur Tabelle).
+Geplant: GitHub Action (z. B. täglich) → `scripts/sync-fussballde.mjs` liest die Staffel-Seite und schreibt die Datei.
+Die App lädt sie zur Laufzeit, ein neuer Build ist nicht nötig. Dafür wird gebraucht:
+- der Link zur Staffel auf fussball.de
+- Netzwerkzugriff auf `www.fussball.de` in der Entwicklungsumgebung (zum Testen des Parsers)
+- Hinweis: fussball.de hat keine offene Schnittstelle, und die Nutzungsbedingungen schränken automatisches Auslesen ein. Nur privat nutzen.
 
 ## Ideen für später (Reihenfolge = Vorschlag)
 

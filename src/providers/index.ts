@@ -1,5 +1,6 @@
 import { EspnProvider } from './espn/EspnProvider'
 import type { FootballProvider } from './FootballProvider'
+import { withFussballDe } from './fussballde/withFussballDe'
 import { MockProvider } from './mock/MockProvider'
 
 /**
@@ -19,5 +20,6 @@ function createProvider(): FootballProvider {
   }
 }
 
-export const provider: FootballProvider = createProvider()
+// Amateur- und Jugendligen von fussball.de kommen immer dazu
+export const provider: FootballProvider = withFussballDe(createProvider())
 export type { FootballProvider }

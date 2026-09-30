@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { setLanguage } from '../../i18n'
 import athlete from './__fixtures__/athlete.json'
 import athleteStats from './__fixtures__/athlete-stats.json'
 import leaders from './__fixtures__/leaders.json'
@@ -19,6 +20,10 @@ import {
   parseDisplayDob,
 } from './mappers'
 import type { RawEvent, RawSummary } from './raw'
+
+// Die Sprache hängt sonst von der Systemsprache ab (Node setzt navigator.language) –
+// die Erwartungen unten sind deutsche Namen.
+beforeAll(() => setLanguage('de'))
 
 describe('Grundfunktionen', () => {
   it('liest Spielminuten inkl. Nachspielzeit', () => {

@@ -16,7 +16,8 @@
         {
           "id": "fde-alstertal-langenhorn-7d",
           "name": "Alstertal-Langenhorn 7.D-Jun. (A4)",
-          "shortName": "Alstertal-Langenhorn 7.D"
+          "shortName": "Alstertal-Langenhorn 7.D",
+          "sourceUrl": "https://www.fussball.de/mannschaft/alstertal-langenhorn-7d-jun-a4-alstertal-langenhorn-hamburg/-/saison/2627/team-id/01SMND816K000000VS548985VU8O1RK1"
         },
         {
           "id": "fde-nordlichter-nsv-1d",
@@ -107,7 +108,8 @@
           "points": 1
         }
       ],
-      "matches": []
+      "matches": [],
+      "sourceUrl": "https://www.fussball.de/mannschaft/alstertal-langenhorn-7d-jun-a4-alstertal-langenhorn-hamburg/-/saison/2627/team-id/01SMND816K000000VS548985VU8O1RK1"
     }
   ]
 }

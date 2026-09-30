@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { CompetitionBadge, TeamLogo } from '../components/media'
 import { Card, Section } from '../components/ui/Card'
+import { ExternalSourceLink } from '../components/ui/ExternalSourceLink'
 import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
@@ -204,6 +205,7 @@ export default function CompetitionPage() {
       ) : (
         <>
           <Header competition={data.competition} seasonLabel={data.season?.label} round={data.season?.currentRound} />
+          {data.competition.externalUrl && <ExternalSourceLink url={data.competition.externalUrl} />}
           <TabBar tabs={tabs} active={tab} onChange={setTab} />
           {tab === 'overview' && <Overview id={id} />}
           {tab === 'matches' && <Matches id={id} />}

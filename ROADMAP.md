@@ -23,6 +23,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
 - Tabellen-Ansichten wie auf fussball.de: Gesamt, Heim, Auswärts, Hinrunde, Rückrunde, Fieberkurve, Kreuztabelle
 - Jugendliga von fussball.de (U13-Kreisliga 03 Herbst, Hamburg) als eigener Wettbewerb – Daten in `public/data/fussballde.json`
+  mit Button „Auf fussball.de öffnen“ (Team- und Ligaseite) zur Originalseite
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
 
 ## Offen: fussball.de automatisch synchronisieren

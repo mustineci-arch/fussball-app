@@ -13,7 +13,7 @@ const data: FdeData = {
       region: 'Hamburg',
       season: '2026/27',
       teams: [
-        { id: 'fde-a', name: 'Team A' },
+        { id: 'fde-a', name: 'Team A', sourceUrl: 'https://www.fussball.de/mannschaft/a' },
         { id: 'fde-b', name: 'Team B' },
       ],
       table: [
@@ -49,6 +49,11 @@ describe('withFussballDe', () => {
     const { competitionIds } = await provider.getTeam('fde-b')
     expect(competitionIds).toEqual(['fde-liga'])
     expect(await provider.getTeamFixtures('fde-b')).toHaveLength(2)
+  })
+
+  it('reicht den Link zur fussball.de-Seite durch', async () => {
+    expect((await provider.getTeam('fde-a')).team.externalUrl).toBe('https://www.fussball.de/mannschaft/a')
+    expect((await provider.getTeam('fde-b')).team.externalUrl).toBeUndefined()
   })
 
   it('findet Teams in der Suche', async () => {

@@ -158,6 +158,8 @@ export const de = {
   'table.form': 'Form',
   'table.noneTitle': 'Keine Tabelle',
   'table.noneText': 'Für diesen Wettbewerb ist keine Tabelle verfügbar.',
+  'common.openExternal': 'Auf {site} öffnen',
+  'common.openExternalHint': 'Öffnet die Originalseite in einem neuen Tab.',
   'tableViews.view.all': 'Gesamt',
   'tableViews.view.home': 'Heim',
   'tableViews.view.away': 'Auswärts',

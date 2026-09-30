@@ -2,6 +2,7 @@ import { CalendarX2, Table2, Users } from 'lucide-react'
 import { Link, useParams } from 'react-router'
 import { PlayerAvatar, TeamLogo } from '../components/media'
 import { Card, Section } from '../components/ui/Card'
+import { ExternalSourceLink } from '../components/ui/ExternalSourceLink'
 import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
@@ -44,6 +45,7 @@ function Header({ team, leagueId }: { team: Team; leagueId?: Id }) {
         <h1 className="flex-1 text-2xl font-bold tracking-tight">{team.name}</h1>
         <FavoriteButton entry={favoriteFromTeam(team)} />
       </div>
+      {team.externalUrl && <ExternalSourceLink url={team.externalUrl} />}
       {visible.length > 0 && (
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm md:grid-cols-4">
           {visible.map((f) => (

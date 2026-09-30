@@ -1,6 +1,6 @@
 /**
  * Format der Datei public/data/fussballde.json.
- * Sie wird von scripts/sync-fussballde.mjs (GitHub Action) geschrieben
+ * Sie wird von Hand gepflegt (später evtl. automatisch)
  * und zur Laufzeit von der App geladen – kein neuer Build nötig.
  */
 export interface FdeTeam {
@@ -8,6 +8,8 @@ export interface FdeTeam {
   name: string
   shortName?: string
   logoUrl?: string
+  /** Teamseite auf fussball.de */
+  sourceUrl?: string
 }
 
 export interface FdeTableRow {

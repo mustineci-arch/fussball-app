@@ -18,6 +18,8 @@ export interface Competition {
   logoUrl?: string
   /** Sortierung in Listen – kleiner = weiter oben */
   priority: number
+  /** Link zur Originalseite der Datenquelle (z. B. fussball.de) */
+  externalUrl?: string
 }
 
 export interface Season {
@@ -43,6 +45,8 @@ export interface Team {
   isNational?: boolean
   /** Name der Hauptliga – nur zur Anzeige (z. B. in Suchergebnissen) */
   league?: string
+  /** Link zur Originalseite der Datenquelle (z. B. fussball.de) */
+  externalUrl?: string
 }
 
 export type PlayerPosition = 'GK' | 'DF' | 'MF' | 'FW'

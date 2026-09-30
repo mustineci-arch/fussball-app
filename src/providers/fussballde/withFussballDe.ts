@@ -1,7 +1,7 @@
 /**
  * Ergänzt einen beliebigen Anbieter um Amateur-/Jugendligen von fussball.de.
  * Die Daten liegen als statische JSON-Datei neben der App (public/data/fussballde.json)
- * und werden automatisch per GitHub Action aktualisiert (scripts/sync-fussballde.mjs).
+ * und werden von Hand gepflegt. Ein Link führt jeweils zur Originalseite auf fussball.de.
  * Alle IDs beginnen mit "fde-" – daran erkennt der Wrapper, wer zuständig ist.
  */
 import { isOnDate } from '../../domain/date'
@@ -42,6 +42,7 @@ const toCompetition = (c: FdeCompetition, index: number): Competition => ({
   country: c.region,
   // Hinter den Profiligen einsortieren
   priority: 500 + index,
+  externalUrl: c.sourceUrl,
 })
 
 function toTeam(c: FdeCompetition, teamId: Id): Team {
@@ -53,6 +54,7 @@ function toTeam(c: FdeCompetition, teamId: Id): Team {
     shortName: t?.shortName ?? t?.name ?? teamId,
     logoUrl: t?.logoUrl,
     league: c.name,
+    externalUrl: t?.sourceUrl,
   }
 }
 

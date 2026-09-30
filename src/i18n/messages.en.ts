@@ -160,6 +160,8 @@ export const en: Record<MessageKey, string> = {
   'table.form': 'Form',
   'table.noneTitle': 'No table',
   'table.noneText': 'No table is available for this competition.',
+  'common.openExternal': 'Open on {site}',
+  'common.openExternalHint': 'Opens the original page in a new tab.',
   'tableViews.view.all': 'Overall',
   'tableViews.view.home': 'Home',
   'tableViews.view.away': 'Away',

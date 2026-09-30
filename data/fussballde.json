@@ -1,0 +1,115 @@
+{
+  "updatedAt": "2026-09-30T12:00:00Z",
+  "competitions": [
+    {
+      "id": "fde-u13-kl-03-herbst",
+      "name": "U13-Kreisliga 03 Herbst",
+      "shortName": "U13",
+      "region": "Hamburg",
+      "season": "2026/27",
+      "teams": [
+        {
+          "id": "fde-duwo-08-1d",
+          "name": "DUWO 08 1.D-Jun. (A1)",
+          "shortName": "DUWO 08 1.D"
+        },
+        {
+          "id": "fde-alstertal-langenhorn-7d",
+          "name": "Alstertal-Langenhorn 7.D-Jun. (A4)",
+          "shortName": "Alstertal-Langenhorn 7.D",
+          "sourceUrl": "https://www.fussball.de/mannschaft/alstertal-langenhorn-7d-jun-a4-alstertal-langenhorn-hamburg/-/saison/2627/team-id/01SMND816K000000VS548985VU8O1RK1"
+        },
+        {
+          "id": "fde-nordlichter-nsv-1d",
+          "name": "Nordlichter im NSV 1.D-Jun. (A1)",
+          "shortName": "Nordlichter NSV 1.D"
+        },
+        {
+          "id": "fde-tus-berne-3d",
+          "name": "tus BERNE 3.D-Jun. (A2)",
+          "shortName": "tus BERNE 3.D"
+        },
+        {
+          "id": "fde-bergstedt-2d",
+          "name": "Bergstedt 2.D-Jun. (A1)",
+          "shortName": "Bergstedt 2.D"
+        },
+        {
+          "id": "fde-halstenbek-rellingen-2d",
+          "name": "Halstenbek-Rellingen 2.D-Jun. (A2)",
+          "shortName": "Halstenbek-Rellingen 2.D"
+        }
+      ],
+      "table": [
+        {
+          "teamId": "fde-duwo-08-1d",
+          "rank": 1,
+          "played": 4,
+          "won": 3,
+          "drawn": 0,
+          "lost": 1,
+          "goalsFor": 24,
+          "goalsAgainst": 15,
+          "points": 9
+        },
+        {
+          "teamId": "fde-alstertal-langenhorn-7d",
+          "rank": 2,
+          "played": 4,
+          "won": 3,
+          "drawn": 0,
+          "lost": 1,
+          "goalsFor": 20,
+          "goalsAgainst": 17,
+          "points": 9
+        },
+        {
+          "teamId": "fde-nordlichter-nsv-1d",
+          "rank": 3,
+          "played": 4,
+          "won": 2,
+          "drawn": 0,
+          "lost": 2,
+          "goalsFor": 23,
+          "goalsAgainst": 20,
+          "points": 6
+        },
+        {
+          "teamId": "fde-tus-berne-3d",
+          "rank": 4,
+          "played": 4,
+          "won": 2,
+          "drawn": 0,
+          "lost": 2,
+          "goalsFor": 18,
+          "goalsAgainst": 22,
+          "points": 6
+        },
+        {
+          "teamId": "fde-bergstedt-2d",
+          "rank": 5,
+          "played": 4,
+          "won": 1,
+          "drawn": 1,
+          "lost": 2,
+          "goalsFor": 18,
+          "goalsAgainst": 22,
+          "points": 4
+        },
+        {
+          "teamId": "fde-halstenbek-rellingen-2d",
+          "rank": 6,
+          "played": 4,
+          "won": 0,
+          "drawn": 1,
+          "lost": 3,
+          "goalsFor": 17,
+          "goalsAgainst": 24,
+          "points": 1
+        }
+      ],
+      "matches": [],
+      "sourceUrl": "https://www.fussball.de/mannschaft/alstertal-langenhorn-7d-jun-a4-alstertal-langenhorn-hamburg/-/saison/2627/team-id/01SMND816K000000VS548985VU8O1RK1"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import { Card, Section } from '../components/ui/Card'
 import { formatDate } from '../domain/date'
 import type { Fixture } from '../domain/types'
-import { useTeamCountries } from '../data/queries'
+import { useFixtureWithTv, useTeamCountries } from '../data/queries'
 import { useLanguage, useT } from '../i18n'
 import { ALL_COUNTRIES, countryLabel, flagOf, hasRightsList, RIGHTS_AS_OF, TV_COUNTRIES, tvWorldwide, type Channel } from './broadcasts'
 import { setTvCountry, useTvCountry } from './country'
@@ -147,7 +147,9 @@ function Sources({ sources }: { sources: string[] }) {
 export function TvSection({ fixture }: { fixture: Fixture }) {
   const t = useT()
   const country = useTvCountry()
-  const all = tvWorldwide(fixture, country, useTeamCountries(fixture))
+  const teamCountries = useTeamCountries(fixture)
+  const withTv = useFixtureWithTv(fixture, [country, ...Object.values(teamCountries)])
+  const all = tvWorldwide(withTv, country, teamCountries)
   const asOf = formatDate(RIGHTS_AS_OF) ?? RIGHTS_AS_OF
 
   return (
@@ -192,7 +194,9 @@ export function TvSection({ fixture }: { fixture: Fixture }) {
 export function WorldChannelLinks({ fixture }: { fixture: Fixture }) {
   const t = useT()
   const country = useTvCountry()
-  const all = tvWorldwide(fixture, country, useTeamCountries(fixture))
+  const teamCountries = useTeamCountries(fixture)
+  const withTv = useFixtureWithTv(fixture, [country, ...Object.values(teamCountries)])
+  const all = tvWorldwide(withTv, country, teamCountries)
   if (all.length === 0) return <p className="text-xs text-subtle">{t('tv.noChannel')}</p>
   return (
     <div className="space-y-1.5">

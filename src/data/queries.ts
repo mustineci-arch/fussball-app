@@ -2,7 +2,7 @@
  * Daten-Hooks der App. Hier liegt die Cache-Strategie im Browser:
  * Stammdaten lange, Tabellen mittel, Live-Spiele kurz – beendete Spiele gar nicht neu.
  */
-import { useQuery } from '@tanstack/react-query'
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { todayKey } from '../domain/date'
 import { isFinished, isLive, needsLiveRefresh } from '../domain/status'
 import type { Fixture, Id, Player, Team, TopPlayerCategory } from '../domain/types'
@@ -10,6 +10,7 @@ import { findPlayerPhoto, findPlayerPhotos, photoKey } from '../media/wikimedia'
 import { provider } from '../providers'
 import { needsTeamLeague, teamCountry } from '../tv/teamCountry'
 import * as fotmob from '../providers/fotmob/fotmob'
+import { broadcastsForFixture, getTvListings } from '../providers/fotmob/tvListings'
 
 const MINUTE = 60_000
 const HOUR = 60 * MINUTE
@@ -220,4 +221,28 @@ export function useTeamCountries(fixture: Fixture): Record<string, string> {
   if (h) result[fixture.homeTeam.shortName] = h
   if (a) result[fixture.awayTeam.shortName] = a
   return result
+}
+
+/**
+ * Sender pro Spiel aus FotMob für die angegebenen Länder (eigenes Land + Heimatländer der Teams).
+ * Liefert das Spiel mit ergänzten Sendern zurück.
+ */
+export function useFixtureWithTv(fixture: Fixture, countries: readonly string[]): Fixture {
+  const unique = [...new Set(countries)].filter((c) => /^[A-Z]{2}$/.test(c))
+  const results = useQueries({
+    queries: unique.map((country) => ({
+      queryKey: ['fotmob', 'tv', country],
+      queryFn: () => getTvListings(country),
+      enabled: extrasEnabled,
+      staleTime: HOUR,
+      retry: 1,
+    })),
+  })
+  const listings = results.flatMap((r) => r.data ?? [])
+  if (!listings.length) return fixture
+  const fromFotmob = broadcastsForFixture(fixture, listings)
+  if (!fromFotmob.length) return fixture
+  // FotMob ergänzt; Länder, für die schon ESPN-Angaben vorliegen, behalten diese zusätzlich
+  const seen = new Set((fixture.broadcasts ?? []).map((b) => `${b.country}:${b.name.toLowerCase()}`))
+  return { ...fixture, broadcasts: [...(fixture.broadcasts ?? []), ...fromFotmob.filter((b) => !seen.has(`${b.country}:${b.name.toLowerCase()}`))] }
 }

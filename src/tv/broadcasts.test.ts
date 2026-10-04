@@ -97,7 +97,7 @@ describe('Sender weltweit', () => {
     expect(us.reported).toBe(true)
     expect(us.channels[0]).toMatchObject({ name: 'Paramount+', url: 'https://www.paramountplus.com' })
     const ca = tvWorldwide(f, 'DE').find((x) => x.country === 'CA')
-    expect(ca?.info.channels[0]).toMatchObject({ name: 'TSN', url: undefined })
+    expect(ca?.info.channels[0]).toMatchObject({ name: 'TSN', url: 'https://www.tsn.ca' })
   })
 
   it('erzeugt Flaggen aus Ländercodes', () => {

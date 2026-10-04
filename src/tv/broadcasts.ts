@@ -345,11 +345,83 @@ const RULES: Record<RightsCountry, Partial<Record<string, Rule>>> = {
   },
 }
 
-/** Sender, die die Datenquelle für genau dieses Spiel meldet (aktueller als die Rechteliste) */
+/**
+ * Senderfamilien → offizielle Seite, je Land wo nötig. Greift, wenn der genaue Name nicht bekannt ist
+ * ("Sky Bundesliga 2" → Sky Deutschland). Reihenfolge: speziell vor allgemein.
+ */
+const URL_PATTERNS: readonly [RegExp, string, string?][] = [
+  [/^sky/i, 'https://www.sky.de/sport', 'DE'],
+  [/^sky/i, 'https://sport.sky.at', 'AT'],
+  [/^sky/i, 'https://www.sky.ch', 'CH'],
+  [/^sky/i, 'https://www.skysports.com', 'GB'],
+  [/^sky/i, 'https://sport.sky.it', 'IT'],
+  [/^wow/i, 'https://www.wowtv.de/sport'],
+  [/^dazn/i, 'https://www.dazn.com'],
+  [/prime video|amazon/i, 'https://www.primevideo.com'],
+  [/^(das erste|ard|sportschau)/i, 'https://www.sportschau.de'],
+  [/^zdf/i, 'https://www.zdf.de/live-tv'],
+  [/^(rtl\+|rtl|nitro)/i, 'https://plus.rtl.de'],
+  [/^(sat\.?1|joyn)/i, 'https://www.joyn.de'],
+  [/^magenta/i, 'https://www.magentasport.de'],
+  [/^orf/i, 'https://on.orf.at'],
+  [/^servus/i, 'https://www.servustv.com'],
+  [/^canal\+/i, 'https://www.canalplus.com'],
+  [/^(srf|rts|rsi)/i, 'https://www.srf.ch/play'],
+  [/^blue/i, 'https://www.blueplus.ch/de/sport'],
+  [/^(bein|digiturk)/i, 'https://www.beinsports.com'],
+  [/^tod/i, 'https://www.todtv.com.tr'],
+  [/^s sport/i, 'https://www.ssportplus.com'],
+  [/^(trt|tabii)/i, 'https://www.tabii.com'],
+  [/^(atv|a spor)/i, 'https://www.atv.com.tr'],
+  [/^exxen/i, 'https://www.exxen.com'],
+  [/^tnt/i, 'https://www.tntsports.co.uk'],
+  [/^hbo/i, 'https://www.hbomax.com'],
+  [/^laliga ?tv/i, 'https://www.laliga.com/en-GB/broadcasters/laligatv'],
+  [/^(bbc)/i, 'https://www.bbc.co.uk/iplayer'],
+  [/^itv/i, 'https://www.itv.com'],
+  [/^premier sports/i, 'https://www.premiersports.com'],
+  [/^peacock/i, 'https://www.peacocktv.com'],
+  [/^(nbc|usa net)/i, 'https://www.nbcsports.com/soccer'],
+  [/^(telemundo|universo)/i, 'https://www.telemundo.com/deportes'],
+  [/^(paramount|cbs)/i, 'https://www.paramountplus.com'],
+  [/^(espn|abc)/i, 'https://www.espn.com'],
+  [/^(fox|fs1|fs2|tubi)/i, 'https://www.foxsports.com/soccer'],
+  [/^(tudn|univision|vix)/i, 'https://www.tudn.com'],
+  [/^fubo/i, 'https://www.fubo.tv'],
+  [/^viaplay/i, 'https://viaplay.com'],
+  [/^ziggo/i, 'https://www.ziggosport.nl'],
+  [/^nos/i, 'https://nos.nl/sport'],
+  [/^movistar/i, 'https://www.movistarplus.es/deportes'],
+  [/^(rtve|la 1|teledeporte)/i, 'https://www.rtve.es/play/directos'],
+  [/^(rai)/i, 'https://www.raiplay.it/dirette'],
+  [/^(tf1)/i, 'https://www.tf1.fr'],
+  [/^ligue 1\+/i, 'https://www.ligue1plus.fr'],
+  [/^onefootball/i, 'https://onefootball.com'],
+  [/^(globo|sportv|cazetv)/i, 'https://ge.globo.com'],
+  [/^(tsn)/i, 'https://www.tsn.ca'],
+  [/^(optus)/i, 'https://sport.optus.com.au'],
+  [/^(stan)/i, 'https://www.stan.com.au/sport'],
+]
+
+/** Frei empfangbare Sender/kostenlose Streams (nach Namen) */
+const FREE_PATTERN =
+  /^(das erste|ard|zdf|sportschau|rtl$|nitro|sat\.?1|orf ?1|orf ?eins|servus|srf|rts|rsi|bbc|itv|s4c|trt|tabii|atv|a spor|tv8|nos|rai ?1|raiplay|tf1|rtve|la 1|teledeporte|telemundo|universo|cbs$|nbc$|abc$|fox$|tubi)/i
+
+export function channelUrl(name: string, country?: string): string | undefined {
+  const exact = KNOWN_URLS[name.toLowerCase()]
+  if (exact) return exact
+  return (
+    URL_PATTERNS.find(([re, , c]) => re.test(name) && c === country)?.[1] ??
+    URL_PATTERNS.find(([re, , c]) => re.test(name) && !c)?.[1] ??
+    URL_PATTERNS.find(([re]) => re.test(name))?.[1]
+  )
+}
+
+/** Sender, die die Datenquellen (ESPN, FotMob) für genau dieses Spiel melden – aktueller als die Rechteliste */
 function reportedChannels(fixture: Fixture, country: string): Channel[] {
   return (fixture.broadcasts ?? [])
     .filter((b) => b.country === country)
-    .map((b) => ({ name: b.name, kind: b.kind, free: false, url: KNOWN_URLS[b.name.toLowerCase()] }))
+    .map((b) => ({ name: b.name, kind: b.kind, free: FREE_PATTERN.test(b.name), url: channelUrl(b.name, country) }))
 }
 
 /** Übertragungsinfo für ein Spiel – undefined, wenn keine belegte Angabe vorliegt. */

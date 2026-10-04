@@ -45,6 +45,13 @@ und holt den Pokal (FotMob-Liga 151) aus FotMob: Spielplan, Gruppentabellen, Mat
 FotMob-IDs tragen Präfixe (`fm-` Spiele, `fmt-` Teams, `fmp-` Spieler); Süper-Lig-Teams werden den
 ESPN-Teams zugeordnet, sodass Teamseiten und Favoriten einheitlich bleiben.
 
+### Sender pro Spiel
+
+`src/providers/fotmob/tvListings.ts` lädt FotMobs Senderliste je Land (`tvlistings?countryCode=DE`,
+ca. 10 Tage im Voraus) für das eigene Land und die Heimatländer der Teams und ordnet sie über Anstoßzeit
+und Teamnamen zu. Dazu kommen ESPNs Angaben (v. a. USA). Erst wenn beide nichts melden, greift die
+recherchierte Rechteliste in `src/tv/broadcasts.ts`. Live-Test: `LIVE=1 npx vitest run src/providers/fotmob/tvListings.live.test.ts`.
+
 ### Zusatzquelle FotMob (Noten, Ausfälle)
 
 ESPN liefert für Fußball weder Spielernoten noch Verletzungen. Diese kommen von der ebenfalls

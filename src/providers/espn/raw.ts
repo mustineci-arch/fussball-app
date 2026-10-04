@@ -88,6 +88,9 @@ export interface RawRosterEntry {
   position?: { abbreviation?: string; name?: string }
   formationPlace?: string | number
   subbedIn?: boolean
+  subbedOut?: boolean
+  /** Einzelwerte im Spiel, z. B. { name: 'totalGoals', value: 1 } */
+  stats?: { name?: string; value?: number; displayValue?: string }[]
 }
 
 export interface RawRoster {
@@ -164,6 +167,15 @@ export interface RawRosterAthlete {
   citizenship?: string
   jersey?: string
   position?: { abbreviation?: string; name?: string }
+  injuries?: RawInjury[]
+}
+
+export interface RawInjury {
+  status?: string
+  date?: string
+  type?: { name?: string; description?: string; abbreviation?: string }
+  details?: { type?: string; location?: string; detail?: string; returnDate?: string }
+  shortComment?: string
 }
 
 export interface RawTeamRoster {

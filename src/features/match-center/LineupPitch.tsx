@@ -4,14 +4,19 @@ import { Card, Section } from '../../components/ui/Card'
 import type { Lineup, LineupPlayer, Team } from '../../domain/types'
 import { useT } from '../../i18n'
 import type { PlayerPhoto } from '../../media/wikimedia'
+import { RatingBadge } from './RatingBadge'
 
 /** Frei lizenzierte Fotos je Spieler-ID (Nachweise stehen unter der Aufstellung) */
 type Photos = Record<string, PlayerPhoto | null> | undefined
+/** Noten je Spieler-ID (leer vor Anpfiff) */
+type Ratings = Map<string, number> | undefined
 
-function PitchPlayer({ entry, photos }: { entry: LineupPlayer; photos: Photos }) {
+function PitchPlayer({ entry, photos, ratings }: { entry: LineupPlayer; photos: Photos; ratings: Ratings }) {
   const label = entry.player.shortName ?? entry.player.name
+  const rating = ratings?.get(entry.player.id)
   return (
-    <Link to={`/player/${entry.player.id}`} className="flex w-16 flex-col items-center gap-1 hover:opacity-85 md:w-20" title={entry.player.name}>
+    <Link to={`/player/${entry.player.id}`} className="relative flex w-16 flex-col items-center gap-1 hover:opacity-85 md:w-20" title={entry.player.name}>
+      {rating !== undefined && <RatingBadge rating={rating} className="absolute -top-1.5 right-0 z-10 min-w-0 px-0.5 text-[10px] md:right-2" />}
       <PlayerAvatar name={entry.player.name} photoUrl={photos?.[entry.player.id]?.url ?? entry.player.photoUrl} shirtNumber={entry.shirtNumber} size={34} className="ring-2 ring-white/70 rounded-full" />
       <span className="max-w-full truncate rounded bg-black/35 px-1 text-[10.5px] leading-tight font-medium text-white md:text-xs">{label}</span>
     </Link>
@@ -28,7 +33,7 @@ function rowsOf(lineup: Lineup): LineupPlayer[][] {
   return [...rows.entries()].sort((a, b) => a[0] - b[0]).map(([, players]) => players.sort((a, b) => (a.gridCol ?? 0) - (b.gridCol ?? 0)))
 }
 
-function HalfPitch({ lineup, side, photos }: { lineup: Lineup; side: 'home' | 'away'; photos: Photos }) {
+function HalfPitch({ lineup, side, photos, ratings }: { lineup: Lineup; side: 'home' | 'away'; photos: Photos; ratings: Ratings }) {
   const rows = rowsOf(lineup)
   const n = rows.length
   return (
@@ -42,7 +47,7 @@ function HalfPitch({ lineup, side, photos }: { lineup: Lineup; side: 'home' | 'a
         return (
           <div key={i} className="absolute inset-x-0 flex -translate-y-1/2 justify-around px-1" style={{ top: `${top}%` }}>
             {ordered.map((p) => (
-              <PitchPlayer key={p.player.id} entry={p} photos={photos} />
+              <PitchPlayer key={p.player.id} entry={p} photos={photos} ratings={ratings} />
             ))}
           </div>
         )
@@ -74,7 +79,7 @@ function TeamLabel({ team, lineup }: { team: Team; lineup?: Lineup }) {
   )
 }
 
-function Bench({ team, lineup, photos }: { team: Team; lineup: Lineup; photos: Photos }) {
+function Bench({ team, lineup, photos, ratings }: { team: Team; lineup: Lineup; photos: Photos; ratings: Ratings }) {
   const t = useT()
   return (
     <div className="min-w-0 space-y-2">
@@ -86,7 +91,8 @@ function Bench({ team, lineup, photos }: { team: Team; lineup: Lineup; photos: P
             <Link to={`/player/${p.player.id}`} className="flex items-center gap-2 rounded-lg py-0.5 text-sm hover:text-brand">
               <span className="w-5 text-right text-xs font-semibold text-subtle tabular-nums">{p.shirtNumber ?? ''}</span>
               <PlayerAvatar name={p.player.name} photoUrl={photos?.[p.player.id]?.url} size={24} />
-              <span className="truncate">{p.player.name}</span>
+              <span className="flex-1 truncate">{p.player.name}</span>
+              {ratings?.has(p.player.id) && <RatingBadge rating={ratings.get(p.player.id)!} />}
             </Link>
           </li>
         ))}
@@ -101,9 +107,10 @@ interface LineupPitchProps {
   home?: Lineup
   away?: Lineup
   photos?: Photos
+  ratings?: Ratings
 }
 
-export function LineupPitch({ homeTeam, awayTeam, home, away, photos }: LineupPitchProps) {
+export function LineupPitch({ homeTeam, awayTeam, home, away, photos, ratings }: LineupPitchProps) {
   const t = useT()
   const hasGrid = [home, away].every((l) => !l || l.starters.every((p) => p.gridRow !== undefined))
 
@@ -116,8 +123,8 @@ export function LineupPitch({ homeTeam, awayTeam, home, away, photos }: LineupPi
         {hasGrid ? (
           <div className="relative mx-auto aspect-[68/100] max-h-[760px] w-full bg-pitch">
             <PitchMarkings />
-            {away && <HalfPitch lineup={away} side="away" photos={photos} />}
-            {home && <HalfPitch lineup={home} side="home" photos={photos} />}
+            {away && <HalfPitch lineup={away} side="away" photos={photos} ratings={ratings} />}
+            {home && <HalfPitch lineup={home} side="home" photos={photos} ratings={ratings} />}
           </div>
         ) : (
           <div className="grid gap-4 p-4 sm:grid-cols-2">
@@ -143,8 +150,8 @@ export function LineupPitch({ homeTeam, awayTeam, home, away, photos }: LineupPi
 
       <Section title={t('match.bench')}>
         <Card className="grid gap-6 sm:grid-cols-2">
-          {home ? <Bench team={homeTeam} lineup={home} photos={photos} /> : <p className="text-sm text-muted">{homeTeam.shortName}: {t('common.notAvailable')}</p>}
-          {away ? <Bench team={awayTeam} lineup={away} photos={photos} /> : <p className="text-sm text-muted">{awayTeam.shortName}: {t('common.notAvailable')}</p>}
+          {home ? <Bench team={homeTeam} lineup={home} photos={photos} ratings={ratings} /> : <p className="text-sm text-muted">{homeTeam.shortName}: {t('common.notAvailable')}</p>}
+          {away ? <Bench team={awayTeam} lineup={away} photos={photos} ratings={ratings} /> : <p className="text-sm text-muted">{awayTeam.shortName}: {t('common.notAvailable')}</p>}
         </Card>
       </Section>
     </div>

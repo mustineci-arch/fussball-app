@@ -1,4 +1,4 @@
-import { CalendarX2, Table2, Users } from 'lucide-react'
+import { CalendarX2, HeartPulse, Table2, Users } from 'lucide-react'
 import { Link, useParams } from 'react-router'
 import { PlayerAvatar, TeamLogo } from '../components/media'
 import { Card, Section } from '../components/ui/Card'
@@ -13,11 +13,12 @@ import type { Fixture, FormResult, Id, Team } from '../domain/types'
 import { FormStrip, StandingsTable } from '../features/competitions/StandingsTable'
 import { FavoriteButton } from '../features/favorites/FavoriteButton'
 import { favoriteFromTeam } from '../features/favorites/store'
+import { InjuryList, InjuryStatusBadge, injuredPlayers } from '../features/injuries/InjuryList'
 import { FixtureList } from '../features/matches/FixtureList'
 import { useT, type MessageKey } from '../i18n'
 import { PhotoCredits } from '../media/PhotoCredit'
 
-const TAB_IDS = ['overview', 'matches', 'squad', 'table', 'stats'] as const
+const TAB_IDS = ['overview', 'matches', 'squad', 'injuries', 'table', 'stats'] as const
 
 function resultFor(f: Fixture, teamId: Id): FormResult | undefined {
   if (!f.score || !isFinished(f.status)) return undefined
@@ -181,6 +182,7 @@ function Squad({ teamId }: { teamId: Id }) {
                       {[p.position && t(`position.${p.position}`), p.nationality].filter(Boolean).join(' · ')}
                     </span>
                   </span>
+                  {p.injury && <InjuryStatusBadge status={p.injury.status} />}
                 </Link>
               ))}
             </Card>
@@ -194,6 +196,22 @@ function Squad({ teamId }: { teamId: Id }) {
           })}
         />
       )}
+    </div>
+  )
+}
+
+function Injuries({ teamId }: { teamId: Id }) {
+  const t = useT()
+  const { data, isPending, error, refetch } = useSquad(teamId)
+  const injured = injuredPlayers(data)
+  const { data: photos } = usePlayersPhotos(`injuries:${teamId}`, injured.length ? injured : undefined)
+  if (isPending) return <BlockSkeleton rows={4} />
+  if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
+  if (injured.length === 0) return <EmptyState icon={HeartPulse} title={t('injury.noneTitle')} description={t('injury.noneText')} />
+  return (
+    <div className="space-y-3">
+      <InjuryList players={injured} photos={photos} />
+      <p className="text-xs text-muted">{t('injury.source')}</p>
     </div>
   )
 }
@@ -261,6 +279,7 @@ export default function TeamPage() {
           {tab === 'overview' && <Overview teamId={id} leagueId={leagueId} />}
           {tab === 'matches' && <Matches teamId={id} />}
           {tab === 'squad' && <Squad teamId={id} />}
+          {tab === 'injuries' && <Injuries teamId={id} />}
           {tab === 'table' && <TableTab teamId={id} leagueId={leagueId} />}
           {tab === 'stats' && <Stats teamId={id} leagueId={leagueId} />}
         </>

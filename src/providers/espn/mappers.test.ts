@@ -10,7 +10,10 @@ import summaryScheduled from './__fixtures__/summary-scheduled.json'
 import {
   mapAthlete,
   mapFixture,
+  mapInjury,
   mapLeaders,
+  mapPlayerMatchStats,
+  mapRosterAthlete,
   mapSearch,
   mapStandings,
   mapStatus,
@@ -183,5 +186,38 @@ describe('Bestenlisten, Spieler, Suche', () => {
     expect(results.teams[0]).toMatchObject({ id: '432', name: 'Galatasaray' })
     expect(results.players.length).toBeGreaterThan(0)
     expect(results.players.every((p) => p.teamName)).toBe(true)
+  })
+})
+
+describe('Verletzungen und Spielerwerte', () => {
+  it('liest die aktuellste Verletzungsmeldung', () => {
+    const injury = mapInjury([
+      { status: 'Out', date: '2026-08-01T10:00Z', details: { type: 'Ankle' } },
+      { status: 'Out', date: '2026-09-20T10:00Z', details: { type: 'Knee', returnDate: '2026-11-01' } },
+    ])
+    expect(injury).toEqual({ status: 'out', detail: 'Knee', since: '2026-09-20', expectedReturn: '2026-11-01' })
+    expect(mapInjury([{ status: 'Day-To-Day' }])?.status).toBe('day_to_day')
+    expect(mapInjury([{ status: 'Suspension' }])?.status).toBe('suspended')
+    expect(mapInjury([{ status: 'Questionable' }])?.status).toBe('doubtful')
+    expect(mapInjury([{ status: 'Active' }])).toBeUndefined()
+    expect(mapInjury([])).toBeUndefined()
+  })
+
+  it('übernimmt die Verletzung in den Kader', () => {
+    const p = mapRosterAthlete({ id: '1', displayName: 'Test Spieler', injuries: [{ status: 'Out' }] })
+    expect(p?.injury?.status).toBe('out')
+    expect(mapRosterAthlete({ id: '2', displayName: 'Fit Spieler' })?.injury).toBeUndefined()
+  })
+
+  it('liest Einzelwerte eines Spielers', () => {
+    const stats = mapPlayerMatchStats([
+      { name: 'totalGoals', value: 1 },
+      { name: 'goalAssists', value: 0 },
+      { name: 'shotsOnTarget', displayValue: '2' },
+      { name: 'saves', value: 3 },
+    ])
+    expect(stats).toMatchObject({ goals: 1, assists: 0, shotsOnTarget: 2, saves: 3 })
+    expect(mapPlayerMatchStats(undefined)).toBeUndefined()
+    expect(mapPlayerMatchStats([])).toBeUndefined()
   })
 })

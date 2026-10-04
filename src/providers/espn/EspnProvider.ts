@@ -127,8 +127,14 @@ export class EspnProvider implements FootballProvider {
   async getTopPlayers(competitionId: Id, category: TopPlayerCategory): Promise<TopPlayerEntry[]> {
     const slug = slugForCompetition(competitionId)
     if (!slug || !this.topPlayerCategories.includes(category)) return []
-    const raw = await this.client.get<RawLeaders>(`${SITE_API}/${slug}/statistics`, ttl.medium)
-    return mapLeaders(raw, category === 'goals' ? 'goalsLeaders' : 'assistsLeaders', slug)
+    try {
+      const raw = await this.client.get<RawLeaders>(`${SITE_API}/${slug}/statistics`, ttl.medium)
+      return mapLeaders(raw, category === 'goals' ? 'goalsLeaders' : 'assistsLeaders', slug)
+    } catch (error) {
+      // Wettbewerbe ohne Bestenlisten (z. B. Testspiele) – kein App-Fehler
+      if (error instanceof NotFoundError) return []
+      throw error
+    }
   }
 
   // ------------------------------------------------------------ Spiele

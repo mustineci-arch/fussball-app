@@ -63,6 +63,20 @@ export interface Player {
   teamName?: string
   /** Nur gesetzt, wenn das Bild lizenziert/freigegeben ist */
   photoUrl?: string
+  /** Aktuelle Verletzung/Sperre laut Datenquelle – fehlt, wenn nichts gemeldet ist */
+  injury?: PlayerInjury
+}
+
+export type InjuryStatus = 'out' | 'doubtful' | 'day_to_day' | 'suspended' | 'other'
+
+export interface PlayerInjury {
+  status: InjuryStatus
+  /** Art der Verletzung (Freitext der Quelle, unübersetzt), z. B. "Knee" */
+  detail?: string
+  /** Seit wann gemeldet (ISO-Datum) */
+  since?: string
+  /** Voraussichtliche Rückkehr (ISO-Datum) */
+  expectedReturn?: string
 }
 
 export type FixtureStatus =
@@ -142,6 +156,28 @@ export interface LineupPlayer {
   gridRow?: number
   /** Position innerhalb der Reihe, 1-basiert von links */
   gridCol?: number
+  /** Eingewechselt (nur bei Ersatzspielern relevant) */
+  subbedIn?: boolean
+  /** Ausgewechselt */
+  subbedOut?: boolean
+  /** Werte des Spielers in diesem Spiel – nur sobald das Spiel läuft und die Quelle sie liefert */
+  stats?: PlayerMatchStats
+}
+
+/** Einzelwerte eines Spielers in einem Spiel. Fehlende Felder = nicht geliefert. */
+export interface PlayerMatchStats {
+  goals?: number
+  assists?: number
+  shots?: number
+  shotsOnTarget?: number
+  foulsCommitted?: number
+  foulsSuffered?: number
+  offsides?: number
+  yellowCards?: number
+  redCards?: number
+  ownGoals?: number
+  saves?: number
+  goalsConceded?: number
 }
 
 export interface Lineup {

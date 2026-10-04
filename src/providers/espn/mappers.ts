@@ -12,6 +12,8 @@ import type {
   MatchEventType,
   MatchStatistic,
   Player,
+  PlayerInjury,
+  PlayerMatchStats,
   PlayerPosition,
   PlayerSeasonStats,
   Score,
@@ -34,10 +36,12 @@ import type {
   RawBoxscoreTeam,
   RawCompetitor,
   RawEvent,
+  RawInjury,
   RawKeyEvent,
   RawLeaders,
   RawRoster,
   RawRosterAthlete,
+  RawRosterEntry,
   RawSearch,
   RawStandingEntry,
   RawStandingGroup,
@@ -225,6 +229,27 @@ export function mapPosition(abbreviation?: string, name?: string): PlayerPositio
   return undefined
 }
 
+/** ESPN-Einzelwerte eines Spielers → interne Werte. Ohne Werte (vor Anpfiff) → undefined. */
+export function mapPlayerMatchStats(raw: RawRosterEntry['stats']): PlayerMatchStats | undefined {
+  if (!raw?.length) return undefined
+  const values = new Map(raw.map((s) => [s.name ?? '', toInt(s.value ?? s.displayValue)]))
+  const stats: PlayerMatchStats = {
+    goals: values.get('totalGoals'),
+    assists: values.get('goalAssists'),
+    shots: values.get('totalShots'),
+    shotsOnTarget: values.get('shotsOnTarget'),
+    foulsCommitted: values.get('foulsCommitted'),
+    foulsSuffered: values.get('foulsSuffered'),
+    offsides: values.get('offsides'),
+    yellowCards: values.get('yellowCards'),
+    redCards: values.get('redCards'),
+    ownGoals: values.get('ownGoals'),
+    saves: values.get('saves'),
+    goalsConceded: values.get('goalsConceded'),
+  }
+  return Object.values(stats).some((v) => v !== undefined) ? stats : undefined
+}
+
 export function mapLineup(raw: RawRoster, leagueSlug?: string): Lineup | undefined {
   const teamId = raw.team?.id
   const entries = raw.roster ?? []
@@ -243,6 +268,9 @@ export function mapLineup(raw: RawRoster, leagueSlug?: string): Lineup | undefin
         position: mapPosition(e.position?.abbreviation, e.position?.name),
       },
       shirtNumber: toInt(e.jersey),
+      subbedIn: e.subbedIn || undefined,
+      subbedOut: e.subbedOut || undefined,
+      stats: mapPlayerMatchStats(e.stats),
     }
   }
 
@@ -461,6 +489,29 @@ export function parseDisplayDob(value?: string, age?: number, now = new Date()):
   return dayFirst ?? monthFirst
 }
 
+const INJURY_STATUS: readonly [RegExp, PlayerInjury['status']][] = [
+  [/suspen/i, 'suspended'],
+  [/day.?to.?day/i, 'day_to_day'],
+  [/doubt|question|probable/i, 'doubtful'],
+  [/out|injur/i, 'out'],
+]
+
+/** Aktuellste Verletzungsmeldung der Quelle. "Active"/leer = keine Meldung. */
+export function mapInjury(injuries: RawInjury[] | undefined): PlayerInjury | undefined {
+  const latest = [...(injuries ?? [])].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))[0]
+  if (!latest) return undefined
+  const statusText = latest.status ?? latest.type?.description ?? latest.type?.name ?? ''
+  if (/^active$/i.test(statusText.trim())) return undefined
+  const status = INJURY_STATUS.find(([re]) => re.test(statusText))?.[1] ?? 'other'
+  const detail = [latest.details?.type, latest.details?.location, latest.details?.detail].find(Boolean)
+  return {
+    status,
+    detail: detail && !/^other$/i.test(detail) ? detail : undefined,
+    since: latest.date ? isoDate(latest.date)?.slice(0, 10) : undefined,
+    expectedReturn: latest.details?.returnDate ? isoDate(latest.details.returnDate)?.slice(0, 10) : undefined,
+  }
+}
+
 export function mapRosterAthlete(raw: RawRosterAthlete, team?: Team): Player | undefined {
   if (!raw.id) return undefined
   const nationality = correctedNationality(raw.id, raw.citizenship)
@@ -479,6 +530,7 @@ export function mapRosterAthlete(raw: RawRosterAthlete, team?: Team): Player | u
     shirtNumber: toInt(raw.jersey),
     teamId: team?.id,
     teamName: team?.name,
+    injury: mapInjury(raw.injuries),
   }
 }
 

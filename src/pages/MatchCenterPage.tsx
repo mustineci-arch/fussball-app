@@ -1,4 +1,4 @@
-import { ClipboardList, ListOrdered, Table2 } from 'lucide-react'
+import { ClipboardList, ListOrdered, Star, Table2 } from 'lucide-react'
 import { useParams } from 'react-router'
 import { Card, Section } from '../components/ui/Card'
 import { BackButton } from '../components/ui/PageHeader'
@@ -7,17 +7,20 @@ import { EmptyState, ErrorState, StaleNotice } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
 import { useCompetitions, useFixtureDetails, usePlayersPhotos, useSquad, useStandings } from '../data/queries'
 import { formatDateTime } from '../domain/date'
+import { ratingsForFixture } from '../domain/rating'
 import type { FixtureDetails } from '../domain/types'
 import { StandingsTable } from '../features/competitions/StandingsTable'
+import { InjuryList, injuredPlayers } from '../features/injuries/InjuryList'
 import { EventTimeline } from '../features/match-center/EventTimeline'
 import { LineupPitch } from '../features/match-center/LineupPitch'
 import { MatchHeader } from '../features/match-center/MatchHeader'
+import { hasPlayerRatings, PlayerRatings } from '../features/match-center/PlayerRatings'
 import { StatsPanel } from '../features/match-center/StatsPanel'
 import { useT } from '../i18n'
 import { PhotoCredits } from '../media/PhotoCredit'
 import { TvSection } from '../tv/TvSection'
 
-const TAB_IDS = ['overview', 'lineups', 'stats', 'events', 'table'] as const
+const TAB_IDS = ['overview', 'lineups', 'ratings', 'stats', 'events', 'table'] as const
 type TabId = (typeof TAB_IDS)[number]
 
 function InfoRow({ label, value }: { label: string; value?: string }) {
@@ -50,8 +53,35 @@ function Overview({ details }: { details: FixtureDetails }) {
           </dl>
         </Card>
       </Section>
+      <MissingPlayers details={details} />
       <TvSection fixture={fixture} />
     </div>
+  )
+}
+
+/** Verletzte und gesperrte Spieler beider Teams (aus den Kadern) */
+function MissingPlayers({ details }: { details: FixtureDetails }) {
+  const t = useT()
+  const { homeTeam, awayTeam } = details.fixture
+  const home = injuredPlayers(useSquad(homeTeam.id).data)
+  const away = injuredPlayers(useSquad(awayTeam.id).data)
+  if (home.length + away.length === 0) return null
+  return (
+    <Section title={t('injury.missing')}>
+      <div className="grid gap-4 md:grid-cols-2">
+        {[
+          { team: homeTeam, players: home },
+          { team: awayTeam, players: away },
+        ]
+          .filter((g) => g.players.length > 0)
+          .map((g) => (
+            <div key={g.team.id} className="space-y-2">
+              <p className="text-sm font-semibold">{g.team.shortName}</p>
+              <InjuryList players={g.players} />
+            </div>
+          ))}
+      </div>
+    </Section>
   )
 }
 
@@ -84,7 +114,14 @@ function LineupsTab({ details }: { details: FixtureDetails }) {
   const { data: photos } = usePlayersPhotos(`lineup:${fixture.id}`, squadsSettled ? players : undefined)
   return (
     <div className="space-y-5">
-      <LineupPitch homeTeam={fixture.homeTeam} awayTeam={fixture.awayTeam} home={lineups?.home} away={lineups?.away} photos={photos} />
+      <LineupPitch
+        homeTeam={fixture.homeTeam}
+        awayTeam={fixture.awayTeam}
+        home={lineups?.home}
+        away={lineups?.away}
+        photos={photos}
+        ratings={ratingsForFixture(details)}
+      />
       {photos && (
         <PhotoCredits
           credits={players.flatMap((p) => {
@@ -108,6 +145,12 @@ function TabContent({ tab, details }: { tab: TabId; details: FixtureDetails }) {
         <LineupsTab details={details} />
       ) : (
         <EmptyState icon={ClipboardList} title={t('match.noLineupTitle')} description={t('match.noLineupText')} />
+      )
+    case 'ratings':
+      return hasPlayerRatings(details) ? (
+        <PlayerRatings details={details} />
+      ) : (
+        <EmptyState icon={Star} title={t('ratings.noneTitle')} description={t('ratings.noneText')} />
       )
     case 'stats':
       return details.statistics?.length ? (

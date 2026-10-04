@@ -7,6 +7,8 @@ import type {
   FixtureDetails,
   FormResult,
   Id,
+  Lineup,
+  LineupPlayer,
   MatchEvent,
   MatchStatistic,
   Player,
@@ -143,8 +145,41 @@ export class MockProvider implements FootballProvider {
     return {
       fixture: r.fixture,
       events: started ? r.events : undefined,
-      lineups: lineupsPublished && !scheduled.postponed ? r.script.lineups : undefined,
+      lineups: lineupsPublished && !scheduled.postponed ? (started ? this.lineupsWithStats(r.script.lineups, r.events) : r.script.lineups) : undefined,
       statistics: started ? this.statistics(r) : undefined,
+    }
+  }
+
+  /** Einzelwerte je Spieler aus den bisherigen Ereignissen (wie ESPN sie während des Spiels liefert) */
+  private lineupsWithStats(lineups: MatchScript['lineups'], events: MatchEvent[]): MatchScript['lineups'] {
+    const count = (playerId: Id, test: (e: MatchEvent) => boolean) => events.filter((e) => test(e) && e.player?.id === playerId).length
+    const enrich = (lineup: Lineup, opponentGoals: number): Lineup => {
+      const withStats = (entry: LineupPlayer): LineupPlayer => {
+        const id = entry.player.id
+        const goals = count(id, (e) => e.type === 'goal' || e.type === 'penalty_goal')
+        return {
+          ...entry,
+          subbedIn: events.some((e) => e.type === 'substitution' && e.player?.id === id) || undefined,
+          subbedOut: events.some((e) => e.type === 'substitution' && e.relatedPlayer?.id === id) || undefined,
+          stats: {
+            goals,
+            assists: events.filter((e) => e.type === 'goal' && e.relatedPlayer?.id === id).length,
+            shots: goals + (Number(id.split('-').at(-1)) % 3),
+            shotsOnTarget: goals + (Number(id.split('-').at(-1)) % 2),
+            yellowCards: count(id, (e) => e.type === 'yellow'),
+            redCards: count(id, (e) => e.type === 'red' || e.type === 'second_yellow'),
+            ownGoals: count(id, (e) => e.type === 'own_goal'),
+            ...(entry.player.position === 'GK' ? { saves: 2 + (opponentGoals % 3), goalsConceded: opponentGoals } : {}),
+          },
+        }
+      }
+      return { ...lineup, starters: lineup.starters.map(withStats), substitutes: lineup.substitutes.map(withStats) }
+    }
+    const goalsBy = (teamId: Id) =>
+      events.filter((e) => GOAL_TYPES.has(e.type) && e.teamId === teamId).length
+    return {
+      home: enrich(lineups.home, goalsBy(lineups.away.teamId)),
+      away: enrich(lineups.away, goalsBy(lineups.home.teamId)),
     }
   }
 

@@ -151,6 +151,12 @@ function teamCode(name: string): string {
   return (words[0] ?? name).slice(0, 3).toUpperCase()
 }
 
+const DEMO_INJURIES: readonly NonNullable<Player['injury']>[] = [
+  { status: 'out', detail: 'Knie' },
+  { status: 'doubtful', detail: 'Oberschenkel' },
+  { status: 'suspended' },
+]
+
 function buildTeam(league: LeagueSeed, name: string, index: number): TeamRecord {
   const rng = createRng(`team:${name}`)
   const id = `t-${slugify(name)}`
@@ -188,6 +194,8 @@ function buildTeam(league: LeagueSeed, name: string, index: number): TeamRecord 
       position,
       shirtNumber: SHIRT_NUMBERS[i],
       teamId: id,
+      // Ein Ausfall pro Team (ohne Zufallszahl, damit die übrigen Demo-Daten stabil bleiben)
+      injury: i === (index * 7 + 3) % SQUAD_LAYOUT.length ? DEMO_INJURIES[index % DEMO_INJURIES.length] : undefined,
     }
   })
 

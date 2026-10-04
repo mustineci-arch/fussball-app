@@ -45,11 +45,19 @@ export interface RawLeagueRef {
   name?: string
 }
 
+export interface RawGeoBroadcast {
+  type?: { shortName?: string }
+  market?: { type?: string }
+  media?: { shortName?: string }
+  region?: string
+}
+
 export interface RawCompetition {
   date?: string
   status?: RawStatus
   venue?: { fullName?: string }
   competitors?: RawCompetitor[]
+  geoBroadcasts?: RawGeoBroadcast[]
 }
 
 export interface RawEvent {

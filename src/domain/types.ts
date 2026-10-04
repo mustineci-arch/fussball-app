@@ -123,6 +123,15 @@ export interface Fixture {
   penaltyScore?: Score
   venue?: string
   referee?: string
+  /** Sender laut Datenquelle für genau dieses Spiel (bisher v. a. USA) */
+  broadcasts?: FixtureBroadcast[]
+}
+
+export interface FixtureBroadcast {
+  name: string
+  /** ISO-Ländercode des Marktes, z. B. "US" */
+  country: string
+  kind: 'tv' | 'stream'
 }
 
 export type MatchEventType =

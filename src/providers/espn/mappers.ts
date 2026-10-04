@@ -5,6 +5,7 @@
 import { slugify } from '../../domain/text'
 import type {
   Fixture,
+  FixtureBroadcast,
   FixtureStatus,
   Lineup,
   LineupPlayer,
@@ -36,6 +37,7 @@ import type {
   RawBoxscoreTeam,
   RawCompetitor,
   RawEvent,
+  RawGeoBroadcast,
   RawInjury,
   RawKeyEvent,
   RawLeaders,
@@ -149,6 +151,19 @@ const pair = (home?: number, away?: number): Score | undefined =>
 // ------------------------------------------------------------ Spiele
 
 /** Scoreboard-/Schedule-Event → Fixture. `leagueSlug` als Fallback, wenn das Event keine Liga nennt. */
+/** Sender pro Spiel ("geoBroadcasts") – Region = Land des Marktes */
+export function mapBroadcasts(raw: RawGeoBroadcast[] | undefined): FixtureBroadcast[] | undefined {
+  const seen = new Set<string>()
+  const list = (raw ?? []).flatMap((b): FixtureBroadcast[] => {
+    const name = b.media?.shortName?.trim()
+    const country = b.region?.trim().toUpperCase()
+    if (!name || !country || seen.has(`${country}:${name}`)) return []
+    seen.add(`${country}:${name}`)
+    return [{ name, country, kind: /stream/i.test(b.type?.shortName ?? '') ? 'stream' : 'tv' }]
+  })
+  return list.length ? list : undefined
+}
+
 export function mapFixture(raw: RawEvent, leagueSlug?: string): Fixture | undefined {
   const comp = raw.competitions?.[0]
   const home = comp?.competitors?.find((c) => c.homeAway === 'home')
@@ -177,6 +192,7 @@ export function mapFixture(raw: RawEvent, leagueSlug?: string): Fixture | undefi
     halftimeScore: firstHalfDone ? pair(toInt(home?.linescores?.[0]?.displayValue ?? home?.linescores?.[0]?.value), toInt(away?.linescores?.[0]?.displayValue ?? away?.linescores?.[0]?.value)) : undefined,
     penaltyScore: pair(home?.shootoutScore, away?.shootoutScore),
     venue: comp?.venue?.fullName ?? raw.venue?.fullName,
+    broadcasts: mapBroadcasts(comp?.geoBroadcasts),
   }
 }
 

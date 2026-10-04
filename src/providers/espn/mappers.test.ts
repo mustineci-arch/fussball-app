@@ -10,6 +10,7 @@ import summaryScheduled from './__fixtures__/summary-scheduled.json'
 import {
   mapAthlete,
   mapFixture,
+  mapBroadcasts,
   mapInjury,
   mapLeaders,
   mapPlayerMatchStats,
@@ -219,5 +220,21 @@ describe('Verletzungen und Spielerwerte', () => {
     expect(stats).toMatchObject({ goals: 1, assists: 0, shotsOnTarget: 2, saves: 3 })
     expect(mapPlayerMatchStats(undefined)).toBeUndefined()
     expect(mapPlayerMatchStats([])).toBeUndefined()
+  })
+})
+
+describe('Sender pro Spiel', () => {
+  it('liest die gemeldeten Sender mit Land und Art', () => {
+    expect(
+      mapBroadcasts([
+        { type: { shortName: 'STREAMING' }, market: { type: 'National' }, media: { shortName: 'ESPN+' }, region: 'us' },
+        { type: { shortName: 'TV' }, market: { type: 'National' }, media: { shortName: 'ESPN Deportes' }, region: 'us' },
+        { type: { shortName: 'TV' }, media: { shortName: 'ESPN Deportes' }, region: 'us' },
+      ]),
+    ).toEqual([
+      { name: 'ESPN+', country: 'US', kind: 'stream' },
+      { name: 'ESPN Deportes', country: 'US', kind: 'tv' },
+    ])
+    expect(mapBroadcasts([])).toBeUndefined()
   })
 })

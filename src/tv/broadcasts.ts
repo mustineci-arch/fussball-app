@@ -11,8 +11,21 @@
  */
 import type { Fixture } from '../domain/types'
 
-export type TvCountry = 'DE' | 'TR'
-export const TV_COUNTRIES: readonly TvCountry[] = ['DE', 'TR']
+export type TvCountry = 'DE' | 'AT' | 'CH' | 'TR' | 'GB' | 'US'
+export const TV_COUNTRIES: readonly TvCountry[] = ['DE', 'AT', 'CH', 'TR', 'GB', 'US']
+
+/** Ländername in der App-Sprache (z. B. "GB" → "Vereinigtes Königreich") */
+export function countryLabel(code: string, language: 'de' | 'en'): string {
+  try {
+    return new Intl.DisplayNames([language], { type: 'region' }).of(code) ?? code
+  } catch {
+    return code
+  }
+}
+
+/** Flaggen-Emoji aus dem Ländercode */
+export const flagOf = (country: string) =>
+  country.length === 2 ? String.fromCodePoint(...[...country.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)) : '🌐'
 
 export const RIGHTS_AS_OF = '2026-09-27'
 
@@ -22,7 +35,7 @@ export interface Channel {
   free: boolean
   kind: 'tv' | 'stream'
   /** Offizielle Seite des Anbieters (Live-/Sportbereich) – nur legale Angebote, keine fremden Streams */
-  url: string
+  url?: string
 }
 
 export type TvNote = 'buli_free_extra' | 'cl_final_free' | 'uel_top_free' | 'no_fta' | 'depends_on_match'
@@ -31,6 +44,8 @@ export interface TvInfo {
   channels: Channel[]
   notes: TvNote[]
   sources: string[]
+  /** true = Sender von der Datenquelle für dieses Spiel gemeldet (nicht aus der Rechteliste) */
+  reported?: boolean
 }
 
 const ch = (name: string, free: boolean, url: string, kind: Channel['kind'] = 'tv'): Channel => ({ name, free, kind, url })
@@ -54,8 +69,80 @@ const TRT = ch('TRT', true, 'https://www.trt.net.tr')
 const TABII = ch('tabii', true, 'https://www.tabii.com', 'stream')
 const ATV = ch('ATV', true, 'https://www.atv.com.tr')
 const A_SPOR = ch('A Spor', true, 'https://www.aspor.com.tr')
+// Österreich / Schweiz
+const SKY_AT = ch('Sky Sport Austria', false, 'https://sport.sky.at')
+const CANAL_AT = ch('Canal+', false, 'https://www.canalplus.com/at', 'stream')
+const ORF = ch('ORF', true, 'https://sport.orf.at')
+const SKY_CH = ch('Sky Sport', false, 'https://www.sky.ch', 'stream')
+const BLUE = ch('blue Sport', false, 'https://www.blueplus.ch/de/sport')
+const SRF = ch('SRF', true, 'https://www.srf.ch/sport')
+// Großbritannien
+const SKY_UK = ch('Sky Sports', false, 'https://www.skysports.com')
+const TNT = ch('TNT Sports', false, 'https://www.tntsports.co.uk')
+const BBC = ch('BBC', true, 'https://www.bbc.co.uk/sport/football', 'stream')
+const PRIME_UK = ch('Prime Video', false, 'https://www.amazon.co.uk/gp/video/storefront', 'stream')
+const PREMIER_SPORTS = ch('Premier Sports', false, 'https://www.premiersports.com')
+const DISNEY_PLUS = ch('Disney+', false, 'https://www.disneyplus.com', 'stream')
+const DAZN_INT = ch('DAZN', false, 'https://www.dazn.com', 'stream')
+// USA
+const NBC = ch('NBC', true, 'https://www.nbcsports.com/soccer')
+const PEACOCK = ch('Peacock', false, 'https://www.peacocktv.com', 'stream')
+const USA_NETWORK = ch('USA Network', false, 'https://www.usanetwork.com')
+const TELEMUNDO = ch('Telemundo', true, 'https://www.telemundo.com/deportes')
+const PARAMOUNT = ch('Paramount+', false, 'https://www.paramountplus.com', 'stream')
+const CBS = ch('CBS', true, 'https://www.cbssports.com/soccer')
+const ESPN_PLUS = ch('ESPN+', false, 'https://plus.espn.com', 'stream')
+const BEIN_US = ch('beIN Sports', false, 'https://www.beinsports.com/us')
+
+/** Sendernamen, wie ESPN sie pro Spiel meldet → offizielle Seite */
+const KNOWN_URLS: Record<string, string> = {
+  'espn+': 'https://plus.espn.com',
+  espn: 'https://www.espn.com',
+  espn2: 'https://www.espn.com',
+  'espn deportes': 'https://www.espndeportes.com',
+  abc: 'https://abc.com',
+  'paramount+': 'https://www.paramountplus.com',
+  cbs: 'https://www.cbssports.com/soccer',
+  'cbs sports network': 'https://www.cbssports.com/soccer',
+  'cbs sports golazo': 'https://www.cbssports.com/soccer',
+  fox: 'https://www.foxsports.com/soccer',
+  fs1: 'https://www.foxsports.com/soccer',
+  fs2: 'https://www.foxsports.com/soccer',
+  'fox deportes': 'https://www.foxdeportes.com',
+  'fox one': 'https://www.foxsports.com/soccer',
+  tubi: 'https://tubitv.com',
+  peacock: 'https://www.peacocktv.com',
+  nbc: 'https://www.nbcsports.com/soccer',
+  'usa net': 'https://www.usanetwork.com',
+  'usa network': 'https://www.usanetwork.com',
+  telemundo: 'https://www.telemundo.com/deportes',
+  universo: 'https://www.telemundo.com/deportes',
+  'bein sports': 'https://www.beinsports.com/us',
+  'bein sports en español': 'https://www.beinsports.com/us-es',
+  tudn: 'https://www.tudn.com',
+  univision: 'https://www.tudn.com',
+  unimás: 'https://www.tudn.com',
+  vix: 'https://vix.com',
+  dazn: 'https://www.dazn.com',
+  'apple tv': 'https://tv.apple.com',
+  'mls season pass': 'https://tv.apple.com',
+}
 
 const SRC = {
+  atBuli: 'https://www.diemedien.at/articles/sportrechte-von-orf-servus-tv-sky-wer-zeigt-ski-alpin-und-nordisch-fussball-formel-1-und-co',
+  dachBuli: 'https://www.svgeurope.org/blog/headlines/sky-germany-secures-bundesliga-and-2-bundesliga-rights-until-2029/',
+  atCl: 'https://www.fussballtv.at/champions-league-live-tv/',
+  atPl: 'https://www.sky.at/sport/fussball/premier-league/sendeplan',
+  chCl: 'https://zufriedenmit.ch/blog/champions-league-schweiz-2026-27-anbieter-kosten-alternativen',
+  chPl: 'https://www.sky-sport.ch/de/articles/die-premier-league-bleibt-bis-2028-bei-sky-sport/',
+  ukPl: 'https://www.digital-tv.co.uk/guides/how-to-watch-premier-league-sky-tnt-sports',
+  ukRights: 'https://en.wikipedia.org/wiki/Sports_broadcasting_contracts_in_the_United_Kingdom',
+  ukLaliga: 'https://www.laliga.com/en-GB/where-to-watch-laliga-easports',
+  usBuli: 'https://www.sportsvideo.org/2026/07/15/usa-sports-and-bundesliga-announce-exclusive-multi-year-u-s-media-rights-agreement/',
+  usNbc: 'https://www.nbcsports.com/soccer/news/how-to-watch-stream-soccer-on-nbc-peacock-for-2026-27-premier-league-bundesliga-serie-a-usmnt-uswnt',
+  usCl: 'https://www.cabletv.com/sports/watch-uefa-champions-league',
+  usAll: 'https://www.renderfoot.com/blog/where-to-watch-soccer-in-usa',
+  usSuperLig: 'https://worldsoccertalk.com/turkish-super-lig-tv-schedule/',
   buli: 'https://www.bundesliga.com/de/bundesliga/news/bundesliga-spiele-im-fernsehen-tv-sender-rtl-dazn-sky-prime-363',
   buliDazn: 'https://dazngroup.com/press-room/dazn-zeigt-ab-der-saison-2025-26-bis-2028-29-noch-mehr-bundesliga-die-samstags-konferenz-und-alle-sonntag-spiele-live-nur-auf-dazn/',
   cl: 'https://www.fussballdaten.de/news/champions-league-uebertragung-2026-27-wer-zeigt-spiele-live-tv-stream/',
@@ -140,6 +227,32 @@ const RULES: Record<TvCountry, Partial<Record<string, Rule>>> = {
     'c-conference-league': fixed([SKY, WOW, RTL_PLUS, RTL, NITRO], [SRC.uel], ['depends_on_match', 'uel_top_free']),
     'c-nations-league': nationsLeagueGermany,
   },
+  AT: {
+    'c-bundesliga': fixed([SKY_AT, DAZN, ORF], [SRC.atBuli, SRC.dachBuli], ['depends_on_match']),
+    'c-champions-league': fixed([SKY_AT, CANAL_AT], [SRC.atCl], ['depends_on_match']),
+    'c-premier-league': fixed([SKY_AT], [SRC.atPl]),
+  },
+  CH: {
+    'c-bundesliga': fixed([SKY_CH, DAZN], [SRC.dachBuli], ['depends_on_match']),
+    'c-champions-league': fixed([BLUE, SRF], [SRC.chCl], ['depends_on_match']),
+    'c-premier-league': fixed([SKY_CH, BLUE], [SRC.chPl]),
+  },
+  GB: {
+    'c-premier-league': fixed([SKY_UK, TNT], [SRC.ukPl], ['depends_on_match']),
+    'c-bundesliga': fixed([SKY_UK, BBC], [SRC.ukRights], ['depends_on_match']),
+    'c-champions-league': fixed([TNT, PRIME_UK], [SRC.ukRights], ['depends_on_match']),
+    'c-europa-league': fixed([TNT], [SRC.ukRights]),
+    'c-la-liga': fixed([PREMIER_SPORTS, DISNEY_PLUS], [SRC.ukLaliga], ['depends_on_match']),
+    'c-serie-a': fixed([DAZN_INT], [SRC.ukRights]),
+  },
+  US: {
+    'c-premier-league': fixed([NBC, PEACOCK, USA_NETWORK], [SRC.usNbc], ['depends_on_match']),
+    'c-bundesliga': fixed([USA_NETWORK, TELEMUNDO, PEACOCK], [SRC.usBuli], ['depends_on_match']),
+    'c-champions-league': fixed([PARAMOUNT, CBS], [SRC.usCl], ['depends_on_match']),
+    'c-la-liga': fixed([ESPN_PLUS], [SRC.usAll]),
+    'c-ligue-1': fixed([BEIN_US], [SRC.usAll]),
+    'c-super-lig': fixed([BEIN_US], [SRC.usSuperLig]),
+  },
   TR: {
     'c-super-lig': fixed([BEIN, TOD], [SRC.superLigTr, SRC.tr]),
     'c-bundesliga': fixed([S_SPORT, S_SPORT_PLUS], [SRC.tr, SRC.tr2]),
@@ -158,7 +271,44 @@ const RULES: Record<TvCountry, Partial<Record<string, Rule>>> = {
   },
 }
 
+/** Sender, die die Datenquelle für genau dieses Spiel meldet (aktueller als die Rechteliste) */
+function reportedChannels(fixture: Fixture, country: string): Channel[] {
+  return (fixture.broadcasts ?? [])
+    .filter((b) => b.country === country)
+    .map((b) => ({ name: b.name, kind: b.kind, free: false, url: KNOWN_URLS[b.name.toLowerCase()] }))
+}
+
 /** Übertragungsinfo für ein Spiel – undefined, wenn keine belegte Angabe vorliegt. */
 export function tvInfoFor(fixture: Fixture, country: TvCountry): TvInfo | undefined {
-  return RULES[country][fixture.competitionId]?.(fixture)
+  const fromRights = RULES[country][fixture.competitionId]?.(fixture)
+  const reported = reportedChannels(fixture, country)
+  if (!reported.length) return fromRights
+  // Pro Spiel gemeldete Sender gehen vor; bekannte Sender behalten ihre Angaben (kostenlos, Link)
+  const known = new Map((fromRights?.channels ?? []).map((c) => [c.name.toLowerCase(), c]))
+  return {
+    channels: reported.map((c) => known.get(c.name.toLowerCase()) ?? c),
+    notes: [],
+    sources: fromRights?.sources ?? [],
+    reported: true,
+  }
+}
+
+export interface CountryTv {
+  country: string
+  info: TvInfo
+}
+
+/** Alle bekannten Sender weltweit – gewähltes Land zuerst, dann weitere Länder mit Angaben */
+export function tvWorldwide(fixture: Fixture, first: TvCountry): CountryTv[] {
+  const countries = [first, ...TV_COUNTRIES.filter((c) => c !== first)]
+  const result: CountryTv[] = countries.flatMap((country) => {
+    const info = tvInfoFor(fixture, country)
+    return info ? [{ country, info }] : []
+  })
+  // Länder, die nur die Datenquelle pro Spiel meldet
+  const extra = [...new Set((fixture.broadcasts ?? []).map((b) => b.country))].filter((c) => !TV_COUNTRIES.includes(c as TvCountry))
+  for (const country of extra) {
+    result.push({ country, info: { channels: reportedChannels(fixture, country), notes: [], sources: [], reported: true } })
+  }
+  return result
 }

@@ -163,11 +163,12 @@ export class EspnProvider implements FootballProvider {
     })
     const details = mapSummary(raw)
     if (!details) throw new NotFoundError('Spiel', fixtureId)
-    if (needsLiveRefresh(details.fixture)) {
-      // Die Spieldetails hält ESPN bis zu 10 s zwischen, das Scoreboard ist sofort aktuell –
-      // Spielstand, Status und Minute daher von dort übernehmen.
-      const fresh = await this.liveFixture(details.fixture, raw.header?.league?.slug).catch(() => undefined)
-      if (fresh) {
+    // Aus dem Scoreboard: Sender des Spiels (fehlen in den Spieldetails) und – bei laufenden Spielen –
+    // Spielstand, Status und Minute (die Spieldetails hält ESPN bis zu 10 s zwischen).
+    const fresh = await this.liveFixture(details.fixture, raw.header?.league?.slug).catch(() => undefined)
+    if (fresh) {
+      details.fixture = { ...details.fixture, broadcasts: fresh.broadcasts }
+      if (needsLiveRefresh(details.fixture)) {
         const { status, minute, extraMinute, score, penaltyScore } = fresh
         details.fixture = { ...details.fixture, status, minute, extraMinute, score: score ?? details.fixture.score, penaltyScore }
       }

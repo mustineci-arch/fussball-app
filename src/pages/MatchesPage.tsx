@@ -15,9 +15,7 @@ import { groupFixturesByCompetition } from '../features/matches/groupFixtures'
 import { MatchRow } from '../features/matches/MatchRow'
 import { useT } from '../i18n'
 import { isLive } from '../domain/status'
-import { tvInfoFor } from '../tv/broadcasts'
-import { useTvCountry } from '../tv/country'
-import { ChannelLinks, TvCountryChips } from '../tv/TvSection'
+import { TvCountryChips, WorldChannelLinks } from '../tv/TvSection'
 import { CompetitionBadge } from '../components/media'
 import type { Fixture } from '../domain/types'
 
@@ -29,7 +27,6 @@ const PAGE_FILTERS: readonly PageFilter[] = ['all', 'live', 'tv', 'upcoming', 'f
 /** Alle gerade laufenden Spiele, je Wettbewerb gruppiert, mit anklickbaren Sendern */
 function TvMatches({ fixtures }: { fixtures: Fixture[] }) {
   const t = useT()
-  const country = useTvCountry()
   const competitions = useCompetitions()
   const groups = groupFixturesByCompetition(
     fixtures.filter((f) => isLive(f.status)),
@@ -52,11 +49,7 @@ function TvMatches({ fixtures }: { fixtures: Fixture[] }) {
                 <div key={f.id}>
                   <MatchRow fixture={f} />
                   <div className="px-3 pb-3 sm:px-4">
-                    {tvInfoFor(f, country) ? (
-                      <ChannelLinks channels={tvInfoFor(f, country)!.channels} />
-                    ) : (
-                      <p className="text-xs text-subtle">{t('tv.noChannel')}</p>
-                    )}
+                    <WorldChannelLinks fixture={f} />
                   </div>
                 </div>
               ))}

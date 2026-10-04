@@ -8,7 +8,7 @@ import { useT } from '../i18n'
 import { provider } from '../providers'
 import { promptInstall, useInstallState } from '../pwa/install'
 import { THEME_SETTINGS, setThemeSetting, useThemeSetting } from '../theme'
-import { TV_COUNTRIES } from '../tv/broadcasts'
+import { flagOf, TV_COUNTRIES } from '../tv/broadcasts'
 import { setTvCountry, useTvCountry } from '../tv/country'
 
 function Row({ icon, title, value }: { icon: ReactNode; title: string; value: ReactNode }) {
@@ -72,7 +72,7 @@ export default function MorePage() {
           <Row
             icon={<Tv className="size-5" />}
             title={t('more.tvCountry')}
-            value={<Segmented label={t('more.tvCountry')} options={TV_COUNTRIES.map((id) => ({ id, label: t(`tv.country.${id}`) }))} value={tvCountry} onChange={setTvCountry} />}
+            value={<Segmented label={t('more.tvCountry')} options={TV_COUNTRIES.map((id) => ({ id, label: flagOf(id) }))} value={tvCountry} onChange={setTvCountry} />}
           />
         </Card>
       </Section>

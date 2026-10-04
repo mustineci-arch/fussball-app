@@ -21,7 +21,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - PWA: installierbar, offline nutzbar, Update-Hinweis
 - Deutsch / Englisch, Dark Mode (Hell/Dunkel/System)
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
-- TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet, Sender verlinken auf die offiziellen Angebote; Filter „Live im TV“ zeigt alle gerade laufenden Spiele mit ihren Sendern
+- TV & Stream weltweit: Rechteinhaber 2026/27 für Deutschland, Österreich, Schweiz, Türkei, Großbritannien und USA (mit Quellen) plus die Sender, die ESPN pro Spiel meldet; kostenlos/Abo gekennzeichnet, Links zu den offiziellen Angeboten; Filter „Live im TV“ zeigt alle laufenden Spiele mit allen Sendern
 - Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
 - Türkischer Pokal (FotMob): Spielplan, Gruppen, K.-o.-Runden, Match Center mit Aufstellung/Noten/Statistik, Pokalspiele auf den Seiten türkischer Teams
 - Ausfälle (FotMob): verletzte/gesperrte Spieler mit Art der Verletzung (35 Arten übersetzt), Meldedatum und voraussichtlicher Rückkehr – je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht
@@ -38,7 +38,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 ## Regelmäßig pflegen
 
-- **TV-Rechte**: zur Saison 2027/28 aktualisieren (`src/tv/broadcasts.ts`) – neue Rechte u. a. Champions League (DE) und Süper Lig (TR, Ausschreibung Jan. 2027)
+- **TV-Rechte**: zur Saison 2027/28 aktualisieren (`src/tv/broadcasts.ts`, alle sechs Länder) – neue Rechte u. a. Champions League (DE) und Süper Lig (TR, Ausschreibung Jan. 2027)
 - **FotMob-Zuordnung**: findet die App ein Team nicht bei FotMob, ESPN-ID → FotMob-ID in `TEAM_OVERRIDES` (`src/providers/fotmob/fotmob.ts`) eintragen
 - **Datenfehler / Namen**: gemeldete Fehler in `src/providers/espn/nameFixes.ts` eintragen
   (`PLAYER_CORRECTIONS`, `TEAM_NAMES`, türkisches Namenswörterbuch)

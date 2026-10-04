@@ -1,12 +1,12 @@
 import { useSyncExternalStore } from 'react'
-import type { TvCountry } from './broadcasts'
+import { TV_COUNTRIES, type TvCountry } from './broadcasts'
 
 const STORAGE_KEY = 'anstoss.tvCountry'
 
 function read(): TvCountry {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'DE' || stored === 'TR') return stored
+    if (stored && (TV_COUNTRIES as readonly string[]).includes(stored)) return stored as TvCountry
   } catch {
     // Speicher nicht verfügbar
   }

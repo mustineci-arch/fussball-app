@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Fixture } from '../domain/types'
-import { bundesligaGermany, tvInfoFor } from './broadcasts'
+import { bundesligaGermany, flagOf, tvInfoFor, tvWorldwide, TV_COUNTRIES } from './broadcasts'
 
 const team = (id: string) => ({ id, slug: id, name: id, shortName: id })
 const fixture = (competitionId: string, kickoffAt: string, home = '1', away = '2'): Fixture => ({
@@ -68,10 +68,40 @@ describe('Schauen: offizielle Links', () => {
       kickoffAt: '2026-10-10T13:30:00Z',
       status: 'scheduled' as const,
     }))
-    for (const country of ['DE', 'TR'] as const) {
+    for (const country of TV_COUNTRIES) {
       for (const f of fixtures) {
         for (const c of tvInfoFor(f, country)?.channels ?? []) expect(c.url).toMatch(/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}/)
       }
     }
+  })
+})
+
+describe('Sender weltweit', () => {
+  it('zeigt alle Länder mit Angaben, das gewählte zuerst', () => {
+    const f = fixture('c-premier-league', '2026-10-10T14:00:00Z')
+    const all = tvWorldwide(f, 'GB')
+    expect(all[0]?.country).toBe('GB')
+    expect(all.map((x) => x.country)).toEqual(expect.arrayContaining(['DE', 'AT', 'CH', 'TR', 'US']))
+    expect(all.find((x) => x.country === 'US')?.info.channels.map((c) => c.name)).toContain('Peacock')
+  })
+
+  it('übernimmt die von der Datenquelle pro Spiel gemeldeten Sender – auch aus weiteren Ländern', () => {
+    const f: Fixture = {
+      ...fixture('c-serie-a', '2026-10-10T14:00:00Z'),
+      broadcasts: [
+        { name: 'Paramount+', country: 'US', kind: 'stream' },
+        { name: 'TSN', country: 'CA', kind: 'tv' },
+      ],
+    }
+    const us = tvInfoFor(f, 'US')!
+    expect(us.reported).toBe(true)
+    expect(us.channels[0]).toMatchObject({ name: 'Paramount+', url: 'https://www.paramountplus.com' })
+    const ca = tvWorldwide(f, 'DE').find((x) => x.country === 'CA')
+    expect(ca?.info.channels[0]).toMatchObject({ name: 'TSN', url: undefined })
+  })
+
+  it('erzeugt Flaggen aus Ländercodes', () => {
+    expect(flagOf('DE')).toBe('🇩🇪')
+    expect(flagOf('GB')).toBe('🇬🇧')
   })
 })

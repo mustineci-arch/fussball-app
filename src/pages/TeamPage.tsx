@@ -6,7 +6,7 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
-import { useCompetitions, usePlayersPhotos, useSquad, useStandings, useTeam, useTeamFixtures, useTopPlayers } from '../data/queries'
+import { useCompetitions, usePlayersPhotos, useSquad, useStandings, useTeam, useTeamExtras, useTeamFixtures, useTopPlayers } from '../data/queries'
 import { POSITION_ORDER } from '../domain/labels'
 import { isFinished, isLive, isUpcoming } from '../domain/status'
 import type { Fixture, FormResult, Id, Team } from '../domain/types'
@@ -14,6 +14,8 @@ import { FormStrip, StandingsTable } from '../features/competitions/StandingsTab
 import { FavoriteButton } from '../features/favorites/FavoriteButton'
 import { favoriteFromTeam } from '../features/favorites/store'
 import { InjuryList, InjuryStatusBadge, injuredPlayers } from '../features/injuries/InjuryList'
+import { seasonRatings, withInjuries } from '../features/injuries/merge'
+import { RatingBadge } from '../features/match-center/RatingBadge'
 import { FixtureList } from '../features/matches/FixtureList'
 import { useT, type MessageKey } from '../i18n'
 import { PhotoCredits } from '../media/PhotoCredit'
@@ -154,9 +156,14 @@ function Matches({ teamId }: { teamId: Id }) {
   )
 }
 
-function Squad({ teamId }: { teamId: Id }) {
+function Squad({ team }: { team: Team }) {
   const t = useT()
-  const { data, isPending, error, refetch } = useSquad(teamId)
+  const teamId = team.id
+  const squad = useSquad(teamId)
+  const { data: extras } = useTeamExtras(team)
+  const { isPending, error, refetch } = squad
+  const data = withInjuries(squad.data, extras).filter((p) => !p.id.startsWith('fm-'))
+  const ratings = seasonRatings(squad.data, extras)
   const { data: photos } = usePlayersPhotos(`squad:${teamId}`, data)
   if (isPending) return <BlockSkeleton rows={8} />
   if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
@@ -183,6 +190,7 @@ function Squad({ teamId }: { teamId: Id }) {
                     </span>
                   </span>
                   {p.injury && <InjuryStatusBadge status={p.injury.status} />}
+                  {ratings.has(p.id) && <RatingBadge rating={ratings.get(p.id)!} />}
                 </Link>
               ))}
             </Card>
@@ -200,12 +208,14 @@ function Squad({ teamId }: { teamId: Id }) {
   )
 }
 
-function Injuries({ teamId }: { teamId: Id }) {
+function Injuries({ team }: { team: Team }) {
   const t = useT()
+  const teamId = team.id
   const { data, isPending, error, refetch } = useSquad(teamId)
-  const injured = injuredPlayers(data)
+  const extras = useTeamExtras(team)
+  const injured = injuredPlayers(withInjuries(data, extras.data))
   const { data: photos } = usePlayersPhotos(`injuries:${teamId}`, injured.length ? injured : undefined)
-  if (isPending) return <BlockSkeleton rows={4} />
+  if (isPending || (extras.isPending && extras.fetchStatus !== 'idle')) return <BlockSkeleton rows={4} />
   if (error) return <ErrorState error={error} onRetry={() => void refetch()} />
   if (injured.length === 0) return <EmptyState icon={HeartPulse} title={t('injury.noneTitle')} description={t('injury.noneText')} />
   return (
@@ -278,8 +288,8 @@ export default function TeamPage() {
           <TabBar tabs={tabs} active={tab} onChange={setTab} />
           {tab === 'overview' && <Overview teamId={id} leagueId={leagueId} />}
           {tab === 'matches' && <Matches teamId={id} />}
-          {tab === 'squad' && <Squad teamId={id} />}
-          {tab === 'injuries' && <Injuries teamId={id} />}
+          {tab === 'squad' && <Squad team={data.team} />}
+          {tab === 'injuries' && <Injuries team={data.team} />}
           {tab === 'table' && <TableTab teamId={id} leagueId={leagueId} />}
           {tab === 'stats' && <Stats teamId={id} leagueId={leagueId} />}
         </>

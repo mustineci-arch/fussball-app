@@ -5,16 +5,17 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState, StaleNotice } from '../components/ui/States'
 import { TabBar, useTabParam } from '../components/ui/Tabs'
-import { useCompetitions, useFixtureDetails, usePlayersPhotos, useSquad, useStandings } from '../data/queries'
+import { useCompetitions, useFixtureDetails, useMatchExtras, usePlayersPhotos, useSquad, useStandings, useTeamExtras } from '../data/queries'
 import { formatDateTime } from '../domain/date'
-import { ratingsForFixture } from '../domain/rating'
 import type { FixtureDetails } from '../domain/types'
 import { StandingsTable } from '../features/competitions/StandingsTable'
 import { InjuryList, injuredPlayers } from '../features/injuries/InjuryList'
+import { withInjuries } from '../features/injuries/merge'
+import { buildMatchRatings } from '../features/match-center/matchRatings'
 import { EventTimeline } from '../features/match-center/EventTimeline'
 import { LineupPitch } from '../features/match-center/LineupPitch'
 import { MatchHeader } from '../features/match-center/MatchHeader'
-import { hasPlayerRatings, PlayerRatings } from '../features/match-center/PlayerRatings'
+import { PlayerRatings } from '../features/match-center/PlayerRatings'
 import { StatsPanel } from '../features/match-center/StatsPanel'
 import { useT } from '../i18n'
 import { PhotoCredits } from '../media/PhotoCredit'
@@ -59,12 +60,20 @@ function Overview({ details }: { details: FixtureDetails }) {
   )
 }
 
-/** Verletzte und gesperrte Spieler beider Teams (aus den Kadern) */
+/** Verletzte und gesperrte Spieler beider Teams: aus den Spieldaten von FotMob, sonst aus den Kadern */
 function MissingPlayers({ details }: { details: FixtureDetails }) {
   const t = useT()
   const { homeTeam, awayTeam } = details.fixture
-  const home = injuredPlayers(useSquad(homeTeam.id).data)
-  const away = injuredPlayers(useSquad(awayTeam.id).data)
+  const match = useMatchExtras(details.fixture).data
+  const homeSquad = useSquad(homeTeam.id).data
+  const awaySquad = useSquad(awayTeam.id).data
+  const homeExtras = useTeamExtras(homeTeam).data
+  const awayExtras = useTeamExtras(awayTeam).data
+  const fromMatch = (side: 'home' | 'away') =>
+    (match?.[side].unavailable ?? []).map((u, i) => ({ id: `fm-${side}-${i}`, slug: '', name: u.name, shirtNumber: u.shirtNumber, injury: u.injury }))
+  const hasMatchData = !!match && match.home.unavailable.length + match.away.unavailable.length > 0
+  const home = hasMatchData ? fromMatch('home') : injuredPlayers(withInjuries(homeSquad, homeExtras))
+  const away = hasMatchData ? fromMatch('away') : injuredPlayers(withInjuries(awaySquad, awayExtras))
   if (home.length + away.length === 0) return null
   return (
     <Section title={t('injury.missing')}>
@@ -112,6 +121,8 @@ function LineupsTab({ details }: { details: FixtureDetails }) {
     l ? [...l.starters, ...l.substitutes].map((e) => ({ id: e.player.id, name: e.player.name, birthDate: birthDates.get(e.player.id) })) : [],
   )
   const { data: photos } = usePlayersPhotos(`lineup:${fixture.id}`, squadsSettled ? players : undefined)
+  const { data: fm } = useMatchExtras(fixture)
+  const ratings = buildMatchRatings(details, fm)
   return (
     <div className="space-y-5">
       <LineupPitch
@@ -120,7 +131,7 @@ function LineupsTab({ details }: { details: FixtureDetails }) {
         home={lineups?.home}
         away={lineups?.away}
         photos={photos}
-        ratings={ratingsForFixture(details)}
+        ratings={ratings?.byPlayerId}
       />
       {photos && (
         <PhotoCredits
@@ -132,6 +143,15 @@ function LineupsTab({ details }: { details: FixtureDetails }) {
       )}
     </div>
   )
+}
+
+function RatingsTab({ details }: { details: FixtureDetails }) {
+  const t = useT()
+  const fm = useMatchExtras(details.fixture)
+  if (fm.isPending && fm.fetchStatus !== 'idle') return <BlockSkeleton rows={8} />
+  const ratings = buildMatchRatings(details, fm.data)
+  if (!ratings) return <EmptyState icon={Star} title={t('ratings.noneTitle')} description={t('ratings.noneText')} />
+  return <PlayerRatings fixture={details.fixture} ratings={ratings} />
 }
 
 function TabContent({ tab, details }: { tab: TabId; details: FixtureDetails }) {
@@ -147,11 +167,7 @@ function TabContent({ tab, details }: { tab: TabId; details: FixtureDetails }) {
         <EmptyState icon={ClipboardList} title={t('match.noLineupTitle')} description={t('match.noLineupText')} />
       )
     case 'ratings':
-      return hasPlayerRatings(details) ? (
-        <PlayerRatings details={details} />
-      ) : (
-        <EmptyState icon={Star} title={t('ratings.noneTitle')} description={t('ratings.noneText')} />
-      )
+      return <RatingsTab details={details} />
     case 'stats':
       return details.statistics?.length ? (
         <StatsPanel statistics={details.statistics} />

@@ -38,6 +38,14 @@ Für einen öffentlichen Betrieb wird ein lizenzierter Anbieter als weiterer Ada
 - Neuer Wettbewerb: eine Zeile in `src/providers/espn/leagues.ts`
 - Tests laufen gegen gespeicherte echte Antworten in `src/providers/espn/__fixtures__/`
 
+### Zusatzquelle FotMob (Noten, Ausfälle)
+
+ESPN liefert für Fußball weder Spielernoten noch Verletzungen. Diese kommen von der ebenfalls
+**inoffiziellen FotMob-API** (`src/providers/fotmob/`) – Spielernoten pro Spiel, Saisonnoten,
+Verletzte und Gesperrte. Zuordnung zu ESPN über Teamnamen (Suche + Liste `TEAM_OVERRIDES`),
+Anstoßzeit und Spielername/Rückennummer. Fehlt etwas bei FotMob, blendet die App es aus;
+ohne FotMob-Noten berechnet sie eine Note aus den ESPN-Einzelwerten (als eigene Berechnung gekennzeichnet).
+
 ## Spielerfotos
 
 Nur frei lizenzierte Fotos aus **Wikimedia Commons** (CC0, gemeinfrei, CC BY, CC BY-SA),

@@ -14,7 +14,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 - Spiele nach Datum, Filter, Live-Stände (Aktualisierung alle 20 s bei laufenden Spielen)
 - Match Center: Übersicht, Aufstellung auf dem Spielfeld, Statistik, Ereignisse, Tabelle
-- Wettbewerbe (12 + Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
+- Wettbewerbe (13 inkl. 2. Bundesliga, dazu Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
 - Echte Daten über ESPN (inoffiziell, kostenlos) – Adapter austauschbar
 - Korrekte Schreibweise (türkische Buchstaben, deutsche Vereinsnamen), Korrekturliste für Quellfehler
 - Favoriten (lokal), „Meine Spiele“ oben auf der Startseite
@@ -23,13 +23,13 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
 - Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
-- Ausfälle: verletzte/gesperrte Spieler je Team (Tab „Ausfälle“, Markierung im Kader) und in der Spielübersicht
-- Spielernoten (1–10): eigener Tab „Noten“ im Match Center und Noten auf dem Spielfeld – aus ESPN-Einzelwerten berechnet, keine offizielle Bewertung
+- Ausfälle (FotMob): verletzte/gesperrte Spieler je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht
+- Spielernoten (FotMob): Tab „Noten“ im Match Center, Noten auf Spielfeld und Bank, Saisonnote im Kader und Profil; ohne FotMob-Daten eigene Berechnung aus ESPN-Einzelwerten
 
 ## Ideen für später (Reihenfolge = Vorschlag)
 
 1. **Feinschliff Match Center** – Spieltag/Runde anzeigen, Head-to-Head, Formkurve in der Tabelle
-2. **Mehr Wettbewerbe** – z. B. Türkischer Pokal, DFB-Pokal, 2. Bundesliga (je eine Zeile in `src/providers/espn/leagues.ts`)
+2. **Mehr Wettbewerbe** – z. B. Türkischer Pokal, DFB-Pokal (je eine Zeile in `src/providers/espn/leagues.ts`)
 3. **Push-Benachrichtigungen** (Tore, Aufstellungen) – braucht einen kleinen Server; auf dem iPhone nur für installierte App
 4. **E2E-Tests** mit Playwright (iPhone-, iPad-, Desktop-Ansicht)
 5. **Konto & Sync** der Favoriten zwischen Geräten
@@ -38,6 +38,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 ## Regelmäßig pflegen
 
 - **TV-Rechte**: zur Saison 2027/28 aktualisieren (`src/tv/broadcasts.ts`) – neue Rechte u. a. Champions League (DE) und Süper Lig (TR, Ausschreibung Jan. 2027)
+- **FotMob-Zuordnung**: findet die App ein Team nicht bei FotMob, ESPN-ID → FotMob-ID in `TEAM_OVERRIDES` (`src/providers/fotmob/fotmob.ts`) eintragen
 - **Datenfehler / Namen**: gemeldete Fehler in `src/providers/espn/nameFixes.ts` eintragen
   (`PLAYER_CORRECTIONS`, `TEAM_NAMES`, türkisches Namenswörterbuch)
 - **Süper-Lig-Teams** nach Auf-/Abstieg in `TURKISH_TEAM_IDS` ergänzen

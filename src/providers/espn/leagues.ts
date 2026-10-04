@@ -26,6 +26,7 @@ const EUROPE: Localized = { de: 'Europa', en: 'Europe' }
 const DEFS: readonly LeagueDef[] = [
   { id: 'c-super-lig', slug: 'tur.1', logoId: 18, name: 'Süper Lig', shortName: 'Süper Lig', country: { de: 'Türkei', en: 'Türkiye' }, type: 'league' },
   { id: 'c-bundesliga', slug: 'ger.1', logoId: 10, name: 'Bundesliga', shortName: 'Bundesliga', country: { de: 'Deutschland', en: 'Germany' }, type: 'league' },
+  { id: 'c-2-bundesliga', slug: 'ger.2', logoId: 97, name: '2. Bundesliga', shortName: '2. Bundesliga', country: { de: 'Deutschland', en: 'Germany' }, type: 'league' },
   { id: 'c-premier-league', slug: 'eng.1', logoId: 23, name: 'Premier League', shortName: 'Premier League', country: 'England', type: 'league' },
   { id: 'c-la-liga', slug: 'esp.1', logoId: 15, name: 'La Liga', shortName: 'La Liga', country: { de: 'Spanien', en: 'Spain' }, type: 'league' },
   { id: 'c-serie-a', slug: 'ita.1', logoId: 12, name: 'Serie A', shortName: 'Serie A', country: { de: 'Italien', en: 'Italy' }, type: 'league' },

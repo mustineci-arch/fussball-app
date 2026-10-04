@@ -4,10 +4,14 @@ import { Card, Section } from '../components/ui/Card'
 import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
-import { useCompetitions, usePlayer, usePlayerPhoto } from '../data/queries'
+import { useCompetitions, usePlayer, usePlayerPhoto, useTeamExtras } from '../data/queries'
 import { ageFrom, formatBirthDate } from '../domain/date'
 import type { PlayerSeasonStats } from '../domain/types'
-import { useT } from '../i18n'
+import { returnText } from '../features/injuries/returnText'
+import { InjuryStatusBadge } from '../features/injuries/InjuryList'
+import { RatingBadge } from '../features/match-center/RatingBadge'
+import { useLanguage, useT } from '../i18n'
+import { findPlayer } from '../providers/fotmob/fotmob'
 import { PhotoCredit } from '../media/PhotoCredit'
 
 type StatColumn = keyof Omit<PlayerSeasonStats, 'competitionId' | 'seasonLabel'>
@@ -19,6 +23,8 @@ export default function PlayerPage() {
   const { data, isPending, error, refetch } = usePlayer(id)
   const { data: competitions } = useCompetitions()
   const { data: photo } = usePlayerPhoto(data?.player)
+  const { data: extras } = useTeamExtras(data?.team)
+  const language = useLanguage()
 
   if (isPending) {
     return (
@@ -39,6 +45,8 @@ export default function PlayerPage() {
   }
 
   const { player, team, seasonStats } = data
+  const fm = extras ? findPlayer(player, extras) : undefined
+  const injury = player.injury ?? fm?.injury
   // Nur Spalten zeigen, für die die Datenquelle überhaupt Werte liefert
   const columns = STAT_COLUMNS.filter((c) => seasonStats.some((s) => s[c] !== undefined))
   const age = player.birthDate ? ageFrom(player.birthDate) : undefined
@@ -66,6 +74,22 @@ export default function PlayerPage() {
             )}
           </div>
         </div>
+        {(fm?.seasonRating || injury) && (
+          <div className="flex flex-wrap items-center gap-3 text-sm">
+            {fm?.seasonRating && (
+              <span className="flex items-center gap-2">
+                <RatingBadge rating={fm.seasonRating} className="px-1.5 py-0.5 text-sm" />
+                <span className="text-muted">{t('ratings.season')}</span>
+              </span>
+            )}
+            {injury && (
+              <span className="flex items-center gap-2">
+                <InjuryStatusBadge status={injury.status} />
+                <span className="text-muted">{returnText(injury.expectedReturnText, language)}</span>
+              </span>
+            )}
+          </div>
+        )}
         {photo && <PhotoCredit photo={photo} />}
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-3">
           {facts.map((f) => (

@@ -4,8 +4,10 @@ import { PlayerAvatar } from '../../components/media'
 import { Card } from '../../components/ui/Card'
 import { formatDate } from '../../domain/date'
 import type { InjuryStatus, Player } from '../../domain/types'
-import { useT } from '../../i18n'
+import { useLanguage, useT } from '../../i18n'
 import type { PlayerPhoto } from '../../media/wikimedia'
+import { hasProfile } from './merge'
+import { returnText } from './returnText'
 
 const STATUS_STYLES: Record<InjuryStatus, string> = {
   out: 'bg-red-600 text-white',
@@ -29,27 +31,38 @@ export function InjuryStatusBadge({ status }: { status: InjuryStatus }) {
 
 export function InjuryList({ players, photos }: { players: Player[]; photos?: Record<string, PlayerPhoto | null> }) {
   const t = useT()
+  const language = useLanguage()
   return (
     <Card padded={false} className="divide-y divide-border overflow-hidden">
       {players.map((p) => {
         const injury = p.injury!
         const since = injury.since && formatDate(injury.since)
-        const back = injury.expectedReturn && formatDate(injury.expectedReturn)
+        const back = (injury.expectedReturn && formatDate(injury.expectedReturn)) || returnText(injury.expectedReturnText, language)
         const info = [
           p.position && t(`position.${p.position}`),
           injury.detail,
           since && t('injury.since', { date: since }),
           back && t('injury.return', { date: back }),
         ].filter(Boolean)
-        return (
-          <Link key={p.id} to={`/player/${p.id}`} className="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-2">
+        const content = (
+          <>
             <PlayerAvatar name={p.name} photoUrl={photos?.[p.id]?.url ?? p.photoUrl} shirtNumber={p.shirtNumber} size={36} />
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold">{p.name}</span>
               <span className="block truncate text-xs text-muted">{info.join(' · ')}</span>
             </span>
             <InjuryStatusBadge status={injury.status} />
+          </>
+        )
+        const row = 'flex items-center gap-3 px-4 py-2.5'
+        return hasProfile(p) ? (
+          <Link key={p.id} to={`/player/${p.id}`} className={`${row} hover:bg-surface-2`}>
+            {content}
           </Link>
+        ) : (
+          <div key={p.id} className={row}>
+            {content}
+          </div>
         )
       })}
     </Card>

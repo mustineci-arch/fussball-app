@@ -3,7 +3,7 @@
  * Die Datenquelle liefert keine fertigen Bewertungen – die Note wird transparent aus den
  * gelieferten Einzelwerten berechnet und in der UI als eigene Berechnung gekennzeichnet.
  */
-import type { FixtureDetails, Lineup, LineupPlayer, PlayerMatchStats } from './types'
+import type { Lineup, LineupPlayer, PlayerMatchStats } from './types'
 
 const BASE = 6.0
 const MIN = 3.0
@@ -89,16 +89,4 @@ export function rateLineup(lineup: Lineup | undefined, goalsFor?: number, goalsA
       return rating === undefined ? [] : [{ entry, rating, starter }]
     })
     .sort((a, b) => b.rating - a.rating)
-}
-
-/** Noten je Spieler-ID für beide Teams eines Spiels */
-export function ratingsForFixture(details: FixtureDetails): Map<string, number> {
-  const { fixture, lineups } = details
-  const score = fixture.status === 'scheduled' ? undefined : fixture.score
-  return new Map(
-    [...rateLineup(lineups?.home, score?.home, score?.away), ...rateLineup(lineups?.away, score?.away, score?.home)].map((r) => [
-      r.entry.player.id,
-      r.rating,
-    ]),
-  )
 }

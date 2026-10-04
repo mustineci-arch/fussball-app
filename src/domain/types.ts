@@ -79,6 +79,8 @@ export interface PlayerInjury {
   since?: string
   /** Voraussichtliche Rückkehr (ISO-Datum) */
   expectedReturn?: string
+  /** Voraussichtliche Rückkehr als Text der Quelle, z. B. "A few weeks" / "Mid October 2026" */
+  expectedReturnText?: string
 }
 
 export type FixtureStatus =

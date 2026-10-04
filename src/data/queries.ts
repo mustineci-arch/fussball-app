@@ -5,9 +5,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { todayKey } from '../domain/date'
 import { isFinished, isLive } from '../domain/status'
-import type { Fixture, Id, Player, TopPlayerCategory } from '../domain/types'
+import type { Fixture, Id, Player, Team, TopPlayerCategory } from '../domain/types'
 import { findPlayerPhoto, findPlayerPhotos, photoKey } from '../media/wikimedia'
 import { provider } from '../providers'
+import * as fotmob from '../providers/fotmob/fotmob'
 
 const MINUTE = 60_000
 const HOUR = 60 * MINUTE
@@ -166,4 +167,33 @@ export const useSearch = (q: string) =>
     enabled: q.trim().length >= 2,
     staleTime: staleTimes.static,
     placeholderData: (prev) => prev,
+  })
+
+// ------------------------------------------------------------ Zusatzquelle FotMob (Noten, Ausfälle)
+
+/** FotMob nur mit echten Daten – im Demo-Modus würden erfundene Namen echten Spielern zugeordnet. */
+const extrasEnabled = !provider.isDemo
+
+/** FotMob-Kader eines Teams: Saisonnoten und Verletzungen */
+export const useTeamExtras = (team: Pick<Team, 'id' | 'name' | 'shortName'> | undefined) =>
+  useQuery({
+    queryKey: ['fotmob', 'team', team?.id],
+    queryFn: async () => {
+      const fmId = await fotmob.findTeamId(team!)
+      return fmId ? fotmob.getSquad(fmId) : []
+    },
+    enabled: extrasEnabled && team !== undefined,
+    staleTime: staleTimes.standings,
+    retry: 1,
+  })
+
+/** FotMob-Noten und Ausfälle zu einem Spiel */
+export const useMatchExtras = (fixture: Fixture | undefined) =>
+  useQuery({
+    queryKey: ['fotmob', 'match', fixture?.id],
+    queryFn: () => fotmob.getMatch(fixture!).then((m) => m ?? null),
+    enabled: extrasEnabled && fixture !== undefined,
+    staleTime: fixture && isFinished(fixture.status) ? Number.POSITIVE_INFINITY : staleTimes.live,
+    refetchInterval: fixture && isLive(fixture.status) ? LIVE_REFRESH_MS * 3 : false,
+    retry: 1,
   })

@@ -15,7 +15,7 @@ import { groupFixturesByCompetition } from '../features/matches/groupFixtures'
 import { MatchRow } from '../features/matches/MatchRow'
 import { useT } from '../i18n'
 import { isLive } from '../domain/status'
-import { TvCountryChips, WorldChannelLinks } from '../tv/TvSection'
+import { TvCountrySelect, WorldChannelLinks } from '../tv/TvSection'
 import { CompetitionBadge } from '../components/media'
 import type { Fixture } from '../domain/types'
 
@@ -34,7 +34,7 @@ function TvMatches({ fixtures }: { fixtures: Fixture[] }) {
   )
   return (
     <div className="space-y-4">
-      <TvCountryChips />
+      <TvCountrySelect />
       {groups.length === 0 ? (
         <EmptyState icon={Tv} title={t('matches.emptyTitle')} description={t('matches.empty.tv')} />
       ) : (

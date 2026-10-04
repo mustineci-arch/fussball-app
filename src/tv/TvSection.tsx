@@ -2,11 +2,11 @@ import clsx from 'clsx'
 import { ExternalLink, MonitorPlay, Tv } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Card, Section } from '../components/ui/Card'
-import { Chips } from '../components/ui/Tabs'
 import { formatDate } from '../domain/date'
 import type { Fixture } from '../domain/types'
+import { useTeamCountries } from '../data/queries'
 import { useLanguage, useT } from '../i18n'
-import { countryLabel, flagOf, RIGHTS_AS_OF, TV_COUNTRIES, tvWorldwide, type Channel } from './broadcasts'
+import { ALL_COUNTRIES, countryLabel, flagOf, hasRightsList, RIGHTS_AS_OF, TV_COUNTRIES, tvWorldwide, type Channel } from './broadcasts'
 import { setTvCountry, useTvCountry } from './country'
 
 function PriceBadge({ free }: { free: boolean }) {
@@ -81,24 +81,48 @@ export function ChannelLinks({ channels }: { channels: Channel[] }) {
   )
 }
 
-export function TvCountryChips() {
+/** Auswahl "Mein Land": alle Länder der Welt, Länder mit Senderliste zuerst */
+export function TvCountrySelect({ className }: { className?: string }) {
+  const t = useT()
   const language = useLanguage()
   const country = useTvCountry()
+  const label = (c: string) => `${flagOf(c)} ${countryLabel(c, language)}`
+  const byName = (list: readonly string[]) => [...list].sort((a, b) => countryLabel(a, language).localeCompare(countryLabel(b, language), language))
   return (
-    <Chips
-      options={TV_COUNTRIES.map((c) => ({ id: c, label: `${flagOf(c)} ${countryLabel(c, language)}` }))}
-      active={country}
-      onChange={setTvCountry}
-    />
+    <label className={clsx('flex items-center gap-2 text-sm', className)}>
+      <span className="shrink-0 text-muted">{t('tv.myCountry')}</span>
+      <select
+        value={country}
+        onChange={(e) => setTvCountry(e.target.value)}
+        className="min-w-0 flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm font-semibold text-text"
+      >
+        <optgroup label={t('tv.withList')}>
+          {byName(TV_COUNTRIES).map((c) => (
+            <option key={c} value={c}>
+              {label(c)}
+            </option>
+          ))}
+        </optgroup>
+        <optgroup label={t('tv.allCountries')}>
+          {byName(ALL_COUNTRIES.filter((c) => !hasRightsList(c))).map((c) => (
+            <option key={c} value={c}>
+              {label(c)}
+            </option>
+          ))}
+        </optgroup>
+      </select>
+    </label>
   )
 }
 
-function CountryHeader({ country }: { country: string }) {
+function CountryHeader({ country, homeOf }: { country: string; homeOf?: string[] }) {
+  const t = useT()
   const language = useLanguage()
   return (
-    <p className="flex items-center gap-2 bg-surface-2 px-4 py-2 text-xs font-bold tracking-wide uppercase">
+    <p className="flex flex-wrap items-center gap-x-2 bg-surface-2 px-4 py-2 text-xs font-bold tracking-wide uppercase">
       <span aria-hidden className="text-base leading-none">{flagOf(country)}</span>
       {countryLabel(country, language)}
+      {homeOf && <span className="font-medium tracking-normal text-muted normal-case">· {t('tv.homeOf', { teams: homeOf.join(' & ') })}</span>}
     </p>
   )
 }
@@ -123,21 +147,20 @@ function Sources({ sources }: { sources: string[] }) {
 export function TvSection({ fixture }: { fixture: Fixture }) {
   const t = useT()
   const country = useTvCountry()
-  const all = tvWorldwide(fixture, country)
+  const all = tvWorldwide(fixture, country, useTeamCountries(fixture))
   const asOf = formatDate(RIGHTS_AS_OF) ?? RIGHTS_AS_OF
 
   return (
     <Section title={t('tv.title')}>
-      <p className="text-xs text-muted">{t('tv.myCountry')}</p>
-      <TvCountryChips />
+      <TvCountrySelect />
       <Card padded={false} className="overflow-hidden">
         {all.length === 0 ? (
           <p className="px-4 py-3 text-sm text-muted">{t('tv.unknown')}</p>
         ) : (
           <div className="divide-y divide-border">
-            {all.map(({ country: c, info }) => (
+            {all.map(({ country: c, info, homeOf }) => (
               <div key={c}>
-                <CountryHeader country={c} />
+                <CountryHeader country={c} homeOf={homeOf} />
                 <ul className="divide-y divide-border">
                   {info.channels.map((ch) => (
                     <ChannelRow key={ch.name} channel={ch} />
@@ -169,7 +192,7 @@ export function TvSection({ fixture }: { fixture: Fixture }) {
 export function WorldChannelLinks({ fixture }: { fixture: Fixture }) {
   const t = useT()
   const country = useTvCountry()
-  const all = tvWorldwide(fixture, country)
+  const all = tvWorldwide(fixture, country, useTeamCountries(fixture))
   if (all.length === 0) return <p className="text-xs text-subtle">{t('tv.noChannel')}</p>
   return (
     <div className="space-y-1.5">

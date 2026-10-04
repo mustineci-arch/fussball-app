@@ -1,16 +1,25 @@
 import { useSyncExternalStore } from 'react'
-import { TV_COUNTRIES, type TvCountry } from './broadcasts'
+import { ALL_COUNTRIES, type TvCountry } from './broadcasts'
 
 const STORAGE_KEY = 'anstoss.tvCountry'
+
+/** Land des Geräts aus den Spracheinstellungen ("de-AT" → AT), sonst Deutschland */
+export function detectCountry(languages: readonly string[] = typeof navigator === 'undefined' ? [] : navigator.languages ?? [navigator.language]): TvCountry {
+  for (const lang of languages) {
+    const region = /[-_]([A-Za-z]{2})\b/.exec(lang)?.[1]?.toUpperCase()
+    if (region && ALL_COUNTRIES.includes(region)) return region
+  }
+  return 'DE'
+}
 
 function read(): TvCountry {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored && (TV_COUNTRIES as readonly string[]).includes(stored)) return stored as TvCountry
+    if (stored && ALL_COUNTRIES.includes(stored)) return stored
   } catch {
     // Speicher nicht verfügbar
   }
-  return 'DE'
+  return detectCountry()
 }
 
 let country: TvCountry = typeof window === 'undefined' ? 'DE' : read()

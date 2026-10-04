@@ -11,8 +11,22 @@
  */
 import type { Fixture } from '../domain/types'
 
-export type TvCountry = 'DE' | 'AT' | 'CH' | 'TR' | 'GB' | 'US'
-export const TV_COUNTRIES: readonly TvCountry[] = ['DE', 'AT', 'CH', 'TR', 'GB', 'US']
+/** Länder mit recherchierter Senderliste */
+export type RightsCountry = 'DE' | 'AT' | 'CH' | 'TR' | 'GB' | 'US' | 'ES' | 'IT' | 'FR' | 'NL'
+export const TV_COUNTRIES: readonly RightsCountry[] = ['DE', 'AT', 'CH', 'TR', 'GB', 'US', 'ES', 'IT', 'FR', 'NL']
+/** Beliebiges Land (ISO-3166-Code) – "Mein Land" kann jedes Land der Welt sein */
+export type TvCountry = string
+
+/** Alle Länder der Welt (ISO 3166-1 Alpha-2) für die Auswahl "Mein Land" */
+export const ALL_COUNTRIES: readonly string[] = (
+  'AD AE AF AG AI AL AM AO AR AS AT AU AW AZ BA BB BD BE BF BG BH BI BJ BM BN BO BR BS BT BW BY BZ CA CD CF CG CH CI CK CL CM CN CO CR CU CV CW CY CZ ' +
+  'DE DJ DK DM DO DZ EC EE EG ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GH GI GL GM GN GP GQ GR GT GU GW GY HK HN HR HT HU ID IE IL IN IQ IR IS IT ' +
+  'JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MG MH MK ML MM MN MO MQ MR MS MT MU MV MW MX MY MZ ' +
+  'NA NC NE NG NI NL NO NP NR NZ OM PA PE PF PG PH PK PL PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SI SK SL SM SN SO SR SS ST SV SX SY SZ ' +
+  'TC TD TG TH TJ TL TM TN TO TR TT TV TW TZ UA UG US UY UZ VA VC VE VG VI VN VU WS XK YE ZA ZM ZW'
+).split(' ')
+
+export const hasRightsList = (country: string): country is RightsCountry => (TV_COUNTRIES as readonly string[]).includes(country)
 
 /** Ländername in der App-Sprache (z. B. "GB" → "Vereinigtes Königreich") */
 export function countryLabel(code: string, language: 'de' | 'en'): string {
@@ -38,7 +52,7 @@ export interface Channel {
   url?: string
 }
 
-export type TvNote = 'buli_free_extra' | 'cl_final_free' | 'uel_top_free' | 'no_fta' | 'depends_on_match'
+export type TvNote = 'buli_free_extra' | 'cl_final_free' | 'uel_top_free' | 'no_fta' | 'depends_on_match' | 'nl_free_dutch'
 
 export interface TvInfo {
   channels: Channel[]
@@ -94,6 +108,23 @@ const CBS = ch('CBS', true, 'https://www.cbssports.com/soccer')
 const ESPN_PLUS = ch('ESPN+', false, 'https://plus.espn.com', 'stream')
 const BEIN_US = ch('beIN Sports', false, 'https://www.beinsports.com/us')
 
+// Spanien
+const MOVISTAR = ch('Movistar+', false, 'https://www.movistarplus.es/deportes')
+const DAZN_ES = ch('DAZN', false, 'https://www.dazn.com/es-ES/home', 'stream')
+const RTVE = ch('RTVE (La 1)', true, 'https://www.rtve.es/play/directos')
+// Italien
+const DAZN_IT = ch('DAZN', false, 'https://www.dazn.com/it-IT/home', 'stream')
+const SKY_IT = ch('Sky Sport', false, 'https://sport.sky.it')
+const PRIME_IT = ch('Prime Video', false, 'https://www.primevideo.com', 'stream')
+const RAI = ch('Rai 1 / RaiPlay', true, 'https://www.raiplay.it/dirette')
+// Frankreich
+const LIGUE1_PLUS = ch('Ligue 1+', false, 'https://www.ligue1plus.fr', 'stream')
+const CANAL_FR = ch('Canal+', false, 'https://www.canalplus.com')
+const TF1 = ch('TF1', true, 'https://www.tf1.fr')
+// Niederlande
+const ZIGGO = ch('Ziggo Sport', false, 'https://www.ziggosport.nl')
+const NOS = ch('NOS', true, 'https://nos.nl/sport')
+
 /** Sendernamen, wie ESPN sie pro Spiel meldet → offizielle Seite */
 const KNOWN_URLS: Record<string, string> = {
   'espn+': 'https://plus.espn.com',
@@ -143,6 +174,15 @@ const SRC = {
   usCl: 'https://www.cabletv.com/sports/watch-uefa-champions-league',
   usAll: 'https://www.renderfoot.com/blog/where-to-watch-soccer-in-usa',
   usSuperLig: 'https://worldsoccertalk.com/turkish-super-lig-tv-schedule/',
+  esLaliga: 'https://www.livesoccertv.com/competitions/spain/primera-division/watch/spain/',
+  esCl: 'https://www.livesoccertv.com/competitions/international/uefa-champions-league/watch/spain/',
+  esNations: 'https://www.livesoccertv.com/competitions/international/uefa-nations-league/watch/spain/',
+  itSerieA: 'https://sport.virgilio.it/serie-a-dove-vedere-tutte-le-partite-in-tv-sky-o-dazn-652440',
+  itCl: 'https://www.calcioefinanza.it/2026/08/30/dove-vedere-champions-league-2026-2027-tv-streaming/',
+  itNational: 'https://www.tvzoom.it/trasmissioni-sportive/nazionale-italiana-streaming/',
+  fr: 'https://www.megazap.fr/Droits-TV-Football-2026-2027-Qui-diffuse-quoi-La-nouvelle-carte-du-football-a-la-television_a16814.html',
+  nlCl: 'https://www.sportcal.com/media/ziggo-sports-lands-dutch-rights-for-all-uefa-club-competitions/',
+  nlNations: 'https://www.uefa.com/uefanationsleague/news/02a9-219ae5c877f5-740390ccb3e5-1000--where-to-watch-the-nations-league-tv-broadcast-partners-li/',
   buli: 'https://www.bundesliga.com/de/bundesliga/news/bundesliga-spiele-im-fernsehen-tv-sender-rtl-dazn-sky-prime-363',
   buliDazn: 'https://dazngroup.com/press-room/dazn-zeigt-ab-der-saison-2025-26-bis-2028-29-noch-mehr-bundesliga-die-samstags-konferenz-und-alle-sonntag-spiele-live-nur-auf-dazn/',
   cl: 'https://www.fussballdaten.de/news/champions-league-uebertragung-2026-27-wer-zeigt-spiele-live-tv-stream/',
@@ -209,12 +249,21 @@ function nationsLeagueGermany(fixture: Pick<Fixture, 'homeTeam' | 'awayTeam'>): 
 }
 
 type Rule = (fixture: Fixture) => TvInfo | undefined
+
+/** Spiele eines Nationalteams (über das Länderkürzel, z. B. "ESP") */
+const involvesNation = (fixture: Pick<Fixture, 'homeTeam' | 'awayTeam'>, code: string) =>
+  [fixture.homeTeam, fixture.awayTeam].some((t) => t.isNational && t.code?.toUpperCase() === code)
+
+const nationalTeamOnly =
+  (code: string, channels: Channel[], sources: string[]): Rule =>
+  (f) =>
+    involvesNation(f, code) ? { channels, notes: [], sources } : undefined
 const fixed =
   (channels: Channel[], sources: string[], notes: TvNote[] = []): Rule =>
   () => ({ channels, notes, sources })
 
 /** Rechte je Wettbewerb (interne Wettbewerbs-IDs) und Land */
-const RULES: Record<TvCountry, Partial<Record<string, Rule>>> = {
+const RULES: Record<RightsCountry, Partial<Record<string, Rule>>> = {
   DE: {
     'c-super-lig': fixed([DIGITURK_EURO], [SRC.superLigDe], ['no_fta']),
     'c-bundesliga': bundesligaGermany,
@@ -253,6 +302,31 @@ const RULES: Record<TvCountry, Partial<Record<string, Rule>>> = {
     'c-ligue-1': fixed([BEIN_US], [SRC.usAll]),
     'c-super-lig': fixed([BEIN_US], [SRC.usSuperLig]),
   },
+  ES: {
+    'c-la-liga': fixed([MOVISTAR, DAZN_ES], [SRC.esLaliga], ['depends_on_match']),
+    'c-champions-league': fixed([MOVISTAR], [SRC.esCl]),
+    'c-europa-league': fixed([MOVISTAR], [SRC.esCl]),
+    'c-conference-league': fixed([MOVISTAR], [SRC.esCl]),
+    'c-nations-league': nationalTeamOnly('ESP', [RTVE], [SRC.esNations]),
+  },
+  IT: {
+    'c-serie-a': fixed([DAZN_IT, SKY_IT], [SRC.itSerieA], ['depends_on_match']),
+    'c-champions-league': fixed([SKY_IT, PRIME_IT], [SRC.itCl], ['depends_on_match']),
+    'c-nations-league': nationalTeamOnly('ITA', [RAI], [SRC.itNational]),
+  },
+  FR: {
+    'c-ligue-1': fixed([LIGUE1_PLUS], [SRC.fr]),
+    'c-champions-league': fixed([CANAL_FR], [SRC.fr]),
+    'c-europa-league': fixed([CANAL_FR], [SRC.fr]),
+    'c-conference-league': fixed([CANAL_FR], [SRC.fr]),
+    'c-nations-league': nationalTeamOnly('FRA', [TF1], [SRC.fr]),
+  },
+  NL: {
+    'c-champions-league': fixed([ZIGGO], [SRC.nlCl], ['nl_free_dutch']),
+    'c-europa-league': fixed([ZIGGO], [SRC.nlCl], ['nl_free_dutch']),
+    'c-conference-league': fixed([ZIGGO], [SRC.nlCl], ['nl_free_dutch']),
+    'c-nations-league': nationalTeamOnly('NED', [NOS], [SRC.nlNations]),
+  },
   TR: {
     'c-super-lig': fixed([BEIN, TOD], [SRC.superLigTr, SRC.tr]),
     'c-bundesliga': fixed([S_SPORT, S_SPORT_PLUS], [SRC.tr, SRC.tr2]),
@@ -280,7 +354,7 @@ function reportedChannels(fixture: Fixture, country: string): Channel[] {
 
 /** Übertragungsinfo für ein Spiel – undefined, wenn keine belegte Angabe vorliegt. */
 export function tvInfoFor(fixture: Fixture, country: TvCountry): TvInfo | undefined {
-  const fromRights = RULES[country][fixture.competitionId]?.(fixture)
+  const fromRights = hasRightsList(country) ? RULES[country][fixture.competitionId]?.(fixture) : undefined
   const reported = reportedChannels(fixture, country)
   if (!reported.length) return fromRights
   // Pro Spiel gemeldete Sender gehen vor; bekannte Sender behalten ihre Angaben (kostenlos, Link)
@@ -296,19 +370,25 @@ export function tvInfoFor(fixture: Fixture, country: TvCountry): TvInfo | undefi
 export interface CountryTv {
   country: string
   info: TvInfo
+  /** Teams dieses Spiels, die aus diesem Land kommen */
+  homeOf?: string[]
 }
 
-/** Alle bekannten Sender weltweit – gewähltes Land zuerst, dann weitere Länder mit Angaben */
-export function tvWorldwide(fixture: Fixture, first: TvCountry): CountryTv[] {
-  const countries = [first, ...TV_COUNTRIES.filter((c) => c !== first)]
+/**
+ * Alle bekannten Sender weltweit. Reihenfolge: gewähltes Land, dann die Heimatländer der beiden Teams,
+ * dann alle weiteren Länder mit Angaben.
+ * `teamCountries`: Land je Team (ISO-Code), z. B. { 'Galatasaray': 'TR', 'Ajax': 'NL' }.
+ */
+export function tvWorldwide(fixture: Fixture, first: TvCountry, teamCountries: Record<string, string> = {}): CountryTv[] {
+  const reportedCountries = (fixture.broadcasts ?? []).map((b) => b.country)
+  const countries = [...new Set<string>([first, ...Object.values(teamCountries), ...TV_COUNTRIES, ...reportedCountries])]
+  const homeOf = (country: string) => {
+    const teams = Object.entries(teamCountries).filter(([, c]) => c === country).map(([team]) => team)
+    return teams.length ? teams : undefined
+  }
   const result: CountryTv[] = countries.flatMap((country) => {
     const info = tvInfoFor(fixture, country)
-    return info ? [{ country, info }] : []
+    return info ? [{ country, info, homeOf: homeOf(country) }] : []
   })
-  // Länder, die nur die Datenquelle pro Spiel meldet
-  const extra = [...new Set((fixture.broadcasts ?? []).map((b) => b.country))].filter((c) => !TV_COUNTRIES.includes(c as TvCountry))
-  for (const country of extra) {
-    result.push({ country, info: { channels: reportedChannels(fixture, country), notes: [], sources: [], reported: true } })
-  }
   return result
 }

@@ -8,6 +8,7 @@ import { isFinished, isLive, needsLiveRefresh } from '../domain/status'
 import type { Fixture, Id, Player, Team, TopPlayerCategory } from '../domain/types'
 import { findPlayerPhoto, findPlayerPhotos, photoKey } from '../media/wikimedia'
 import { provider } from '../providers'
+import { needsTeamLeague, teamCountry } from '../tv/teamCountry'
 import * as fotmob from '../providers/fotmob/fotmob'
 
 const MINUTE = 60_000
@@ -198,3 +199,25 @@ export const useMatchExtras = (fixture: Fixture | undefined) =>
     refetchInterval: fixture && isLive(fixture.status) ? 15_000 : false,
     retry: 1,
   })
+
+/** Heimatland je Team (für die Senderanzeige) – Name → ISO-Code */
+export function useTeamCountries(fixture: Fixture): Record<string, string> {
+  const home = useQuery({
+    queryKey: queryKeys.team(fixture.homeTeam.id),
+    queryFn: () => provider.getTeam(fixture.homeTeam.id),
+    staleTime: staleTimes.static,
+    enabled: needsTeamLeague(fixture.homeTeam, fixture),
+  })
+  const away = useQuery({
+    queryKey: queryKeys.team(fixture.awayTeam.id),
+    queryFn: () => provider.getTeam(fixture.awayTeam.id),
+    staleTime: staleTimes.static,
+    enabled: needsTeamLeague(fixture.awayTeam, fixture),
+  })
+  const result: Record<string, string> = {}
+  const h = teamCountry(fixture.homeTeam, fixture, home.data?.competitionIds[0])
+  const a = teamCountry(fixture.awayTeam, fixture, away.data?.competitionIds[0])
+  if (h) result[fixture.homeTeam.shortName] = h
+  if (a) result[fixture.awayTeam.shortName] = a
+  return result
+}

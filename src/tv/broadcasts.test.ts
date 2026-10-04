@@ -105,3 +105,27 @@ describe('Sender weltweit', () => {
     expect(flagOf('GB')).toBe('🇬🇧')
   })
 })
+
+describe('Heimatländer der Teams', () => {
+  it('stellt die Heimatländer der Teams direkt hinter das eigene Land', () => {
+    const f = fixture('c-champions-league', '2026-10-21T19:00:00Z')
+    const all = tvWorldwide(f, 'AT', { Galatasaray: 'TR', Ajax: 'NL' })
+    expect(all.slice(0, 3).map((x) => x.country)).toEqual(['AT', 'TR', 'NL'])
+    expect(all[1]?.homeOf).toEqual(['Galatasaray'])
+    expect(all[2]?.info.channels[0]?.name).toBe('Ziggo Sport')
+  })
+
+  it('zeigt Nationalteam-Sender nur bei Spielen des eigenen Nationalteams', () => {
+    const spain = { id: '164', slug: 'spain', name: 'Spanien', shortName: 'Spanien', code: 'ESP', isNational: true }
+    const f = { ...fixture('c-nations-league', '2026-10-10T18:45:00Z'), homeTeam: spain }
+    expect(tvInfoFor(f, 'ES')?.channels[0]?.name).toBe('RTVE (La 1)')
+    expect(tvInfoFor(fixture('c-nations-league', '2026-10-10T18:45:00Z'), 'ES')).toBeUndefined()
+  })
+
+  it('funktioniert für jedes Land – auch ohne eigene Senderliste', () => {
+    const f: Fixture = { ...fixture('c-serie-a', '2026-10-10T14:00:00Z'), broadcasts: [{ name: 'TSN', country: 'CA', kind: 'tv' }] }
+    const all = tvWorldwide(f, 'CA')
+    expect(all[0]).toMatchObject({ country: 'CA' })
+    expect(all.some((x) => x.country === 'IT')).toBe(true)
+  })
+})

@@ -14,7 +14,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 - Spiele nach Datum, Filter, Live-Stände (Aktualisierung alle 20 s bei laufenden Spielen)
 - Match Center: Übersicht, Aufstellung auf dem Spielfeld, Statistik, Ereignisse, Tabelle
-- Wettbewerbe (12), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
+- Wettbewerbe (12 + Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
 - Echte Daten über ESPN (inoffiziell, kostenlos) – Adapter austauschbar
 - Korrekte Schreibweise (türkische Buchstaben, deutsche Vereinsnamen), Korrekturliste für Quellfehler
 - Favoriten (lokal), „Meine Spiele“ oben auf der Startseite

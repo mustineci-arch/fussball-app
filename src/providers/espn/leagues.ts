@@ -17,6 +17,8 @@ interface LeagueDef {
   shortName: Localized
   country: Localized
   type: Competition['type']
+  /** Nur in der Spielliste, nicht unter „Wettbewerbe“ */
+  hidden?: boolean
 }
 
 const EUROPE: Localized = { de: 'Europa', en: 'Europe' }
@@ -34,9 +36,9 @@ const DEFS: readonly LeagueDef[] = [
   { id: 'c-nations-league', slug: 'uefa.nations', logoId: 2395, name: 'UEFA Nations League', shortName: 'Nations League', country: EUROPE, type: 'international' },
   { id: 'c-euro', slug: 'uefa.euro', logoId: 74, name: { de: 'Europameisterschaft', en: 'European Championship' }, shortName: { de: 'EM', en: 'EURO' }, country: EUROPE, type: 'international' },
   { id: 'c-world-cup', slug: 'fifa.world', logoId: 4, name: { de: 'Weltmeisterschaft', en: 'World Cup' }, shortName: { de: 'WM', en: 'World Cup' }, country: { de: 'Welt', en: 'World' }, type: 'international' },
-  // Testspiele – z. B. HSV gegen FC Kopenhagen. Keine Tabelle, keine Bestenlisten.
-  { id: 'c-club-friendly', slug: 'club.friendly', name: { de: 'Testspiele (Vereine)', en: 'Club Friendlies' }, shortName: { de: 'Testspiel', en: 'Friendly' }, country: { de: 'Welt', en: 'World' }, type: 'cup' },
-  { id: 'c-intl-friendly', slug: 'fifa.friendly', name: { de: 'Länderspiele (Test)', en: 'International Friendlies' }, shortName: { de: 'Länderspiel', en: 'Int. Friendly' }, country: { de: 'Welt', en: 'World' }, type: 'international' },
+  // Testspiele – z. B. HSV gegen FC Kopenhagen. Nur in der Spielliste; keine Tabelle, keine Bestenlisten.
+  { id: 'c-club-friendly', slug: 'club.friendly', name: { de: 'Testspiele (Vereine)', en: 'Club Friendlies' }, shortName: { de: 'Testspiel', en: 'Friendly' }, country: { de: 'Welt', en: 'World' }, type: 'cup', hidden: true },
+  { id: 'c-intl-friendly', slug: 'fifa.friendly', name: { de: 'Länderspiele (Test)', en: 'International Friendlies' }, shortName: { de: 'Länderspiel', en: 'Int. Friendly' }, country: { de: 'Welt', en: 'World' }, type: 'international', hidden: true },
 ]
 
 const pick = (value: Localized, language: Language) => (typeof value === 'string' ? value : value[language])
@@ -51,6 +53,7 @@ function toCompetition(def: LeagueDef, priority: number, language: Language): Co
     priority,
     country: pick(def.country, language),
     logoUrl: def.logoId ? `https://a.espncdn.com/i/leaguelogos/soccer/500/${def.logoId}.png` : undefined,
+    hidden: def.hidden,
   }
 }
 

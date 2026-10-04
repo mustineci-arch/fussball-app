@@ -57,7 +57,7 @@ export function SideNav() {
   const isActive = useIsActive()
   const { data: competitions } = useCompetitions()
   const favorites = favoriteIds(useFavorites(), 'competition')
-  const sorted = competitions && [...competitions].sort((a, b) => Number(favorites.has(b.id)) - Number(favorites.has(a.id)))
+  const sorted = competitions && competitions.filter((c) => !c.hidden).sort((a, b) => Number(favorites.has(b.id)) - Number(favorites.has(a.id)))
 
   return (
     <aside className="sticky top-0 hidden h-dvh shrink-0 flex-col border-r border-border bg-surface md:flex md:w-[92px] xl:w-64">

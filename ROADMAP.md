@@ -22,7 +22,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - Deutsch / Englisch, Dark Mode (Hell/Dunkel/System)
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
-- Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests auf der Startseite und unter Wettbewerbe
+- Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
 - Ausfälle: verletzte/gesperrte Spieler je Team (Tab „Ausfälle“, Markierung im Kader) und in der Spielübersicht
 - Spielernoten (1–10): eigener Tab „Noten“ im Match Center und Noten auf dem Spielfeld – aus ESPN-Einzelwerten berechnet, keine offizielle Bewertung
 

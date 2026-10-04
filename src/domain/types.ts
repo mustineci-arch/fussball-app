@@ -18,6 +18,8 @@ export interface Competition {
   logoUrl?: string
   /** Sortierung in Listen – kleiner = weiter oben */
   priority: number
+  /** Nicht unter „Wettbewerbe“ zeigen (z. B. Testspiele) – Spiele erscheinen trotzdem in der Tagesliste */
+  hidden?: boolean
 }
 
 export interface Season {

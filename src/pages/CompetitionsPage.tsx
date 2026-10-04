@@ -44,7 +44,7 @@ export default function CompetitionsPage() {
         <ErrorState error={error} onRetry={() => void refetch()} />
       ) : (
         GROUPS.map(({ type, titleKey }) => {
-          const list = data.filter((c) => c.type === type)
+          const list = data.filter((c) => c.type === type && !c.hidden)
           if (list.length === 0) return null
           return (
             <Section key={type} title={t(titleKey)}>

@@ -216,7 +216,7 @@ export class EspnProvider implements FootballProvider {
     if (q.length < 2) return { teams: [], players: [], competitions: [] }
     const needle = normalizeText(q)
     const competitions = listedCompetitions().filter(
-      (c) => normalizeText(c.name).includes(needle) || normalizeText(c.shortName).includes(needle),
+      (c) => !c.hidden && (normalizeText(c.name).includes(needle) || normalizeText(c.shortName).includes(needle)),
     )
     const raw = await this.client.get<RawSearch>(`${WEB_API}/search/v2?query=${encodeURIComponent(q)}&limit=20`, ttl.long)
     return { competitions, ...mapSearch(raw) }

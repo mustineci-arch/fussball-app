@@ -31,7 +31,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 1. **Feinschliff Match Center** – Spieltag/Runde anzeigen, Head-to-Head, Formkurve in der Tabelle
 2. **Mehr Wettbewerbe** – ESPN-Wettbewerbe je eine Zeile in `src/providers/espn/leagues.ts`; Wettbewerbe, die nur FotMob hat, wie der türkische Pokal in `src/providers/CombinedProvider.ts`
-3. **Push-Benachrichtigungen** (Tore, Aufstellungen) – braucht einen kleinen Server; auf dem iPhone nur für installierte App
+3. **Push-Benachrichtigungen** (Anpfiff und Tore der Favoriten-Teams) – Plan: Cloudflare Worker (kostenlos) prüft jede Minute die Spielstände und verschickt Web-Push (VAPID); Favoriten werden beim Abonnieren an den Worker übertragen. Braucht ein Cloudflare-Konto; auf dem iPhone nur für die installierte App, Verzögerung ca. 1 Minute
 4. **E2E-Tests** mit Playwright (iPhone-, iPad-, Desktop-Ansicht)
 5. **Konto & Sync** der Favoriten zwischen Geräten
 6. **Projektordner aus OneDrive verschieben** (z. B. `C:\dev\fussball-app`) – `node_modules` belastet die Synchronisierung

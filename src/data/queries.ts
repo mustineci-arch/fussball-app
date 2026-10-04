@@ -4,7 +4,7 @@
  */
 import { useQuery } from '@tanstack/react-query'
 import { todayKey } from '../domain/date'
-import { isFinished, isLive } from '../domain/status'
+import { isFinished, isLive, needsLiveRefresh } from '../domain/status'
 import type { Fixture, Id, Player, Team, TopPlayerCategory } from '../domain/types'
 import { findPlayerPhoto, findPlayerPhotos, photoKey } from '../media/wikimedia'
 import { provider } from '../providers'
@@ -13,17 +13,17 @@ import * as fotmob from '../providers/fotmob/fotmob'
 const MINUTE = 60_000
 const HOUR = 60 * MINUTE
 
-/** Aktualisierungsintervall für Live-Daten */
-export const LIVE_REFRESH_MS = 20_000
+/** Aktualisierungsintervall für Live-Daten (und Spiele kurz vor/nach Anpfiff) */
+export const LIVE_REFRESH_MS = 2_000
 
 export const staleTimes = {
   static: 12 * HOUR,
   standings: 10 * MINUTE,
   fixtures: 5 * MINUTE,
-  live: 15_000,
+  live: 1_000,
 } as const
 
-const hasLive = (fixtures: Fixture[] | undefined) => fixtures?.some((f) => isLive(f.status)) ?? false
+const hasLive = (fixtures: Fixture[] | undefined) => fixtures?.some((f) => needsLiveRefresh(f)) ?? false
 
 export const queryKeys = {
   competitions: ['competitions'] as const,
@@ -93,11 +93,11 @@ export const useFixtureDetails = (id: Id) =>
       return staleTimes.live
     },
     refetchInterval: (q) => {
-      const status = q.state.data?.fixture.status
-      if (!status) return false
-      if (isLive(status)) return LIVE_REFRESH_MS
-      // Kurz vor Anpfiff gelegentlich prüfen (Aufstellung, Anpfiff).
-      if (status === 'scheduled') return 2 * MINUTE
+      const fixture = q.state.data?.fixture
+      if (!fixture) return false
+      if (needsLiveRefresh(fixture)) return LIVE_REFRESH_MS
+      // Vor dem Spiel gelegentlich prüfen (Aufstellung).
+      if (fixture.status === 'scheduled') return 2 * MINUTE
       return false
     },
   })
@@ -194,6 +194,7 @@ export const useMatchExtras = (fixture: Fixture | undefined) =>
     queryFn: () => fotmob.getMatch(fixture!).then((m) => m ?? null),
     enabled: extrasEnabled && fixture !== undefined,
     staleTime: fixture && isFinished(fixture.status) ? Number.POSITIVE_INFINITY : staleTimes.live,
-    refetchInterval: fixture && isLive(fixture.status) ? LIVE_REFRESH_MS * 3 : false,
+    // Noten ändern sich langsamer als Spielstand und Ereignisse
+    refetchInterval: fixture && isLive(fixture.status) ? 15_000 : false,
     retry: 1,
   })

@@ -31,6 +31,7 @@ const DEFS: readonly LeagueDef[] = [
   { id: 'c-la-liga', slug: 'esp.1', logoId: 15, name: 'La Liga', shortName: 'La Liga', country: { de: 'Spanien', en: 'Spain' }, type: 'league' },
   { id: 'c-serie-a', slug: 'ita.1', logoId: 12, name: 'Serie A', shortName: 'Serie A', country: { de: 'Italien', en: 'Italy' }, type: 'league' },
   { id: 'c-ligue-1', slug: 'fra.1', logoId: 9, name: 'Ligue 1', shortName: 'Ligue 1', country: { de: 'Frankreich', en: 'France' }, type: 'league' },
+  { id: 'c-dfb-pokal', slug: 'ger.dfb_pokal', logoId: 2061, name: 'DFB-Pokal', shortName: 'DFB-Pokal', country: { de: 'Deutschland', en: 'Germany' }, type: 'cup' },
   { id: 'c-champions-league', slug: 'uefa.champions', logoId: 2, name: 'UEFA Champions League', shortName: 'Champions League', country: EUROPE, type: 'cup' },
   { id: 'c-europa-league', slug: 'uefa.europa', logoId: 2310, name: 'UEFA Europa League', shortName: 'Europa League', country: EUROPE, type: 'cup' },
   { id: 'c-conference-league', slug: 'uefa.europa.conf', logoId: 20296, name: 'UEFA Conference League', shortName: 'Conference League', country: EUROPE, type: 'cup' },

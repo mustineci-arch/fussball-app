@@ -14,7 +14,8 @@ const SECOND = 1000
 const MINUTE = 60 * SECOND
 
 export const ttl = {
-  live: 15 * SECOND,
+  /** Kürzer als das Live-Intervall der App (2 s), damit jede Abfrage frische Daten holt */
+  live: 1 * SECOND,
   short: 1 * MINUTE,
   medium: 10 * MINUTE,
   long: 6 * 60 * MINUTE,
@@ -60,7 +61,8 @@ export class EspnClient {
     const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
     let response: Response
     try {
-      response = await this.fetchImpl(url, { signal: controller.signal })
+      // Kein Browser-Cache: ESPN erlaubt bis zu 10 s Zwischenspeicherung – die Lebensdauer steuert der eigene Cache oben.
+      response = await this.fetchImpl(url, { signal: controller.signal, cache: 'no-store' })
     } catch (cause) {
       throw new ProviderError('Datenquelle nicht erreichbar', { cause })
     } finally {

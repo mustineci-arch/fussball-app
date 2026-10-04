@@ -12,9 +12,9 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 ## Fertig
 
-- Spiele nach Datum, Filter, Live-Stände (Aktualisierung alle 20 s bei laufenden Spielen)
+- Spiele nach Datum, Filter, Live-Stände (Aktualisierung alle 2 s bei laufenden Spielen und rund um den Anpfiff; Spielstand/Minute direkt aus dem ESPN-Scoreboard, Ereignisse/Aufstellung liefert ESPN mit ca. 10–15 s Verzögerung)
 - Match Center: Übersicht, Aufstellung auf dem Spielfeld, Statistik, Ereignisse, Tabelle
-- Wettbewerbe (13 inkl. 2. Bundesliga, dazu Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
+- Wettbewerbe (14 inkl. 2. Bundesliga und DFB-Pokal, dazu Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
 - Echte Daten über ESPN (inoffiziell, kostenlos) – Adapter austauschbar
 - Korrekte Schreibweise (türkische Buchstaben, deutsche Vereinsnamen), Korrekturliste für Quellfehler
 - Favoriten (lokal), „Meine Spiele“ oben auf der Startseite
@@ -29,7 +29,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 ## Ideen für später (Reihenfolge = Vorschlag)
 
 1. **Feinschliff Match Center** – Spieltag/Runde anzeigen, Head-to-Head, Formkurve in der Tabelle
-2. **Mehr Wettbewerbe** – z. B. Türkischer Pokal, DFB-Pokal (je eine Zeile in `src/providers/espn/leagues.ts`)
+2. **Mehr Wettbewerbe** – Türkischer Pokal gibt es bei ESPN nicht (nur über FotMob als eigener Adapter möglich); weitere ESPN-Wettbewerbe je eine Zeile in `src/providers/espn/leagues.ts`
 3. **Push-Benachrichtigungen** (Tore, Aufstellungen) – braucht einen kleinen Server; auf dem iPhone nur für installierte App
 4. **E2E-Tests** mit Playwright (iPhone-, iPad-, Desktop-Ansicht)
 5. **Konto & Sync** der Favoriten zwischen Geräten

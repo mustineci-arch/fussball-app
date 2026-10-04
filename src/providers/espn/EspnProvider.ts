@@ -3,8 +3,8 @@
  * Nur für private Nutzung gedacht – für einen öffentlichen Betrieb wird ein lizenzierter Anbieter
  * über einen weiteren Adapter angebunden; der Rest der App bleibt unverändert.
  */
-import { addDays, isOnDate, parseDateKey, todayKey } from '../../domain/date'
-import { isFinished, isLive } from '../../domain/status'
+import { addDays, isOnDate, parseDateKey, toDateKey, todayKey } from '../../domain/date'
+import { isFinished, needsLiveRefresh } from '../../domain/status'
 import { normalizeText } from '../../domain/text'
 import type {
   Competition,
@@ -52,7 +52,7 @@ const compactDate = (dateKey: string) => dateKey.replaceAll('-', '')
 
 /** Cache-Dauer einer Spielliste: kurz, solange etwas läuft oder bald beginnt – sonst lang. */
 function fixturesTtl(fixtures: Fixture[]): number {
-  if (fixtures.some((f) => isLive(f.status))) return ttl.live
+  if (fixtures.some((f) => needsLiveRefresh(f))) return ttl.live
   const soon = Date.now() + 3 * 60 * 60_000
   if (fixtures.some((f) => f.status === 'scheduled' && new Date(f.kickoffAt).getTime() < soon)) return ttl.short
   return fixtures.every((f) => isFinished(f.status)) && fixtures.length > 0 ? ttl.long : ttl.medium
@@ -163,7 +163,27 @@ export class EspnProvider implements FootballProvider {
     })
     const details = mapSummary(raw)
     if (!details) throw new NotFoundError('Spiel', fixtureId)
+    if (needsLiveRefresh(details.fixture)) {
+      // Die Spieldetails hält ESPN bis zu 10 s zwischen, das Scoreboard ist sofort aktuell –
+      // Spielstand, Status und Minute daher von dort übernehmen.
+      const fresh = await this.liveFixture(details.fixture, raw.header?.league?.slug).catch(() => undefined)
+      if (fresh) {
+        const { status, minute, extraMinute, score, penaltyScore } = fresh
+        details.fixture = { ...details.fixture, status, minute, extraMinute, score: score ?? details.fixture.score, penaltyScore }
+      }
+    }
     return details
+  }
+
+  /** Aktueller Stand eines Spiels aus dem Scoreboard seiner Liga (Kalendertag nach ESPN-Zeit, daher zwei Tage) */
+  private async liveFixture(fixture: Fixture, leagueSlug: string | undefined): Promise<Fixture | undefined> {
+    if (!leagueSlug) return undefined
+    const day = toDateKey(new Date(fixture.kickoffAt))
+    for (const key of [day, addDays(day, -1)]) {
+      const found = this.mapBoard(await this.scoreboard(leagueSlug, key), leagueSlug).find((f) => f.id === fixture.id)
+      if (found) return found
+    }
+    return undefined
   }
 
   // ------------------------------------------------------------ Teams & Spieler

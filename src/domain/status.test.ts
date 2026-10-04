@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatMinute, isFinished, isLive, isUpcoming, matchesFilter } from './status'
+import { formatMinute, isFinished, isLive, isUpcoming, matchesFilter, needsLiveRefresh } from './status'
 import type { Fixture } from './types'
 
 const team = { id: 't', slug: 't', name: 'T', shortName: 'T' }
@@ -32,5 +32,20 @@ describe('status', () => {
     expect(formatMinute({ status: 'live_2h', minute: 90, extraMinute: 3 })).toBe("90+3'")
     expect(formatMinute({ status: 'halftime', minute: 45 })).toBeUndefined()
     expect(formatMinute({ status: 'live_1h' })).toBeUndefined()
+  })
+})
+
+describe('needsLiveRefresh', () => {
+  const now = Date.parse('2026-10-04T18:00:00Z')
+  const at = (minutes: number) => new Date(now + minutes * 60_000).toISOString()
+  it('aktualisiert laufende Spiele und Spiele rund um den Anpfiff', () => {
+    expect(needsLiveRefresh({ status: 'live_2h', kickoffAt: at(-70) }, now)).toBe(true)
+    expect(needsLiveRefresh({ status: 'scheduled', kickoffAt: at(1) }, now)).toBe(true)
+    expect(needsLiveRefresh({ status: 'scheduled', kickoffAt: at(-5) }, now)).toBe(true)
+  })
+  it('lässt geplante und beendete Spiele in Ruhe', () => {
+    expect(needsLiveRefresh({ status: 'scheduled', kickoffAt: at(30) }, now)).toBe(false)
+    expect(needsLiveRefresh({ status: 'scheduled', kickoffAt: at(-60) }, now)).toBe(false)
+    expect(needsLiveRefresh({ status: 'finished', kickoffAt: at(-100) }, now)).toBe(false)
   })
 })

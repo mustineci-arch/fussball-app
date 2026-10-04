@@ -40,3 +40,13 @@ export function formatMinute(fixture: Pick<Fixture, 'status' | 'minute' | 'extra
   if (fixture.minute === undefined) return undefined
   return fixture.extraMinute ? `${fixture.minute}+${fixture.extraMinute}'` : `${fixture.minute}'`
 }
+
+const MINUTE = 60_000
+
+/** Spiel läuft, beginnt in den nächsten 2 Minuten oder sollte schon laufen (Anpfiff noch nicht gemeldet) */
+export function needsLiveRefresh(f: Pick<Fixture, 'status' | 'kickoffAt'>, now = Date.now()): boolean {
+  if (isLive(f.status)) return true
+  if (f.status !== 'scheduled') return false
+  const toKickoff = new Date(f.kickoffAt).getTime() - now
+  return toKickoff < 2 * MINUTE && toKickoff > -20 * MINUTE
+}

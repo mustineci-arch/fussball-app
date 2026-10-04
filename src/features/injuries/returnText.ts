@@ -14,7 +14,9 @@ export function returnText(raw: string | undefined, language: Language): string 
   const lower = text.toLowerCase()
   if (lower === 'a few weeks') return 'in einigen Wochen'
   if (lower === 'a few days') return 'in einigen Tagen'
-  if (/out for (the )?season|season/i.test(lower)) return 'Saisonende'
+  if (lower === 'about a week') return 'in ca. einer Woche'
+  if (lower === 'back in training') return 'wieder im Training'
+  if (/out for (the )?season|season/i.test(lower)) return 'nach Saisonende'
   let m = /^about (\d+)(?:\s*-\s*(\d+))? (day|week|month)s?$/.exec(lower)
   if (m) {
     const unit = { day: ['Tag', 'Tagen'], week: ['Woche', 'Wochen'], month: ['Monat', 'Monaten'] }[m[3] as 'day' | 'week' | 'month']

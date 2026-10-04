@@ -390,7 +390,7 @@ export function mapTeamSquad(raw: RawFmTeamFull, team: Team): Player[] {
             shirtNumber: num(m.shirtNumber),
             teamId: team.id,
             teamName: team.name,
-            injury: m.injured || m.injury ? mapFmInjury(m.injury?.expectedReturn ?? undefined) : undefined,
+            injury: m.injured || m.injury ? mapFmInjury(m.injury?.expectedReturn ?? undefined, { injuryId: m.injury?.id }) : undefined,
           },
         ]
       }),
@@ -437,7 +437,12 @@ export function mapPlayerData(raw: RawFmPlayerData, resolveTeam: TeamResolver, r
     shirtNumber: num(info('shirt')?.value?.numberValue),
     teamId: team?.id,
     teamName: team?.name,
-    injury: raw.injuryInformation ? mapFmInjury(raw.injuryInformation.expectedReturn?.expectedReturnFallback) : undefined,
+    injury: raw.injuryInformation
+      ? mapFmInjury(raw.injuryInformation.expectedReturn?.expectedReturnFallback, {
+          name: raw.injuryInformation.name,
+          since: raw.injuryInformation.lastUpdated?.utcTime,
+        })
+      : undefined,
   }
   const main = raw.mainLeague
   const stat = (key: string) => main?.stats?.find((s) => s.localizedTitleId === key)?.value

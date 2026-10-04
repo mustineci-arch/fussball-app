@@ -79,18 +79,100 @@ const num = (v: unknown) => {
   return Number.isFinite(n) ? n : undefined
 }
 
-/** FotMob-Rückkehrtext → Status. "Doubtful" = fraglich, sonst fällt der Spieler aus. */
-export function mapFmInjury(expectedReturn: string | undefined, type?: string): PlayerInjury {
+/**
+ * FotMob-Verletzungs-IDs → Bezeichnung (englisch, wie FotMob sie im Spielerprofil nennt).
+ * Gesammelt aus den Kadern von 50 Teams (Bundesliga, Premier League, Süper Lig, La Liga, Serie A), Oktober 2026.
+ * Fehlt eine ID, liefert das Spielerprofil die Bezeichnung nach.
+ */
+export const INJURY_NAMES: Record<string, string> = {
+  '1': 'Heart problems',
+  '6': 'Injured',
+  '8': 'Broken foot',
+  '9': 'Concussion',
+  '14': 'Knee injury',
+  '17': 'Broken wrist',
+  '21': 'Foot injury',
+  '23': 'Broken ankle',
+  '29': 'Toe injury',
+  '30': 'Ankle injury',
+  '31': 'Hip injury',
+  '32': 'Shoulder injury',
+  '33': 'Elbow injury',
+  '35': 'Hand injury',
+  '38': 'Sprained ankle',
+  '42': 'Hamstring injury',
+  '45': 'Back injury',
+  '47': 'Groin injury',
+  '69': 'Thigh injury',
+  '70': 'Meniscus injury',
+  '71': 'Ligament injury',
+  '73': 'Achilles tendon injury',
+  '74': 'Leg injury',
+  '76': 'Cruciate ligament injury',
+  '87': 'Muscle injury',
+  '92': 'Illness',
+  '96': 'Virus',
+  '101': 'Calf injury',
+  '102': 'Neck injury',
+  '115': 'Strain injury',
+  '120': 'Muscle cramps',
+  '121': 'Physical discomfort',
+  '130': 'Knock',
+  '137': 'Lack of fitness',
+  '140': 'Injured',
+}
+
+export interface FmInjuryInfo {
+  /** "injury" oder "suspension" */
+  type?: string
+  /** FotMob-Verletzungs-ID (z. B. 69) */
+  injuryId?: string | number | null
+  /** Bezeichnung aus dem Spielerprofil, z. B. "Thigh injury" */
+  name?: string
+  /** Gemeldet am (ISO) */
+  since?: string
+}
+
+/** FotMob-Angaben → Verletzung. "Doubtful" = fraglich, sonst fällt der Spieler aus. */
+export function mapFmInjury(expectedReturn: string | undefined, info: FmInjuryInfo = {}): PlayerInjury {
   const text = expectedReturn?.trim() || undefined
-  if (type === 'suspension') return { status: 'suspended', expectedReturnText: text }
-  if (text && /doubt/i.test(text)) return { status: 'doubtful' }
-  return { status: 'out', expectedReturnText: text }
+  const name = info.name ?? (info.injuryId != null ? INJURY_NAMES[String(info.injuryId)] : undefined)
+  const detail = name && !/^injured$/i.test(name) ? name : undefined
+  const since = info.since?.slice(0, 10)
+  if (info.type === 'suspension') return { status: 'suspended', detail, since, expectedReturnText: text }
+  if (text && /doubt/i.test(text)) return { status: 'doubtful', detail, since }
+  if (text && /back in training/i.test(text)) return { status: 'doubtful', detail, since, expectedReturnText: text }
+  return { status: 'out', detail, since, expectedReturnText: text }
+}
+
+interface RawFmPlayerInjury {
+  injuryInformation?: {
+    name?: string
+    key?: string
+    expectedReturn?: { expectedReturnFallback?: string }
+    lastUpdated?: { utcTime?: string }
+  } | null
+}
+
+/** Genaue Angaben zur Verletzung aus dem Spielerprofil (Art, gemeldet am) */
+async function injuryDetails(playerId: number): Promise<FmInjuryInfo | undefined> {
+  const raw = await get<RawFmPlayerInjury>('playerData', { id: String(playerId) }, ttl.medium).catch(() => undefined)
+  const info = raw?.injuryInformation
+  if (!info) return undefined
+  return { name: info.name, since: info.lastUpdated?.utcTime, injuryId: info.key?.replace(/^injury_/, '') }
 }
 
 const teamData = (fmTeamId: number) => get<RawFmTeam>('teams', { id: String(fmTeamId) }, ttl.medium)
 
 export async function getSquad(fmTeamId: number): Promise<FmSquadPlayer[]> {
   const raw = await teamData(fmTeamId)
+  const members = (raw.squad?.squad ?? []).filter((g) => g.title !== 'coach').flatMap((g) => g.members ?? [])
+  // Für Verletzte das Spielerprofil laden – dort stehen Art der Verletzung und Meldedatum.
+  const details = new Map(
+    await Promise.all(
+      members.filter((m) => m.id && (m.injured || m.injury)).map(async (m) => [m.id!, await injuryDetails(m.id!)] as const),
+    ),
+  )
   return (raw.squad?.squad ?? [])
     .filter((g) => g.title !== 'coach')
     .flatMap((g) => g.members ?? [])
@@ -104,7 +186,10 @@ export async function getSquad(fmTeamId: number): Promise<FmSquadPlayer[]> {
           shirtNumber: num(m.shirtNumber),
           birthDate: m.dateOfBirth?.slice(0, 10),
           seasonRating: rating && rating > 0 ? rating : undefined,
-          injury: m.injured || m.injury ? mapFmInjury(m.injury?.expectedReturn ?? undefined) : undefined,
+          injury:
+            m.injured || m.injury
+              ? mapFmInjury(m.injury?.expectedReturn ?? undefined, { injuryId: m.injury?.id, ...details.get(m.id) })
+              : undefined,
         },
       ]
     })
@@ -150,7 +235,7 @@ export function mapLineupTeam(team: RawFmLineupTeam | undefined): FmMatchSide {
   ].filter((p): p is FmMatchPlayer => p !== undefined)
   const unavailable = (team?.unavailable ?? []).flatMap((p) =>
     p.name
-      ? [{ name: p.name, shirtNumber: num(p.shirtNumber), injury: mapFmInjury(p.unavailability?.expectedReturn, p.unavailability?.type) }]
+      ? [{ name: p.name, shirtNumber: num(p.shirtNumber), injury: mapFmInjury(p.unavailability?.expectedReturn, { type: p.unavailability?.type, injuryId: p.unavailability?.injuryId, since: undefined }) }]
       : [],
   )
   return { players, unavailable }

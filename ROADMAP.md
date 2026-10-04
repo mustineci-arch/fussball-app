@@ -24,7 +24,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
 - Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
 - Türkischer Pokal (FotMob): Spielplan, Gruppen, K.-o.-Runden, Match Center mit Aufstellung/Noten/Statistik, Pokalspiele auf den Seiten türkischer Teams
-- Ausfälle (FotMob): verletzte/gesperrte Spieler je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht
+- Ausfälle (FotMob): verletzte/gesperrte Spieler mit Art der Verletzung (35 Arten übersetzt), Meldedatum und voraussichtlicher Rückkehr – je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht
 - Spielernoten (FotMob): Tab „Noten“ im Match Center, Noten auf Spielfeld und Bank, Saisonnote im Kader und Profil; ohne FotMob-Daten eigene Berechnung aus ESPN-Einzelwerten
 
 ## Ideen für später (Reihenfolge = Vorschlag)

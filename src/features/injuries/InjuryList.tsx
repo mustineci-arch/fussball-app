@@ -7,6 +7,7 @@ import type { InjuryStatus, Player } from '../../domain/types'
 import { useLanguage, useT } from '../../i18n'
 import type { PlayerPhoto } from '../../media/wikimedia'
 import { hasProfile } from './merge'
+import { injuryName } from './injuryNames'
 import { returnText } from './returnText'
 
 const STATUS_STYLES: Record<InjuryStatus, string> = {
@@ -38,18 +39,17 @@ export function InjuryList({ players, photos }: { players: Player[]; photos?: Re
         const injury = p.injury!
         const since = injury.since && formatDate(injury.since)
         const back = (injury.expectedReturn && formatDate(injury.expectedReturn)) || returnText(injury.expectedReturnText, language)
-        const info = [
-          p.position && t(`position.${p.position}`),
-          injury.detail,
-          since && t('injury.since', { date: since }),
-          back && t('injury.return', { date: back }),
-        ].filter(Boolean)
+        const kind = injuryName(injury.detail, language)
+        const details = [back && t('injury.return', { date: back }), since && t('injury.reported', { date: since })].filter(Boolean)
         const content = (
           <>
             <PlayerAvatar name={p.name} photoUrl={photos?.[p.id]?.url ?? p.photoUrl} shirtNumber={p.shirtNumber} size={36} />
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold">{p.name}</span>
-              <span className="block truncate text-xs text-muted">{info.join(' · ')}</span>
+              <span className="block text-xs text-muted">
+                {[p.position && t(`position.${p.position}`), kind].filter(Boolean).join(' · ')}
+              </span>
+              {details.length > 0 && <span className="block text-xs text-subtle">{details.join(' · ')}</span>}
             </span>
             <InjuryStatusBadge status={injury.status} />
           </>

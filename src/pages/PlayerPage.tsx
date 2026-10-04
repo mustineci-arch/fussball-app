@@ -5,8 +5,9 @@ import { BackButton } from '../components/ui/PageHeader'
 import { BlockSkeleton, Skeleton } from '../components/ui/Skeleton'
 import { EmptyState, ErrorState } from '../components/ui/States'
 import { useCompetitions, usePlayer, usePlayerPhoto, useTeamExtras } from '../data/queries'
-import { ageFrom, formatBirthDate } from '../domain/date'
+import { ageFrom, formatBirthDate, formatDate } from '../domain/date'
 import type { PlayerSeasonStats } from '../domain/types'
+import { injuryName } from '../features/injuries/injuryNames'
 import { returnText } from '../features/injuries/returnText'
 import { InjuryStatusBadge } from '../features/injuries/InjuryList'
 import { RatingBadge } from '../features/match-center/RatingBadge'
@@ -85,7 +86,15 @@ export default function PlayerPage() {
             {injury && (
               <span className="flex items-center gap-2">
                 <InjuryStatusBadge status={injury.status} />
-                <span className="text-muted">{returnText(injury.expectedReturnText, language)}</span>
+                <span className="text-muted">
+                  {[
+                    injuryName(injury.detail, language),
+                    returnText(injury.expectedReturnText, language) && t('injury.return', { date: returnText(injury.expectedReturnText, language)! }),
+                    injury.since && t('injury.reported', { date: formatDate(injury.since) ?? injury.since }),
+                  ]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </span>
               </span>
             )}
           </div>

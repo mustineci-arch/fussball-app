@@ -261,6 +261,7 @@ export const en: Record<MessageKey, string> = {
   'injury.other': 'Reported',
   'injury.since': 'since {date}',
   'injury.return': 'back: {date}',
+  'injury.reported': 'reported {date}',
   'injury.missing': 'Missing players',
   'injury.noneTitle': 'No injuries reported',
   'injury.noneText': 'The data source currently reports no injured or suspended players.',

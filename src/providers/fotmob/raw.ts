@@ -36,7 +36,7 @@ export interface RawFmLineupPlayer {
     playerOfTheMatch?: boolean
     substitutionEvents?: { type?: string; time?: number }[]
   }
-  unavailability?: { type?: string; expectedReturn?: string; expectedReturnDate?: string }
+  unavailability?: { type?: string; injuryId?: number; expectedReturn?: string; expectedReturnDate?: string }
 }
 
 export interface RawFmLineupTeam {
@@ -167,7 +167,7 @@ export interface RawFmPlayerData {
   primaryTeam?: { teamId?: number; teamName?: string }
   positionDescription?: { primaryPosition?: { key?: string } }
   playerInformation?: { title?: string; translationKey?: string; value?: { numberValue?: number; fallback?: unknown }; countryCode?: string }[]
-  injuryInformation?: { expectedReturn?: { expectedReturnFallback?: string } } | null
+  injuryInformation?: { name?: string; key?: string; expectedReturn?: { expectedReturnFallback?: string }; lastUpdated?: { utcTime?: string } } | null
   mainLeague?: { leagueId?: number; season?: string; stats?: { localizedTitleId?: string; value?: number }[] }
 }
 

@@ -33,7 +33,7 @@ describe('FotMob-Zuordnung', () => {
   it('liest Verletzungen und Sperren', () => {
     expect(mapFmInjury('Doubtful')).toEqual({ status: 'doubtful' })
     expect(mapFmInjury('A few weeks')).toEqual({ status: 'out', expectedReturnText: 'A few weeks' })
-    expect(mapFmInjury('Early November 2026', 'suspension').status).toBe('suspended')
+    expect(mapFmInjury('Early November 2026', { type: 'suspension' }).status).toBe('suspended')
   })
 
   it('liest Noten aus der Aufstellung', () => {
@@ -62,5 +62,33 @@ describe('Rückkehrtexte', () => {
     expect(returnText('November 2026', 'de')).toBe('November 2026')
     expect(returnText('Unknown', 'de')).toBeUndefined()
     expect(returnText('A few weeks', 'en')).toBe('A few weeks')
+  })
+})
+
+describe('Verletzungsarten', () => {
+  it('nennt die Art der Verletzung über die FotMob-ID oder das Spielerprofil', async () => {
+    const { injuryName } = await import('../../features/injuries/injuryNames')
+    expect(mapFmInjury('A few weeks', { injuryId: '69' })).toMatchObject({ status: 'out', detail: 'Thigh injury' })
+    expect(mapFmInjury('Doubtful', { injuryId: 87 }).detail).toBe('Muscle injury')
+    expect(mapFmInjury('Mid October 2026', { name: 'Ankle injury', since: '2026-09-29T00:00:00.000Z' })).toMatchObject({ detail: 'Ankle injury', since: '2026-09-29' })
+    expect(mapFmInjury('A few weeks', { injuryId: '6' }).detail).toBeUndefined() // nur "Injured"
+    expect(mapFmInjury('Back in training').status).toBe('doubtful')
+    const de = (s: string) => injuryName(s, 'de')
+    expect(de('Thigh injury')).toBe('Oberschenkelverletzung')
+    expect(de('Muscle injury')).toBe('Muskelverletzung')
+    expect(de('Cruciate ligament injury')).toBe('Kreuzbandverletzung')
+    expect(de('Achilles tendon injury')).toBe('Achillessehnenverletzung')
+    expect(de('Hamstring injury')).toBe('Verletzung der Oberschenkelrückseite')
+    expect(de('Broken ankle')).toBe('Sprunggelenkbruch')
+    expect(de('Knock')).toBe('Prellung')
+    expect(de('Something new')).toBe('Something new')
+    expect(injuryName('Thigh injury', 'en')).toBe('Thigh injury')
+  })
+
+  it('übersetzt alle bekannten FotMob-Verletzungsarten', async () => {
+    const { injuryName } = await import('../../features/injuries/injuryNames')
+    const { INJURY_NAMES } = await import('./fotmob')
+    const untranslated = Object.values(INJURY_NAMES).filter((n) => injuryName(n, 'de') === n)
+    expect(untranslated).toEqual([])
   })
 })

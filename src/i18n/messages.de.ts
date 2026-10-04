@@ -259,6 +259,7 @@ export const de = {
   'injury.other': 'Gemeldet',
   'injury.since': 'seit {date}',
   'injury.return': 'zurück: {date}',
+  'injury.reported': 'gemeldet {date}',
   'injury.missing': 'Ausfälle',
   'injury.noneTitle': 'Keine Ausfälle gemeldet',
   'injury.noneText': 'Die Datenquelle meldet derzeit keine verletzten oder gesperrten Spieler.',

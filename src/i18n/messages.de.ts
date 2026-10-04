@@ -322,6 +322,11 @@ export const de = {
   'more.photos': 'Spielerfotos',
   'more.photosValue': 'Wikimedia Commons (freie Lizenzen)',
 
+  'tv.openChannel': '{name} öffnen (offizielles Angebot)',
+  'filter.tv': 'Live im TV',
+  'matches.empty.tv': 'Gerade läuft kein Spiel. Laufende Spiele erscheinen hier automatisch mit ihren Sendern.',
+  'tv.noChannel': 'Kein Sender bekannt',
+  'tv.watchHint': 'Die Buttons führen zu den offiziellen Anbietern. Je nach Sender ist ein Abo oder eine kostenlose Anmeldung nötig; manche Angebote gibt es nur im jeweiligen Land.',
   'tv.title': 'TV & Stream',
   'tv.free': 'kostenlos',
   'tv.pay': 'Abo nötig',

@@ -21,7 +21,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - PWA: installierbar, offline nutzbar, Update-Hinweis
 - Deutsch / Englisch, Dark Mode (Hell/Dunkel/System)
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
-- TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
+- TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet, Sender verlinken auf die offiziellen Angebote; Filter „Live im TV“ zeigt alle gerade laufenden Spiele mit ihren Sendern
 - Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
 - Türkischer Pokal (FotMob): Spielplan, Gruppen, K.-o.-Runden, Match Center mit Aufstellung/Noten/Statistik, Pokalspiele auf den Seiten türkischer Teams
 - Ausfälle (FotMob): verletzte/gesperrte Spieler mit Art der Verletzung (35 Arten übersetzt), Meldedatum und voraussichtlicher Rückkehr – je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht

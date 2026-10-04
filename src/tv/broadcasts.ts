@@ -21,6 +21,8 @@ export interface Channel {
   /** true = frei empfangbar / kostenlos, false = Abo nötig */
   free: boolean
   kind: 'tv' | 'stream'
+  /** Offizielle Seite des Anbieters (Live-/Sportbereich) – nur legale Angebote, keine fremden Streams */
+  url: string
 }
 
 export type TvNote = 'buli_free_extra' | 'cl_final_free' | 'uel_top_free' | 'no_fta' | 'depends_on_match'
@@ -31,27 +33,27 @@ export interface TvInfo {
   sources: string[]
 }
 
-const ch = (name: string, free: boolean, kind: Channel['kind'] = 'tv'): Channel => ({ name, free, kind })
+const ch = (name: string, free: boolean, url: string, kind: Channel['kind'] = 'tv'): Channel => ({ name, free, kind, url })
 
-// Sender
-const SKY = ch('Sky Sport', false)
-const WOW = ch('WOW', false, 'stream')
-const DAZN = ch('DAZN', false, 'stream')
-const PRIME = ch('Prime Video', false, 'stream')
-const RTL = ch('RTL', true)
-const NITRO = ch('NITRO', true)
-const RTL_PLUS = ch('RTL+', false, 'stream')
-const ARD = ch('ARD', true)
-const ZDF = ch('ZDF', true)
-const DIGITURK_EURO = ch('Digiturk Euro (beIN Sports)', false, 'stream')
-const BEIN = ch('beIN Sports', false)
-const TOD = ch('TOD', false, 'stream')
-const S_SPORT = ch('S Sport', false)
-const S_SPORT_PLUS = ch('S Sport Plus', false, 'stream')
-const TRT = ch('TRT', true)
-const TABII = ch('tabii', true, 'stream')
-const ATV = ch('ATV', true)
-const A_SPOR = ch('A Spor', true)
+// Sender – Links auf die offiziellen Angebote (Startseite bzw. Sport-/Livebereich)
+const SKY = ch('Sky Sport', false, 'https://www.sky.de/sport')
+const WOW = ch('WOW', false, 'https://www.wowtv.de/sport', 'stream')
+const DAZN = ch('DAZN', false, 'https://www.dazn.com/de-DE/home', 'stream')
+const PRIME = ch('Prime Video', false, 'https://www.amazon.de/gp/video/storefront', 'stream')
+const RTL = ch('RTL', true, 'https://plus.rtl.de')
+const NITRO = ch('NITRO', true, 'https://plus.rtl.de')
+const RTL_PLUS = ch('RTL+', false, 'https://plus.rtl.de', 'stream')
+const ARD = ch('ARD', true, 'https://www.sportschau.de')
+const ZDF = ch('ZDF', true, 'https://www.zdf.de/live-tv')
+const DIGITURK_EURO = ch('Digiturk Euro (beIN Sports)', false, 'https://beinsports.com.tr', 'stream')
+const BEIN = ch('beIN Sports', false, 'https://beinsports.com.tr')
+const TOD = ch('TOD', false, 'https://www.todtv.com.tr', 'stream')
+const S_SPORT = ch('S Sport', false, 'https://www.ssport.tv')
+const S_SPORT_PLUS = ch('S Sport Plus', false, 'https://www.ssportplus.com', 'stream')
+const TRT = ch('TRT', true, 'https://www.trt.net.tr')
+const TABII = ch('tabii', true, 'https://www.tabii.com', 'stream')
+const ATV = ch('ATV', true, 'https://www.atv.com.tr')
+const A_SPOR = ch('A Spor', true, 'https://www.aspor.com.tr')
 
 const SRC = {
   buli: 'https://www.bundesliga.com/de/bundesliga/news/bundesliga-spiele-im-fernsehen-tv-sender-rtl-dazn-sky-prime-363',

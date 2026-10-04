@@ -57,3 +57,21 @@ describe('Türkei', () => {
 it('liefert nichts für Wettbewerbe ohne belegte Rechte (z. B. WM 2026/27)', () => {
   expect(tvInfoFor(fixture('c-world-cup', '2026-10-01T18:00:00Z'), 'DE')).toBeUndefined()
 })
+
+describe('Schauen: offizielle Links', () => {
+  const base = { id: 'x', homeTeam: { id: '1', slug: 'a', name: 'A', shortName: 'A' }, awayTeam: { id: '2', slug: 'b', name: 'B', shortName: 'B' } }
+
+  it('verlinkt jeden Sender auf ein offizielles https-Angebot', () => {
+    const fixtures = ['c-bundesliga', 'c-super-lig', 'c-premier-league', 'c-champions-league', 'c-europa-league', 'c-la-liga'].map((competitionId) => ({
+      ...base,
+      competitionId,
+      kickoffAt: '2026-10-10T13:30:00Z',
+      status: 'scheduled' as const,
+    }))
+    for (const country of ['DE', 'TR'] as const) {
+      for (const f of fixtures) {
+        for (const c of tvInfoFor(f, country)?.channels ?? []) expect(c.url).toMatch(/^https:\/\/[a-z0-9.-]+\.[a-z]{2,}/)
+      }
+    }
+  })
+})

@@ -324,6 +324,11 @@ export const en: Record<MessageKey, string> = {
   'more.photos': 'Player photos',
   'more.photosValue': 'Wikimedia Commons (free licences)',
 
+  'tv.openChannel': 'Open {name} (official service)',
+  'filter.tv': 'Live on TV',
+  'matches.empty.tv': 'No match is being played right now. Live matches appear here automatically with their broadcasters.',
+  'tv.noChannel': 'No broadcaster known',
+  'tv.watchHint': 'The buttons lead to the official providers. Depending on the broadcaster a subscription or free sign-up is required; some services are only available in their country.',
   'tv.title': 'TV & streaming',
   'tv.free': 'free',
   'tv.pay': 'subscription',

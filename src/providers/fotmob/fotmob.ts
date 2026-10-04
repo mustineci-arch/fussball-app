@@ -16,8 +16,9 @@ const client = new EspnClient()
  * Eigener Parameter, damit der FotMob-Cache diese Adressen nur aus Browser-Anfragen kennt
  * (mit Freigabe für fremde Seiten) – sonst fehlt die CORS-Freigabe gelegentlich.
  */
-const get = <T>(path: string, params: Record<string, string>, cacheFor: number | ((data: T) => number)) =>
+export const fotmobGet = <T>(path: string, params: Record<string, string>, cacheFor: number | ((data: T) => number)) =>
   client.get<T>(`${BASE}/${path}?${new URLSearchParams({ ...params, src: 'anstoss' })}`, cacheFor)
+const get = fotmobGet
 
 // ------------------------------------------------------------ Namensvergleich
 
@@ -46,6 +47,7 @@ const TEAM_OVERRIDES: Record<string, number> = {
 }
 
 export async function findTeamId(team: Pick<Team, 'id' | 'name' | 'shortName'>): Promise<number | undefined> {
+  if (team.id.startsWith('fmt-')) return Number(team.id.slice(4)) || undefined
   const override = TEAM_OVERRIDES[team.id]
   if (override) return override
   const longest = [...tokens(team.name)].sort((a, b) => b.length - a.length)[0]
@@ -154,10 +156,19 @@ export function mapLineupTeam(team: RawFmLineupTeam | undefined): FmMatchSide {
   return { players, unavailable }
 }
 
+const matchTtl = (d: RawFmMatchDetails) => (d.general?.finished ? ttl.long : d.general?.started ? ttl.live : ttl.short)
+
+/** Noten und Ausfälle direkt über die FotMob-Spiel-ID (Spiele, die aus FotMob selbst stammen) */
+export async function getMatchById(matchId: string): Promise<FmMatch> {
+  const details = await get<RawFmMatchDetails>('matchDetails', { matchId }, matchTtl)
+  return { home: mapLineupTeam(details.content?.lineup?.homeTeam), away: mapLineupTeam(details.content?.lineup?.awayTeam) }
+}
+
 const MAX_KICKOFF_DIFF_MS = 4 * 60 * 60_000
 
 /** FotMob-Daten zu einem ESPN-Spiel: über den Spielplan eines der beiden Teams und die Anstoßzeit */
 export async function getMatch(fixture: Fixture): Promise<FmMatch | undefined> {
+  if (fixture.id.startsWith('fm-')) return getMatchById(fixture.id.slice(3))
   const homeId = await findTeamId(fixture.homeTeam)
   const awayId = homeId ? undefined : await findTeamId(fixture.awayTeam)
   const ownId = homeId ?? awayId
@@ -170,9 +181,7 @@ export async function getMatch(fixture: Fixture): Promise<FmMatch | undefined> {
   )
   if (!match?.id) return undefined
 
-  const details = await get<RawFmMatchDetails>('matchDetails', { matchId: String(match.id) }, (d) =>
-    d.general?.finished ? ttl.long : d.general?.started ? ttl.live : ttl.short,
-  )
+  const details = await get<RawFmMatchDetails>('matchDetails', { matchId: String(match.id) }, matchTtl)
   // Bei Spielen mit wenig Abdeckung (z. B. viele Testspiele) fehlt die Aufstellung – dann gibt es keine Noten.
   const fmHome = details.content?.lineup?.homeTeam
   const fmAway = details.content?.lineup?.awayTeam

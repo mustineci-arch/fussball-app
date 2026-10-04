@@ -14,7 +14,7 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 
 - Spiele nach Datum, Filter, Live-Stände (Aktualisierung alle 2 s bei laufenden Spielen und rund um den Anpfiff; Spielstand/Minute direkt aus dem ESPN-Scoreboard, Ereignisse/Aufstellung liefert ESPN mit ca. 10–15 s Verzögerung)
 - Match Center: Übersicht, Aufstellung auf dem Spielfeld, Statistik, Ereignisse, Tabelle
-- Wettbewerbe (14 inkl. 2. Bundesliga und DFB-Pokal, dazu Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
+- Wettbewerbe (15 inkl. 2. Bundesliga, DFB-Pokal und türkischem Pokal, dazu Testspiele), Tabellen mit Zonen, Teams, Kader, Spielerprofile, Suche
 - Echte Daten über ESPN (inoffiziell, kostenlos) – Adapter austauschbar
 - Korrekte Schreibweise (türkische Buchstaben, deutsche Vereinsnamen), Korrekturliste für Quellfehler
 - Favoriten (lokal), „Meine Spiele“ oben auf der Startseite
@@ -23,13 +23,14 @@ Updates kommen automatisch („Aktualisieren“-Hinweis), kein App Store nötig.
 - Spielerfotos aus Wikimedia Commons (nur freie Lizenzen, mit Fotonachweis) in Profil, Kader, Aufstellung
 - TV & Stream: Rechteinhaber 2026/27 für Deutschland und Türkei, kostenlos/Abo gekennzeichnet
 - Testspiele: Vereins-Testspiele (z. B. HSV – FC Kopenhagen) und Länderspiel-Tests in der Spielliste (nicht unter Wettbewerbe)
+- Türkischer Pokal (FotMob): Spielplan, Gruppen, K.-o.-Runden, Match Center mit Aufstellung/Noten/Statistik, Pokalspiele auf den Seiten türkischer Teams
 - Ausfälle (FotMob): verletzte/gesperrte Spieler je Team (Tab „Ausfälle“, Markierung im Kader, Spielerprofil) und pro Spiel in der Übersicht
 - Spielernoten (FotMob): Tab „Noten“ im Match Center, Noten auf Spielfeld und Bank, Saisonnote im Kader und Profil; ohne FotMob-Daten eigene Berechnung aus ESPN-Einzelwerten
 
 ## Ideen für später (Reihenfolge = Vorschlag)
 
 1. **Feinschliff Match Center** – Spieltag/Runde anzeigen, Head-to-Head, Formkurve in der Tabelle
-2. **Mehr Wettbewerbe** – Türkischer Pokal gibt es bei ESPN nicht (nur über FotMob als eigener Adapter möglich); weitere ESPN-Wettbewerbe je eine Zeile in `src/providers/espn/leagues.ts`
+2. **Mehr Wettbewerbe** – ESPN-Wettbewerbe je eine Zeile in `src/providers/espn/leagues.ts`; Wettbewerbe, die nur FotMob hat, wie der türkische Pokal in `src/providers/CombinedProvider.ts`
 3. **Push-Benachrichtigungen** (Tore, Aufstellungen) – braucht einen kleinen Server; auf dem iPhone nur für installierte App
 4. **E2E-Tests** mit Playwright (iPhone-, iPad-, Desktop-Ansicht)
 5. **Konto & Sync** der Favoriten zwischen Geräten

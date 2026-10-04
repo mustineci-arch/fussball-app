@@ -131,7 +131,7 @@ export const usePlayerPhoto = (player: Pick<Player, 'id' | 'name' | 'birthDate'>
         name: player!.name,
         birthDate: player!.birthDate,
         // Die Spieler-IDs sind bei ESPN die ESPN-IDs – nur dann für die exakte Zuordnung nutzen
-        espnId: provider.id === 'espn' ? player!.id : undefined,
+        espnId: provider.id === 'espn' && /^\d+$/.test(player!.id) ? player!.id : undefined,
       }),
     enabled: player !== undefined && !provider.isDemo,
     staleTime: Number.POSITIVE_INFINITY,
@@ -150,7 +150,7 @@ export const usePlayersPhotos = (scope: string, players: Pick<Player, 'id' | 'na
       const queries = list.map((p) => ({
         name: p.name,
         birthDate: p.birthDate,
-        espnId: provider.id === 'espn' ? p.id : undefined,
+        espnId: provider.id === 'espn' && /^\d+$/.test(p.id) ? p.id : undefined,
       }))
       const found = await findPlayerPhotos(queries)
       return Object.fromEntries(list.map((p, i) => [p.id, found.get(photoKey(queries[i]!)) ?? null]))

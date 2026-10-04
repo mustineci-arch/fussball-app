@@ -1,0 +1,1171 @@
+{
+ "details": {
+  "id": 8622,
+  "type": "team",
+  "name": "Konyaspor",
+  "latestSeason": "2026/2027",
+  "shortName": "Konyaspor",
+  "country": "TUR",
+  "gender": "male",
+  "faqJSONLD": {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "When is Konyaspor's next match?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Konyaspor's next match is at 11:30 BST on Sun, 11 Oct 2026 against Başakşehir."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Where is Konyaspor's stadium?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Konyaspor stadium is located in Konya and is called Medaş Konya Büyükşehir Stadyumu."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What is the capacity of Medaş Konya Büyükşehir Stadyumu?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The capacity for Medaş Konya Büyükşehir Stadyumu is 42276."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "When was Medaş Konya Büyükşehir Stadyumu opened?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Medaş Konya Büyükşehir Stadyumu opened in 2014."
+     }
+    }
+   ]
+  },
+  "sportsTeamJSONLD": {
+   "@context": "https://schema.org",
+   "@type": "SportsTeam",
+   "name": "Konyaspor",
+   "sport": "Football/Soccer",
+   "gender": "https://schema.org/Male",
+   "logo": "https://images.fotmob.com/image_resources/logo/teamlogo/8622.png",
+   "url": "https://www.fotmob.com/teams/8622/overview/konyaspor",
+   "athlete": [],
+   "location": {
+    "@type": "Place",
+    "name": "Medaş Konya Büyükşehir Stadyumu",
+    "address": {
+     "@type": "PostalAddress",
+     "addressCountry": "Türkiye",
+     "addressLocality": "Konya"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": "37.946302618",
+     "longitude": "32.488065073"
+    }
+   },
+   "memberOf": {
+    "@type": "SportsOrganization",
+    "name": "Super Lig",
+    "url": "https://www.fotmob.com/leagues/71/overview/super-lig"
+   }
+  },
+  "breadcrumbJSONLD": {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Home",
+     "item": "https://www.fotmob.com"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Super Lig",
+     "item": "https://www.fotmob.com/leagues/71/overview/super-lig"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Konyaspor",
+     "item": "https://www.fotmob.com/teams/8622/overview/konyaspor"
+    }
+   ]
+  },
+  "canSyncCalendar": true,
+  "hasFixtureDifficulty": true,
+  "primaryLeagueId": 71,
+  "primaryLeagueName": "Super Lig",
+  "seopath": "konyaspor"
+ },
+ "squad": {
+  "squad": [
+   {
+    "title": "coach",
+    "members": [
+     {
+      "id": 1114920,
+      "height": null,
+      "age": 49,
+      "dateOfBirth": "1976-11-12",
+      "name": "İlhan Palut",
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "coach",
+       "fallback": "Coach"
+      },
+      "excludeFromRanking": true
+     }
+    ]
+   },
+   {
+    "title": "keepers",
+    "members": [
+     {
+      "id": 1429909,
+      "name": "Deniz Ertaş",
+      "shirtNumber": 1,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "keeper_long",
+       "fallback": "Keeper"
+      },
+      "positionId": 0,
+      "injury": null,
+      "rating": 6.29,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "11",
+      "positionIdsDesc": "GK",
+      "height": 184,
+      "age": 21,
+      "dateOfBirth": "2005-03-20",
+      "transferValue": 2210960
+     },
+     {
+      "id": 712040,
+      "name": "Bahadir Han Güngördü",
+      "shirtNumber": 13,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "keeper_long",
+       "fallback": "Keeper"
+      },
+      "positionId": 0,
+      "injury": null,
+      "rating": 7.31,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "11",
+      "positionIdsDesc": "GK",
+      "height": 190,
+      "age": 30,
+      "dateOfBirth": "1996-01-16",
+      "transferValue": 359898
+     },
+     {
+      "id": 1763433,
+      "name": "Egemen Aydın",
+      "shirtNumber": 29,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "keeper_long",
+       "fallback": "Keeper"
+      },
+      "positionId": 0,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": null,
+      "positionIdsDesc": null,
+      "height": 193,
+      "age": 19,
+      "dateOfBirth": "2007-05-12",
+      "transferValue": null
+     }
+    ]
+   },
+   {
+    "title": "defenders",
+    "members": [
+     {
+      "id": 2140571,
+      "name": "Alpha Fofana",
+      "shirtNumber": null,
+      "ccode": "GUI",
+      "cname": "Guinea",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": null,
+      "positionIdsDesc": null,
+      "height": null,
+      "age": 18,
+      "dateOfBirth": "2008-01-03",
+      "transferValue": null
+     },
+     {
+      "id": 511399,
+      "name": "Ahmet Oğuz",
+      "shirtNumber": 2,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "32",
+      "positionIdsDesc": "RB",
+      "height": 175,
+      "age": 33,
+      "dateOfBirth": "1993-01-16",
+      "transferValue": 258013
+     },
+     {
+      "id": 1430145,
+      "name": "Arif Boşluk",
+      "shirtNumber": 3,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 7.08,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "38",
+      "positionIdsDesc": "LB",
+      "height": 184,
+      "age": 23,
+      "dateOfBirth": "2003-06-06",
+      "transferValue": 668345
+     },
+     {
+      "id": 704664,
+      "name": "Adil Demirbağ",
+      "shirtNumber": 4,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.43,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 3,
+      "excludeFromRanking": false,
+      "positionIds": "36",
+      "positionIdsDesc": "CB",
+      "height": 185,
+      "age": 28,
+      "dateOfBirth": "1997-12-10",
+      "transferValue": 1643686
+     },
+     {
+      "id": 891469,
+      "name": "Uğurcan Yazğılı",
+      "shirtNumber": 5,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.26,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "34,32",
+      "positionIdsDesc": "CB,RB",
+      "height": 184,
+      "age": 27,
+      "dateOfBirth": "1999-04-09",
+      "transferValue": 1209994
+     },
+     {
+      "id": 666954,
+      "name": "Chidozie Awaziem",
+      "shirtNumber": 15,
+      "ccode": "NGA",
+      "cname": "Nigeria",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.54,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 2,
+      "excludeFromRanking": false,
+      "positionIds": "34",
+      "positionIdsDesc": "CB",
+      "height": 192,
+      "age": 29,
+      "dateOfBirth": "1997-01-01",
+      "transferValue": 1629540
+     },
+     {
+      "id": 1965642,
+      "name": "Ata Yanik",
+      "shirtNumber": 16,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "36",
+      "positionIdsDesc": "CB",
+      "height": 182,
+      "age": 17,
+      "dateOfBirth": "2009-05-15",
+      "transferValue": 743116
+     },
+     {
+      "id": 692810,
+      "name": "Yhoan Andzouana",
+      "shirtNumber": 17,
+      "ccode": "CGO",
+      "cname": "Congo",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.71,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 1,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "32,62,71,38",
+      "positionIdsDesc": "RB,RWB,RM,LB",
+      "height": 177,
+      "age": 29,
+      "dateOfBirth": "1996-12-13",
+      "transferValue": 708170
+     },
+     {
+      "id": 1112763,
+      "name": "Rayyan Baniya",
+      "shirtNumber": 22,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.68,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 2,
+      "excludeFromRanking": false,
+      "positionIds": "34",
+      "positionIdsDesc": "CB",
+      "height": 187,
+      "age": 27,
+      "dateOfBirth": "1999-02-18",
+      "transferValue": 900616
+     },
+     {
+      "id": 418137,
+      "name": "Arthur Masuaku",
+      "shirtNumber": 26,
+      "ccode": "COD",
+      "cname": "DR Congo",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": 6.97,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "38,68,37",
+      "positionIdsDesc": "LB,LWB,CB",
+      "height": 179,
+      "age": 32,
+      "dateOfBirth": "1993-11-07",
+      "transferValue": 1418198
+     },
+     {
+      "id": 1583233,
+      "name": "Da Mata",
+      "shirtNumber": 41,
+      "ccode": "BRA",
+      "cname": "Brazil",
+      "role": {
+       "key": "defender_long",
+       "fallback": "Defender"
+      },
+      "positionId": 1,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "36",
+      "positionIdsDesc": "CB",
+      "height": 185,
+      "age": 20,
+      "dateOfBirth": "2006-03-13",
+      "transferValue": null
+     }
+    ]
+   },
+   {
+    "title": "midfielders",
+    "members": [
+     {
+      "id": 576118,
+      "name": "Diogo Gonçalves",
+      "shirtNumber": 7,
+      "ccode": "POR",
+      "cname": "Portugal",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": 6.66,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 1,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "85,87",
+      "positionIdsDesc": "CAM,LW",
+      "height": 176,
+      "age": 29,
+      "dateOfBirth": "1997-02-06",
+      "transferValue": 1617418
+     },
+     {
+      "id": 463591,
+      "name": "Marko Jevtović",
+      "shirtNumber": 8,
+      "ccode": "SRB",
+      "cname": "Serbia",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": 6.7,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 2,
+      "excludeFromRanking": false,
+      "positionIds": "66",
+      "positionIdsDesc": "CDM",
+      "height": 192,
+      "age": 33,
+      "dateOfBirth": "1993-07-24",
+      "transferValue": 166719
+     },
+     {
+      "id": 592783,
+      "name": "Enis Bardhi",
+      "shirtNumber": 10,
+      "ccode": "MKD",
+      "cname": "North Macedonia",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": 6.09,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 1,
+      "ycards": 1,
+      "excludeFromRanking": true,
+      "positionIds": "85,87,77,103",
+      "positionIdsDesc": "CAM,LW,CM,RW",
+      "height": 172,
+      "age": 31,
+      "dateOfBirth": "1995-07-02",
+      "transferValue": 1307156
+     },
+     {
+      "id": 1915583,
+      "name": "Ömer Çobanoglu",
+      "shirtNumber": 25,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": null,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "66",
+      "positionIdsDesc": "CDM",
+      "height": null,
+      "age": 19,
+      "dateOfBirth": "2007-07-04",
+      "transferValue": null
+     },
+     {
+      "id": 1562891,
+      "name": "Rajmund Tóth",
+      "shirtNumber": 66,
+      "ccode": "HUN",
+      "cname": "Hungary",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": 6.65,
+      "goals": 1,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 1,
+      "excludeFromRanking": false,
+      "positionIds": "64,32",
+      "positionIdsDesc": "CDM,RB",
+      "height": 182,
+      "age": 22,
+      "dateOfBirth": "2004-04-09",
+      "transferValue": 1087989
+     },
+     {
+      "id": 1098065,
+      "name": "Melih İbrahimoğlu",
+      "shirtNumber": 77,
+      "ccode": "AUT",
+      "cname": "Austria",
+      "role": {
+       "key": "midfielder_long",
+       "fallback": "Midfielder"
+      },
+      "positionId": 2,
+      "injury": null,
+      "rating": 6.7,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 2,
+      "excludeFromRanking": false,
+      "positionIds": "64,84,75",
+      "positionIdsDesc": "CDM,CAM,CM",
+      "height": 175,
+      "age": 26,
+      "dateOfBirth": "2000-07-17",
+      "transferValue": 1620051
+     }
+    ]
+   },
+   {
+    "title": "attackers",
+    "members": [
+     {
+      "id": 352023,
+      "name": "Deniz Türüc",
+      "shirtNumber": 9,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 7.04,
+      "goals": 1,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 2,
+      "excludeFromRanking": false,
+      "positionIds": "83",
+      "positionIdsDesc": "RW",
+      "height": 177,
+      "age": 33,
+      "dateOfBirth": "1993-01-29",
+      "transferValue": 540771
+     },
+     {
+      "id": 938682,
+      "name": "Jackson Muleka",
+      "shirtNumber": 11,
+      "ccode": "COD",
+      "cname": "DR Congo",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 6.33,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 1,
+      "excludeFromRanking": false,
+      "positionIds": "115,87,82,86",
+      "positionIdsDesc": "ST,LW,RW,CAM",
+      "height": 180,
+      "age": 27,
+      "dateOfBirth": "1999-10-04",
+      "transferValue": 1835853
+     },
+     {
+      "id": 996894,
+      "name": "Ebrima Colley",
+      "shirtNumber": 19,
+      "ccode": "GAM",
+      "cname": "The Gambia",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 6.57,
+      "goals": 1,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "87",
+      "positionIdsDesc": "LW",
+      "height": 180,
+      "age": 26,
+      "dateOfBirth": "2000-02-01",
+      "transferValue": 734977
+     },
+     {
+      "id": 817500,
+      "name": "Mostafa Mohamed",
+      "shirtNumber": 42,
+      "ccode": "EGY",
+      "cname": "Egypt",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 5.94,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "105",
+      "positionIdsDesc": "ST",
+      "height": 185,
+      "age": 28,
+      "dateOfBirth": "1997-11-28",
+      "transferValue": 1970356
+     },
+     {
+      "id": 1527137,
+      "name": "Emir Bars",
+      "shirtNumber": 45,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 6.45,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": true,
+      "positionIds": "83,87",
+      "positionIdsDesc": "RW,LW",
+      "height": 180,
+      "age": 21,
+      "dateOfBirth": "2005-04-11",
+      "transferValue": 715895
+     },
+     {
+      "id": 613260,
+      "name": "Jean-Luc Dompé",
+      "shirtNumber": 91,
+      "ccode": "FRA",
+      "cname": "France",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 6.37,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "107",
+      "positionIdsDesc": "LW",
+      "height": 170,
+      "age": 31,
+      "dateOfBirth": "1995-08-12",
+      "transferValue": 1652485
+     },
+     {
+      "id": 1197548,
+      "name": "Enis Destan",
+      "shirtNumber": 94,
+      "ccode": "TUR",
+      "cname": "Turkiye",
+      "role": {
+       "key": "attacker_long",
+       "fallback": "Attacker"
+      },
+      "positionId": 3,
+      "injury": null,
+      "rating": 6.06,
+      "goals": 0,
+      "penalties": 0,
+      "assists": 0,
+      "rcards": 0,
+      "ycards": 0,
+      "excludeFromRanking": false,
+      "positionIds": "115",
+      "positionIdsDesc": "ST",
+      "height": 185,
+      "age": 24,
+      "dateOfBirth": "2002-06-15",
+      "transferValue": 1748310
+     }
+    ]
+   }
+  ],
+  "isNationalTeam": false
+ },
+ "fixtures": {
+  "allFixtures": {
+   "fixtures": [
+    {
+     "id": 5904943,
+     "pageUrl": "/matches/konyaspor-vs-galatasaray/2golhr#5904943",
+     "opponent": {
+      "id": 8637,
+      "name": "Galatasaray",
+      "score": 0
+     },
+     "home": {
+      "id": 8637,
+      "name": "Galatasaray",
+      "score": 0
+     },
+     "away": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-04-04T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904955,
+     "pageUrl": "/matches/konyaspor-vs-samsunspor/2shmo0#5904955",
+     "opponent": {
+      "id": 9750,
+      "name": "Samsunspor",
+      "score": 0
+     },
+     "home": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "away": {
+      "id": 9750,
+      "name": "Samsunspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-04-11T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904961,
+     "pageUrl": "/matches/konyaspor-vs-besiktas/2xc519#5904961",
+     "opponent": {
+      "id": 10188,
+      "name": "Beşiktaş",
+      "score": 0
+     },
+     "home": {
+      "id": 10188,
+      "name": "Beşiktaş",
+      "score": 0
+     },
+     "away": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-04-18T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904967,
+     "pageUrl": "/matches/alanyaspor-vs-konyaspor/1go0ds#5904967",
+     "opponent": {
+      "id": 4678,
+      "name": "Alanyaspor",
+      "score": 0
+     },
+     "home": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "away": {
+      "id": 4678,
+      "name": "Alanyaspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-04-25T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904979,
+     "pageUrl": "/matches/gaziantep-fk-vs-konyaspor/1c1n1a#5904979",
+     "opponent": {
+      "id": 4081,
+      "name": "Gaziantep FK",
+      "score": 0
+     },
+     "home": {
+      "id": 4081,
+      "name": "Gaziantep FK",
+      "score": 0
+     },
+     "away": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-05-02T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904987,
+     "pageUrl": "/matches/goztepe-vs-konyaspor/x4f30#5904987",
+     "opponent": {
+      "id": 1925,
+      "name": "Göztepe",
+      "score": 0
+     },
+     "home": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "away": {
+      "id": 1925,
+      "name": "Göztepe",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-05-09T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5904997,
+     "pageUrl": "/matches/eyupspor-vs-konyaspor/1gov6a#5904997",
+     "opponent": {
+      "id": 4681,
+      "name": "Eyüpspor",
+      "score": 0
+     },
+     "home": {
+      "id": 4681,
+      "name": "Eyüpspor",
+      "score": 0
+     },
+     "away": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-05-16T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    },
+    {
+     "id": 5905006,
+     "pageUrl": "/matches/konyaspor-vs-corum-fk/ur2fd6a#5905006",
+     "opponent": {
+      "id": 357274,
+      "name": "Çorum FK",
+      "score": 0
+     },
+     "home": {
+      "id": 8622,
+      "name": "Konyaspor",
+      "score": 0
+     },
+     "away": {
+      "id": 357274,
+      "name": "Çorum FK",
+      "score": 0
+     },
+     "displayTournament": false,
+     "notStarted": true,
+     "tournament": {
+      "name": "Super Lig",
+      "stage": "",
+      "leagueId": 71
+     },
+     "status": {
+      "utcTime": "2027-05-23T17:00:00.000Z",
+      "matchDateTbd": true,
+      "matchTimeTbd": false,
+      "started": false,
+      "cancelled": false,
+      "finished": false
+     }
+    }
+   ]
+  }
+ },
+ "overview": {
+  "venue": {
+   "widget": {
+    "name": "Medaş Konya Büyükşehir Stadyumu",
+    "location": [
+     "37.946302618",
+     "32.488065073"
+    ],
+    "city": "Konya"
+   },
+   "statPairs": [
+    [
+     "Surface",
+     "Grass"
+    ],
+    [
+     "Capacity",
+     42276
+    ],
+    [
+     "Opened",
+     2014
+    ]
+   ]
+  },
+  "coachHistory": [
+   {
+    "id": 154758,
+    "name": "Mesut Bakkal",
+    "season": "2013/2014",
+    "leagueId": 71,
+    "leagueName": "Süper Lig",
+    "win": 6,
+    "draw": 8,
+    "loss": 5,
+    "pointsPerGame": 1.37,
+    "winPercentage": 0.32
+   }
+  ]
+ }
+}

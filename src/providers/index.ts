@@ -1,4 +1,4 @@
-import { EspnProvider } from './espn/EspnProvider'
+import { CombinedProvider } from './CombinedProvider'
 import type { FootballProvider } from './FootballProvider'
 import { MockProvider } from './mock/MockProvider'
 
@@ -12,10 +12,11 @@ function createProvider(): FootballProvider {
     case 'mock':
       return new MockProvider()
     case 'espn':
-      return new EspnProvider()
+      // ESPN + FotMob für Wettbewerbe, die ESPN nicht führt (türkischer Pokal)
+      return new CombinedProvider()
     default:
       console.warn(`Unbekannter Datenanbieter "${name}" – verwende ESPN.`)
-      return new EspnProvider()
+      return new CombinedProvider()
   }
 }
 

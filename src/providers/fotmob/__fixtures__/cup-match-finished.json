@@ -1,0 +1,2862 @@
+{
+ "general": {
+  "matchId": "5237912",
+  "leagueId": 923709,
+  "parentLeagueId": 151,
+  "leagueRoundName": "final",
+  "homeTeam": {
+   "name": "Trabzonspor",
+   "id": 9752
+  },
+  "awayTeam": {
+   "name": "Konyaspor",
+   "id": 8622
+  },
+  "matchTimeUTCDate": "2026-05-22T17:45:00.000Z",
+  "started": true,
+  "finished": true
+ },
+ "header": {
+  "teams": [
+   {
+    "name": "Trabzonspor",
+    "id": 9752,
+    "score": 2,
+    "imageUrl": "https://images.fotmob.com/image_resources/logo/teamlogo/9752_small.png",
+    "pageUrl": "/teams/9752/overview/trabzonspor"
+   },
+   {
+    "name": "Konyaspor",
+    "id": 8622,
+    "score": 1,
+    "imageUrl": "https://images.fotmob.com/image_resources/logo/teamlogo/8622_small.png",
+    "pageUrl": "/teams/8622/overview/konyaspor"
+   }
+  ],
+  "status": {
+   "utcTime": "2026-05-22T17:45:00.000Z",
+   "numberOfHomeRedCards": 0,
+   "numberOfAwayRedCards": 0,
+   "halfs": {
+    "firstHalfStarted": "22.05.2026 19:46:33",
+    "firstHalfEnded": "22.05.2026 20:37:07",
+    "secondHalfStarted": "22.05.2026 20:55:24",
+    "secondHalfEnded": "22.05.2026 21:48:10",
+    "firstExtraHalfStarted": "",
+    "secondExtraHalfStarted": "",
+    "gameEnded": "22.05.2026 21:48:10"
+   },
+   "finished": true,
+   "started": true,
+   "cancelled": false,
+   "awarded": false,
+   "scoreStr": "2 - 1",
+   "reason": {
+    "short": "FT",
+    "shortKey": "fulltime_short",
+    "long": "Full-Time",
+    "longKey": "finished"
+   },
+   "whoLostOnPenalties": null,
+   "whoLostOnAggregated": ""
+  }
+ },
+ "content": {
+  "matchFacts": {
+   "events": {
+    "events": [
+     {
+      "reactKey": "1415705018Goal412357undefinedtrue",
+      "timeStr": 18,
+      "type": "Goal",
+      "time": 18,
+      "overloadTime": null,
+      "eventId": 14157050,
+      "player": {
+       "id": 412357,
+       "name": "Paul Onuachu",
+       "profileUrl": "/players/412357/paul-onuachu"
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "profileUrl": "/players/412357/paul-onuachu",
+      "overloadTimeStr": false,
+      "isHome": true,
+      "ownGoal": null,
+      "goalDescription": null,
+      "goalDescriptionKey": null,
+      "suffix": null,
+      "suffixKey": null,
+      "isPenaltyShootoutEvent": false,
+      "nameStr": "Paul Onuachu",
+      "firstName": "Paul",
+      "lastName": "Onuachu",
+      "fullName": "Paul Onuachu",
+      "playerId": 412357,
+      "newScore": [
+       1,
+       0
+      ],
+      "penShootoutScore": null,
+      "shotmapEvent": null,
+      "assistStr": "assist by Wagner Pina",
+      "assistProfileUrl": "/players/1460591/wagner-pina",
+      "assistPlayerId": 1460591,
+      "assistKey": "assist_by",
+      "assistInput": "Wagner Pina"
+     },
+     {
+      "reactKey": "1415707422Card891469undefinedfalse",
+      "timeStr": 22,
+      "type": "Card",
+      "time": 22,
+      "overloadTime": null,
+      "eventId": 14157074,
+      "player": {
+       "id": 891469,
+       "name": "Ugurcan Yazgili",
+       "profileUrl": "/players/891469/ugurcan-yazgili"
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "profileUrl": "/players/891469/ugurcan-yazgili",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "nameStr": "Ugurcan Yazgili",
+      "firstName": "Ugurcan",
+      "lastName": "Yazgili",
+      "fullName": "Ugurcan Yazgili",
+      "playerId": 891469,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415723145Card1174002undefinedtrue",
+      "timeStr": "45 + 1",
+      "type": "Card",
+      "time": 45,
+      "overloadTime": 1,
+      "eventId": 14157231,
+      "player": {
+       "id": 1174002,
+       "name": "Benjamin Bouchouari",
+       "profileUrl": "/players/1174002/benjamin-bouchouari"
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "profileUrl": "/players/1174002/benjamin-bouchouari",
+      "overloadTimeStr": "+1",
+      "isHome": true,
+      "nameStr": "Benjamin Bouchouari",
+      "firstName": "Benjamin",
+      "lastName": "Bouchouari",
+      "fullName": "Benjamin Bouchouari",
+      "playerId": 1174002,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415723245Card178955undefinedtrue",
+      "timeStr": "45 + 4",
+      "type": "Card",
+      "time": 45,
+      "overloadTime": 4,
+      "eventId": 14157232,
+      "player": {
+       "id": 178955,
+       "name": "Stefan Savic",
+       "profileUrl": "/players/178955/stefan-savic"
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "profileUrl": "/players/178955/stefan-savic",
+      "overloadTimeStr": "+4",
+      "isHome": true,
+      "nameStr": "Stefan Savic",
+      "firstName": "Stefan",
+      "lastName": "Savic",
+      "fullName": "Stefan Savic",
+      "playerId": 178955,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415733545Card463591undefinedfalse",
+      "timeStr": "45 + 7",
+      "type": "Card",
+      "time": 45,
+      "overloadTime": 7,
+      "eventId": 14157335,
+      "player": {
+       "id": 463591,
+       "name": "Marko Jevtovic",
+       "profileUrl": "/players/463591/marko-jevtovic"
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "profileUrl": "/players/463591/marko-jevtovic",
+      "overloadTimeStr": "+7",
+      "isHome": false,
+      "nameStr": "Marko Jevtovic",
+      "firstName": "Marko",
+      "lastName": "Jevtovic",
+      "fullName": "Marko Jevtovic",
+      "playerId": 463591,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "undefined45HalfNaNundefinedundefined",
+      "timeStr": 45,
+      "type": "Half",
+      "time": 45,
+      "overloadTime": null,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "halfStrShort": "HT",
+      "halfStrKey": "halftime_short"
+     },
+     {
+      "reactKey": "1415733750Goal938682undefinedfalse",
+      "timeStr": 50,
+      "type": "Goal",
+      "time": 50,
+      "overloadTime": null,
+      "eventId": 14157337,
+      "player": {
+       "id": 938682,
+       "name": "Jackson Muleka",
+       "profileUrl": "/players/938682/jackson-muleka"
+      },
+      "homeScore": 1,
+      "awayScore": 0,
+      "profileUrl": "/players/938682/jackson-muleka",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "ownGoal": null,
+      "goalDescription": null,
+      "goalDescriptionKey": null,
+      "suffix": null,
+      "suffixKey": null,
+      "isPenaltyShootoutEvent": false,
+      "nameStr": "Jackson Muleka",
+      "firstName": "Jackson",
+      "lastName": "Muleka",
+      "fullName": "Jackson Muleka",
+      "playerId": 938682,
+      "newScore": [
+       1,
+       1
+      ],
+      "penShootoutScore": null,
+      "shotmapEvent": null,
+      "assistStr": null,
+      "assistProfileUrl": null
+     },
+     {
+      "reactKey": "undefined57SubstitutionNaN358936true",
+      "timeStr": 57,
+      "type": "Substitution",
+      "time": 57,
+      "overloadTime": 0,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 1,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": false,
+      "isHome": true,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Ozan Tufan",
+        "id": "358936",
+        "profileUrl": "/players/358936/ozan-tufan"
+       },
+       {
+        "name": "Stefan Savic",
+        "id": "178955",
+        "profileUrl": "/players/178955/stefan-savic"
+       }
+      ]
+     },
+     {
+      "reactKey": "1415736658MissedPenalty592783undefinedfalse",
+      "timeStr": 58,
+      "type": "MissedPenalty",
+      "time": 58,
+      "overloadTime": null,
+      "eventId": 14157366,
+      "player": {
+       "id": 592783,
+       "name": "Enis Bardhi",
+       "profileUrl": "/players/592783/enis-bardhi"
+      },
+      "homeScore": 1,
+      "awayScore": 1,
+      "profileUrl": "/players/592783/enis-bardhi",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "nameStr": "Enis Bardhi",
+      "isPenaltyShootoutEvent": false,
+      "penShootoutScore": null
+     },
+     {
+      "reactKey": "1415736760Card352023undefinedfalse",
+      "timeStr": 60,
+      "type": "Card",
+      "time": 60,
+      "overloadTime": null,
+      "eventId": 14157367,
+      "player": {
+       "id": 352023,
+       "name": "Deniz Türüc",
+       "profileUrl": "/players/352023/deniz-turuc"
+      },
+      "homeScore": 1,
+      "awayScore": 1,
+      "profileUrl": "/players/352023/deniz-turuc",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "nameStr": "Deniz Türüc",
+      "firstName": "Deniz",
+      "lastName": "Türüc",
+      "fullName": "Deniz Türüc",
+      "playerId": 352023,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415738866Card576118undefinedfalse",
+      "timeStr": 66,
+      "type": "Card",
+      "time": 66,
+      "overloadTime": null,
+      "eventId": 14157388,
+      "player": {
+       "id": 576118,
+       "name": "Diogo Gonçalves",
+       "profileUrl": "/players/576118/diogo-goncalves"
+      },
+      "homeScore": 1,
+      "awayScore": 1,
+      "profileUrl": "/players/576118/diogo-goncalves",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "nameStr": "Diogo Gonçalves",
+      "firstName": "Diogo",
+      "lastName": "Gonçalves",
+      "fullName": "Diogo Gonçalves",
+      "playerId": 576118,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415745079Goal412357undefinedtrue",
+      "timeStr": 79,
+      "type": "Goal",
+      "time": 79,
+      "overloadTime": null,
+      "eventId": 14157450,
+      "player": {
+       "id": 412357,
+       "name": "Paul Onuachu",
+       "profileUrl": "/players/412357/paul-onuachu"
+      },
+      "homeScore": 1,
+      "awayScore": 1,
+      "profileUrl": "/players/412357/paul-onuachu",
+      "overloadTimeStr": false,
+      "isHome": true,
+      "ownGoal": null,
+      "goalDescription": "Penalty",
+      "goalDescriptionKey": "penalty",
+      "suffix": "Pen",
+      "suffixKey": "penalties_short",
+      "isPenaltyShootoutEvent": false,
+      "nameStr": "Paul Onuachu",
+      "firstName": "Paul",
+      "lastName": "Onuachu",
+      "fullName": "Paul Onuachu",
+      "playerId": 412357,
+      "newScore": [
+       2,
+       1
+      ],
+      "penShootoutScore": null,
+      "shotmapEvent": null,
+      "assistStr": null,
+      "assistProfileUrl": null
+     },
+     {
+      "reactKey": "undefined80SubstitutionNaN768118false",
+      "timeStr": 80,
+      "type": "Substitution",
+      "time": 80,
+      "overloadTime": 0,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Blaz Kramer",
+        "id": "768118",
+        "profileUrl": "/players/768118/blaz-kramer"
+       },
+       {
+        "name": "Enis Bardhi",
+        "id": "592783",
+        "profileUrl": "/players/592783/enis-bardhi"
+       }
+      ]
+     },
+     {
+      "reactKey": "1415746480Card412357undefinedtrue",
+      "timeStr": 80,
+      "type": "Card",
+      "time": 80,
+      "overloadTime": null,
+      "eventId": 14157464,
+      "player": {
+       "id": 412357,
+       "name": "Paul Onuachu",
+       "profileUrl": "/players/412357/paul-onuachu"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/412357/paul-onuachu",
+      "overloadTimeStr": false,
+      "isHome": true,
+      "nameStr": "Paul Onuachu",
+      "firstName": "Paul",
+      "lastName": "Onuachu",
+      "fullName": "Paul Onuachu",
+      "playerId": 412357,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415748783Card1162410undefinedfalse",
+      "timeStr": 83,
+      "type": "Card",
+      "time": 83,
+      "overloadTime": null,
+      "eventId": 14157487,
+      "player": {
+       "id": 1162410,
+       "name": "Berkan Kutlu",
+       "profileUrl": "/players/1162410/berkan-kutlu"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/1162410/berkan-kutlu",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "nameStr": "Berkan Kutlu",
+      "firstName": "Berkan",
+      "lastName": "Kutlu",
+      "fullName": "Berkan Kutlu",
+      "playerId": 1162410,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "1415748983Card1460591undefinedtrue",
+      "timeStr": 83,
+      "type": "Card",
+      "time": 83,
+      "overloadTime": null,
+      "eventId": 14157489,
+      "player": {
+       "id": 1460591,
+       "name": "Wagner Pina",
+       "profileUrl": "/players/1460591/wagner-pina"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/1460591/wagner-pina",
+      "overloadTimeStr": false,
+      "isHome": true,
+      "nameStr": "Wagner Pina",
+      "firstName": "Wagner",
+      "lastName": "Pina",
+      "fullName": "Wagner Pina",
+      "playerId": 1460591,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "undefined85SubstitutionNaN635465false",
+      "timeStr": 85,
+      "type": "Substitution",
+      "time": 85,
+      "overloadTime": 0,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Morten Bjørlo",
+        "id": "635465",
+        "profileUrl": "/players/635465/morten-bjorlo"
+       },
+       {
+        "name": "Marko Jevtovic",
+        "id": "463591",
+        "profileUrl": "/players/463591/marko-jevtovic"
+       }
+      ]
+     },
+     {
+      "reactKey": "undefined89SubstitutionNaN440647false",
+      "timeStr": 89,
+      "type": "Substitution",
+      "time": 89,
+      "overloadTime": 0,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": false,
+      "isHome": false,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Sander Svendsen",
+        "id": "440647",
+        "profileUrl": "/players/440647/sander-svendsen"
+       },
+       {
+        "name": "Diogo Gonçalves",
+        "id": "576118",
+        "profileUrl": "/players/576118/diogo-goncalves"
+       }
+      ]
+     },
+     {
+      "reactKey": "1415750290Card1435397undefinedtrue",
+      "timeStr": "90 + 1",
+      "type": "Card",
+      "time": 90,
+      "overloadTime": 1,
+      "eventId": 14157502,
+      "player": {
+       "id": 1435397,
+       "name": "Chibuike Nwaiwu",
+       "profileUrl": "/players/1435397/chibuike-nwaiwu"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/1435397/chibuike-nwaiwu",
+      "overloadTimeStr": "+1",
+      "isHome": true,
+      "nameStr": "Chibuike Nwaiwu",
+      "firstName": "Chibuike",
+      "lastName": "Nwaiwu",
+      "fullName": "Chibuike Nwaiwu",
+      "playerId": 1435397,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "undefined90SubstitutionNaN1491069true",
+      "timeStr": "90 + 2",
+      "type": "Substitution",
+      "time": 90,
+      "overloadTime": 2,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": "+2",
+      "isHome": true,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Salih Malkoçoglu",
+        "id": "1491069",
+        "profileUrl": "/players/1491069/salih-malkocoglu"
+       },
+       {
+        "name": "Ernest Muçi",
+        "id": "1121511",
+        "profileUrl": "/players/1121511/ernest-muci"
+       }
+      ]
+     },
+     {
+      "reactKey": "undefined90SubstitutionNaN1666494true",
+      "timeStr": "90 + 2",
+      "type": "Substitution",
+      "time": 90,
+      "overloadTime": 2,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": "+2",
+      "isHome": true,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Christ Inao Oulaï",
+        "id": "1666494",
+        "profileUrl": "/players/1666494/christ-inao-oulai"
+       },
+       {
+        "name": "Oleksandr Zubkov",
+        "id": "655636",
+        "profileUrl": "/players/655636/oleksandr-zubkov"
+       }
+      ]
+     },
+     {
+      "reactKey": "1415751690Card704664undefinedfalse",
+      "timeStr": "90 + 2",
+      "type": "Card",
+      "time": 90,
+      "overloadTime": 2,
+      "eventId": 14157516,
+      "player": {
+       "id": 704664,
+       "name": "Adil Demirbag",
+       "profileUrl": "/players/704664/adil-demirbag"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/704664/adil-demirbag",
+      "overloadTimeStr": "+2",
+      "isHome": false,
+      "nameStr": "Adil Demirbag",
+      "firstName": "Adil",
+      "lastName": "Demirbag",
+      "fullName": "Adil Demirbag",
+      "playerId": 704664,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "undefined90SubstitutionNaN411605true",
+      "timeStr": "90 + 5",
+      "type": "Substitution",
+      "time": 90,
+      "overloadTime": 5,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "",
+      "overloadTimeStr": "+5",
+      "isHome": true,
+      "injuredPlayerOut": false,
+      "swap": [
+       {
+        "name": "Mehmet Umut Nayir",
+        "id": "411605",
+        "profileUrl": "/players/411605/mehmet-umut-nayir"
+       },
+       {
+        "name": "Felipe Augusto",
+        "id": "1267102",
+        "profileUrl": "/players/1267102/felipe-augusto"
+       }
+      ]
+     },
+     {
+      "reactKey": "1415753090Card1666494undefinedtrue",
+      "timeStr": "90 + 5",
+      "type": "Card",
+      "time": 90,
+      "overloadTime": 5,
+      "eventId": 14157530,
+      "player": {
+       "id": 1666494,
+       "name": "Christ Inao Oulaï",
+       "profileUrl": "/players/1666494/christ-inao-oulai"
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "profileUrl": "/players/1666494/christ-inao-oulai",
+      "overloadTimeStr": "+5",
+      "isHome": true,
+      "nameStr": "Christ Inao Oulaï",
+      "firstName": "Christ Inao",
+      "lastName": "Oulaï",
+      "fullName": "Christ Inao Oulaï",
+      "playerId": 1666494,
+      "card": "Yellow",
+      "cardDescription": null,
+      "cardReason": null
+     },
+     {
+      "reactKey": "undefined90HalfNaNundefinedundefined",
+      "timeStr": 90,
+      "type": "Half",
+      "time": 90,
+      "overloadTime": null,
+      "player": {
+       "id": null,
+       "profileUrl": ""
+      },
+      "homeScore": 2,
+      "awayScore": 1,
+      "halfStrShort": "FT",
+      "halfStrKey": "fulltime_short"
+     }
+    ]
+   },
+   "infoBox": {
+    "legInfo": null,
+    "Match Date": {
+     "utcTime": "2026-05-22T17:45:00.000Z",
+     "isDateCorrect": true
+    },
+    "Tournament": {
+     "id": 923709,
+     "parentLeagueId": 151,
+     "link": "/leagues/151/overview/cup",
+     "leagueName": "Cup",
+     "roundName": "final",
+     "round": "final"
+    },
+    "Stadium": {
+     "name": "Corendon Airlines Park",
+     "city": "Antalya",
+     "country": "Türkiye",
+     "lat": 36.888275959,
+     "long": 30.668551867,
+     "capacity": 33032,
+     "surface": "grass"
+    },
+    "Referee": {
+     "text": "",
+     "countryCode": "",
+     "country": ""
+    },
+    "Attendance": null
+   }
+  },
+  "stats": {
+   "Periods": {
+    "All": {
+     "stats": [
+      {
+       "title": "Top stats",
+       "key": "top_stats",
+       "stats": [
+        {
+         "title": "Ball possession",
+         "key": "BallPossesion",
+         "stats": [
+          51,
+          49
+         ],
+         "rawStats": [
+          {
+           "value": 51
+          },
+          {
+           "value": 49
+          }
+         ],
+         "format": "integer",
+         "type": "graph",
+         "highlighted": "home"
+        },
+        {
+         "title": "Total shots",
+         "key": "total_shots",
+         "stats": [
+          14,
+          12
+         ],
+         "rawStats": [
+          {
+           "value": 14
+          },
+          {
+           "value": 12
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Shots on target",
+         "key": "ShotsOnTarget",
+         "stats": [
+          6,
+          4
+         ],
+         "rawStats": [
+          {
+           "value": 6
+          },
+          {
+           "value": 4
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Touches in opposition box",
+         "key": "touches_opp_box",
+         "stats": [
+          15,
+          13
+         ],
+         "rawStats": [
+          {
+           "value": 15
+          },
+          {
+           "value": 13
+          }
+         ],
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Big chances",
+         "key": "big_chance",
+         "stats": [
+          3,
+          4
+         ],
+         "rawStats": [
+          {
+           "value": 3
+          },
+          {
+           "value": 4
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Big chances missed",
+         "key": "big_chance_missed_title",
+         "stats": [
+          1,
+          4
+         ],
+         "rawStats": [
+          {
+           "value": 1
+          },
+          {
+           "value": 4
+          }
+         ],
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Accurate passes",
+         "key": "accurate_passes",
+         "stats": [
+          "279 (84%)",
+          "260 (79%)"
+         ],
+         "rawStats": [
+          {
+           "value": 279,
+           "total": 332
+          },
+          {
+           "value": 260,
+           "total": 331
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Yellow cards",
+         "key": "yellow_cards",
+         "stats": [
+          6,
+          6
+         ],
+         "rawStats": [
+          {
+           "value": 6
+          },
+          {
+           "value": 6
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Corners",
+         "key": "corners",
+         "stats": [
+          4,
+          2
+         ],
+         "rawStats": [
+          {
+           "value": 4
+          },
+          {
+           "value": 2
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        }
+       ]
+      },
+      {
+       "title": "Shots",
+       "key": "shots",
+       "stats": [
+        {
+         "title": "Shots",
+         "key": "shots",
+         "stats": [
+          null,
+          null
+         ],
+         "rawStats": [
+          null,
+          null
+         ],
+         "type": "title",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Total shots",
+         "key": "total_shots",
+         "stats": [
+          14,
+          12
+         ],
+         "rawStats": [
+          {
+           "value": 14
+          },
+          {
+           "value": 12
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Shots off target",
+         "key": "ShotsOffTarget",
+         "stats": [
+          8,
+          5
+         ],
+         "rawStats": [
+          {
+           "value": 8
+          },
+          {
+           "value": 5
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Shots on target",
+         "key": "ShotsOnTarget",
+         "stats": [
+          6,
+          4
+         ],
+         "rawStats": [
+          {
+           "value": 6
+          },
+          {
+           "value": 4
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Blocked shots",
+         "key": "blocked_shots",
+         "stats": [
+          0,
+          3
+         ],
+         "rawStats": [
+          {
+           "value": 0
+          },
+          {
+           "value": 3
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Hit woodwork",
+         "key": "shots_woodwork",
+         "stats": [
+          0,
+          3
+         ],
+         "rawStats": [
+          {
+           "value": 0
+          },
+          {
+           "value": 3
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Shots inside box",
+         "key": "shots_inside_box",
+         "stats": [
+          7,
+          10
+         ],
+         "rawStats": [
+          {
+           "value": 7
+          },
+          {
+           "value": 10
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Shots outside box",
+         "key": "shots_outside_box",
+         "stats": [
+          7,
+          2
+         ],
+         "rawStats": [
+          {
+           "value": 7
+          },
+          {
+           "value": 2
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        }
+       ]
+      },
+      {
+       "title": "Passes",
+       "key": "passes",
+       "stats": [
+        {
+         "title": "Passes",
+         "key": "passes",
+         "stats": [
+          null,
+          null
+         ],
+         "rawStats": [
+          null,
+          null
+         ],
+         "type": "title",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Passes",
+         "key": "passes",
+         "stats": [
+          332,
+          331
+         ],
+         "rawStats": [
+          {
+           "value": 332
+          },
+          {
+           "value": 331
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Accurate passes",
+         "key": "accurate_passes",
+         "stats": [
+          "279 (84%)",
+          "260 (79%)"
+         ],
+         "rawStats": [
+          {
+           "value": 279,
+           "total": 332
+          },
+          {
+           "value": 260,
+           "total": 331
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Own half",
+         "key": "own_half_passes",
+         "stats": [
+          97,
+          180
+         ],
+         "rawStats": [
+          {
+           "value": 97
+          },
+          {
+           "value": 180
+          }
+         ],
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Opposition half",
+         "key": "opposition_half_passes",
+         "stats": [
+          182,
+          80
+         ],
+         "rawStats": [
+          {
+           "value": 182
+          },
+          {
+           "value": 80
+          }
+         ],
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Accurate long balls",
+         "key": "long_balls_accurate",
+         "stats": [
+          "22 (52%)",
+          "16 (37%)"
+         ],
+         "rawStats": [
+          {
+           "value": 22,
+           "total": 42
+          },
+          {
+           "value": 16,
+           "total": 43
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Accurate crosses",
+         "key": "accurate_crosses",
+         "stats": [
+          "6 (33%)",
+          "6 (75%)"
+         ],
+         "rawStats": [
+          {
+           "value": 6,
+           "total": 18
+          },
+          {
+           "value": 6,
+           "total": 8
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Throws",
+         "key": "player_throws",
+         "stats": [
+          19,
+          9
+         ],
+         "rawStats": [
+          {
+           "value": 19
+          },
+          {
+           "value": 9
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Touches in opposition box",
+         "key": "touches_opp_box",
+         "stats": [
+          15,
+          13
+         ],
+         "rawStats": [
+          {
+           "value": 15
+          },
+          {
+           "value": 13
+          }
+         ],
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Offsides",
+         "key": "Offsides",
+         "stats": [
+          2,
+          2
+         ],
+         "rawStats": [
+          {
+           "value": 2
+          },
+          {
+           "value": 2
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "equal"
+        }
+       ]
+      },
+      {
+       "title": "Defence",
+       "key": "defence",
+       "stats": [
+        {
+         "title": "Defence",
+         "key": "defense",
+         "stats": [
+          null,
+          null
+         ],
+         "rawStats": [
+          null,
+          null
+         ],
+         "type": "title",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Tackles",
+         "key": "matchstats.headers.tackles",
+         "stats": [
+          9,
+          13
+         ],
+         "rawStats": [
+          {
+           "value": 9
+          },
+          {
+           "value": 13
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Interceptions",
+         "key": "interceptions",
+         "stats": [
+          6,
+          7
+         ],
+         "rawStats": [
+          {
+           "value": 6
+          },
+          {
+           "value": 7
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Blocks",
+         "key": "shot_blocks",
+         "stats": [
+          3,
+          0
+         ],
+         "rawStats": [
+          {
+           "value": 3
+          },
+          {
+           "value": 0
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Clearances",
+         "key": "clearances",
+         "stats": [
+          7,
+          26
+         ],
+         "rawStats": [
+          {
+           "value": 7
+          },
+          {
+           "value": 26
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        },
+        {
+         "title": "Keeper saves",
+         "key": "keeper_saves",
+         "stats": [
+          3,
+          4
+         ],
+         "rawStats": [
+          {
+           "value": 3
+          },
+          {
+           "value": 4
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "away"
+        }
+       ]
+      },
+      {
+       "title": "Duels",
+       "key": "duels",
+       "stats": [
+        {
+         "title": "Duels",
+         "key": "duels",
+         "stats": [
+          null,
+          null
+         ],
+         "rawStats": [
+          null,
+          null
+         ],
+         "type": "title",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Duels won",
+         "key": "duel_won",
+         "stats": [
+          53,
+          48
+         ],
+         "rawStats": [
+          {
+           "value": 53
+          },
+          {
+           "value": 48
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Ground duels won",
+         "key": "ground_duels_won",
+         "stats": [
+          "37 (52%)",
+          "34 (48%)"
+         ],
+         "rawStats": [
+          {
+           "value": 37,
+           "total": 71
+          },
+          {
+           "value": 34,
+           "total": 71
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Aerial duels won",
+         "key": "aerials_won",
+         "stats": [
+          "16 (53%)",
+          "14 (47%)"
+         ],
+         "rawStats": [
+          {
+           "value": 16,
+           "total": 30
+          },
+          {
+           "value": 14,
+           "total": 30
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        },
+        {
+         "title": "Successful dribbles",
+         "key": "dribbles_succeeded",
+         "stats": [
+          "7 (54%)",
+          "5 (56%)"
+         ],
+         "rawStats": [
+          {
+           "value": 7,
+           "total": 13
+          },
+          {
+           "value": 5,
+           "total": 9
+          }
+         ],
+         "format": "integerWithPercentage",
+         "type": "text",
+         "highlighted": "home"
+        }
+       ]
+      },
+      {
+       "title": "Discipline",
+       "key": "discipline",
+       "stats": [
+        {
+         "title": "Discipline",
+         "key": "discipline",
+         "stats": [
+          null,
+          null
+         ],
+         "rawStats": [
+          null,
+          null
+         ],
+         "type": "title",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Yellow cards",
+         "key": "yellow_cards",
+         "stats": [
+          6,
+          6
+         ],
+         "rawStats": [
+          {
+           "value": 6
+          },
+          {
+           "value": 6
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Red cards",
+         "key": "red_cards",
+         "stats": [
+          0,
+          0
+         ],
+         "rawStats": [
+          {
+           "value": 0
+          },
+          {
+           "value": 0
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "equal"
+        },
+        {
+         "title": "Fouls committed",
+         "key": "fouls",
+         "stats": [
+          19,
+          23
+         ],
+         "rawStats": [
+          {
+           "value": 19
+          },
+          {
+           "value": 23
+          }
+         ],
+         "format": "integer",
+         "type": "text",
+         "highlighted": "home"
+        }
+       ]
+      }
+     ],
+     "teamColors": {
+      "darkMode": {
+       "home": "#9e2736",
+       "away": "#008050"
+      },
+      "lightMode": {
+       "home": "#6e2330",
+       "away": "#008050"
+      },
+      "fontDarkMode": {
+       "home": "rgba(255, 255, 255, 1.0)",
+       "away": "rgba(255, 255, 255, 1.0)"
+      },
+      "fontLightMode": {
+       "home": "rgba(255, 255, 255, 1.0)",
+       "away": "rgba(255, 255, 255, 1.0)"
+      }
+     }
+    }
+   }
+  },
+  "lineup": {
+   "matchId": 5237912,
+   "lineupType": "standard",
+   "source": "enetpulse",
+   "availableFilters": [
+    "marketValue",
+    "match",
+    "age",
+    "country"
+   ],
+   "homeTeam": {
+    "id": 9752,
+    "name": "Trabzonspor",
+    "formation": "4-2-3-1",
+    "coach": {
+     "id": 34943,
+     "age": 48,
+     "name": "Fatih Tekke",
+     "countryName": "Turkiye",
+     "countryCode": "TUR",
+     "firstName": "Fatih",
+     "lastName": "Tekke",
+     "primaryTeamId": 9752,
+     "primaryTeamName": "Trabzonspor",
+     "usualPlayingPositionId": null,
+     "isCoach": true
+    },
+    "starters": [
+     {
+      "id": 611491,
+      "age": 30,
+      "name": "André Onana",
+      "positionId": 11,
+      "usualPlayingPositionId": 0,
+      "shirtNumber": "24",
+      "countryName": "Cameroon",
+      "countryCode": "CMR",
+      "horizontalLayout": {
+       "x": 0.1,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.1,
+       "height": 0.192,
+       "width": 1
+      },
+      "marketValue": 13890209,
+      "performance": {
+       "rating": 7.5
+      },
+      "firstName": "André",
+      "lastName": "Onana",
+      "rankings": null
+     },
+     {
+      "id": 1460591,
+      "age": 23,
+      "name": "Wagner Pina",
+      "positionId": 32,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "20",
+      "countryName": "Cape Verde",
+      "countryCode": "CPV",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.875,
+       "height": 0.25,
+       "width": 0.385
+      },
+      "verticalLayout": {
+       "x": 0.125,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 7197236,
+      "performance": {
+       "rating": 8,
+       "events": [
+        {
+         "type": "yellowCard"
+        },
+        {
+         "type": "assist"
+        }
+       ]
+      },
+      "firstName": "Wagner",
+      "lastName": "Pina",
+      "rankings": null
+     },
+     {
+      "id": 1435397,
+      "age": 22,
+      "name": "Chibuike Nwaiwu",
+      "positionId": 34,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "27",
+      "countryName": "Nigeria",
+      "countryCode": "NGA",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.625,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.375,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 7827939,
+      "performance": {
+       "rating": 7.7,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Chibuike",
+      "lastName": "Nwaiwu",
+      "rankings": null
+     },
+     {
+      "id": 178955,
+      "age": 35,
+      "name": "Stefan Savic",
+      "positionId": 36,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "15",
+      "countryName": "Montenegro",
+      "countryCode": "MNE",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.375,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.625,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 494844,
+      "performance": {
+       "rating": 7,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ],
+       "substitutionEvents": [
+        {
+         "time": 57,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Stefan",
+      "lastName": "Savic",
+      "rankings": null
+     },
+     {
+      "id": 889717,
+      "age": 29,
+      "name": "Mustafa Eskihellaç",
+      "positionId": 38,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "19",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.125,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.875,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 2071620,
+      "performance": {
+       "rating": 6.1
+      },
+      "firstName": "Mustafa",
+      "lastName": "Eskihellaç",
+      "rankings": null
+     },
+     {
+      "id": 1174002,
+      "age": 24,
+      "name": "Benjamin Bouchouari",
+      "positionId": 64,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "8",
+      "countryName": "Morocco",
+      "countryCode": "MAR",
+      "horizontalLayout": {
+       "x": 0.485,
+       "y": 0.7,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.3,
+       "y": 0.485,
+       "height": 0.192,
+       "width": 0.4
+      },
+      "marketValue": 5337898,
+      "performance": {
+       "rating": 8,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Benjamin",
+      "lastName": "Bouchouari",
+      "rankings": null
+     },
+     {
+      "id": 1244808,
+      "age": 26,
+      "name": "Tim Jabol-Folcarelli",
+      "positionId": 66,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "26",
+      "countryName": "France",
+      "countryCode": "FRA",
+      "horizontalLayout": {
+       "x": 0.485,
+       "y": 0.3,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.7,
+       "y": 0.485,
+       "height": 0.192,
+       "width": 0.4
+      },
+      "marketValue": 3037327,
+      "performance": {
+       "rating": 6.5
+      },
+      "firstName": "Tim",
+      "lastName": "Jabol-Folcarelli",
+      "rankings": null
+     },
+     {
+      "id": 655636,
+      "age": 29,
+      "name": "Oleksandr Zubkov",
+      "positionId": 83,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "22",
+      "countryName": "Ukraine",
+      "countryCode": "UKR",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.837,
+       "height": 0.25,
+       "width": 0.385
+      },
+      "verticalLayout": {
+       "x": 0.162,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.325
+      },
+      "marketValue": 6150238,
+      "performance": {
+       "rating": 7.6,
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Oleksandr",
+      "lastName": "Zubkov",
+      "rankings": null
+     },
+     {
+      "id": 1121511,
+      "age": 25,
+      "name": "Ernest Muçi",
+      "positionId": 85,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "10",
+      "countryName": "Albania",
+      "countryCode": "ALB",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.337
+      },
+      "marketValue": 10505469,
+      "performance": {
+       "rating": 6.8,
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Ernest",
+      "lastName": "Muçi",
+      "rankings": null
+     },
+     {
+      "id": 1267102,
+      "age": 22,
+      "name": "Felipe Augusto",
+      "positionId": 87,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "99",
+      "countryName": "Brazil",
+      "countryCode": "BRA",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.163,
+       "height": 0.25,
+       "width": 0.193
+      },
+      "verticalLayout": {
+       "x": 0.837,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.325
+      },
+      "marketValue": 3143263,
+      "performance": {
+       "rating": 6.3,
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Felipe",
+      "lastName": "Augusto",
+      "rankings": null
+     },
+     {
+      "id": 412357,
+      "age": 31,
+      "name": "Paul Onuachu",
+      "positionId": 115,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "30",
+      "countryName": "Nigeria",
+      "countryCode": "NGA",
+      "horizontalLayout": {
+       "x": 0.87,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.87,
+       "height": 0.192,
+       "width": 1
+      },
+      "marketValue": 4417900,
+      "performance": {
+       "rating": 8.7,
+       "events": [
+        {
+         "type": "yellowCard"
+        },
+        {
+         "type": "goal"
+        },
+        {
+         "type": "goal"
+        }
+       ],
+       "playerOfTheMatch": true
+      },
+      "firstName": "Paul",
+      "lastName": "Onuachu",
+      "rankings": null
+     }
+    ],
+    "subs": [
+     {
+      "id": 358936,
+      "age": 31,
+      "name": "Ozan Tufan",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "11",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 1160830,
+      "performance": {
+       "rating": 6.3,
+       "substitutionEvents": [
+        {
+         "time": 57,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Ozan",
+      "lastName": "Tufan",
+      "rankings": null
+     },
+     {
+      "id": 1491069,
+      "age": 21,
+      "name": "Salih Malkoçoglu",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "74",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 1591892,
+      "performance": {
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Salih",
+      "lastName": "Malkoçoglu",
+      "rankings": null
+     },
+     {
+      "id": 1666494,
+      "age": 20,
+      "name": "Christ Inao Oulaï",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "42",
+      "countryName": "Ivory Coast",
+      "countryCode": "CIV",
+      "marketValue": 2201116,
+      "performance": {
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ],
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Christ Inao",
+      "lastName": "Oulaï",
+      "rankings": null
+     },
+     {
+      "id": 411605,
+      "age": 32,
+      "name": "Mehmet Umut Nayir",
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "18",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 614236,
+      "performance": {
+       "substitutionEvents": [
+        {
+         "time": 90,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Mehmet Umut",
+      "lastName": "Nayir",
+      "rankings": null
+     },
+     {
+      "id": 1677467,
+      "age": 19,
+      "name": "Ahmet Yildirim",
+      "usualPlayingPositionId": 0,
+      "shirtNumber": "88",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "performance": {},
+      "firstName": "Ahmet",
+      "lastName": "Yildirim",
+      "rankings": null
+     },
+     {
+      "id": 1504681,
+      "age": 20,
+      "name": "Onuralp Çevikkan",
+      "usualPlayingPositionId": 0,
+      "shirtNumber": "25",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "performance": {},
+      "firstName": "Onuralp",
+      "lastName": "Çevikkan",
+      "rankings": null
+     },
+     {
+      "id": 1130733,
+      "age": 22,
+      "name": "Mathias Fjørtoft Løvik",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "14",
+      "countryName": "Norway",
+      "countryCode": "NOR",
+      "marketValue": 6018654,
+      "performance": {},
+      "firstName": "Mathias Fjørtoft",
+      "lastName": "Løvik",
+      "rankings": null
+     },
+     {
+      "id": 1690129,
+      "age": 20,
+      "name": "Boran Baskan",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "80",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 699532,
+      "performance": {},
+      "firstName": "Boran",
+      "lastName": "Baskan",
+      "rankings": null
+     },
+     {
+      "id": 1690088,
+      "age": 18,
+      "name": "Onuralp Cakiroglu",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "17",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "performance": {},
+      "firstName": "Onuralp",
+      "lastName": "Cakiroglu",
+      "rankings": null
+     },
+     {
+      "id": 295203,
+      "age": 37,
+      "name": "Anthony Nwakaeme",
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "9",
+      "countryName": "Nigeria",
+      "countryCode": "NGA",
+      "marketValue": 283142,
+      "performance": {},
+      "firstName": "Anthony",
+      "lastName": "Nwakaeme",
+      "rankings": null
+     }
+    ],
+    "unavailable": [
+     {
+      "id": 214339,
+      "age": 32,
+      "name": "Okay Yokuslu",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 1265345,
+      "unavailability": {
+       "injuryId": 69,
+       "type": "injury",
+       "expectedReturn": "Early June 2026"
+      },
+      "firstName": "Okay",
+      "lastName": "Yokuslu"
+     },
+     {
+      "id": 1037491,
+      "age": 24,
+      "name": "Arseniy Batagov",
+      "countryName": "Ukraine",
+      "countryCode": "UKR",
+      "marketValue": 13008452,
+      "unavailability": {
+       "injuryId": 70,
+       "type": "injury",
+       "expectedReturn": "Late June 2026"
+      },
+      "firstName": "Arseniy",
+      "lastName": "Batagov"
+     }
+    ]
+   },
+   "awayTeam": {
+    "id": 8622,
+    "name": "Konyaspor",
+    "formation": "4-2-3-1",
+    "coach": {
+     "id": 1114920,
+     "age": 49,
+     "name": "Ilhan Palut",
+     "countryName": "Turkiye",
+     "countryCode": "TUR",
+     "firstName": "Ilhan",
+     "lastName": "Palut",
+     "primaryTeamId": 8622,
+     "primaryTeamName": "Konyaspor",
+     "usualPlayingPositionId": null,
+     "isCoach": true
+    },
+    "starters": [
+     {
+      "id": 712040,
+      "age": 30,
+      "name": "Bahadir Han Güngördü",
+      "positionId": 11,
+      "usualPlayingPositionId": 0,
+      "shirtNumber": "13",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.1,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.1,
+       "height": 0.192,
+       "width": 1
+      },
+      "marketValue": 583859,
+      "performance": {
+       "rating": 6.7
+      },
+      "firstName": "Bahadir Han",
+      "lastName": "Güngördü",
+      "rankings": null
+     },
+     {
+      "id": 1237425,
+      "age": 23,
+      "name": "Adamo Nagalo",
+      "positionId": 32,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "39",
+      "countryName": "Burkina Faso",
+      "countryCode": "BFA",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.875,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.125,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 2059523,
+      "performance": {
+       "rating": 7.1
+      },
+      "firstName": "Adamo",
+      "lastName": "Nagalo",
+      "rankings": null
+     },
+     {
+      "id": 891469,
+      "age": 27,
+      "name": "Ugurcan Yazgili",
+      "positionId": 34,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "5",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.625,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.375,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 1043245,
+      "performance": {
+       "rating": 7.4,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Ugurcan",
+      "lastName": "Yazgili",
+      "rankings": null
+     },
+     {
+      "id": 704664,
+      "age": 28,
+      "name": "Adil Demirbag",
+      "positionId": 36,
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "4",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.375,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.625,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 1583763,
+      "performance": {
+       "rating": 7.6,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Adil",
+      "lastName": "Demirbag",
+      "rankings": null
+     },
+     {
+      "id": 1162410,
+      "age": 28,
+      "name": "Berkan Kutlu",
+      "positionId": 38,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "18",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.292,
+       "y": 0.125,
+       "height": 0.25,
+       "width": 0.385
+      },
+      "verticalLayout": {
+       "x": 0.875,
+       "y": 0.292,
+       "height": 0.192,
+       "width": 0.25
+      },
+      "marketValue": 1291185,
+      "performance": {
+       "rating": 6.3,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Berkan",
+      "lastName": "Kutlu",
+      "rankings": null
+     },
+     {
+      "id": 1098065,
+      "age": 25,
+      "name": "Melih Ibrahimoglu",
+      "positionId": 64,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "77",
+      "countryName": "Austria",
+      "countryCode": "AUT",
+      "horizontalLayout": {
+       "x": 0.485,
+       "y": 0.7,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.3,
+       "y": 0.485,
+       "height": 0.192,
+       "width": 0.4
+      },
+      "marketValue": 1428296,
+      "performance": {
+       "rating": 6
+      },
+      "firstName": "Melih",
+      "lastName": "Ibrahimoglu",
+      "rankings": null
+     },
+     {
+      "id": 463591,
+      "age": 32,
+      "name": "Marko Jevtovic",
+      "positionId": 66,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "16",
+      "countryName": "Serbia",
+      "countryCode": "SRB",
+      "horizontalLayout": {
+       "x": 0.485,
+       "y": 0.3,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.7,
+       "y": 0.485,
+       "height": 0.192,
+       "width": 0.4
+      },
+      "marketValue": 296831,
+      "performance": {
+       "rating": 6.1,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ],
+       "substitutionEvents": [
+        {
+         "time": 85,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Marko",
+      "lastName": "Jevtovic",
+      "rankings": null
+     },
+     {
+      "id": 352023,
+      "age": 33,
+      "name": "Deniz Türüc",
+      "positionId": 83,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "9",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.837,
+       "height": 0.25,
+       "width": 0.193
+      },
+      "verticalLayout": {
+       "x": 0.162,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.325
+      },
+      "marketValue": 623306,
+      "performance": {
+       "rating": 6.4,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ]
+      },
+      "firstName": "Deniz",
+      "lastName": "Türüc",
+      "rankings": null
+     },
+     {
+      "id": 576118,
+      "age": 29,
+      "name": "Diogo Gonçalves",
+      "positionId": 85,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "17",
+      "countryName": "Portugal",
+      "countryCode": "POR",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.337
+      },
+      "marketValue": 1815640,
+      "performance": {
+       "rating": 5.8,
+       "events": [
+        {
+         "type": "yellowCard"
+        }
+       ],
+       "substitutionEvents": [
+        {
+         "time": 89,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Diogo",
+      "lastName": "Gonçalves",
+      "rankings": null
+     },
+     {
+      "id": 592783,
+      "age": 30,
+      "name": "Enis Bardhi",
+      "positionId": 87,
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "10",
+      "countryName": "North Macedonia",
+      "countryCode": "MKD",
+      "horizontalLayout": {
+       "x": 0.678,
+       "y": 0.163,
+       "height": 0.25,
+       "width": 0.385
+      },
+      "verticalLayout": {
+       "x": 0.837,
+       "y": 0.678,
+       "height": 0.192,
+       "width": 0.325
+      },
+      "marketValue": 1627953,
+      "performance": {
+       "rating": 6.1,
+       "events": [
+        {
+         "type": "missedPenalty"
+        }
+       ],
+       "substitutionEvents": [
+        {
+         "time": 80,
+         "type": "subOut"
+        }
+       ]
+      },
+      "firstName": "Enis",
+      "lastName": "Bardhi",
+      "rankings": null
+     },
+     {
+      "id": 938682,
+      "age": 26,
+      "name": "Jackson Muleka",
+      "positionId": 115,
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "40",
+      "countryName": "DR Congo",
+      "countryCode": "COD",
+      "horizontalLayout": {
+       "x": 0.87,
+       "y": 0.5,
+       "height": 0.25,
+       "width": 0.192
+      },
+      "verticalLayout": {
+       "x": 0.5,
+       "y": 0.87,
+       "height": 0.192,
+       "width": 1
+      },
+      "marketValue": 2066183,
+      "performance": {
+       "rating": 8.2,
+       "events": [
+        {
+         "type": "goal"
+        }
+       ]
+      },
+      "firstName": "Jackson",
+      "lastName": "Muleka",
+      "rankings": null
+     }
+    ],
+    "subs": [
+     {
+      "id": 768118,
+      "age": 29,
+      "name": "Blaz Kramer",
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "99",
+      "countryName": "Slovenia",
+      "countryCode": "SVN",
+      "marketValue": 918986,
+      "performance": {
+       "rating": 5.9,
+       "substitutionEvents": [
+        {
+         "time": 80,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Blaz",
+      "lastName": "Kramer",
+      "rankings": null
+     },
+     {
+      "id": 635465,
+      "age": 30,
+      "name": "Morten Bjørlo",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "42",
+      "countryName": "Norway",
+      "countryCode": "NOR",
+      "marketValue": 822948,
+      "performance": {
+       "substitutionEvents": [
+        {
+         "time": 85,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Morten",
+      "lastName": "Bjørlo",
+      "rankings": null
+     },
+     {
+      "id": 440647,
+      "age": 28,
+      "name": "Sander Svendsen",
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "32",
+      "countryName": "Norway",
+      "countryCode": "NOR",
+      "marketValue": 441562,
+      "performance": {
+       "substitutionEvents": [
+        {
+         "time": 89,
+         "type": "subIn"
+        }
+       ]
+      },
+      "firstName": "Sander",
+      "lastName": "Svendsen",
+      "rankings": null
+     },
+     {
+      "id": 1429909,
+      "age": 21,
+      "name": "Deniz Ertas",
+      "usualPlayingPositionId": 0,
+      "shirtNumber": "1",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 4553389,
+      "performance": {},
+      "firstName": "Deniz",
+      "lastName": "Ertas",
+      "rankings": null
+     },
+     {
+      "id": 1430145,
+      "age": 22,
+      "name": "Arif Bosluk",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "24",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 1059964,
+      "performance": {},
+      "firstName": "Arif",
+      "lastName": "Bosluk",
+      "rankings": null
+     },
+     {
+      "id": 1112763,
+      "age": 27,
+      "name": "Rayyan Baniya",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "22",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 1116333,
+      "performance": {},
+      "firstName": "Rayyan",
+      "lastName": "Baniya",
+      "rankings": null
+     },
+     {
+      "id": 645142,
+      "age": 30,
+      "name": "Yasir Subasi",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "3",
+      "countryName": "Turkiye",
+      "countryCode": "TUR",
+      "marketValue": 452194,
+      "performance": {},
+      "firstName": "Yasir",
+      "lastName": "Subasi",
+      "rankings": null
+     },
+     {
+      "id": 692810,
+      "age": 29,
+      "name": "Yhoan Andzouana",
+      "usualPlayingPositionId": 1,
+      "shirtNumber": "23",
+      "countryName": "Congo",
+      "countryCode": "CGO",
+      "marketValue": 451303,
+      "performance": {},
+      "firstName": "Yhoan",
+      "lastName": "Andzouana",
+      "rankings": null
+     },
+     {
+      "id": 1514516,
+      "age": 22,
+      "name": "Jin-Ho Jo",
+      "usualPlayingPositionId": 2,
+      "shirtNumber": "21",
+      "countryName": "South Korea",
+      "countryCode": "KOR",
+      "performance": {},
+      "firstName": "Jin-Ho",
+      "lastName": "Jo",
+      "rankings": null
+     },
+     {
+      "id": 1109486,
+      "age": 23,
+      "name": "Kazeem Olaigbe",
+      "usualPlayingPositionId": 3,
+      "shirtNumber": "70",
+      "countryName": "Belgium",
+      "countryCode": "BEL",
+      "marketValue": 5122883,
+      "performance": {},
+      "firstName": "Kazeem",
+      "lastName": "Olaigbe",
+      "rankings": null
+     }
+    ],
+    "unavailable": [
+     {
+      "id": 310289,
+      "age": 36,
+      "name": "Guilherme",
+      "countryName": "Brazil",
+      "countryCode": "BRA",
+      "marketValue": 363539,
+      "unavailability": {
+       "injuryId": 87,
+       "type": "injury",
+       "expectedReturn": "Early June 2026"
+      },
+      "firstName": "",
+      "lastName": "Guilherme"
+     },
+     {
+      "id": 340108,
+      "age": 32,
+      "name": "Josip Calusic",
+      "countryName": "Croatia",
+      "countryCode": "CRO",
+      "marketValue": 252902,
+      "unavailability": {
+       "injuryId": 87,
+       "type": "injury",
+       "expectedReturn": "Early June 2026"
+      },
+      "firstName": "Josip",
+      "lastName": "Calusic"
+     },
+     {
+      "id": 1180743,
+      "age": 24,
+      "name": "Tunahan Tasci",
+      "countryName": "Netherlands",
+      "countryCode": "NED",
+      "marketValue": 768009,
+      "unavailability": {
+       "injuryId": 87,
+       "type": "injury",
+       "expectedReturn": "Early June 2026"
+      },
+      "firstName": "Tunahan",
+      "lastName": "Tasci"
+     },
+     {
+      "id": 884415,
+      "age": 28,
+      "name": "Ufuk Akyol",
+      "countryName": "Germany",
+      "countryCode": "GER",
+      "marketValue": 260145,
+      "unavailability": {
+       "injuryId": 76,
+       "type": "injury",
+       "expectedReturn": "Late October 2026"
+      },
+      "firstName": "Ufuk",
+      "lastName": "Akyol"
+     }
+    ]
+   }
+  }
+ }
+}

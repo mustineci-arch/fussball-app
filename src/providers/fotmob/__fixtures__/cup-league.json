@@ -1,0 +1,1113 @@
+{
+ "details": {
+  "id": 151,
+  "name": "Turkish Cup",
+  "selectedSeason": "2025/2026"
+ },
+ "table": [
+  {
+   "data": {
+    "tables": [
+     {
+      "leagueName": "Cup Grp. A",
+      "legend": [
+       {
+        "title": "Qualification next stage",
+        "tKey": "qualification_next_stage",
+        "color": "#2AD572",
+        "indices": [
+         0,
+         1
+        ]
+       },
+       {
+        "title": "Possible qualification next stage",
+        "tKey": "possible_qualification_next_stage",
+        "color": "#FFD908",
+        "indices": [
+         2
+        ]
+       }
+      ],
+      "table": {
+       "all": [
+        {
+         "name": "Galatasaray",
+         "shortName": "Galatasaray",
+         "id": 8637,
+         "pageUrl": "/teams/8637/overview/galatasaray",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 4,
+         "draws": 0,
+         "losses": 0,
+         "scoresStr": "8-3",
+         "goalConDiff": 5,
+         "pts": 12,
+         "idx": 1,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Trabzonspor",
+         "shortName": "Trabzonspor",
+         "id": 9752,
+         "pageUrl": "/teams/9752/overview/trabzonspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 3,
+         "draws": 0,
+         "losses": 1,
+         "scoresStr": "13-4",
+         "goalConDiff": 9,
+         "pts": 9,
+         "idx": 2,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Alanyaspor",
+         "shortName": "Alanyaspor",
+         "id": 4678,
+         "pageUrl": "/teams/4678/overview/alanyaspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 2,
+         "draws": 1,
+         "losses": 1,
+         "scoresStr": "8-4",
+         "goalConDiff": 4,
+         "pts": 7,
+         "idx": 3,
+         "qualColor": "#FFD908"
+        },
+        {
+         "name": "Başakşehir",
+         "shortName": "Başakşehir",
+         "id": 1933,
+         "pageUrl": "/teams/1933/overview/basaksehir",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 2,
+         "draws": 0,
+         "losses": 2,
+         "scoresStr": "8-7",
+         "goalConDiff": 1,
+         "pts": 6,
+         "idx": 4,
+         "qualColor": null
+        },
+        {
+         "name": "Fatih Karagümrük",
+         "shortName": "Karagümrük",
+         "id": 2088,
+         "pageUrl": "/teams/2088/overview/fatih-karagumruk",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 2,
+         "losses": 1,
+         "scoresStr": "5-6",
+         "goalConDiff": -1,
+         "pts": 5,
+         "idx": 5,
+         "qualColor": null
+        },
+        {
+         "name": "Boluspor",
+         "shortName": "Boluspor",
+         "id": 4675,
+         "pageUrl": "/teams/4675/overview/boluspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 2,
+         "losses": 2,
+         "scoresStr": "1-6",
+         "goalConDiff": -5,
+         "pts": 2,
+         "idx": 6,
+         "qualColor": null
+        },
+        {
+         "name": "İstanbulspor",
+         "shortName": "İstanbulspor",
+         "id": 106560,
+         "pageUrl": "/teams/106560/overview/istanbulspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 2,
+         "losses": 2,
+         "scoresStr": "2-9",
+         "goalConDiff": -7,
+         "pts": 2,
+         "idx": 7,
+         "qualColor": null
+        },
+        {
+         "name": "Fethiyespor",
+         "shortName": "Fethiyespor",
+         "id": 8375,
+         "pageUrl": "/teams/8375/overview/fethiyespor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 1,
+         "losses": 3,
+         "scoresStr": "1-7",
+         "goalConDiff": -6,
+         "pts": 1,
+         "idx": 8,
+         "qualColor": null
+        }
+       ]
+      }
+     },
+     {
+      "leagueName": "Cup Grp. B",
+      "legend": [
+       {
+        "title": "Qualification next stage",
+        "tKey": "qualification_next_stage",
+        "color": "#2AD572",
+        "indices": [
+         0,
+         1
+        ]
+       },
+       {
+        "title": "Possible qualification next stage",
+        "tKey": "possible_qualification_next_stage",
+        "color": "#FFD908",
+        "indices": [
+         2
+        ]
+       }
+      ],
+      "table": {
+       "all": [
+        {
+         "name": "Samsunspor",
+         "shortName": "Samsunspor",
+         "id": 9750,
+         "pageUrl": "/teams/9750/overview/samsunspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 4,
+         "draws": 0,
+         "losses": 0,
+         "scoresStr": "12-3",
+         "goalConDiff": 9,
+         "pts": 12,
+         "idx": 1,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Konyaspor",
+         "shortName": "Konyaspor",
+         "id": 8622,
+         "pageUrl": "/teams/8622/overview/konyaspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 4,
+         "draws": 0,
+         "losses": 0,
+         "scoresStr": "9-1",
+         "goalConDiff": 8,
+         "pts": 12,
+         "idx": 2,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Gençlerbirliği",
+         "shortName": "Gençlerbirliği",
+         "id": 7800,
+         "pageUrl": "/teams/7800/overview/genclerbirligi",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 3,
+         "draws": 1,
+         "losses": 0,
+         "scoresStr": "9-5",
+         "goalConDiff": 4,
+         "pts": 10,
+         "idx": 3,
+         "qualColor": "#FFD908"
+        },
+        {
+         "name": "Iğdır FK",
+         "shortName": "Iğdır FK",
+         "id": 1281818,
+         "pageUrl": "/teams/1281818/overview/igdr-fk",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 2,
+         "losses": 1,
+         "scoresStr": "9-4",
+         "goalConDiff": 5,
+         "pts": 5,
+         "idx": 4,
+         "qualColor": null
+        },
+        {
+         "name": "Eyüpspor",
+         "shortName": "Eyüpspor",
+         "id": 4681,
+         "pageUrl": "/teams/4681/overview/eyupspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 1,
+         "losses": 2,
+         "scoresStr": "5-6",
+         "goalConDiff": -1,
+         "pts": 4,
+         "idx": 5,
+         "qualColor": null
+        },
+        {
+         "name": "Bodrum FK",
+         "shortName": "Bodrum FK",
+         "id": 658811,
+         "pageUrl": "/teams/658811/overview/bodrum-fk",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 1,
+         "losses": 3,
+         "scoresStr": "3-7",
+         "goalConDiff": -4,
+         "pts": 1,
+         "idx": 6,
+         "qualColor": null
+        },
+        {
+         "name": "Aliağa",
+         "shortName": "Aliağa",
+         "id": 1559147,
+         "pageUrl": "/teams/1559147/overview/aliaga",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 1,
+         "losses": 3,
+         "scoresStr": "5-16",
+         "goalConDiff": -11,
+         "pts": 1,
+         "idx": 7,
+         "qualColor": null
+        },
+        {
+         "name": "Antalyaspor",
+         "shortName": "Antalyaspor",
+         "id": 1931,
+         "pageUrl": "/teams/1931/overview/antalyaspor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 0,
+         "draws": 0,
+         "losses": 4,
+         "scoresStr": "0-10",
+         "goalConDiff": -10,
+         "pts": 0,
+         "idx": 8,
+         "qualColor": null
+        }
+       ]
+      }
+     },
+     {
+      "leagueName": "Cup Grp. C",
+      "legend": [
+       {
+        "title": "Qualification next stage",
+        "tKey": "qualification_next_stage",
+        "color": "#2AD572",
+        "indices": [
+         0,
+         1
+        ]
+       },
+       {
+        "title": "Possible qualification next stage",
+        "tKey": "possible_qualification_next_stage",
+        "color": "#FFD908",
+        "indices": [
+         2
+        ]
+       }
+      ],
+      "table": {
+       "all": [
+        {
+         "name": "Beşiktaş",
+         "shortName": "Beşiktaş",
+         "id": 10188,
+         "pageUrl": "/teams/10188/overview/besiktas",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 3,
+         "draws": 1,
+         "losses": 0,
+         "scoresStr": "10-3",
+         "goalConDiff": 7,
+         "pts": 10,
+         "idx": 1,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Fenerbahçe",
+         "shortName": "Fenerbahçe",
+         "id": 8695,
+         "pageUrl": "/teams/8695/overview/fenerbahce",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 3,
+         "draws": 0,
+         "losses": 1,
+         "scoresStr": "9-3",
+         "goalConDiff": 6,
+         "pts": 9,
+         "idx": 2,
+         "qualColor": "#2AD572"
+        },
+        {
+         "name": "Erzurumspor FK",
+         "shortName": "Erzurumspor FK",
+         "id": 281467,
+         "pageUrl": "/teams/281467/overview/erzurumspor-fk",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 2,
+         "draws": 0,
+         "losses": 2,
+         "scoresStr": "8-8",
+         "goalConDiff": 0,
+         "pts": 6,
+         "idx": 3,
+         "qualColor": "#FFD908"
+        },
+        {
+         "name": "Gaziantep FK",
+         "shortName": "Gaziantep FK",
+         "id": 4081,
+         "pageUrl": "/teams/4081/overview/gaziantep-fk",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 2,
+         "draws": 0,
+         "losses": 2,
+         "scoresStr": "8-10",
+         "goalConDiff": -2,
+         "pts": 6,
+         "idx": 4,
+         "qualColor": null
+        },
+        {
+         "name": "Kocaelispor",
+         "shortName": "Kocaelispor",
+         "id": 1569,
+         "pageUrl": "/teams/1569/overview/kocaelispor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 1,
+         "losses": 2,
+         "scoresStr": "4-4",
+         "goalConDiff": 0,
+         "pts": 4,
+         "idx": 5,
+         "qualColor": null
+        },
+        {
+         "name": "Rizespor",
+         "shortName": "Rizespor",
+         "id": 2166,
+         "pageUrl": "/teams/2166/overview/rizespor",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 1,
+         "losses": 2,
+         "scoresStr": "7-9",
+         "goalConDiff": -2,
+         "pts": 4,
+         "idx": 6,
+         "qualColor": null
+        },
+        {
+         "name": "Beyoğlu Yeni Çarşı Futbol Kulubu",
+         "shortName": "Beyoğlu Yeni Çarşı Futbol Kulubu",
+         "id": 551694,
+         "pageUrl": "/teams/551694/overview/beyoglu-yeni-cars-futbol-kulubu",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 1,
+         "losses": 2,
+         "scoresStr": "3-5",
+         "goalConDiff": -2,
+         "pts": 4,
+         "idx": 7,
+         "qualColor": null
+        },
+        {
+         "name": "Keçiörengücü",
+         "shortName": "Keçiörengücü",
+         "id": 8387,
+         "pageUrl": "/teams/8387/overview/keciorengucu",
+         "deduction": null,
+         "ongoing": null,
+         "played": 4,
+         "wins": 1,
+         "draws": 0,
+         "losses": 3,
+         "scoresStr": "6-13",
+         "goalConDiff": -7,
+         "pts": 3,
+         "idx": 8,
+         "qualColor": null
+        }
+       ]
+      }
+     }
+    ],
+    "legend": [
+     {
+      "title": "Qualification next stage",
+      "tKey": "qualification_next_stage",
+      "color": "#2AD572",
+      "indices": [
+       0,
+       1
+      ]
+     },
+     {
+      "title": "Possible qualification next stage",
+      "tKey": "possible_qualification_next_stage",
+      "color": "#FFD908",
+      "indices": [
+       2
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "fixtures": {
+  "allMatches": [
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/sivasspor-vs-kepez-belediye-antalya/aqw7hia#4980504",
+    "id": "4980504",
+    "home": {
+     "name": "Kepez Belediye Antalya",
+     "shortName": "Kepez Belediye Antalya",
+     "id": "210040"
+    },
+    "away": {
+     "name": "Sivasspor",
+     "shortName": "Sivasspor",
+     "id": "6265"
+    },
+    "status": {
+     "utcTime": "2025-10-28T10:00:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "1 - 3",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/serik-spor-vs-aliaga/1315jwn6c#4980487",
+    "id": "4980487",
+    "home": {
+     "name": "Aliağa",
+     "shortName": "Aliağa",
+     "id": "1559147"
+    },
+    "away": {
+     "name": "Serik Spor",
+     "shortName": "Serik Spor",
+     "id": "914196"
+    },
+    "status": {
+     "utcTime": "2025-10-28T10:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "4 - 3",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/fethiyespor-vs-dersimspor/2u8ykiek#4980493",
+    "id": "4980493",
+    "home": {
+     "name": "Dersimspor",
+     "shortName": "Dersimspor",
+     "id": "658818"
+    },
+    "away": {
+     "name": "Fethiyespor",
+     "shortName": "Fethiyespor",
+     "id": "8375"
+    },
+    "status": {
+     "utcTime": "2025-10-28T10:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 3",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/van-spor-kulubu-vs-fatsa-belediyespor/7n55svso#4980496",
+    "id": "4980496",
+    "home": {
+     "name": "Fatsa Belediyespor",
+     "shortName": "Fatsa Belediyespor",
+     "id": "948056"
+    },
+    "away": {
+     "name": "Van Spor Kulübü",
+     "shortName": "Van Spor Kulübü",
+     "id": "146408"
+    },
+    "status": {
+     "utcTime": "2025-10-28T10:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "3 - 3",
+     "reason": {
+      "short": "Pen",
+      "shortKey": "penalties_short",
+      "long": "After penalties",
+      "longKey": "afterpenalties"
+     }
+    }
+   },
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/kahramanmarasspor-vs-umraniyespor/jan9ms6#4980499",
+    "id": "4980499",
+    "home": {
+     "name": "Kahramanmaraşspor",
+     "shortName": "Kahramanmaraşspor",
+     "id": "8376"
+    },
+    "away": {
+     "name": "Ümraniyespor",
+     "shortName": "Ümraniyespor",
+     "id": "281460"
+    },
+    "status": {
+     "utcTime": "2025-10-28T10:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "4 - 0",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "3",
+    "roundName": 3,
+    "pageUrl": "/matches/saryer-vs-52-orduspor/4s8jh95p#4980485",
+    "id": "4980485",
+    "home": {
+     "name": "52 Orduspor",
+     "shortName": "52 Orduspor",
+     "id": "863845"
+    },
+    "away": {
+     "name": "Sarıyer",
+     "shortName": "Sarıyer",
+     "id": "2090"
+    },
+    "status": {
+     "utcTime": "2025-10-28T12:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 2",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/konyaspor-vs-mus-spor/4z8hqxo0#5046373",
+    "id": "5046373",
+    "home": {
+     "name": "Muş Spor",
+     "shortName": "Muş Spor",
+     "id": "874731"
+    },
+    "away": {
+     "name": "Konyaspor",
+     "shortName": "Konyaspor",
+     "id": "8622"
+    },
+    "status": {
+     "utcTime": "2025-12-02T10:00:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "1 - 4",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/keciorengucu-vs-kayserispor/2unlbk#5046366",
+    "id": "5046366",
+    "home": {
+     "name": "Keçiörengücü",
+     "shortName": "Keçiörengücü",
+     "id": "8387"
+    },
+    "away": {
+     "name": "Kayserispor",
+     "shortName": "Kayserispor",
+     "id": "10182"
+    },
+    "status": {
+     "utcTime": "2025-12-02T12:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "2 - 0",
+     "reason": {
+      "short": "AET",
+      "shortKey": "afterextratime_short",
+      "long": "After extra time",
+      "longKey": "afterextra"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/rizespor-vs-pendikspor/279vrol#5046372",
+    "id": "5046372",
+    "home": {
+     "name": "Rizespor",
+     "shortName": "Rizespor",
+     "id": "2166"
+    },
+    "away": {
+     "name": "Pendikspor",
+     "shortName": "Pendikspor",
+     "id": "95745"
+    },
+    "status": {
+     "utcTime": "2025-12-02T15:00:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "6 - 1",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/sakaryaspor-vs-genclerbirligi/16c0p6#5046380",
+    "id": "5046380",
+    "home": {
+     "name": "Sakaryaspor",
+     "shortName": "Sakaryaspor",
+     "id": "4124"
+    },
+    "away": {
+     "name": "Gençlerbirliği",
+     "shortName": "Gençlerbirliği",
+     "id": "7800"
+    },
+    "status": {
+     "utcTime": "2025-12-02T17:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 5",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/kocaelispor-vs-karacabey-belediye-spor/67xeuo6#5046382",
+    "id": "5046382",
+    "home": {
+     "name": "Karacabey Belediye Spor",
+     "shortName": "Karacabey Belediye Spor",
+     "id": "162990"
+    },
+    "away": {
+     "name": "Kocaelispor",
+     "shortName": "Kocaelispor",
+     "id": "1569"
+    },
+    "status": {
+     "utcTime": "2025-12-03T10:00:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "1 - 2",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "4",
+    "roundName": 4,
+    "pageUrl": "/matches/eyupspor-vs-cankaya-fk/1fcv4yqp#5046376",
+    "id": "5046376",
+    "home": {
+     "name": "Eyüpspor",
+     "shortName": "Eyüpspor",
+     "id": "4681"
+    },
+    "away": {
+     "name": "Çankaya FK",
+     "shortName": "Çankaya FK",
+     "id": "468168"
+    },
+    "status": {
+     "utcTime": "2025-12-03T10:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "6 - 1",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "1/4",
+    "roundName": "Quarter-Finals",
+    "pageUrl": "/matches/konyaspor-vs-fenerbahce/2ha392#5237897",
+    "id": "5237897",
+    "home": {
+     "name": "Konyaspor",
+     "shortName": "Konyaspor",
+     "id": "8622"
+    },
+    "away": {
+     "name": "Fenerbahçe",
+     "shortName": "Fenerbahçe",
+     "id": "8695"
+    },
+    "status": {
+     "utcTime": "2026-04-21T17:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "1 - 0",
+     "reason": {
+      "short": "AET",
+      "shortKey": "afterextratime_short",
+      "long": "After extra time",
+      "longKey": "afterextra"
+     }
+    }
+   },
+   {
+    "round": "1/4",
+    "roundName": "Quarter-Finals",
+    "pageUrl": "/matches/genclerbirligi-vs-galatasaray/28fr6c#5237896",
+    "id": "5237896",
+    "home": {
+     "name": "Galatasaray",
+     "shortName": "Galatasaray",
+     "id": "8637"
+    },
+    "away": {
+     "name": "Gençlerbirliği",
+     "shortName": "Gençlerbirliği",
+     "id": "7800"
+    },
+    "status": {
+     "utcTime": "2026-04-22T17:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 2",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "1/4",
+    "roundName": "Quarter-Finals",
+    "pageUrl": "/matches/samsunspor-vs-trabzonspor/358aj5#5237898",
+    "id": "5237898",
+    "home": {
+     "name": "Samsunspor",
+     "shortName": "Samsunspor",
+     "id": "9750"
+    },
+    "away": {
+     "name": "Trabzonspor",
+     "shortName": "Trabzonspor",
+     "id": "9752"
+    },
+    "status": {
+     "utcTime": "2026-04-23T15:45:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 0",
+     "reason": {
+      "short": "Pen",
+      "shortKey": "penalties_short",
+      "long": "After penalties",
+      "longKey": "afterpenalties"
+     }
+    }
+   },
+   {
+    "round": "1/4",
+    "roundName": "Quarter-Finals",
+    "pageUrl": "/matches/alanyaspor-vs-besiktas/1tsmwh#5237895",
+    "id": "5237895",
+    "home": {
+     "name": "Beşiktaş",
+     "shortName": "Beşiktaş",
+     "id": "10188"
+    },
+    "away": {
+     "name": "Alanyaspor",
+     "shortName": "Alanyaspor",
+     "id": "4678"
+    },
+    "status": {
+     "utcTime": "2026-04-23T17:45:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "3 - 0",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "1/2",
+    "roundName": "Semi-Finals",
+    "pageUrl": "/matches/konyaspor-vs-besiktas/2xc519#5237911",
+    "id": "5237911",
+    "home": {
+     "name": "Beşiktaş",
+     "shortName": "Beşiktaş",
+     "id": "10188"
+    },
+    "away": {
+     "name": "Konyaspor",
+     "shortName": "Konyaspor",
+     "id": "8622"
+    },
+    "status": {
+     "utcTime": "2026-05-05T17:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "0 - 1",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "1/2",
+    "roundName": "Semi-Finals",
+    "pageUrl": "/matches/genclerbirligi-vs-trabzonspor/2jpxi8#5237910",
+    "id": "5237910",
+    "home": {
+     "name": "Gençlerbirliği",
+     "shortName": "Gençlerbirliği",
+     "id": "7800"
+    },
+    "away": {
+     "name": "Trabzonspor",
+     "shortName": "Trabzonspor",
+     "id": "9752"
+    },
+    "status": {
+     "utcTime": "2026-05-13T17:30:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "1 - 2",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   },
+   {
+    "round": "final",
+    "roundName": "Final",
+    "pageUrl": "/matches/konyaspor-vs-trabzonspor/2sif0t#5237912",
+    "id": "5237912",
+    "home": {
+     "name": "Trabzonspor",
+     "shortName": "Trabzonspor",
+     "id": "9752"
+    },
+    "away": {
+     "name": "Konyaspor",
+     "shortName": "Konyaspor",
+     "id": "8622"
+    },
+    "status": {
+     "utcTime": "2026-05-22T17:45:00Z",
+     "timezone": "",
+     "finished": true,
+     "started": true,
+     "cancelled": false,
+     "awarded": false,
+     "scoreStr": "2 - 1",
+     "reason": {
+      "short": "FT",
+      "shortKey": "fulltime_short",
+      "long": "Full-Time",
+      "longKey": "finished"
+     }
+    }
+   }
+  ]
+ }
+}

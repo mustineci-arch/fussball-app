@@ -38,6 +38,13 @@ Für einen öffentlichen Betrieb wird ein lizenzierter Anbieter als weiterer Ada
 - Neuer Wettbewerb: eine Zeile in `src/providers/espn/leagues.ts`
 - Tests laufen gegen gespeicherte echte Antworten in `src/providers/espn/__fixtures__/`
 
+### Türkischer Pokal über FotMob
+
+ESPN führt den türkischen Pokal nicht. `src/providers/CombinedProvider.ts` nimmt ESPN als Hauptquelle
+und holt den Pokal (FotMob-Liga 151) aus FotMob: Spielplan, Gruppentabellen, Match Center, Teams, Spieler.
+FotMob-IDs tragen Präfixe (`fm-` Spiele, `fmt-` Teams, `fmp-` Spieler); Süper-Lig-Teams werden den
+ESPN-Teams zugeordnet, sodass Teamseiten und Favoriten einheitlich bleiben.
+
 ### Zusatzquelle FotMob (Noten, Ausfälle)
 
 ESPN liefert für Fußball weder Spielernoten noch Verletzungen. Diese kommen von der ebenfalls

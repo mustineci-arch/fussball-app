@@ -1,5 +1,6 @@
 // Prüft die FotMob-Zuordnung gegen die echten Schnittstellen. Läuft nur mit LIVE=1: LIVE=1 npx vitest run src/providers/fotmob/fotmob.live.test.ts
 import { describe, expect, it } from 'vitest'
+import { CombinedProvider, TURKISH_CUP_ID } from '../CombinedProvider'
 import { EspnProvider } from '../espn/EspnProvider'
 import { findPlayer, findTeamId, getMatch, getSquad } from './fotmob'
 
@@ -45,4 +46,34 @@ describe.skipIf(!process.env.LIVE)('FotMob live', () => {
       console.log('  espn stats sample', JSON.stringify(details.lineups?.home?.starters?.[0]))
     }
   }, 60_000)
+
+  it('türkischer Pokal über FotMob', async () => {
+    const p = new CombinedProvider(espn)
+    const { competition, season } = await p.getCompetition(TURKISH_CUP_ID)
+    console.log('CUP', competition.name, season?.label)
+    const fixtures = await p.getCompetitionFixtures(TURKISH_CUP_ID)
+    console.log('FIXTURES', fixtures.length, 'ESPN-Teams', fixtures.filter((f) => !f.homeTeam.id.startsWith('fmt-')).length)
+    console.log('LETZTE', fixtures.slice(-3).map((f) => `${f.round} ${f.homeTeam.name}(${f.homeTeam.id}) ${f.score?.home}:${f.score?.away} ${f.awayTeam.name}(${f.awayTeam.id}) ${f.status}`))
+    const tables = await p.getStandings(TURKISH_CUP_ID)
+    console.log('TABELLEN', tables.map((t) => `${t.groupName}: ${t.rows.map((r) => `${r.rank}.${r.team.name}[${r.team.id}]`).join(', ')}`))
+    const final = fixtures.at(-1)!
+    const details = await p.getFixtureDetails(final.id)
+    console.log('FINALE', details.fixture.homeTeam.name, details.fixture.score, 'Ereignisse', details.events?.length, 'Statistik', details.statistics?.length, 'Aufstellung', details.lineups?.home?.starters.length)
+    const fmTeam = fixtures.flatMap((f) => [f.homeTeam, f.awayTeam]).find((t) => t.id.startsWith('fmt-'))
+    if (fmTeam) {
+      const t = await p.getTeam(fmTeam.id)
+      const squad = await p.getSquad(fmTeam.id)
+      const tf = await p.getTeamFixtures(fmTeam.id)
+      console.log('FM-TEAM', t.team.name, t.team.venue, 'Kader', squad.length, 'Spiele', tf.length)
+      if (squad[0]) {
+        const pl = await p.getPlayer(squad[0].id)
+        console.log('SPIELER', pl.player.name, pl.player.birthDate, pl.player.position, pl.team?.name, JSON.stringify(pl.seasonStats[0]))
+      }
+    }
+    const gs = await p.getTeamFixtures('432')
+    console.log('GALATASARAY Pokalspiele', gs.filter((f) => f.competitionId === TURKISH_CUP_ID).length, 'gesamt', gs.length)
+    const today = await p.getFixturesByDate(new Date().toISOString().slice(0, 10))
+    console.log('HEUTE', today.length, 'Pokal', today.filter((f) => f.competitionId === TURKISH_CUP_ID).length)
+    expect(fixtures.length).toBeGreaterThan(50)
+  }, 120_000)
 })

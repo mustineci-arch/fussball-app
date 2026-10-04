@@ -1,0 +1,236 @@
+{
+ "id": 478527,
+ "name": "Steve Mounié",
+ "birthDate": {
+  "utcTime": "1994-09-29T00:00:00.000Z",
+  "timezone": "UTC"
+ },
+ "primaryTeam": {
+  "teamId": 8406,
+  "teamName": "Augsburg",
+  "onLoan": false,
+  "teamColors": {
+   "color": "#B93733",
+   "colorAlternate": "#B93733",
+   "colorAway": "#46714D",
+   "colorAwayAlternate": "#FFFFFF"
+  }
+ },
+ "positionDescription": {
+  "positions": [
+   {
+    "strPos": {
+     "label": "Striker",
+     "key": "striker"
+    },
+    "strPosShort": {
+     "label": "ST",
+     "key": "striker_short"
+    },
+    "occurences": 12,
+    "position": "105",
+    "isMainPosition": true,
+    "pitchPositionData": {
+     "right": 0.5,
+     "top": 0.1
+    }
+   }
+  ],
+  "primaryPosition": {
+   "label": "Striker",
+   "key": "striker"
+  },
+  "nonPrimaryPositions": []
+ },
+ "playerInformation": [
+  {
+   "value": {
+    "numberValue": 190,
+    "key": null,
+    "fallback": "190 cm"
+   },
+   "title": "Height",
+   "translationKey": "height_sentencecase"
+  },
+  {
+   "value": {
+    "numberValue": 15,
+    "options": {},
+    "key": null,
+    "fallback": 15
+   },
+   "title": "Shirt",
+   "translationKey": "shirt"
+  },
+  {
+   "value": {
+    "numberValue": 32,
+    "options": {
+     "style": "unit",
+     "unit": "year",
+     "unitDisplay": "long"
+    },
+    "key": null,
+    "fallback": "32"
+   },
+   "title": "Age",
+   "translationKey": "age_sentencecase"
+  },
+  {
+   "value": {
+    "key": "right",
+    "fallback": "Right"
+   },
+   "title": "Preferred foot",
+   "translationKey": "preferred_foot"
+  },
+  {
+   "value": {
+    "key": null,
+    "fallback": "Benin"
+   },
+   "title": "Country",
+   "translationKey": "country_sentencecase",
+   "icon": {
+    "type": "country",
+    "id": "BEN"
+   },
+   "countryCode": "BEN"
+  },
+  {
+   "value": {
+    "numberValue": 952494,
+    "key": null,
+    "fallback": "€952.5k"
+   },
+   "title": "Market value",
+   "translationKey": "transfer_value"
+  },
+  {
+   "value": {
+    "dateValue": "2027-06-30",
+    "key": null,
+    "fallback": {
+     "utcTime": "2027-06-30T00:00:00.000Z",
+     "timezone": "UTC"
+    }
+   },
+   "title": "Contract end",
+   "translationKey": "contract_end"
+  }
+ ],
+ "injuryInformation": {
+  "name": "Injured",
+  "key": "injury_6",
+  "expectedReturn": {
+   "expectedReturnKey": "expected_return_date_mid",
+   "expectedReturnDateParam": "October 2026",
+   "expectedReturnFallback": "Mid October 2026"
+  },
+  "lastUpdated": {
+   "utcTime": "2026-09-01T00:00:00.000Z",
+   "timezone": null
+  }
+ },
+ "mainLeague": {
+  "leagueId": 71,
+  "leagueName": "Super Lig",
+  "season": "2025/2026",
+  "stats": [
+   {
+    "title": "Goals",
+    "localizedTitleId": "goals",
+    "value": 2
+   },
+   {
+    "title": "Assists",
+    "localizedTitleId": "assists",
+    "value": 0
+   },
+   {
+    "title": "Started",
+    "localizedTitleId": "started",
+    "value": 6
+   },
+   {
+    "title": "Matches",
+    "localizedTitleId": "matches_uppercase",
+    "value": 21
+   },
+   {
+    "title": "Minutes played",
+    "localizedTitleId": "minutes_played",
+    "value": 705
+   },
+   {
+    "title": "Rating",
+    "localizedTitleId": "rating",
+    "value": 6.43
+   },
+   {
+    "title": "Yellow cards",
+    "localizedTitleId": "yellow_cards",
+    "value": 4
+   },
+   {
+    "title": "Red cards",
+    "localizedTitleId": "red_cards",
+    "value": 0
+   }
+  ]
+ },
+ "statSeasons": [
+  {
+   "seasonName": "2025/2026",
+   "tournaments": [
+    {
+     "name": "Super Lig",
+     "tournamentId": 71,
+     "entryId": "0-0",
+     "hasDeepStats": true
+    },
+    {
+     "name": "Cup Grp. A",
+     "tournamentId": 151,
+     "entryId": "0-1",
+     "hasDeepStats": false
+    },
+    {
+     "name": "DFB Pokal",
+     "tournamentId": 209,
+     "entryId": "0-2",
+     "hasDeepStats": true
+    },
+    {
+     "name": "Africa Cup of Nations",
+     "tournamentId": 289,
+     "entryId": "0-3",
+     "hasDeepStats": true
+    }
+   ]
+  },
+  {
+   "seasonName": "2024/2025",
+   "tournaments": [
+    {
+     "name": "Bundesliga",
+     "tournamentId": 54,
+     "entryId": "1-0",
+     "hasDeepStats": true
+    },
+    {
+     "name": "DFB Pokal",
+     "tournamentId": 209,
+     "entryId": "1-1",
+     "hasDeepStats": true
+    },
+    {
+     "name": "Africa Cup of Nations Qualification qualification",
+     "tournamentId": 10608,
+     "entryId": "1-2",
+     "hasDeepStats": true
+    }
+   ]
+  }
+ ]
+}
